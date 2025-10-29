@@ -3,6 +3,7 @@ uvicorn[standard]
 requests
 google-auth
 python-slugify
+python-dotenv
 google-adk
 litellm
 google-cloud-aiplatform>=1.66.0

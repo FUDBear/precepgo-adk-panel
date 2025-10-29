@@ -16,6 +16,10 @@ from google.auth.transport.requests import Request as GARequest
 from google.oauth2 import id_token
 from contextlib import asynccontextmanager
 
+# Load environment variables from .env file
+from dotenv import load_dotenv
+load_dotenv()  # This loads .env file if it exists
+
 # Ignore all warnings
 warnings.filterwarnings("ignore")
 logging.basicConfig(level=logging.ERROR)
