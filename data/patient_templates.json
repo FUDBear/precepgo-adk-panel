@@ -1,0 +1,132 @@
+[
+    {
+      "full_name": "Liam Nguyen",
+      "ethnicity": "Vietnamese",
+      "weight": {
+        "kg": 45,
+        "lbs": 99
+      },
+      "comorbidities": ["Asthma", "Developmental Delay"],
+      "age": 8,
+      "categories": ["Pediatric"],
+      "personality": "Shy, cooperative with encouragement",
+      "health_traits": ["Small airway diameter", "Fragile respiratory system"]
+    },
+    {
+      "full_name": "Aisha Patel",
+      "ethnicity": "Indian",
+      "weight": {
+        "kg": 65,
+        "lbs": 143
+      },
+      "comorbidities": ["Type 1 Diabetes", "Obesity"],
+      "age": 16,
+      "categories": ["Pediatric", "Adolescent"],
+      "personality": "Anxious, talkative",
+      "health_traits": ["Unpredictable blood sugar", "Increased airway resistance"]
+    },
+    {
+      "full_name": "Carlos Rodriguez",
+      "ethnicity": "Mexican",
+      "weight": {
+        "kg": 85,
+        "lbs": 187
+      },
+      "comorbidities": ["Hypertension", "Chronic Kidney Disease"],
+      "age": 42,
+      "categories": ["Adult"],
+      "personality": "Calm, detail-oriented",
+      "health_traits": ["Stable vitals with medication", "Reduced renal clearance"]
+    },
+    {
+      "full_name": "Fatima Hassan",
+      "ethnicity": "Somali",
+      "weight": {
+        "kg": 110,
+        "lbs": 242
+      },
+      "comorbidities": ["Morbid Obesity", "Obstructive Sleep Apnea"],
+      "age": 55,
+      "categories": ["Adult"],
+      "personality": "Friendly, hesitant about procedures",
+      "health_traits": ["Difficult airway access", "Hypoxemia risk"]
+    },
+    {
+      "full_name": "Emily Chen",
+      "ethnicity": "Chinese",
+      "weight": {
+        "kg": 50,
+        "lbs": 110
+      },
+      "comorbidities": ["Osteoporosis", "Hypothyroidism"],
+      "age": 72,
+      "categories": ["Geriatric"],
+      "personality": "Reserved, compliant",
+      "health_traits": ["Fragile bones", "Slow metabolism"]
+    },
+    {
+      "full_name": "Javier Morales",
+      "ethnicity": "Puerto Rican",
+      "weight": {
+        "kg": 75,
+        "lbs": 165
+      },
+      "comorbidities": ["Type 2 Diabetes", "Peripheral Neuropathy"],
+      "age": 68,
+      "categories": ["Geriatric"],
+      "personality": "Outgoing, anxious about pain",
+      "health_traits": ["Impaired sensation", "Delayed wound healing"]
+    },
+    {
+      "full_name": "Sophia Okafor",
+      "ethnicity": "Nigerian",
+      "weight": {
+        "kg": 95,
+        "lbs": 209
+      },
+      "comorbidities": ["Heart Failure", "Hypertension"],
+      "age": 79,
+      "categories": ["Geriatric"],
+      "personality": "Warm, easily confused",
+      "health_traits": ["Reduced cardiac reserve", "Orthostatic hypotension"]
+    },
+    {
+      "full_name": "Hiroshi Tanaka",
+      "ethnicity": "Japanese",
+      "weight": {
+        "kg": 60,
+        "lbs": 132
+      },
+      "comorbidities": ["Parkinson’s Disease", "Glaucoma"],
+      "age": 83,
+      "categories": ["Geriatric"],
+      "personality": "Stoic, slow to respond",
+      "health_traits": ["Tremors", "Visual impairment"]
+    },
+    {
+      "full_name": "Isabella Gomez",
+      "ethnicity": "Colombian",
+      "weight": {
+        "kg": 70,
+        "lbs": 154
+      },
+      "comorbidities": ["Asthma", "Anxiety Disorder"],
+      "age": 34,
+      "categories": ["Adult"],
+      "personality": "Energetic, nervous",
+      "health_traits": ["Bronchospasm risk", "Heightened stress response"]
+    },
+    {
+      "full_name": "Mohammed Al-Sayed",
+      "ethnicity": "Egyptian",
+      "weight": {
+        "kg": 80,
+        "lbs": 176
+      },
+      "comorbidities": ["Coronary Artery Disease", "Chronic Obstructive Pulmonary Disease"],
+      "age": 61,
+      "categories": ["Geriatric"],
+      "personality": "Gruff, cooperative with clear instructions",
+      "health_traits": ["Reduced oxygen saturation", "Cardiac instability"]
+    }
+  ]

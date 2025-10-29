@@ -1,0 +1,160 @@
+{
+  "concepts": {
+    "difficult airway management": {
+      "description": "Managing a difficult airway involves assessing risk factors like Mallampati score and neck mobility. Video laryngoscopy is recommended for Grade III/IV views. Backup options include supraglottic devices.",
+      "sources": ["Miller's Anesthesia", "AANA Guidelines"],
+      "tags": ["airway", "difficult airway", "laryngoscopy"],
+      "scenarios": ["emergency intubation", "difficult airway", "massive hemorrhage"]
+    },
+    "rapid sequence induction": {
+      "description": "RSI secures the airway rapidly in aspiration-risk patients. Use preoxygenation and cricoid pressure. Avoid in known difficult airways unless prepared for rescue.",
+      "sources": ["Miller's Anesthesia", "AANA Guidelines"],
+      "tags": ["airway", "emergency", "aspiration"],
+      "scenarios": ["emergency intubation", "aspiration risk", "trauma"]
+    },
+    "local anesthetic systemic toxicity": {
+      "description": "LAST occurs with high local anesthetic levels, causing CNS and CV symptoms. Treat with 20% lipid emulsion. Prevention includes test doses and ultrasound guidance.",
+      "sources": ["Nagelhout", "Miller's Anesthesia"],
+      "tags": ["LAST", "pharmacology", "regional anesthesia"],
+      "scenarios": ["regional block", "spinal anesthesia", "epidural"]
+    },
+    "spinal anesthesia": {
+      "description": "Spinal anesthesia uses local anesthetics in the subarachnoid space. Monitor for hypotension and respiratory depression. Ideal for lower limb surgeries.",
+      "sources": ["Miller's Anesthesia", "Nagelhout"],
+      "tags": ["regional anesthesia", "spinal", "local anesthetic"],
+      "scenarios": ["hip replacement", "knee surgery", "lower limb procedures"]
+    },
+    "pediatric airway management": {
+      "description": "Pediatric airways require smaller ETTs (size = [age/4] + 4). Avoid cuffed tubes in infants. Use uncuffed tubes in children under 8 years.",
+      "sources": ["Miller's Anesthesia", "AANA Guidelines"],
+      "tags": ["pediatric", "airway", "ETT sizing"],
+      "scenarios": ["pediatric tonsillectomy", "pediatric surgery", "emergency pediatric"]
+    },
+    "malignant hyperthermia": {
+      "description": "MH is a hypermetabolic crisis triggered by anesthetics. Administer dantrolene and cool the patient. Stop triggering agents immediately.",
+      "sources": ["Miller's Anesthesia", "Nagelhout"],
+      "tags": ["MH", "emergency", "pharmacology"],
+      "scenarios": ["emergency response", "MH crisis", "anesthetic complications"]
+    },
+    "obesity and airway challenges": {
+      "description": "Obese patients need ramped positioning for intubation. Anticipate difficult BMV due to soft tissue. Use higher initial oxygen flow rates.",
+      "sources": ["Miller's Anesthesia", "AANA Guidelines"],
+      "tags": ["obesity", "airway", "positioning"],
+      "scenarios": ["morbid obesity", "difficult airway", "bariatric surgery"]
+    },
+    "cricothyrotomy procedure": {
+      "description": "Cricothyrotomy is a last-resort airway in CICO. Use scalpel-bougie technique within 60 seconds. Confirm placement with capnography.",
+      "sources": ["Miller's Anesthesia", "AANA Guidelines"],
+      "tags": ["surgical airway", "CICO", "emergency"],
+      "scenarios": ["CICO", "emergency airway", "failed intubation"]
+    },
+    "propofol administration": {
+      "description": "Propofol induces anesthesia with rapid onset. Dose at 1–2 mg/kg IV, watch for hypotension. Contraindicated in egg/soy allergies.",
+      "sources": ["Nagelhout"],
+      "tags": ["propofol", "IV anesthetic", "pharmacology"],
+      "scenarios": ["induction", "maintenance", "sedation"]
+    },
+    "sevoflurane use": {
+      "description": "Sevoflurane is a volatile anesthetic for pediatric induction. Monitor for respiratory depression. Risk of malignant hyperthermia exists.",
+      "sources": ["Nagelhout"],
+      "tags": ["sevoflurane", "volatile anesthetic", "pediatric"],
+      "scenarios": ["pediatric induction", "maintenance", "mask induction"]
+    },
+    "asa difficult airway algorithm": {
+      "description": "The ASA algorithm guides difficult airway management. Limit attempts to 3, use rescue devices, and escalate to surgical airway if needed.",
+      "sources": ["AANA Guidelines"],
+      "tags": ["ASA algorithm", "difficult airway", "protocol"],
+      "scenarios": ["difficult airway", "failed intubation", "emergency airway"]
+    },
+    "regional anesthesia safety": {
+      "description": "Ensure safety in regional blocks by avoiding intravascular injection. Use nerve stimulators or ultrasound. Monitor for LAST symptoms.",
+      "sources": ["Nagelhout", "Miller's Anesthesia"],
+      "tags": ["regional anesthesia", "safety", "LAST"],
+      "scenarios": ["nerve blocks", "spinal anesthesia", "epidural"]
+    },
+    "airway management": {
+      "description": "Comprehensive airway management includes assessment, preparation, and execution of airway techniques. Follow AANA guidelines for patient safety.",
+      "sources": ["Miller's Anesthesia", "AANA Guidelines"],
+      "tags": ["airway", "management", "safety"],
+      "scenarios": ["routine intubation", "difficult airway", "emergency airway"]
+    },
+    "pharmacology": {
+      "description": "Understanding anesthetic pharmacology is essential for safe practice. Includes pharmacokinetics, pharmacodynamics, and drug interactions.",
+      "sources": ["Nagelhout", "Miller's Anesthesia"],
+      "tags": ["pharmacology", "drugs", "interactions"],
+      "scenarios": ["drug selection", "dosing", "monitoring"]
+    },
+    "patient safety": {
+      "description": "Patient safety is the foundation of anesthesia practice. Includes monitoring, documentation, and adherence to professional standards.",
+      "sources": ["AANA Guidelines", "Miller's Anesthesia"],
+      "tags": ["safety", "monitoring", "standards"],
+      "scenarios": ["routine care", "emergency response", "quality improvement"]
+    }
+  },
+  "scenarios": [
+    "rapid sequence induction",
+    "difficult airway", 
+    "emergent intubation",
+    "pediatric tonsillectomy",
+    "laparoscopic cholecystectomy",
+    "cardiac induction with severe AS",
+    "regional block with anticoagulation",
+    "massive hemorrhage",
+    "emergency cricothyrotomy",
+    "difficult airway with C-spine injury",
+    "hip replacement",
+    "knee surgery",
+    "emergency pediatric",
+    "MH crisis",
+    "morbid obesity",
+    "bariatric surgery",
+    "CICO",
+    "failed intubation",
+    "emergency airway",
+    "induction",
+    "maintenance",
+    "sedation",
+    "pediatric induction",
+    "mask induction",
+    "nerve blocks",
+    "spinal anesthesia",
+    "epidural",
+    "routine intubation",
+    "drug selection",
+    "dosing",
+    "monitoring",
+    "routine care",
+    "emergency response",
+    "quality improvement"
+  ],
+  "tags": [
+    "airway",
+    "difficult airway", 
+    "laryngoscopy",
+    "emergency",
+    "aspiration",
+    "LAST",
+    "pharmacology",
+    "regional anesthesia",
+    "spinal",
+    "local anesthetic",
+    "pediatric",
+    "ETT sizing",
+    "MH",
+    "obesity",
+    "positioning",
+    "surgical airway",
+    "CICO",
+    "propofol",
+    "IV anesthetic",
+    "sevoflurane",
+    "volatile anesthetic",
+    "ASA algorithm",
+    "protocol",
+    "safety",
+    "monitoring",
+    "standards",
+    "drugs",
+    "interactions"
+  ]
+}

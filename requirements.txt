@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+requests
+google-auth
+python-slugify
+google-adk
+litellm
+google-cloud-aiplatform>=1.66.0
+google-generativeai
+Pillow>=10.0.0

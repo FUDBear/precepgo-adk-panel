@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Environment variables and secrets
+.env
+*.key
+*.pem
+*.log
+server.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Google Cloud
+.gcloud/
+gcloud-credentials.json
+application_default_credentials.json
+
+# Temporary files
+*.tmp
+/tmp/
+*.bak
+
+# Don't commit API keys or credentials
+*API_KEY*
+*api_key*
+credentials/
+secrets/
+
+# Large data files (optional - you might want to commit the txt file)
+# data/*.txt
+
