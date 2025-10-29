@@ -1,0 +1,9 @@
+# Excludes when using gcloud builds submit
+.git
+.gitignore
+__pycache__/
+*.pyc
+.env
+venv/
+.envrc
+.DS_Store
