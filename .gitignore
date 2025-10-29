@@ -45,6 +45,10 @@ application_default_credentials.json
 credentials/
 secrets/
 
+# Prevent committing actual API keys in documentation files
+# (SECURITY.md should use placeholders only)
+# Note: SECURITY.md itself can be committed, but must not contain real keys
+
 # Large data files (optional - you might want to commit the txt file)
 # data/*.txt
 

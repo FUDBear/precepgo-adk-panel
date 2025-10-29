@@ -22,8 +22,8 @@
 ### `.env` (Your Actual Secrets - NEVER COMMIT)
 ```bash
 GEMINI_API_KEY=your-actual-api-key-here
-MCP_URL=https://precepgo-data-mcp-g4y4qz5rfa-uw.a.run.app
-GOOGLE_CLOUD_PROJECT=precepgo-mentor-ai
+MCP_URL=https://your-mcp-server.run.app
+GOOGLE_CLOUD_PROJECT=your-project-id
 GOOGLE_CLOUD_REGION=us-central1
 ```
 
