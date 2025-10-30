@@ -45,10 +45,17 @@ application_default_credentials.json
 credentials/
 secrets/
 
+# Project docs to exclude from Git history/uploads
+BARASH_INTEGRATION.md
+BARASH_ONLY_VERIFICATION.md
+
 # Prevent committing actual API keys in documentation files
 # (SECURITY.md should use placeholders only)
 # Note: SECURITY.md itself can be committed, but must not contain real keys
 
 # Large data files (optional - you might want to commit the txt file)
 # data/*.txt
+
+# Ignore the entire data directory and all subfiles
+data/
 
