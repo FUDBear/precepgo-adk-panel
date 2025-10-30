@@ -87,6 +87,7 @@ os.environ["GOOGLE_GENAI_USE_VERTEXAI"] = "True"
 # Gemini API model identifiers (using models/ prefix for google-generativeai)
 MODEL_GEMINI_FLASH = "models/gemini-2.5-flash"  # Fast and efficient
 MODEL_GEMINI_PRO = "models/gemini-2.5-pro"      # Most powerful for deep research
+MODEL_GEMINI_DEEP_THINK = "models/gemini-2.5-pro"  # Use Pro model (thinking-exp not available via API)
 
 print("\nEnvironment configured for Google ADK Hackathon.")
 
@@ -146,45 +147,14 @@ research_state = {
     "status": "idle"
 }
 
-# Background task for scheduled research
-async def scheduled_research_task():
-    """Run deep research every 5 minutes and generate 20 questions"""
-    while True:
-        try:
-            research_state["status"] = "running"
-            research_state["next_run"] = datetime.now()
-            
-            print(f"\n🔬 Starting scheduled research at {datetime.now()}")
-            
-            # Generate 20 questions from Barash Section 2
-            await generate_chapter_questions()
-            
-            research_state["last_run"] = datetime.now()
-            research_state["status"] = "completed"
-            
-            print(f"✅ Research completed at {datetime.now()}")
-            
-        except Exception as e:
-            print(f"❌ Error in scheduled research: {e}")
-            research_state["status"] = f"error: {str(e)}"
-        
-        # Wait 5 minutes before next run
-        print(f"⏳ Next research scheduled in 5 minutes...")
-        research_state["next_run"] = datetime.now()
-        await asyncio.sleep(300)  # 5 minutes = 300 seconds
-
 # Lifespan context manager for FastAPI
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup: Start the background research task
-    print("🚀 Starting scheduled research task...")
-    research_state["running"] = True
-    task = asyncio.create_task(scheduled_research_task())
+    # Startup: No automatic background task - research is manual-only
+    print("🚀 PrecepGo ADK Panel started - Research is manual trigger only")
     yield
-    # Shutdown: Cancel the background task
-    print("🛑 Stopping scheduled research task...")
-    research_state["running"] = False
-    task.cancel()
+    # Shutdown
+    print("🛑 PrecepGo ADK Panel shutting down...")
 
 app = FastAPI(title="PrecepGo ADK Panel", lifespan=lifespan)
 
@@ -574,6 +544,206 @@ async def generate_clinical_image(concept: str, scenario: str) -> dict:
             "auth_required": auth_required
         }
 
+async def fetch_all_barash_sections() -> list:
+    """
+    Fetch content from all 9 Barash sections for comprehensive research.
+    Returns a list of section data with content from all chapters.
+    """
+    # All 9 Barash sections with key search terms
+    sections = [
+        {
+            "section_num": 1,
+            "section_name": "Introduction and Overview",
+            "search_terms": [
+                "History of Anesthesia",
+                "Anesthesia Before Ether",
+                "Physical and Psychological Anesthesia",
+                "Early Analgesics and Soporifics",
+                "Inhaled Anesthetics",
+                "Control of the Airway",
+                "Tracheal Intubation",
+                "Advanced Airway Devices",
+                "Anesthesia Delivery Systems",
+                "Patient Monitors",
+                "Safety Standards",
+                "Professionalism and Anesthesia Practice"
+            ]
+        },
+        {
+            "section_num": 2,
+            "section_name": "Basic Science and Fundamentals",
+            "search_terms": [
+                "Genomic Basis of Perioperative Precision Medicine",
+                "Experimental Design and Statistics",
+                "Inflammation, Wound Healing, and Infection",
+                "The Allergic Response",
+                "Mechanisms of Anesthesia and Consciousness",
+                "Basic Principles of Clinical Pharmacology"
+            ]
+        },
+        {
+            "section_num": 3,
+            "section_name": "Cardiac Anatomy and Physiology",
+            "search_terms": [
+                "Cardiac Anatomy",
+                "Cardiac Physiology",
+                "Cardiac Function",
+                "Cardiovascular System",
+                "Heart Anatomy",
+                "Cardiac Cycle"
+            ]
+        },
+        {
+            "section_num": 4,
+            "section_name": "Anesthetic Drugs and Adjuvants",
+            "search_terms": [
+                "Inhalation Anesthetics",
+                "Intravenous Anesthetics",
+                "Neuromuscular Blocking Agents",
+                "Local Anesthetics",
+                "Opioids",
+                "Anesthetic Adjuvants"
+            ]
+        },
+        {
+            "section_num": 5,
+            "section_name": "Preoperative Assessment and Perioperative Monitoring",
+            "search_terms": [
+                "Preoperative Assessment",
+                "Perioperative Monitoring",
+                "Patient Evaluation",
+                "Anesthetic Risk Assessment",
+                "ASA Physical Status",
+                "Preoperative Testing"
+            ]
+        },
+        {
+            "section_num": 6,
+            "section_name": "Basic Anesthetic Management",
+            "search_terms": [
+                "Anesthetic Induction",
+                "Airway Management",
+                "General Anesthesia",
+                "Regional Anesthesia",
+                "Anesthetic Maintenance",
+                "Emergence from Anesthesia"
+            ]
+        },
+        {
+            "section_num": 7,
+            "section_name": "Anesthesia Subspecialty Care",
+            "search_terms": [
+                "Neuroanesthesia",
+                "Cerebral Perfusion",
+                "Intracranial Pressure Monitoring",
+                "Cerebral Oxygenation",
+                "Cerebral Protection",
+                "Hypothermia",
+                "Pituitary Surgery",
+                "Cerebral Aneurysm Surgery",
+                "Epilepsy Surgery",
+                "Awake Craniotomy",
+                "Traumatic Brain Injury",
+                "Spine Surgery",
+                "Spinal Cord Injury"
+            ]
+        },
+        {
+            "section_num": 8,
+            "section_name": "Anesthesia for Selected Surgical Services",
+            "search_terms": [
+                "Laparoscopic Surgery",
+                "Robotic Surgery",
+                "Physiologic Impact of Laparoscopy",
+                "Cardiovascular System",
+                "Respiratory System",
+                "Pneumoperitoneum",
+                "Positioning",
+                "Monitoring",
+                "Ventilation Management",
+                "Fluid Management",
+                "Complications",
+                "Postoperative Management",
+                "Acute Pain Management",
+                "Postoperative Nausea and Vomiting"
+            ]
+        },
+        {
+            "section_num": 9,
+            "section_name": "Postanesthetic Management, Critical Care, and Pain Management",
+            "search_terms": [
+                "Postanesthetic Management",
+                "Critical Care",
+                "Pain Management",
+                "Postoperative Care",
+                "Recovery Room",
+                "PACU Management",
+                "Postoperative Complications",
+                "Respiratory Management",
+                "Cardiovascular Management",
+                "Neurologic Management",
+                "Pain Assessment",
+                "Analgesic Techniques",
+                "Regional Analgesia",
+                "Patient-Controlled Analgesia",
+                "Chronic Pain Management"
+            ]
+        }
+    ]
+    
+    all_sections_content = []
+    
+    for section in sections:
+        print(f"📖 Fetching Section {section['section_num']}: {section['section_name']}")
+        section_content = {
+            "section_num": section["section_num"],
+            "section_name": section["section_name"],
+            "chapters": [],
+            "total_content": "",
+            "word_count": 0
+        }
+        
+        # Search for each term in this section
+        for term in section["search_terms"]:
+            try:
+                res = _call_mcp("/mcp/search", method="POST", json_body={
+                    "query": term,
+                    "limit": 50
+                })
+                
+                if res.get("results"):
+                    chapter_content = ""
+                    chapter_title = term
+                    
+                    # Combine all matches for this search term
+                    for result in res["results"][:15]:
+                        if result.get("matches"):
+                            for match in result["matches"]:
+                                context = match.get("context", "")
+                                if context:
+                                    chapter_content += context + "\n\n"
+                    
+                    if chapter_content:
+                        # Check if this is from Barash book
+                        if any("barash" in str(result.get("book_title", "")).lower() for result in res["results"][:5]):
+                            section_content["chapters"].append({
+                                "title": chapter_title,
+                                "content": chapter_content,
+                                "word_count": len(chapter_content.split())
+                            })
+                            section_content["total_content"] += f"\n\n=== {chapter_title} ===\n\n{chapter_content}"
+            
+            except Exception as e:
+                print(f"⚠️ Error fetching {term}: {e}")
+                continue
+        
+        section_content["word_count"] = len(section_content["total_content"].split())
+        if section_content["word_count"] > 0:
+            all_sections_content.append(section_content)
+            print(f"✅ Section {section['section_num']}: {len(section_content['chapters'])} chapters, {section_content['word_count']:,} words")
+    
+    return all_sections_content
+
 async def fetch_full_barash_chapter() -> dict:
     """
     Fetch a full chapter from Barash Section 2 for deep research.
@@ -646,119 +816,108 @@ async def fetch_full_barash_chapter() -> dict:
 
 async def generate_chapter_questions() -> dict:
     """
-    Deep research on a Barash chapter and generate 20 MCQ questions.
-    Follows the chapter-question-generator agent pattern.
+    Deep research on ALL Barash sections and generate comprehensive MCQ questions.
+    Researches all 9 sections from the MCP server and creates expanded question set.
     """
-    print("🔬 Starting deep research on Barash chapter...")
+    print("🔬 Starting comprehensive deep research on ALL Barash sections...")
     
-    # Step 1: Fetch full chapter content
-    chapter_data = await fetch_full_barash_chapter()
+    # Step 1: Fetch content from all 9 Barash sections
+    all_sections = await fetch_all_barash_sections()
     
-    print(f"📊 Chapter loaded: {chapter_data['chapter']}")
-    print(f"📝 Word count: {chapter_data['word_count']}")
+    if not all_sections:
+        raise ValueError("No Barash content found in MCP server. Please verify MCP_URL is configured correctly.")
     
-    # Step 2: Generate questions using Gemini API (for Google ADK Hackathon!)
+    total_words = sum(section["word_count"] for section in all_sections)
+    total_chapters = sum(len(section["chapters"]) for section in all_sections)
+    
+    print(f"📊 Loaded {len(all_sections)} sections with {total_chapters} chapters")
+    print(f"📝 Total word count: {total_words:,} words")
+    
+    # Combine all section content for comprehensive research
+    combined_content = "\n\n".join([
+        f"\n\n{'='*80}\nSECTION {section['section_num']}: {section['section_name']}\n{'='*80}\n\n{section['total_content']}"
+        for section in all_sections
+    ])
+    
+    # Calculate question distribution: concise set spanning all sections
+    total_questions = 20  # Generate 20 questions covering all 9 sections
+    
+    # Step 2: Generate questions using Gemini API via the agent module
     questions_text = None
     
     if GEMINI_API_AVAILABLE:
         try:
-            print("🤖 Attempting Gemini API question generation...")
-            # Use Gemini API for the hackathon!
-            model = genai.GenerativeModel(MODEL_GEMINI_PRO)
+            # Import and use the Gemini Agent module
+            from gemini_agent import GeminiAgent
             
-            # Create comprehensive prompt following chapter-question-generator instructions
-            prompt = f"""You are an expert educational assessment designer specializing in medical education for CRNA students.
-
-**SOURCE MATERIAL:**
-{chapter_data['content'][:100000]}  
-
-**YOUR TASK:**
-Perform DEEP RESEARCH on this chapter from Barash Clinical Anesthesia and create exactly 20 multiple choice questions following these guidelines:
-
-**CRITICAL RULES:**
-1. Use ONLY information from the provided chapter text above
-2. DO NOT add information from your training data
-3. All questions must be traceable to specific content in the chapter
-4. Follow the exact format shown in the example below
-
-**QUESTION DISTRIBUTION:**
-- 6 questions (30%): Foundational/Recall (Bloom's: Remember/Understand)
-- 10 questions (50%): Application/Analysis (Bloom's: Apply/Analyze)  
-- 4 questions (20%): Higher-Order Thinking (Bloom's: Evaluate/Create)
-
-**FORMAT FOR EACH QUESTION:**
-```
-**[Number]. [Clear, specific question stem from chapter content]**
-
-A) [Plausible but incorrect option]
-
-B) [Plausible but incorrect option]
-
-C) [Correct answer]
-
-**Correct Answer:** C
-
-**Explanation:** [2-3 sentences explaining why this is correct, citing the chapter]
-```
-
-**QUALITY REQUIREMENTS:**
-- Question stems must be clear and specific
-- All distractors must be plausible (someone with partial knowledge might choose them)
-- Correct answer must be indisputable based on the chapter
-- Explanations must cite the chapter content
-- Cover breadth of the chapter material
-- Test understanding, not just memorization
-
-Generate all 20 questions now in markdown format."""
-
-            # Generate questions using Gemini API
-            print("🤖 Generating 20 questions with Gemini API...")
-            response = model.generate_content(prompt)
-            questions_text = response.text
+            print(f"🤖 Using Gemini Agent for question generation...")
+            agent = GeminiAgent(model_name=MODEL_GEMINI_PRO)
+            
+            # Generate questions using the agent
+            questions_text = agent.generate_questions(
+                content=combined_content,
+                num_questions=total_questions,
+                sections=all_sections,
+                temperature=0.1,
+                max_tokens=16384
+            )
             print("✅ Gemini API generation successful!")
             
+        except ImportError:
+            print("⚠️ Gemini agent module not found, please ensure gemini_agent.py exists")
+            questions_text = None
         except Exception as e:
             print(f"⚠️ Gemini API failed: {e}")
-            print("   Make sure GEMINI_API_KEY is set:")
-            print("   export GEMINI_API_KEY='your-key-here'")
-            print("   Get key from: https://makersuite.google.com/app/apikey")
+            print("   Make sure GEMINI_API_KEY is set in .env file")
             questions_text = None
     
-    # Step 2b: Fallback - Template-based question generation from Barash text  
+    # Step 2b: Fail if Gemini API didn't generate questions
     if not questions_text:
-        print("📝 Using template-based generation from Barash content...")
-        # For now, create a placeholder - we'll implement this if Vertex AI doesn't work
-        questions_text = "Questions will be generated from Barash content..."
+        error_msg = "❌ ERROR: Gemini API failed to generate questions. Please check:\n"
+        error_msg += "   1. GEMINI_API_KEY is set in .env file\n"
+        error_msg += "   2. API key is valid\n"
+        error_msg += "   3. Check server logs for detailed error messages\n"
+        print(error_msg)
+        raise ValueError("Gemini API question generation failed. Check API key and logs for details.")
         
     # Step 3: Save to Questions.md file
     output_filename = "Questions.md"
     
     with open(output_filename, "w") as f:
-        f.write(f"# Multiple Choice Questions: {chapter_data['chapter']}\n")
+        f.write(f"# Comprehensive Multiple Choice Questions: All Barash Sections\n")
         f.write(f"## Based on Barash, Cullen, and Stoelting's Clinical Anesthesia, 9th Edition\n\n")
         f.write(f"**Generated:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-        f.write(f"**Chapter:** {chapter_data['chapter']}\n")
-        f.write(f"**Source:** {chapter_data['source']}\n\n")
-        f.write("---\n\n")
+        f.write(f"**Sections Covered:** {len(all_sections)} sections (Sections 1-9)\n")
+        f.write(f"**Total Chapters:** {total_chapters}\n")
+        f.write(f"**Total Words:** {total_words:,}\n")
+        f.write(f"**Total Questions:** {total_questions}\n\n")
+        f.write("**Sections Included:**\n")
+        for section in all_sections:
+            f.write(f"- Section {section['section_num']}: {section['section_name']} ({len(section['chapters'])} chapters, {section['word_count']:,} words)\n")
+        f.write("\n---\n\n")
         f.write("## Questions\n\n")
         f.write(questions_text)
         f.write("\n\n---\n\n")
         f.write(f"**Created:** {datetime.now().strftime('%B %d, %Y')}\n")
         f.write(f"**File Location:** {os.path.abspath(output_filename)}\n")
+        f.write(f"**Source:** MCP Server - {MCP_URL}\n")
     
     # Update research state
-    research_state["last_chapter"] = chapter_data['chapter']
-    research_state["questions_generated"] = 20
+    research_state["last_chapter"] = f"All {len(all_sections)} Sections"
+    research_state["questions_generated"] = total_questions
     research_state["last_run"] = datetime.now()
     
-    print(f"✅ Generated 20 questions and saved to {output_filename}")
+    print(f"✅ Generated {total_questions} comprehensive questions from {len(all_sections)} sections and saved to {output_filename}")
     
     return {
         "success": True,
-        "chapter": chapter_data['chapter'],
-        "questions_generated": 20,
+        "sections_covered": len(all_sections),
+        "chapters_covered": total_chapters,
+        "total_words": total_words,
+        "questions_generated": total_questions,
         "file": output_filename,
-        "timestamp": datetime.now().isoformat()
+        "timestamp": datetime.now().isoformat(),
+        "sections": [f"Section {s['section_num']}: {s['section_name']}" for s in all_sections]
     }
 
 async def generate_medical_question(concept: str, content: str, patient: dict, level: str) -> dict:
@@ -1253,7 +1412,7 @@ def get_research_status():
         "last_run": research_state["last_run"].isoformat() if research_state["last_run"] else None,
         "last_chapter": research_state["last_chapter"],
         "questions_generated": research_state["questions_generated"],
-        "next_run_in_seconds": 300 if research_state["running"] else None
+        "next_run_in_seconds": None  # Manual only - no automatic scheduling
     }
 
 @app.post("/research/trigger")
@@ -1261,10 +1420,18 @@ async def trigger_research_now():
     """Manually trigger the research task immediately"""
     try:
         print("🎯 Manual research trigger requested")
+        research_state["status"] = "running"
+        research_state["running"] = True
         result = await generate_chapter_questions()
+        research_state["status"] = "completed"
+        research_state["running"] = False
         return {"ok": True, "result": result}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Research failed: {str(e)}")
+        error_msg = str(e)
+        print(f"❌ Research failed: {error_msg}")
+        research_state["status"] = f"error: {error_msg}"
+        research_state["running"] = False
+        raise HTTPException(status_code=500, detail=f"Research failed: {error_msg}")
 
 @app.get("/research/questions")
 def get_generated_questions():
@@ -1323,16 +1490,16 @@ def dashboard():
                 <strong>Powered by Barash Clinical Anesthesia, 9th Edition + Vertex AI</strong>
             </p>
             <p style="text-align: center; color: #27ae60; margin-bottom: 30px; font-size: 14px;">
-                📚 Section 2: Basic Science and Fundamentals (129,283 words) | 6 Chapters | 130,791 total words
+                📚 All 9 Barash Sections: Introduction, Basic Science, Cardiac, Pharmacology, Assessment, Management, Subspecialty Care, Surgical Services, Postanesthetic Care
             </p>
             
             <div style="background-color: #e3f2fd; padding: 15px; border-radius: 5px; margin-bottom: 20px; border-left: 4px solid #2196f3;">
-                <strong>🔬 Scheduled Research Agent:</strong> 
+                <strong>🔬 Manual Research Agent:</strong> 
                 <span id="researchStatus">Loading...</span>
-                <br><small style="color: #555;">Deep research runs every 5 minutes, analyzing Barash chapters to generate 20 MCQ questions</small>
+                <br><small style="color: #555;">Click the button below to trigger comprehensive research across ALL 9 Barash sections (Sections 1-9). This will generate 20 questions covering Introduction, Basic Science, Cardiac, Pharmacology, Assessment, Management, Subspecialty Care, Surgical Services, and Postanesthetic Care.</small>
                 <br>
-                <button onclick="triggerResearch()" style="margin-top: 10px; padding: 8px 16px; background: #2196f3; color: white; border: none; border-radius: 4px; cursor: pointer;">
-                    🚀 Trigger Research Now
+                <button onclick="triggerResearch()" style="margin-top: 10px; padding: 12px 24px; background: #2196f3; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: bold;">
+                    🚀 Start Comprehensive Research (All 9 Sections)
                 </button>
                 <button onclick="checkStatus()" style="margin-top: 10px; padding: 8px 16px; background: #4caf50; color: white; border: none; border-radius: 4px; cursor: pointer; margin-left: 10px;">
                     🔄 Refresh Status
@@ -1340,62 +1507,109 @@ def dashboard():
             </div>
             
             <div style="background-color: #e8f5e9; padding: 15px; border-radius: 5px; margin-bottom: 20px; border-left: 4px solid #27ae60;">
-                <strong>📖 Content Source:</strong> All questions are generated exclusively from Barash Section 2: Basic Science and Fundamentals
-                <br><small style="color: #555;">Chapters 6-11 covering Genomics, Statistics, Wound Healing, Allergic Response, Anesthesia Mechanisms, and Clinical Pharmacology</small>
+                <strong>📖 Content Source:</strong> All questions are generated from ALL 9 Barash sections via MCP server
+                <br><small style="color: #555;"><strong>Sections covered:</strong> Section 1 (Introduction & Overview), Section 2 (Basic Science & Fundamentals), Section 3 (Cardiac Anatomy & Physiology), Section 4 (Anesthetic Drugs & Adjuvants), Section 5 (Preoperative Assessment & Monitoring), Section 6 (Basic Anesthetic Management), Section 7 (Anesthesia Subspecialty Care), Section 8 (Anesthesia for Selected Surgical Services), Section 9 (Postanesthetic Management, Critical Care, and Pain Management)</small>
             </div>
             
             <form id="questionForm">
                 <div class="form-group">
-                    <label for="concept">Medical Concept (from Barash Section 2):</label>
+                    <label for="concept">Medical Concept (from All Barash Sections):</label>
                     <select id="concept" name="concept" required>
-                        <!-- Barash Chapter 6: Genomic Basis of Perioperative Medicine -->
-                        <optgroup label="📖 Barash Ch.6: Genomic Medicine">
+                        <!-- Section 1: Introduction and Overview -->
+                        <optgroup label="📖 Section 1: Introduction & Overview">
+                            <option value="history of anesthesia">History of Anesthesia</option>
+                            <option value="anesthesia before ether">Anesthesia Before Ether</option>
+                            <option value="control of the airway">Control of the Airway</option>
+                            <option value="tracheal intubation">Tracheal Intubation</option>
+                            <option value="safety standards">Safety Standards</option>
+                            <option value="professionalism in anesthesia">Professionalism in Anesthesia</option>
+                        </optgroup>
+                        
+                        <!-- Section 2: Basic Science and Fundamentals -->
+                        <optgroup label="📖 Section 2: Basic Science & Fundamentals">
                             <option value="perioperative genomics and precision medicine">Perioperative Genomics and Precision Medicine</option>
                             <option value="pharmacogenomics in anesthesia">Pharmacogenomics in Anesthesia</option>
                             <option value="genetic variability in drug response">Genetic Variability in Drug Response</option>
-                            <option value="biomarkers for perioperative outcomes">Biomarkers for Perioperative Outcomes</option>
-                        </optgroup>
-                        
-                        <!-- Barash Chapter 7: Experimental Design and Statistics -->
-                        <optgroup label="📖 Barash Ch.7: Research & Statistics">
                             <option value="randomized controlled trials">Randomized Controlled Trials</option>
-                            <option value="statistical analysis in clinical research">Statistical Analysis in Clinical Research</option>
-                            <option value="meta-analysis and systematic reviews">Meta-Analysis and Systematic Reviews</option>
-                        </optgroup>
-                        
-                        <!-- Barash Chapter 8: Wound Healing and Infection -->
-                        <optgroup label="📖 Barash Ch.8: Wound Healing">
                             <option value="surgical site infection prevention">Surgical Site Infection Prevention</option>
-                            <option value="wound oxygenation and perfusion">Wound Oxygenation and Perfusion</option>
-                            <option value="antibiotic prophylaxis timing">Antibiotic Prophylaxis Timing</option>
-                            <option value="hand hygiene and infection control">Hand Hygiene and Infection Control</option>
-                        </optgroup>
-                        
-                        <!-- Barash Chapter 9: Allergic Response -->
-                        <optgroup label="📖 Barash Ch.9: Allergic Responses">
                             <option value="anaphylaxis recognition and treatment">Anaphylaxis Recognition and Treatment</option>
-                            <option value="drug-induced allergic reactions">Drug-Induced Allergic Reactions</option>
-                            <option value="latex allergy management">Latex Allergy Management</option>
-                            <option value="neuromuscular blocker allergy">Neuromuscular Blocker Allergy</option>
-                        </optgroup>
-                        
-                        <!-- Barash Chapter 10: Mechanisms of Anesthesia -->
-                        <optgroup label="📖 Barash Ch.10: Anesthesia Mechanisms">
                             <option value="GABAa receptors and anesthetic action">GABAa Receptors and Anesthetic Action</option>
                             <option value="minimum alveolar concentration">Minimum Alveolar Concentration (MAC)</option>
-                            <option value="meyer-overton rule">Meyer-Overton Rule</option>
-                            <option value="molecular targets of anesthetics">Molecular Targets of Anesthetics</option>
-                            <option value="ion channels and anesthesia">Ion Channels and Anesthesia</option>
+                            <option value="pharmacokinetics and pharmacodynamics">Pharmacokinetics and Pharmacodynamics</option>
+                            <option value="cytochrome P450 interactions">Cytochrome P450 Drug Interactions</option>
                         </optgroup>
                         
-                        <!-- Barash Chapter 11: Clinical Pharmacology -->
-                        <optgroup label="📖 Barash Ch.11: Clinical Pharmacology">
-                            <option value="pharmacokinetics and pharmacodynamics">Pharmacokinetics and Pharmacodynamics</option>
-                            <option value="drug distribution and elimination">Drug Distribution and Elimination</option>
-                            <option value="cytochrome P450 interactions">Cytochrome P450 Drug Interactions</option>
-                            <option value="target-controlled infusions">Target-Controlled Infusions</option>
-                            <option value="context-sensitive half-time">Context-Sensitive Half-Time</option>
-                            <option value="opioid-hypnotic synergy">Opioid-Hypnotic Synergy</option>
+                        <!-- Section 3: Cardiac Anatomy and Physiology -->
+                        <optgroup label="📖 Section 3: Cardiac Anatomy & Physiology">
+                            <option value="cardiac anatomy">Cardiac Anatomy</option>
+                            <option value="cardiac physiology">Cardiac Physiology</option>
+                            <option value="cardiovascular system">Cardiovascular System</option>
+                            <option value="cardiac cycle">Cardiac Cycle</option>
+                            <option value="heart function">Heart Function</option>
+                        </optgroup>
+                        
+                        <!-- Section 4: Anesthetic Drugs and Adjuvants -->
+                        <optgroup label="📖 Section 4: Anesthetic Drugs & Adjuvants">
+                            <option value="inhalation anesthetics">Inhalation Anesthetics</option>
+                            <option value="intravenous anesthetics">Intravenous Anesthetics</option>
+                            <option value="neuromuscular blocking agents">Neuromuscular Blocking Agents</option>
+                            <option value="local anesthetics">Local Anesthetics</option>
+                            <option value="opioids">Opioids</option>
+                            <option value="anesthetic adjuvants">Anesthetic Adjuvants</option>
+                        </optgroup>
+                        
+                        <!-- Section 5: Preoperative Assessment and Monitoring -->
+                        <optgroup label="📖 Section 5: Preoperative Assessment & Monitoring">
+                            <option value="preoperative assessment">Preoperative Assessment</option>
+                            <option value="perioperative monitoring">Perioperative Monitoring</option>
+                            <option value="patient evaluation">Patient Evaluation</option>
+                            <option value="ASA physical status">ASA Physical Status</option>
+                            <option value="preoperative testing">Preoperative Testing</option>
+                        </optgroup>
+                        
+                        <!-- Section 6: Basic Anesthetic Management -->
+                        <optgroup label="📖 Section 6: Basic Anesthetic Management">
+                            <option value="anesthetic induction">Anesthetic Induction</option>
+                            <option value="airway management">Airway Management</option>
+                            <option value="general anesthesia">General Anesthesia</option>
+                            <option value="regional anesthesia">Regional Anesthesia</option>
+                            <option value="anesthetic maintenance">Anesthetic Maintenance</option>
+                            <option value="emergence from anesthesia">Emergence from Anesthesia</option>
+                        </optgroup>
+                        
+                        <!-- Section 7: Anesthesia Subspecialty Care -->
+                        <optgroup label="📖 Section 7: Anesthesia Subspecialty Care">
+                            <option value="neuroanesthesia">Neuroanesthesia</option>
+                            <option value="cerebral perfusion">Cerebral Perfusion</option>
+                            <option value="intracranial pressure monitoring">Intracranial Pressure Monitoring</option>
+                            <option value="cerebral protection">Cerebral Protection</option>
+                            <option value="pituitary surgery">Pituitary Surgery</option>
+                            <option value="cerebral aneurysm surgery">Cerebral Aneurysm Surgery</option>
+                            <option value="traumatic brain injury">Traumatic Brain Injury</option>
+                            <option value="spine surgery">Spine Surgery</option>
+                        </optgroup>
+                        
+                        <!-- Section 8: Anesthesia for Selected Surgical Services -->
+                        <optgroup label="📖 Section 8: Surgical Services">
+                            <option value="laparoscopic surgery">Laparoscopic Surgery</option>
+                            <option value="robotic surgery">Robotic Surgery</option>
+                            <option value="pneumoperitoneum">Pneumoperitoneum</option>
+                            <option value="positioning">Positioning</option>
+                            <option value="ventilation management">Ventilation Management</option>
+                            <option value="fluid management">Fluid Management</option>
+                            <option value="postoperative management">Postoperative Management</option>
+                        </optgroup>
+                        
+                        <!-- Section 9: Postanesthetic Management, Critical Care, and Pain Management -->
+                        <optgroup label="📖 Section 9: Postanesthetic & Pain Management">
+                            <option value="postanesthetic management">Postanesthetic Management</option>
+                            <option value="critical care">Critical Care</option>
+                            <option value="pain management">Pain Management</option>
+                            <option value="recovery room">Recovery Room</option>
+                            <option value="PACU management">PACU Management</option>
+                            <option value="postoperative complications">Postoperative Complications</option>
+                            <option value="analgesic techniques">Analgesic Techniques</option>
+                            <option value="patient-controlled analgesia">Patient-Controlled Analgesia</option>
                         </optgroup>
                     </select>
                 </div>

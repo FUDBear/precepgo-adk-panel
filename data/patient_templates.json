@@ -128,5 +128,1305 @@
       "categories": ["Geriatric"],
       "personality": "Gruff, cooperative with clear instructions",
       "health_traits": ["Reduced oxygen saturation", "Cardiac instability"]
+    },
+    {
+      "full_name": "Maria Santos",
+      "ethnicity": "Filipino",
+      "weight": {
+        "kg": 72,
+        "lbs": 159
+      },
+      "comorbidities": ["Gestational Diabetes", "Mild Preeclampsia"],
+      "age": 28,
+      "categories": ["Obstetric", "Adult"],
+      "personality": "Calm, first-time mother, asks many questions",
+      "health_traits": ["Increased blood volume", "Elevated blood pressure", "Third trimester - 36 weeks"]
+    },
+    {
+      "full_name": "Keisha Williams",
+      "ethnicity": "African American",
+      "weight": {
+        "kg": 88,
+        "lbs": 194
+      },
+      "comorbidities": ["Preeclampsia", "Gestational Hypertension"],
+      "age": 35,
+      "categories": ["Obstetric", "Adult"],
+      "personality": "Anxious, concerned about baby",
+      "health_traits": ["Severe preeclampsia", "Risk of seizures", "Emergency C-section indicated"]
+    },
+    {
+      "full_name": "Sarah Johnson",
+      "ethnicity": "Caucasian",
+      "weight": {
+        "kg": 78,
+        "lbs": 172
+      },
+      "comorbidities": ["Placenta Previa", "History of C-section"],
+      "age": 32,
+      "categories": ["Obstetric", "Adult"],
+      "personality": "Worried but cooperative",
+      "health_traits": ["Risk of hemorrhage", "Previous uterine scar", "Scheduled C-section"]
+    },
+    {
+      "full_name": "Priya Kapoor",
+      "ethnicity": "Indian",
+      "weight": {
+        "kg": 58,
+        "lbs": 128
+      },
+      "comorbidities": ["Anemia", "Hypothyroidism"],
+      "age": 26,
+      "categories": ["Obstetric", "Adult"],
+      "personality": "Quiet, trusting",
+      "health_traits": ["Low hemoglobin", "Twin pregnancy", "Increased cardiac output"]
+    },
+    {
+      "full_name": "Amanda Martinez",
+      "ethnicity": "Mexican",
+      "weight": {
+        "kg": 102,
+        "lbs": 225
+      },
+      "comorbidities": ["Obesity", "Asthma", "Previous C-section"],
+      "age": 30,
+      "categories": ["Obstetric", "Adult"],
+      "personality": "Nervous, talkative",
+      "health_traits": ["Difficult airway", "Increased aspiration risk", "VBAC attempt"]
+    },
+    {
+      "full_name": "Yuki Yamamoto",
+      "ethnicity": "Japanese",
+      "weight": {
+        "kg": 55,
+        "lbs": 121
+      },
+      "comorbidities": ["Advanced Maternal Age", "Mild Hypertension"],
+      "age": 42,
+      "categories": ["Obstetric", "Adult"],
+      "personality": "Stoic, detail-oriented",
+      "health_traits": ["IVF pregnancy", "Twins", "Scheduled C-section"]
+    },
+    {
+      "full_name": "Gabriela Silva",
+      "ethnicity": "Brazilian",
+      "weight": {
+        "kg": 68,
+        "lbs": 150
+      },
+      "comorbidities": ["Asthma", "Anxiety"],
+      "age": 24,
+      "categories": ["Obstetric", "Adult"],
+      "personality": "Very anxious, needs reassurance",
+      "health_traits": ["Well-controlled asthma", "Vaginal delivery with epidural"]
+    },
+    {
+      "full_name": "Nicole Thompson",
+      "ethnicity": "Caucasian",
+      "weight": {
+        "kg": 95,
+        "lbs": 209
+      },
+      "comorbidities": ["Type 2 Diabetes", "Morbid Obesity"],
+      "age": 38,
+      "categories": ["Obstetric", "Adult"],
+      "personality": "Friendly, compliant",
+      "health_traits": ["Difficult epidural placement", "Large for gestational age baby", "Increased C-section risk"]
+    },
+    {
+      "full_name": "Amina Ibrahim",
+      "ethnicity": "Somali",
+      "weight": {
+        "kg": 62,
+        "lbs": 137
+      },
+      "comorbidities": ["Anemia", "History of PPH"],
+      "age": 29,
+      "categories": ["Obstetric", "Adult"],
+      "personality": "Calm, experienced mother",
+      "health_traits": ["Previous postpartum hemorrhage", "Grand multipara", "Type and cross matched"]
+    },
+    {
+      "full_name": "Elena Popescu",
+      "ethnicity": "Romanian",
+      "weight": {
+        "kg": 70,
+        "lbs": 154
+      },
+      "comorbidities": ["Cardiac Arrhythmia", "Hyperthyroidism"],
+      "age": 33,
+      "categories": ["Obstetric", "Adult"],
+      "personality": "Anxious, well-informed",
+      "health_traits": ["Palpitations", "On beta blockers", "Cardiology clearance obtained"]
+    },
+    {
+      "full_name": "Robert Anderson",
+      "ethnicity": "Caucasian",
+      "weight": {
+        "kg": 92,
+        "lbs": 203
+      },
+      "comorbidities": ["Obesity", "Osteoarthritis"],
+      "age": 58,
+      "categories": ["Orthopedic", "Adult"],
+      "personality": "Impatient, wants quick recovery",
+      "health_traits": ["Total knee replacement", "Chronic pain", "Takes daily NSAIDs"]
+    },
+    {
+      "full_name": "Margaret O'Brien",
+      "ethnicity": "Irish",
+      "weight": {
+        "kg": 68,
+        "lbs": 150
+      },
+      "comorbidities": ["Osteoporosis", "Hypertension"],
+      "age": 74,
+      "categories": ["Orthopedic", "Geriatric"],
+      "personality": "Cheerful, cooperative",
+      "health_traits": ["Hip fracture repair", "Fragile bones", "Fall risk"]
+    },
+    {
+      "full_name": "Tyler Brooks",
+      "ethnicity": "African American",
+      "weight": {
+        "kg": 88,
+        "lbs": 194
+      },
+      "comorbidities": ["Sickle Cell Trait", "Chronic Pain"],
+      "age": 27,
+      "categories": ["Orthopedic", "Adult"],
+      "personality": "Wary, history of undertreated pain",
+      "health_traits": ["ACL reconstruction", "Athletic build", "High opioid tolerance"]
+    },
+    {
+      "full_name": "Hans Mueller",
+      "ethnicity": "German",
+      "weight": {
+        "kg": 95,
+        "lbs": 209
+      },
+      "comorbidities": ["Type 2 Diabetes", "Peripheral Vascular Disease"],
+      "age": 66,
+      "categories": ["Orthopedic", "Geriatric"],
+      "personality": "Stoic, follows instructions",
+      "health_traits": ["Total hip replacement", "Poor wound healing", "Neuropathy"]
+    },
+    {
+      "full_name": "Jessica Kim",
+      "ethnicity": "Korean",
+      "weight": {
+        "kg": 52,
+        "lbs": 115
+      },
+      "comorbidities": ["Rheumatoid Arthritis", "Anemia"],
+      "age": 45,
+      "categories": ["Orthopedic", "Adult"],
+      "personality": "Patient, resilient",
+      "health_traits": ["Bilateral hand surgery", "Chronic steroid use", "Fragile skin"]
+    },
+    {
+      "full_name": "Marcus Johnson",
+      "ethnicity": "African American",
+      "weight": {
+        "kg": 105,
+        "lbs": 231
+      },
+      "comorbidities": ["Obesity", "Sleep Apnea"],
+      "age": 52,
+      "categories": ["Orthopedic", "Adult"],
+      "personality": "Jovial, concerned about pain",
+      "health_traits": ["Spinal fusion surgery", "Uses CPAP", "Difficult airway"]
+    },
+    {
+      "full_name": "Anna Kowalski",
+      "ethnicity": "Polish",
+      "weight": {
+        "kg": 58,
+        "lbs": 128
+      },
+      "comorbidities": ["Osteoporosis", "Hypothyroidism"],
+      "age": 69,
+      "categories": ["Orthopedic", "Geriatric"],
+      "personality": "Nervous, needs reassurance",
+      "health_traits": ["Shoulder replacement", "History of falls", "Takes levothyroxine"]
+    },
+    {
+      "full_name": "David Chen",
+      "ethnicity": "Chinese",
+      "weight": {
+        "kg": 78,
+        "lbs": 172
+      },
+      "comorbidities": ["Hypertension", "Gout"],
+      "age": 61,
+      "categories": ["Orthopedic", "Geriatric"],
+      "personality": "Quiet, compliant",
+      "health_traits": ["Ankle surgery", "Takes multiple medications", "Renal insufficiency"]
+    },
+    {
+      "full_name": "Emma Larsson",
+      "ethnicity": "Swedish",
+      "weight": {
+        "kg": 65,
+        "lbs": 143
+      },
+      "comorbidities": ["Scoliosis", "Anxiety"],
+      "age": 19,
+      "categories": ["Orthopedic", "Adolescent"],
+      "personality": "Anxious, first surgery",
+      "health_traits": ["Spinal fusion for scoliosis", "Expected blood loss", "Young healthy patient"]
+    },
+    {
+      "full_name": "Carlos Ramirez",
+      "ethnicity": "Mexican",
+      "weight": {
+        "kg": 82,
+        "lbs": 181
+      },
+      "comorbidities": ["Type 2 Diabetes", "Obesity"],
+      "age": 56,
+      "categories": ["Orthopedic", "Adult"],
+      "personality": "Friendly, worried about recovery",
+      "health_traits": ["Rotator cuff repair", "Poor glycemic control", "Delayed healing risk"]
+    },
+    {
+      "full_name": "William Patterson",
+      "ethnicity": "Caucasian",
+      "weight": {
+        "kg": 85,
+        "lbs": 187
+      },
+      "comorbidities": ["Coronary Artery Disease", "Previous MI"],
+      "age": 68,
+      "categories": ["Cardiac", "Geriatric"],
+      "personality": "Anxious, cardiac-focused",
+      "health_traits": ["CABG surgery", "Ejection fraction 40%", "On multiple cardiac meds"]
+    },
+    {
+      "full_name": "Patricia Davis",
+      "ethnicity": "African American",
+      "weight": {
+        "kg": 78,
+        "lbs": 172
+      },
+      "comorbidities": ["Atrial Fibrillation", "Hypertension"],
+      "age": 72,
+      "categories": ["Cardiac", "Geriatric"],
+      "personality": "Calm, trusting",
+      "health_traits": ["Mitral valve replacement", "On warfarin", "CHF history"]
+    },
+    {
+      "full_name": "James Mitchell",
+      "ethnicity": "Caucasian",
+      "weight": {
+        "kg": 92,
+        "lbs": 203
+      },
+      "comorbidities": ["Heart Failure", "Diabetes"],
+      "age": 64,
+      "categories": ["Cardiac", "Geriatric"],
+      "personality": "Stoic, matter-of-fact",
+      "health_traits": ["Aortic valve replacement", "Low EF", "Diuretic dependent"]
+    },
+    {
+      "full_name": "Rosa Fernandez",
+      "ethnicity": "Spanish",
+      "weight": {
+        "kg": 68,
+        "lbs": 150
+      },
+      "comorbidities": ["Atrial Fibrillation", "COPD"],
+      "age": 76,
+      "categories": ["Cardiac", "Geriatric"],
+      "personality": "Worried, needs family present",
+      "health_traits": ["Maze procedure", "Respiratory compromise", "Limited cardiac reserve"]
+    },
+    {
+      "full_name": "Richard Thompson",
+      "ethnicity": "Caucasian",
+      "weight": {
+        "kg": 88,
+        "lbs": 194
+      },
+      "comorbidities": ["Hypertension", "Hyperlipidemia"],
+      "age": 59,
+      "categories": ["Cardiac", "Adult"],
+      "personality": "Type A, impatient",
+      "health_traits": ["CABG x4", "Strong heart", "Well-controlled BP"]
+    },
+    {
+      "full_name": "Linda Washington",
+      "ethnicity": "African American",
+      "weight": {
+        "kg": 95,
+        "lbs": 209
+      },
+      "comorbidities": ["Obesity", "Diabetes", "Renal Insufficiency"],
+      "age": 62,
+      "categories": ["Cardiac", "Geriatric"],
+      "personality": "Friendly, anxious about dialysis",
+      "health_traits": ["CABG + valve", "CKD stage 3", "Volume overload"]
+    },
+    {
+      "full_name": "George Papadopoulos",
+      "ethnicity": "Greek",
+      "weight": {
+        "kg": 82,
+        "lbs": 181
+      },
+      "comorbidities": ["Previous Stroke", "Hypertension"],
+      "age": 71,
+      "categories": ["Cardiac", "Geriatric"],
+      "personality": "Quiet, family-oriented",
+      "health_traits": ["Aortic aneurysm repair", "Carotid stenosis", "Stroke risk"]
+    },
+    {
+      "full_name": "Mary O'Connor",
+      "ethnicity": "Irish",
+      "weight": {
+        "kg": 72,
+        "lbs": 159
+      },
+      "comorbidities": ["Atrial Fibrillation", "Osteoporosis"],
+      "age": 78,
+      "categories": ["Cardiac", "Geriatric"],
+      "personality": "Cheerful, faithful",
+      "health_traits": ["Cardiac catheterization", "On anticoagulation", "Fragile patient"]
+    },
+    {
+      "full_name": "Harold Bennett",
+      "ethnicity": "Caucasian",
+      "weight": {
+        "kg": 90,
+        "lbs": 198
+      },
+      "comorbidities": ["COPD", "Previous CABG"],
+      "age": 73,
+      "categories": ["Cardiac", "Geriatric"],
+      "personality": "Gruff, experienced patient",
+      "health_traits": ["Redo CABG", "Scarred chest", "Complex case"]
+    },
+    {
+      "full_name": "Sandra Lee",
+      "ethnicity": "Chinese",
+      "weight": {
+        "kg": 62,
+        "lbs": 137
+      },
+      "comorbidities": ["Diabetes", "Hypertension"],
+      "age": 67,
+      "categories": ["Cardiac", "Geriatric"],
+      "personality": "Reserved, compliant",
+      "health_traits": ["Coronary stenting", "Small vessels", "Asian descent factors"]
+    },
+    {
+      "full_name": "Jake Morrison",
+      "ethnicity": "Caucasian",
+      "weight": {
+        "kg": 85,
+        "lbs": 187
+      },
+      "comorbidities": ["Traumatic Brain Injury", "Rib Fractures"],
+      "age": 24,
+      "categories": ["Trauma", "Adult"],
+      "personality": "Unconscious, GCS 8",
+      "health_traits": ["Motor vehicle accident", "Intracranial pressure concerns", "Hemodynamically unstable"]
+    },
+    {
+      "full_name": "Tyrone Jackson",
+      "ethnicity": "African American",
+      "weight": {
+        "kg": 92,
+        "lbs": 203
+      },
+      "comorbidities": ["Gunshot Wound", "Blood Loss"],
+      "age": 28,
+      "categories": ["Trauma", "Adult"],
+      "personality": "Agitated, in pain",
+      "health_traits": ["Penetrating abdominal trauma", "Hemorrhagic shock", "Needs massive transfusion"]
+    },
+    {
+      "full_name": "Michelle Carter",
+      "ethnicity": "Caucasian",
+      "weight": {
+        "kg": 58,
+        "lbs": 128
+      },
+      "comorbidities": ["Multiple Fractures", "Pneumothorax"],
+      "age": 19,
+      "categories": ["Trauma", "Adolescent"],
+      "personality": "Scared, calling for parents",
+      "health_traits": ["Fall from height", "Bilateral femur fractures", "Chest tube placed"]
+    },
+    {
+      "full_name": "Carlos Delgado",
+      "ethnicity": "Mexican",
+      "weight": {
+        "kg": 75,
+        "lbs": 165
+      },
+      "comorbidities": ["Spinal Cord Injury", "Hypotension"],
+      "age": 32,
+      "categories": ["Trauma", "Adult"],
+      "personality": "Confused, neurogenic shock",
+      "health_traits": ["C-spine fracture", "Paralysis below injury", "Vasopressor support needed"]
+    },
+    {
+      "full_name": "Sarah Mitchell",
+      "ethnicity": "Caucasian",
+      "weight": {
+        "kg": 65,
+        "lbs": 143
+      },
+      "comorbidities": ["Pelvic Fracture", "Internal Bleeding"],
+      "age": 45,
+      "categories": ["Trauma", "Adult"],
+      "personality": "Drowsy, weak",
+      "health_traits": ["Motorcycle accident", "Unstable pelvis", "Ongoing blood loss"]
+    },
+    {
+      "full_name": "Omar Hassan",
+      "ethnicity": "Somali",
+      "weight": {
+        "kg": 70,
+        "lbs": 154
+      },
+      "comorbidities": ["Stab Wound", "Hemothorax"],
+      "age": 26,
+      "categories": ["Trauma", "Adult"],
+      "personality": "Anxious, cooperative",
+      "health_traits": ["Penetrating chest trauma", "Blood in chest cavity", "Emergent surgery"]
+    },
+    {
+      "full_name": "Jennifer Park",
+      "ethnicity": "Korean",
+      "weight": {
+        "kg": 52,
+        "lbs": 115
+      },
+      "comorbidities": ["Facial Trauma", "Jaw Fractures"],
+      "age": 22,
+      "categories": ["Trauma", "Adult"],
+      "personality": "In pain, unable to speak clearly",
+      "health_traits": ["Assault victim", "Difficult airway", "Maxillofacial surgery needed"]
+    },
+    {
+      "full_name": "Derek Williams",
+      "ethnicity": "African American",
+      "weight": {
+        "kg": 98,
+        "lbs": 216
+      },
+      "comorbidities": ["Burn Injury", "Smoke Inhalation"],
+      "age": 38,
+      "categories": ["Trauma", "Adult"],
+      "personality": "In severe pain, agitated",
+      "health_traits": ["35% TBSA burns", "Airway edema", "Fluid resuscitation needed"]
+    },
+    {
+      "full_name": "Angela Russo",
+      "ethnicity": "Italian",
+      "weight": {
+        "kg": 68,
+        "lbs": 150
+      },
+      "comorbidities": ["Liver Laceration", "Rib Fractures"],
+      "age": 41,
+      "categories": ["Trauma", "Adult"],
+      "personality": "Scared, crying",
+      "health_traits": ["Blunt abdominal trauma", "Grade 3 liver injury", "Observation vs surgery"]
+    },
+    {
+      "full_name": "Kevin O'Brien",
+      "ethnicity": "Irish",
+      "weight": {
+        "kg": 88,
+        "lbs": 194
+      },
+      "comorbidities": ["Alcohol Intoxication", "Head Trauma"],
+      "age": 52,
+      "categories": ["Trauma", "Adult"],
+      "personality": "Combative, confused",
+      "health_traits": ["Fall with head injury", "Subdural hematoma", "Aspiration risk"]
+    },
+    {
+      "full_name": "Brenda Washington",
+      "ethnicity": "African American",
+      "weight": {
+        "kg": 152,
+        "lbs": 335
+      },
+      "comorbidities": ["Morbid Obesity", "Sleep Apnea", "Diabetes"],
+      "age": 42,
+      "categories": ["Bariatric", "Adult"],
+      "personality": "Motivated, nervous",
+      "health_traits": ["Gastric bypass surgery", "BMI 58", "Uses CPAP nightly"]
+    },
+    {
+      "full_name": "Timothy Rogers",
+      "ethnicity": "Caucasian",
+      "weight": {
+        "kg": 165,
+        "lbs": 364
+      },
+      "comorbidities": ["Super Obesity", "Hypertension", "Diabetes"],
+      "age": 38,
+      "categories": ["Bariatric", "Adult"],
+      "personality": "Quiet, determined",
+      "health_traits": ["Sleeve gastrectomy", "BMI 62", "Difficult IV access"]
+    },
+    {
+      "full_name": "Lakisha Brown",
+      "ethnicity": "African American",
+      "weight": {
+        "kg": 148,
+        "lbs": 326
+      },
+      "comorbidities": ["Obesity", "Asthma", "Depression"],
+      "age": 35,
+      "categories": ["Bariatric", "Adult"],
+      "personality": "Talkative, anxious",
+      "health_traits": ["Gastric bypass", "Reactive airway", "On antidepressants"]
+    },
+    {
+      "full_name": "Robert Hill",
+      "ethnicity": "Caucasian",
+      "weight": {
+        "kg": 158,
+        "lbs": 348
+      },
+      "comorbidities": ["Morbid Obesity", "Heart Failure", "Sleep Apnea"],
+      "age": 48,
+      "categories": ["Bariatric", "Adult"],
+      "personality": "Concerned, cooperative",
+      "health_traits": ["Gastric sleeve", "Reduced ejection fraction", "High cardiac risk"]
+    },
+    {
+      "full_name": "Tanya Martinez",
+      "ethnicity": "Mexican",
+      "weight": {
+        "kg": 142,
+        "lbs": 313
+      },
+      "comorbidities": ["Obesity", "Fatty Liver Disease", "GERD"],
+      "age": 44,
+      "categories": ["Bariatric", "Adult"],
+      "personality": "Friendly, hopeful",
+      "health_traits": ["Roux-en-Y gastric bypass", "Aspiration risk", "Hepatic dysfunction"]
+    },
+    {
+      "full_name": "Donald Pierce",
+      "ethnicity": "Caucasian",
+      "weight": {
+        "kg": 170,
+        "lbs": 375
+      },
+      "comorbidities": ["Super Morbid Obesity", "Diabetes", "Hypertension"],
+      "age": 51,
+      "categories": ["Bariatric", "Adult"],
+      "personality": "Frustrated, ready for change",
+      "health_traits": ["Duodenal switch", "BMI 65", "Complex bariatric procedure"]
+    },
+    {
+      "full_name": "Christina Gonzalez",
+      "ethnicity": "Puerto Rican",
+      "weight": {
+        "kg": 145,
+        "lbs": 320
+      },
+      "comorbidities": ["Morbid Obesity", "PCOS", "Pre-diabetes"],
+      "age": 29,
+      "categories": ["Bariatric", "Adult"],
+      "personality": "Young, motivated",
+      "health_traits": ["Gastric sleeve", "Fertility concerns", "Insulin resistance"]
+    },
+    {
+      "full_name": "Michael Stevens",
+      "ethnicity": "Caucasian",
+      "weight": {
+        "kg": 155,
+        "lbs": 342
+      },
+      "comorbidities": ["Obesity", "Sleep Apnea", "Joint Pain"],
+      "age": 46,
+      "categories": ["Bariatric", "Adult"],
+      "personality": "Determined, well-researched",
+      "health_traits": ["Revision surgery", "Previous band removal", "Difficult anatomy"]
+    },
+    {
+      "full_name": "Patricia Nguyen",
+      "ethnicity": "Vietnamese",
+      "weight": {
+        "kg": 138,
+        "lbs": 304
+      },
+      "comorbidities": ["Obesity", "Hypothyroidism", "Asthma"],
+      "age": 40,
+      "categories": ["Bariatric", "Adult"],
+      "personality": "Nervous, needs reassurance",
+      "health_traits": ["Gastric bypass", "On thyroid medication", "Respiratory concerns"]
+    },
+    {
+      "full_name": "Gregory Davis",
+      "ethnicity": "African American",
+      "weight": {
+        "kg": 162,
+        "lbs": 357
+      },
+      "comorbidities": ["Morbid Obesity", "Diabetes", "Chronic Pain"],
+      "age": 54,
+      "categories": ["Bariatric", "Adult"],
+      "personality": "Stoic, realistic",
+      "health_traits": ["Gastric sleeve", "On chronic opioids", "Pain management challenges"]
+    },
+    {
+      "full_name": "Thomas Harper",
+      "ethnicity": "Caucasian",
+      "weight": {
+        "kg": 78,
+        "lbs": 172
+      },
+      "comorbidities": ["Brain Tumor", "Seizure Disorder"],
+      "age": 52,
+      "categories": ["Neurosurgical", "Adult"],
+      "personality": "Calm, accepting",
+      "health_traits": ["Craniotomy for tumor resection", "On antiepileptics", "Neuro monitoring needed"]
+    },
+    {
+      "full_name": "Rachel Goldman",
+      "ethnicity": "Jewish",
+      "weight": {
+        "kg": 65,
+        "lbs": 143
+      },
+      "comorbidities": ["Aneurysm", "Hypertension"],
+      "age": 58,
+      "categories": ["Neurosurgical", "Adult"],
+      "personality": "Anxious, well-informed",
+      "health_traits": ["Cerebral aneurysm clipping", "Blood pressure control critical", "Subarachnoid hemorrhage risk"]
+    },
+    {
+      "full_name": "Mark Johnson",
+      "ethnicity": "Caucasian",
+      "weight": {
+        "kg": 82,
+        "lbs": 181
+      },
+      "comorbidities": ["Spinal Stenosis", "Diabetes"],
+      "age": 64,
+      "categories": ["Neurosurgical", "Geriatric"],
+      "personality": "Patient, cooperative",
+      "health_traits": ["Laminectomy", "Prone positioning", "Neuropathy"]
+    },
+    {
+      "full_name": "Lisa Chen",
+      "ethnicity": "Chinese",
+      "weight": {
+        "kg": 58,
+        "lbs": 128
+      },
+      "comorbidities": ["Arteriovenous Malformation", "Migraine"],
+      "age": 36,
+      "categories": ["Neurosurgical", "Adult"],
+      "personality": "Scared, young patient",
+      "health_traits": ["AVM resection", "Risk of hemorrhage", "Neuro deficits possible"]
+    },
+    {
+      "full_name": "Paul Anderson",
+      "ethnicity": "Caucasian",
+      "weight": {
+        "kg": 88,
+        "lbs": 194
+      },
+      "comorbidities": ["Pituitary Adenoma", "Diabetes Insipidus"],
+      "age": 47,
+      "categories": ["Neurosurgical", "Adult"],
+      "personality": "Concerned about vision",
+      "health_traits": ["Transsphenoidal surgery", "Endocrine dysfunction", "Fluid management critical"]
+    },
+    {
+      "full_name": "Diana Martinez",
+      "ethnicity": "Mexican",
+      "weight": {
+        "kg": 72,
+        "lbs": 159
+      },
+      "comorbidities": ["Hydrocephalus", "Previous Shunt"],
+      "age": 28,
+      "categories": ["Neurosurgical", "Adult"],
+      "personality": "Experienced patient, calm",
+      "health_traits": ["Shunt revision", "Increased ICP", "Multiple prior surgeries"]
+    },
+    {
+      "full_name": "Kenneth Brown",
+      "ethnicity": "African American",
+      "weight": {
+        "kg": 85,
+        "lbs": 187
+      },
+      "comorbidities": ["Cervical Myelopathy", "Hypertension"],
+      "age": 61,
+      "categories": ["Neurosurgical", "Geriatric"],
+      "personality": "Stoic, resigned",
+      "health_traits": ["Cervical spine fusion", "Cord compression", "Neuro monitoring"]
+    },
+    {
+      "full_name": "Susan Park",
+      "ethnicity": "Korean",
+      "weight": {
+        "kg": 62,
+        "lbs": 137
+      },
+      "comorbidities": ["Chiari Malformation", "Chronic Headaches"],
+      "age": 33,
+      "categories": ["Neurosurgical", "Adult"],
+      "personality": "Hopeful, researched condition",
+      "health_traits": ["Posterior fossa decompression", "CSF flow obstruction", "Young healthy otherwise"]
+    },
+    {
+      "full_name": "Brian Wilson",
+      "ethnicity": "Caucasian",
+      "weight": {
+        "kg": 92,
+        "lbs": 203
+      },
+      "comorbidities": ["Spinal Cord Tumor", "Chronic Pain"],
+      "age": 56,
+      "categories": ["Neurosurgical", "Adult"],
+      "personality": "Anxious about paralysis",
+      "health_traits": ["Intramedullary tumor resection", "High opioid tolerance", "Complex case"]
+    },
+    {
+      "full_name": "Nancy Rodriguez",
+      "ethnicity": "Colombian",
+      "weight": {
+        "kg": 68,
+        "lbs": 150
+      },
+      "comorbidities": ["Meningioma", "Seizures"],
+      "age": 49,
+      "categories": ["Neurosurgical", "Adult"],
+      "personality": "Faithful, trusting",
+      "health_traits": ["Craniotomy for meningioma", "On multiple antiepileptics", "Seizure precautions"]
+    },
+    {
+      "full_name": "Steven Miller",
+      "ethnicity": "Caucasian",
+      "weight": {
+        "kg": 82,
+        "lbs": 181
+      },
+      "comorbidities": ["Lung Cancer", "COPD"],
+      "age": 67,
+      "categories": ["Thoracic", "Geriatric"],
+      "personality": "Former smoker, regretful",
+      "health_traits": ["Lobectomy", "Poor lung function", "One-lung ventilation needed"]
+    },
+    {
+      "full_name": "Carol Peterson",
+      "ethnicity": "Caucasian",
+      "weight": {
+        "kg": 72,
+        "lbs": 159
+      },
+      "comorbidities": ["Lung Nodule", "Emphysema"],
+      "age": 71,
+      "categories": ["Thoracic", "Geriatric"],
+      "personality": "Anxious, breathless",
+      "health_traits": ["VATS wedge resection", "Limited pulmonary reserve", "High oxygen requirement"]
+    },
+    {
+      "full_name": "Raymond Clark",
+      "ethnicity": "African American",
+      "weight": {
+        "kg": 88,
+        "lbs": 194
+      },
+      "comorbidities": ["Esophageal Cancer", "Malnutrition"],
+      "age": 62,
+      "categories": ["Thoracic", "Geriatric"],
+      "personality": "Weak, determined",
+      "health_traits": ["Esophagectomy", "Significant weight loss", "Complex reconstruction"]
+    },
+    {
+      "full_name": "Dorothy Lee",
+      "ethnicity": "Chinese",
+      "weight": {
+        "kg": 58,
+        "lbs": 128
+      },
+      "comorbidities": ["Thymoma", "Myasthenia Gravis"],
+      "age": 54,
+      "categories": ["Thoracic", "Adult"],
+      "personality": "Weak, easily fatigued",
+      "health_traits": ["Thymectomy", "Muscle weakness", "Respiratory failure risk"]
+    },
+    {
+      "full_name": "Gary Thompson",
+      "ethnicity": "Caucasian",
+      "weight": {
+        "kg": 85,
+        "lbs": 187
+      },
+      "comorbidities": ["Mesothelioma", "Asbestos Exposure"],
+      "age": 69,
+      "categories": ["Thoracic", "Geriatric"],
+      "personality": "Stoic, poor prognosis",
+      "health_traits": ["Pleurectomy", "Restrictive lung disease", "Pain management needed"]
+    },
+    {
+      "full_name": "Margaret Wilson",
+      "ethnicity": "Caucasian",
+      "weight": {
+        "kg": 68,
+        "lbs": 150
+      },
+      "comorbidities": ["Pneumothorax", "Cystic Lung Disease"],
+      "age": 42,
+      "categories": ["Thoracic", "Adult"],
+      "personality": "Anxious, recurrent condition",
+      "health_traits": ["Pleurodesis", "Multiple previous pneumothoraces", "Fragile lungs"]
+    },
+    {
+      "full_name": "Joseph Martinez",
+      "ethnicity": "Mexican",
+      "weight": {
+        "kg": 78,
+        "lbs": 172
+      },
+      "comorbidities": ["Lung Cancer", "Smoking History"],
+      "age": 64,
+      "categories": ["Thoracic", "Geriatric"],
+      "personality": "Regretful, cooperative",
+      "health_traits": ["Pneumonectomy", "Recently quit smoking", "Major lung resection"]
+    },
+    {
+      "full_name": "Sandra Davis",
+      "ethnicity": "African American",
+      "weight": {
+        "kg": 75,
+        "lbs": 165
+      },
+      "comorbidities": ["Mediastinal Mass", "Tracheal Compression"],
+      "age": 48,
+      "categories": ["Thoracic", "Adult"],
+      "personality": "Short of breath, scared",
+      "health_traits": ["Mass biopsy", "Airway compromise", "Difficult intubation expected"]
+    },
+    {
+      "full_name": "Frank Anderson",
+      "ethnicity": "Caucasian",
+      "weight": {
+        "kg": 82,
+        "lbs": 181
+      },
+      "comorbidities": ["Empyema", "Sepsis"],
+      "age": 58,
+      "categories": ["Thoracic", "Adult"],
+      "personality": "Ill-appearing, weak",
+      "health_traits": ["Decortication", "Ongoing infection", "Hemodynamic instability"]
+    },
+    {
+      "full_name": "Betty Garcia",
+      "ethnicity": "Mexican",
+      "weight": {
+        "kg": 65,
+        "lbs": 143
+      },
+      "comorbidities": ["Bronchiectasis", "Recurrent Infections"],
+      "age": 52,
+      "categories": ["Thoracic", "Adult"],
+      "personality": "Chronically ill, tired",
+      "health_traits": ["Segmentectomy", "Chronic cough", "Difficult secretion management"]
+    },
+    {
+      "full_name": "Sophie Dubois",
+      "ethnicity": "French",
+      "weight": {
+        "kg": 28,
+        "lbs": 62
+      },
+      "comorbidities": ["Congenital Heart Disease", "Failure to Thrive"],
+      "age": 4,
+      "categories": ["Pediatric"],
+      "personality": "Scared, cries easily",
+      "health_traits": ["Cardiac catheterization", "Small veins", "NPO sensitive"]
+    },
+    {
+      "full_name": "Mason Taylor",
+      "ethnicity": "Caucasian",
+      "weight": {
+        "kg": 18,
+        "lbs": 40
+      },
+      "comorbidities": ["Premature Birth History", "Reactive Airway"],
+      "age": 3,
+      "categories": ["Pediatric"],
+      "personality": "Active, uncooperative",
+      "health_traits": ["Hernia repair", "Former 28-week preemie", "Bronchospasm risk"]
+    },
+    {
+      "full_name": "Aaliyah Johnson",
+      "ethnicity": "African American",
+      "weight": {
+        "kg": 22,
+        "lbs": 48
+      },
+      "comorbidities": ["Sickle Cell Disease", "Chronic Anemia"],
+      "age": 6,
+      "categories": ["Pediatric"],
+      "personality": "Familiar with hospitals, brave",
+      "health_traits": ["Tonsillectomy", "Vaso-occlusive crisis risk", "Transfusion history"]
+    },
+    {
+      "full_name": "Ethan Kim",
+      "ethnicity": "Korean",
+      "weight": {
+        "kg": 38,
+        "lbs": 84
+      },
+      "comorbidities": ["Autism Spectrum Disorder", "Seizure Disorder"],
+      "age": 9,
+      "categories": ["Pediatric"],
+      "personality": "Non-verbal, easily overstimulated",
+      "health_traits": ["Dental surgery", "Difficult behavioral management", "On antiepileptics"]
+    },
+    {
+      "full_name": "Isabella Martinez",
+      "ethnicity": "Mexican",
+      "weight": {
+        "kg": 52,
+        "lbs": 115
+      },
+      "comorbidities": ["Type 1 Diabetes", "Celiac Disease"],
+      "age": 12,
+      "categories": ["Pediatric"],
+      "personality": "Mature for age, compliant",
+      "health_traits": ["Appendectomy", "Brittle diabetes", "Blood sugar monitoring critical"]
+    },
+    {
+      "full_name": "Noah Brown",
+      "ethnicity": "African American",
+      "weight": {
+        "kg": 15,
+        "lbs": 33
+      },
+      "comorbidities": ["Cerebral Palsy", "Gastrostomy Tube"],
+      "age": 2,
+      "categories": ["Pediatric"],
+      "personality": "Unable to communicate pain",
+      "health_traits": ["Hip surgery", "Aspiration risk", "Chronic lung disease"]
+    },
+    {
+      "full_name": "Mia Patel",
+      "ethnicity": "Indian",
+      "weight": {
+        "kg": 32,
+        "lbs": 71
+      },
+      "comorbidities": ["Asthma", "Food Allergies"],
+      "age": 7,
+      "categories": ["Pediatric"],
+      "personality": "Anxious, attached to parents",
+      "health_traits": ["Ear tubes placement", "Multiple allergies", "Reactive airway"]
+    },
+    {
+      "full_name": "Oliver Schmidt",
+      "ethnicity": "German",
+      "weight": {
+        "kg": 62,
+        "lbs": 137
+      },
+      "comorbidities": ["Juvenile Rheumatoid Arthritis", "Chronic Steroid Use"],
+      "age": 14,
+      "categories": ["Pediatric", "Adolescent"],
+      "personality": "Stoic, mature",
+      "health_traits": ["Joint surgery", "Immunosuppressed", "Adrenal suppression risk"]
+    },
+    {
+      "full_name": "Chloe Anderson",
+      "ethnicity": "Caucasian",
+      "weight": {
+        "kg": 48,
+        "lbs": 106
+      },
+      "comorbidities": ["Cystic Fibrosis", "Chronic Lung Disease"],
+      "age": 11,
+      "categories": ["Pediatric"],
+      "personality": "Brave, experienced patient",
+      "health_traits": ["PICC line placement", "Thick secretions", "Poor nutrition"]
+    },
+    {
+      "full_name": "Lucas Silva",
+      "ethnicity": "Brazilian",
+      "weight": {
+        "kg": 25,
+        "lbs": 55
+      },
+      "comorbidities": ["Down Syndrome", "Congenital Heart Defect"],
+      "age": 5,
+      "categories": ["Pediatric"],
+      "personality": "Happy, cooperative",
+      "health_traits": ["Adenoidectomy", "Cardiac monitoring needed", "Difficult airway"]
+    },
+    {
+      "full_name": "Arthur Reynolds",
+      "ethnicity": "Caucasian",
+      "weight": {
+        "kg": 85,
+        "lbs": 187
+      },
+      "comorbidities": ["Abdominal Aortic Aneurysm", "Hypertension"],
+      "age": 72,
+      "categories": ["Vascular", "Geriatric"],
+      "personality": "Stoic, matter-of-fact",
+      "health_traits": ["AAA repair", "Risk of rupture", "Large blood loss potential"]
+    },
+    {
+      "full_name": "Evelyn Brooks",
+      "ethnicity": "African American",
+      "weight": {
+        "kg": 78,
+        "lbs": 172
+      },
+      "comorbidities": ["Peripheral Arterial Disease", "Diabetes"],
+      "age": 68,
+      "categories": ["Vascular", "Geriatric"],
+      "personality": "Worried about amputation",
+      "health_traits": ["Femoral-popliteal bypass", "Gangrene", "Poor circulation"]
+    },
+    {
+      "full_name": "Walter Schmidt",
+      "ethnicity": "German",
+      "weight": {
+        "kg": 82,
+        "lbs": 181
+      },
+      "comorbidities": ["Carotid Stenosis", "Previous Stroke"],
+      "age": 74,
+      "categories": ["Vascular", "Geriatric"],
+      "personality": "Anxious about another stroke",
+      "health_traits": ["Carotid endarterectomy", "Neurologic monitoring", "Stroke risk"]
+    },
+    {
+      "full_name": "Helen Kowalski",
+      "ethnicity": "Polish",
+      "weight": {
+        "kg": 72,
+        "lbs": 159
+      },
+      "comorbidities": ["Varicose Veins", "Venous Insufficiency"],
+      "age": 62,
+      "categories": ["Vascular", "Geriatric"],
+      "personality": "Relieved to get treatment",
+      "health_traits": ["Vein stripping", "Chronic venous disease", "Skin changes"]
+    },
+    {
+      "full_name": "Albert Johnson",
+      "ethnicity": "African American",
+      "weight": {
+        "kg": 88,
+        "lbs": 194
+      },
+      "comorbidities": ["Renal Failure", "Hypertension"],
+      "age": 58,
+      "categories": ["Vascular", "Adult"],
+      "personality": "Dependent on dialysis",
+      "health_traits": ["AV fistula creation", "Dialysis access", "Fluid management critical"]
+    },
+    {
+      "full_name": "Florence Martinez",
+      "ethnicity": "Mexican",
+      "weight": {
+        "kg": 68,
+        "lbs": 150
+      },
+      "comorbidities": ["Thoracic Outlet Syndrome", "Chronic Pain"],
+      "age": 45,
+      "categories": ["Vascular", "Adult"],
+      "personality": "Frustrated with chronic condition",
+      "health_traits": ["First rib resection", "Nerve compression", "Complex anatomy"]
+    },
+    {
+      "full_name": "Howard Chen",
+      "ethnicity": "Chinese",
+      "weight": {
+        "kg": 75,
+        "lbs": 165
+      },
+      "comorbidities": ["Popliteal Aneurysm", "Smoking History"],
+      "age": 66,
+      "categories": ["Vascular", "Geriatric"],
+      "personality": "Recently quit smoking",
+      "health_traits": ["Aneurysm repair", "Clot risk", "Limb salvage"]
+    },
+    {
+      "full_name": "Mildred Washington",
+      "ethnicity": "African American",
+      "weight": {
+        "kg": 82,
+        "lbs": 181
+      },
+      "comorbidities": ["Deep Vein Thrombosis", "Obesity"],
+      "age": 54,
+      "categories": ["Vascular", "Adult"],
+      "personality": "Anxious about clots",
+      "health_traits": ["IVC filter placement", "Recurrent DVT", "Anticoagulation contraindicated"]
+    },
+    {
+      "full_name": "Ernest Taylor",
+      "ethnicity": "Caucasian",
+      "weight": {
+        "kg": 78,
+        "lbs": 172
+      },
+      "comorbidities": ["Aortic Dissection", "Hypertension"],
+      "age": 64,
+      "categories": ["Vascular", "Geriatric"],
+      "personality": "In pain, scared",
+      "health_traits": ["Emergency TEVAR", "Type B dissection", "Blood pressure control critical"]
+    },
+    {
+      "full_name": "Gertrude O'Brien",
+      "ethnicity": "Irish",
+      "weight": {
+        "kg": 65,
+        "lbs": 143
+      },
+      "comorbidities": ["Renal Artery Stenosis", "Hypertension"],
+      "age": 69,
+      "categories": ["Vascular", "Geriatric"],
+      "personality": "Hopeful for BP improvement",
+      "health_traits": ["Renal artery stenting", "Difficult to control HTN", "Kidney function decline"]
+    },
+    {
+      "full_name": "Victor Adams",
+      "ethnicity": "Caucasian",
+      "weight": {
+        "kg": 88,
+        "lbs": 194
+      },
+      "comorbidities": ["Laryngeal Cancer", "Heavy Smoking History"],
+      "age": 61,
+      "categories": ["ENT", "Geriatric"],
+      "personality": "Hoarse voice, anxious",
+      "health_traits": ["Laryngectomy", "Airway concerns", "Difficult shared airway"]
+    },
+    {
+      "full_name": "Denise Harper",
+      "ethnicity": "African American",
+      "weight": {
+        "kg": 72,
+        "lbs": 159
+      },
+      "comorbidities": ["Thyroid Cancer", "Hypothyroidism"],
+      "age": 52,
+      "categories": ["ENT", "Adult"],
+      "personality": "Calm, well-prepared",
+      "health_traits": ["Thyroidectomy", "Recurrent laryngeal nerve at risk", "Calcium monitoring needed"]
+    },
+    {
+      "full_name": "Leonard Rossi",
+      "ethnicity": "Italian",
+      "weight": {
+        "kg": 82,
+        "lbs": 181
+      },
+      "comorbidities": ["Oral Cancer", "Alcohol Use"],
+      "age": 58,
+      "categories": ["ENT", "Adult"],
+      "personality": "Concerned about appearance",
+      "health_traits": ["Mandibulectomy with reconstruction", "Free flap", "Long surgery anticipated"]
+    },
+    {
+      "full_name": "Ruth Anderson",
+      "ethnicity": "Caucasian",
+      "weight": {
+        "kg": 68,
+        "lbs": 150
+      },
+      "comorbidities": ["Chronic Sinusitis", "Asthma"],
+      "age": 46,
+      "categories": ["ENT", "Adult"],
+      "personality": "Tired of infections",
+      "health_traits": ["FESS procedure", "Nasal polyps", "Bleeding risk"]
+    },
+    {
+      "full_name": "Eugene Park",
+      "ethnicity": "Korean",
+      "weight": {
+        "kg": 75,
+        "lbs": 165
+      },
+      "comorbidities": ["Obstructive Sleep Apnea", "Obesity"],
+      "age": 48,
+      "categories": ["ENT", "Adult"],
+      "personality": "Desperate for sleep",
+      "health_traits": ["UPPP surgery", "Difficult airway", "Postop airway edema risk"]
+    },
+    {
+      "full_name": "Gladys Mitchell",
+      "ethnicity": "African American",
+      "weight": {
+        "kg": 65,
+        "lbs": 143
+      },
+      "comorbidities": ["Parotid Tumor", "Hypertension"],
+      "age": 64,
+      "categories": ["ENT", "Geriatric"],
+      "personality": "Worried about facial nerve",
+      "health_traits": ["Parotidectomy", "Facial nerve monitoring", "Risk of facial paralysis"]
+    },
+    {
+      "full_name": "Chester Brown",
+      "ethnicity": "African American",
+      "weight": {
+        "kg": 78,
+        "lbs": 172
+      },
+      "comorbidities": ["Tongue Cancer", "Smoking"],
+      "age": 56,
+      "categories": ["ENT", "Adult"],
+      "personality": "Scared, regretful",
+      "health_traits": ["Glossectomy", "Airway reconstruction", "Tracheostomy likely"]
+    },
+    {
+      "full_name": "Pearl Lee",
+      "ethnicity": "Chinese",
+      "weight": {
+        "kg": 58,
+        "lbs": 128
+      },
+      "comorbidities": ["Nasopharyngeal Mass", "Radiation History"],
+      "age": 62,
+      "categories": ["ENT", "Geriatric"],
+      "personality": "Stoic, experienced with treatment",
+      "health_traits": ["Biopsy under anesthesia", "Radiation changes", "Difficult anatomy"]
+    },
+    {
+      "full_name": "Vernon Garcia",
+      "ethnicity": "Mexican",
+      "weight": {
+        "kg": 85,
+        "lbs": 187
+      },
+      "comorbidities": ["Vocal Cord Paralysis", "GERD"],
+      "age": 51,
+      "categories": ["ENT", "Adult"],
+      "personality": "Hoarse, frustrated",
+      "health_traits": ["Vocal cord injection", "Aspiration risk", "Airway protection concerns"]
+    },
+    {
+      "full_name": "Edna Wilson",
+      "ethnicity": "Caucasian",
+      "weight": {
+        "kg": 62,
+        "lbs": 137
+      },
+      "comorbidities": ["Acoustic Neuroma", "Hearing Loss"],
+      "age": 67,
+      "categories": ["ENT", "Geriatric"],
+      "personality": "Anxious about surgery",
+      "health_traits": ["Tumor resection", "Cranial nerve involvement", "Long surgery"]
     }
   ]

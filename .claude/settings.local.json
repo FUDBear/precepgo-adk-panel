@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Read(//Users/joshuaburleson/Documents/**)"
+      "Read(//Users/joshuaburleson/Documents/**)",
+      "Bash(cat:*)",
+      "Bash(python3:*)"
     ],
     "deny": [],
     "ask": []
