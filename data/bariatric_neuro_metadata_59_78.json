@@ -1,0 +1,1553 @@
+[
+  {
+    "patient_name": "Brenda Washington",
+    "patient_index": 50,
+    "asa_class": "III",
+    "surgical_type": "Bariatric - Gastric Bypass",
+    "learning_scenarios": [
+      {
+        "section": "Section 2",
+        "topics": ["Pharmacokinetics in obesity", "Drug dosing by weight"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Propofol induction dose based on lean body weight (LBW) to avoid overdosing",
+          "Succinylcholine dosed on total body weight (TBW) due to increased pseudocholinesterase",
+          "Maintenance volatile agents and opioids based on ideal body weight (IBW)",
+          "Increased volume of distribution for lipophilic drugs in obesity",
+          "Obesity increases cardiac output and hepatic blood flow affecting drug clearance"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["OSA screening", "Difficult airway assessment", "STOP-Bang questionnaire"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "STOP-Bang score >5 indicates high OSA risk - requires postoperative monitoring",
+          "BMI 58 with CPAP use confirms severe OSA diagnosis",
+          "Difficult mask ventilation predicted by BMI >30, age >55, beard, edentulous",
+          "OSA increases risk of perioperative cardiovascular complications 2-3 fold",
+          "Preoperative CPAP optimization reduces postoperative respiratory complications"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Airway management in obesity", "Positioning", "Regional anesthesia benefits"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Ramped positioning (head elevated 25-30 degrees) aligns ear to sternal notch for optimal intubation",
+          "Preoxygenation critical - FRC reduced 50% in morbid obesity, desaturation occurs rapidly",
+          "Awake fiberoptic intubation considered if Mallampati IV, limited mouth opening, or neck circumference >60cm",
+          "Neuraxial anesthesia reduces pulmonary complications and opioid requirements",
+          "Reverse Trendelenburg 15-20 degrees improves respiratory mechanics during surgery",
+          "Avoid excessive opioids - use multimodal analgesia with regional techniques"
+        ]
+      }
+    ],
+    "clinical_challenges": [
+      "Morbid obesity BMI 58",
+      "Severe OSA with CPAP dependence",
+      "Difficult airway and mask ventilation",
+      "Diabetes management perioperatively",
+      "Positioning challenges and pressure injury risk",
+      "Rapid desaturation with apnea"
+    ],
+    "monitoring_needs": [
+      "Standard ASA monitors",
+      "Arterial line for frequent blood gases and hemodynamic monitoring",
+      "Capnography essential - early warning of respiratory depression",
+      "Nerve stimulator for neuromuscular blockade monitoring",
+      "Temperature monitoring"
+    ],
+    "anesthetic_considerations": [
+      "Ramped positioning for intubation",
+      "Extended preoxygenation (8 vital capacity breaths or 3 minutes)",
+      "Video laryngoscopy first-line for intubation",
+      "Multimodal analgesia (local infiltration, IV acetaminophen, ketorolac)",
+      "Regional anesthesia when possible (TAP block for open procedures)",
+      "Awake extubation with full reversal and return of airway reflexes",
+      "Mandatory postoperative CPAP",
+      "Enhanced recovery protocol with early mobilization"
+    ],
+    "risk_factors": {
+      "cardiac": "moderate",
+      "pulmonary": "very high",
+      "airway": "very high",
+      "metabolic": "high",
+      "thrombotic": "high"
+    }
+  },
+  {
+    "patient_name": "Timothy Rogers",
+    "patient_index": 51,
+    "asa_class": "IV",
+    "surgical_type": "Bariatric - Sleeve Gastrectomy",
+    "learning_scenarios": [
+      {
+        "section": "Section 2",
+        "topics": ["Obesity pharmacokinetics", "Ventilation strategies"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "BMI 62 (super morbid obesity) requires careful weight-based dosing calculations",
+          "Remifentanil preferred opioid - dosed on IBW, no accumulation",
+          "Neuromuscular blockers: rocuronium and sugammadex dosed on IBW",
+          "PEEP 10-15 cmH2O prevents atelectasis in obesity",
+          "Protective lung ventilation: tidal volume 6-8 mL/kg IBW, not TBW"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Cardiovascular risk in obesity", "Hypertension management"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Obesity hypoventilation syndrome increases pulmonary hypertension and right heart strain",
+          "Difficult IV access requires ultrasound guidance - prepare early",
+          "Hypertension in obesity often resistant - continue home antihypertensives",
+          "Increased risk of MACE with BMI >40 and multiple comorbidities = ASA IV",
+          "Consider preoperative cardiology consultation for EF assessment"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Laparoscopic considerations", "Pneumoperitoneum effects"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Pneumoperitoneum further reduces FRC and increases peak airway pressures",
+          "Reverse Trendelenburg improves ventilation but decreases venous return",
+          "Avoid excessive insufflation pressure (keep <15 mmHg)",
+          "Monitor for CO2 absorption - can cause hypercarbia and acidosis",
+          "PEEP recruitment maneuvers after desufflation improve oxygenation"
+        ]
+      }
+    ],
+    "clinical_challenges": [
+      "Super morbid obesity BMI 62",
+      "Difficult IV access",
+      "Severe hypertension and diabetes",
+      "Laparoscopic surgery with pneumoperitoneum",
+      "High risk for postoperative respiratory failure",
+      "Venous thromboembolism risk"
+    ],
+    "monitoring_needs": [
+      "Standard ASA monitors with arterial line",
+      "Ultrasound for IV access",
+      "Arterial blood gases intraoperatively",
+      "Neuromuscular monitoring mandatory",
+      "Consider CVP if cardiac concerns"
+    ],
+    "anesthetic_considerations": [
+      "Early arterial line placement for ABG monitoring",
+      "Lung protective ventilation strategies",
+      "Minimize opioids - remifentanil infusion preferred",
+      "Full neuromuscular reversal with sugammadex",
+      "Aggressive DVT prophylaxis (sequential compression devices + pharmacologic)",
+      "Postoperative ICU or step-down monitoring",
+      "CPAP/BiPAP immediately postoperatively"
+    ],
+    "risk_factors": {
+      "cardiac": "high",
+      "pulmonary": "very high",
+      "airway": "very high",
+      "metabolic": "high",
+      "thrombotic": "very high"
+    }
+  },
+  {
+    "patient_name": "Lakisha Brown",
+    "patient_index": 52,
+    "asa_class": "III",
+    "surgical_type": "Bariatric - Gastric Bypass",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Asthma optimization", "Reactive airway in obesity"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Asthma + obesity = increased perioperative bronchospasm risk",
+          "Preoperative beta-agonist and corticosteroid optimization essential",
+          "Depression medications may interact with anesthetics (SSRIs and MAO-I)",
+          "Avoid desflurane - highest airway irritant among volatile agents",
+          "Consider deep extubation vs awake based on airway anatomy"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Aspiration prophylaxis", "GERD management"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Obesity and bariatric surgery = very high aspiration risk",
+          "Aspiration prophylaxis: H2-blocker + metoclopramide + sodium citrate",
+          "NPO guidelines strictly enforced (8 hours solids, 2 hours clear liquids)",
+          "Rapid sequence intubation technique for gastric bypass patients",
+          "Head-up positioning 30 degrees reduces gastric pressure and aspiration risk"
+        ]
+      },
+      {
+        "section": "Section 2",
+        "topics": ["Psychotropic drug interactions"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "SSRIs increase bleeding risk - consider effect on surgical hemostasis",
+          "Antidepressants may prolong QTc - avoid droperidol and ondansetron",
+          "Continue antidepressants perioperatively to prevent withdrawal",
+          "Anxiety increases sympathetic response - consider anxiolytic premedication"
+        ]
+      }
+    ],
+    "clinical_challenges": [
+      "Obesity with reactive airway disease",
+      "Depression requiring medication management",
+      "High aspiration risk",
+      "Anxiety management",
+      "Bronchospasm prevention"
+    ],
+    "monitoring_needs": [
+      "Standard ASA monitors",
+      "Capnography with waveform analysis",
+      "Peak airway pressure monitoring",
+      "Bronchodilator medications immediately available"
+    ],
+    "anesthetic_considerations": [
+      "Preoperative albuterol nebulizer treatment",
+      "Aspiration prophylaxis protocol",
+      "RSI with cricoid pressure",
+      "Avoid histamine-releasing drugs (morphine, atracurium)",
+      "Sevoflurane or isoflurane for maintenance",
+      "Deep extubation if excellent airway anatomy, otherwise awake",
+      "Continue home psychiatric medications"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "high",
+      "airway": "high",
+      "psychiatric": "moderate",
+      "aspiration": "very high"
+    }
+  },
+  {
+    "patient_name": "Robert Hill",
+    "patient_index": 53,
+    "asa_class": "IV",
+    "surgical_type": "Bariatric - Gastric Sleeve",
+    "learning_scenarios": [
+      {
+        "section": "Section 3",
+        "topics": ["Heart failure in obesity", "Reduced ejection fraction management"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Obesity cardiomyopathy with reduced EF = high cardiac risk",
+          "Heart failure + OSA = biventricular dysfunction common",
+          "Maintain preload - avoid excessive PEEP reducing venous return",
+          "Goal-directed fluid therapy prevents both overload and inadequate perfusion",
+          "Positive pressure ventilation decreases afterload (beneficial in HFrEF)"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["High-risk cardiac patient assessment", "Preoperative optimization"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "RCRI score ≥3 (heart failure + high-risk surgery) = very high MACE risk",
+          "Cardiology consultation for optimization essential",
+          "Beta-blockers continued perioperatively",
+          "BNP/troponin monitoring perioperatively for myocardial injury",
+          "Consider ICU monitoring postoperatively"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Hemodynamic monitoring", "Induction techniques in heart failure"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Etomidate preferred for induction - minimal cardiac depression",
+          "Arterial line pre-induction for beat-to-beat BP monitoring",
+          "Consider central venous access for vasopressor administration",
+          "Avoid large fluid boluses - use 250mL aliquots with assessment",
+          "Have norepinephrine or phenylephrine infusion ready"
+        ]
+      }
+    ],
+    "clinical_challenges": [
+      "Morbid obesity with heart failure",
+      "Reduced ejection fraction",
+      "Severe OSA",
+      "High cardiac risk surgery",
+      "Hemodynamic instability risk"
+    ],
+    "monitoring_needs": [
+      "Standard ASA monitors",
+      "Arterial line mandatory",
+      "Central venous pressure consideration",
+      "Cardiac output monitoring (FloTrac or NICOM)",
+      "Continuous ECG with ST-segment analysis",
+      "Transesophageal echocardiography available"
+    ],
+    "anesthetic_considerations": [
+      "Preoperative cardiology clearance",
+      "Etomidate induction with careful titration",
+      "Goal-directed fluid therapy with dynamic indices",
+      "Minimize myocardial depression - avoid high-dose volatile agents",
+      "Vasopressor infusion prepared (norepinephrine preferred)",
+      "Lung protective ventilation with moderate PEEP",
+      "Postoperative ICU admission",
+      "Troponin monitoring x 3 days postoperatively"
+    ],
+    "risk_factors": {
+      "cardiac": "very high",
+      "pulmonary": "very high",
+      "airway": "high",
+      "mortality": "high"
+    }
+  },
+  {
+    "patient_name": "Tanya Martinez",
+    "patient_index": 54,
+    "surgical_type": "Bariatric - Roux-en-Y Gastric Bypass",
+    "asa_class": "III",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Fatty liver disease", "GERD and aspiration risk"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "NAFLD common in obesity - assess liver function preoperatively",
+          "Fatty liver may affect drug metabolism (reduced clearance)",
+          "GERD universally present in obesity - highest aspiration risk",
+          "H. pylori testing often performed before bariatric surgery",
+          "Avoid hepatotoxic drugs (prolonged high-dose acetaminophen)"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Aspiration prevention", "Rapid sequence intubation"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "GERD + obesity = aspiration prophylaxis mandatory (triple therapy)",
+          "Proton pump inhibitor night before and morning of surgery",
+          "RSI with cricoid pressure (Sellick maneuver) controversial but commonly used",
+          "Ramped position for RSI improves success and safety",
+          "Avoid mask ventilation before intubation in true RSI"
+        ]
+      },
+      {
+        "section": "Section 2",
+        "topics": ["Hepatic drug metabolism"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Fatty infiltration may reduce hepatic clearance capacity",
+          "NAFLD rarely causes significant coagulopathy unless cirrhotic",
+          "Most anesthetic drugs well-tolerated in NAFLD",
+          "Avoid prolonged infusions of drugs with hepatic metabolism"
+        ]
+      }
+    ],
+    "clinical_challenges": [
+      "Obesity with fatty liver disease",
+      "Severe GERD",
+      "Very high aspiration risk",
+      "Hepatic function concerns",
+      "Metabolic syndrome"
+    ],
+    "monitoring_needs": [
+      "Standard ASA monitors",
+      "Consider arterial line for longer procedures",
+      "Liver function tests preoperatively",
+      "Coagulation studies if cirrhosis suspected"
+    ],
+    "anesthetic_considerations": [
+      "Full aspiration prophylaxis protocol",
+      "RSI with video laryngoscopy",
+      "Ramped positioning",
+      "Avoid excessive acetaminophen doses",
+      "Multimodal analgesia to minimize opioids",
+      "Regional anesthesia beneficial",
+      "Monitor for postoperative nausea/vomiting"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "moderate",
+      "airway": "high",
+      "aspiration": "very high",
+      "hepatic": "moderate"
+    }
+  },
+  {
+    "patient_name": "Donald Pierce",
+    "patient_index": 55,
+    "asa_class": "IV",
+    "surgical_type": "Bariatric - Duodenal Switch",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Super morbid obesity", "Complex bariatric surgery"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "BMI 65 = super morbid obesity with extreme physiologic derangements",
+          "Duodenal switch = longest, most complex bariatric procedure (3-5 hours)",
+          "Multiple comorbidities (diabetes, hypertension) = ASA IV classification",
+          "High risk for postoperative complications including leak and VTE",
+          "Preoperative weight loss and optimization critical"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Prolonged surgery considerations", "VTE prophylaxis"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Prolonged surgery increases VTE risk exponentially in obesity",
+          "Sequential compression devices applied before induction",
+          "Pharmacologic prophylaxis with higher doses (enoxaparin 40mg BID)",
+          "Hypothermia prevention critical (forced air warming, fluid warmers)",
+          "Glucose monitoring every 1-2 hours in diabetics"
+        ]
+      },
+      {
+        "section": "Section 2",
+        "topics": ["Thermoregulation", "Fluid management"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Large body surface area increases heat loss",
+          "Hypothermia increases infection risk and coagulopathy",
+          "Goal-directed fluid therapy prevents overload",
+          "Obesity increases insensible losses"
+        ]
+      }
+    ],
+    "clinical_challenges": [
+      "Super morbid obesity BMI 65",
+      "Complex prolonged surgery",
+      "Multiple metabolic derangements",
+      "Very high VTE risk",
+      "Temperature management",
+      "Postoperative leak risk"
+    ],
+    "monitoring_needs": [
+      "Standard ASA monitors",
+      "Arterial line mandatory",
+      "Temperature monitoring (core)",
+      "Urine output monitoring",
+      "Frequent glucose checks",
+      "Consider central venous access"
+    ],
+    "anesthetic_considerations": [
+      "Meticulous positioning with extra padding",
+      "Aggressive warming strategies",
+      "Enhanced VTE prophylaxis",
+      "Lung protective ventilation",
+      "Tight glycemic control (glucose 140-180 mg/dL)",
+      "Minimize opioids with multimodal analgesia",
+      "Postoperative ICU monitoring mandatory",
+      "Early mobilization protocol"
+    ],
+    "risk_factors": {
+      "cardiac": "high",
+      "pulmonary": "very high",
+      "airway": "very high",
+      "thrombotic": "very high",
+      "metabolic": "very high",
+      "mortality": "moderate"
+    }
+  },
+  {
+    "patient_name": "Christina Gonzalez",
+    "patient_index": 56,
+    "asa_class": "III",
+    "surgical_type": "Bariatric - Gastric Sleeve",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Young bariatric patient", "PCOS and metabolic syndrome"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "PCOS associated with insulin resistance and metabolic syndrome",
+          "Pre-diabetes requires glucose monitoring perioperatively",
+          "Young age protective but obesity still confers significant risk",
+          "Fertility goals post-surgery require pregnancy planning (wait 12-18 months)",
+          "PCOS increases risk of OSA even at younger age"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Enhanced recovery in bariatric surgery"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "ERAS protocols reduce complications in bariatric surgery",
+          "Early feeding (clear liquids at 2 hours) safe and beneficial",
+          "Minimize opioids - multimodal analgesia protocol",
+          "Early ambulation (within 4 hours) prevents VTE and improves outcomes",
+          "Dexamethasone reduces PONV (common in young females and laparoscopy)"
+        ]
+      },
+      {
+        "section": "Section 2",
+        "topics": ["Insulin resistance", "Glucose management"],
+        "difficulty": "basic",
+        "teaching_points": [
+          "Insulin resistance present even without overt diabetes",
+          "Stress response amplifies hyperglycemia",
+          "Target glucose <180 mg/dL perioperatively",
+          "Pre-diabetes typically managed without insulin"
+        ]
+      }
+    ],
+    "clinical_challenges": [
+      "Morbid obesity at young age",
+      "PCOS and insulin resistance",
+      "PONV risk",
+      "Fertility preservation goals",
+      "Metabolic syndrome"
+    ],
+    "monitoring_needs": [
+      "Standard ASA monitors",
+      "Glucose monitoring",
+      "Consider arterial line for longer cases"
+    ],
+    "anesthetic_considerations": [
+      "Standard bariatric precautions",
+      "PONV prophylaxis (multi-drug approach)",
+      "Multimodal analgesia protocol",
+      "ERAS protocol implementation",
+      "Early mobilization emphasis",
+      "Glucose monitoring without insulin typically",
+      "Patient education about postoperative expectations"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "moderate",
+      "airway": "moderate",
+      "metabolic": "moderate",
+      "PONV": "high"
+    }
+  },
+  {
+    "patient_name": "Michael Stevens",
+    "patient_index": 57,
+    "asa_class": "III",
+    "surgical_type": "Bariatric - Revision Surgery",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Revision bariatric surgery", "Previous surgical complications"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Revision surgery has higher complication rates than primary bariatric surgery",
+          "Band removal with conversion to bypass/sleeve common for band complications",
+          "Difficult anatomy from adhesions increases operative time and blood loss",
+          "Previous band may have caused esophageal dilation - aspiration risk higher",
+          "Nutritional deficiencies common after failed bariatric procedures"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Adhesions and difficult surgery", "Prolonged anesthesia"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Adhesiolysis increases surgical time unpredictably",
+          "Higher conversion to open surgery rate in revisions",
+          "Blood loss risk higher - type and screen mandatory",
+          "Previous pneumoperitoneum may have caused adhesions affecting lung expansion",
+          "Pain scores often higher in revision surgery"
+        ]
+      },
+      {
+        "section": "Section 2",
+        "topics": ["Chronic pain and opioid tolerance"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Chronic joint pain may indicate chronic opioid use",
+          "Opioid tolerance requires higher doses for analgesia",
+          "Multimodal approach critical to minimize opioid escalation",
+          "Regional techniques (TAP block) particularly beneficial",
+          "OSA + opioids = very high respiratory depression risk"
+        ]
+      }
+    ],
+    "clinical_challenges": [
+      "Revision surgery complexity",
+      "Difficult anatomy from adhesions",
+      "OSA management",
+      "Possible opioid tolerance",
+      "Unpredictable surgical duration",
+      "Higher complication risk"
+    ],
+    "monitoring_needs": [
+      "Standard ASA monitors",
+      "Arterial line consideration",
+      "Type and screen for blood",
+      "Prepare for prolonged case"
+    ],
+    "anesthetic_considerations": [
+      "Prepare for longer surgery than scheduled",
+      "Blood availability",
+      "Multimodal analgesia mandatory",
+      "Regional anesthesia (TAP block) strongly considered",
+      "Minimize opioids despite possible tolerance",
+      "Extra warming measures for prolonged case",
+      "Postoperative monitoring for respiratory depression",
+      "Pain management consultation if chronic opioid use"
+    ],
+    "risk_factors": {
+      "cardiac": "moderate",
+      "pulmonary": "high",
+      "airway": "high",
+      "surgical": "high",
+      "pain": "high"
+    }
+  },
+  {
+    "patient_name": "Patricia Nguyen",
+    "patient_index": 58,
+    "asa_class": "III",
+    "surgical_type": "Bariatric - Gastric Bypass",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Hypothyroidism management", "Asthma in obesity"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Hypothyroidism increases anesthetic sensitivity - reduce doses 20-30%",
+          "Continue levothyroxine perioperatively (give morning of surgery)",
+          "Hypothyroidism slows drug metabolism and increases myocardial depression risk",
+          "Asthma + obesity increases bronchospasm risk significantly",
+          "OSA more common with hypothyroidism"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Airway management with multiple comorbidities"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Hypothyroidism may cause macroglossia affecting airway",
+          "Obesity + asthma + hypothyroidism = complex airway management",
+          "Careful preoxygenation and positioning critical",
+          "Avoid drugs that release histamine in asthmatic patients",
+          "Slower emergence expected with hypothyroidism"
+        ]
+      },
+      {
+        "section": "Section 2",
+        "topics": ["Thyroid hormone effects on anesthesia"],
+        "difficulty": "basic",
+        "teaching_points": [
+          "Hypothyroidism decreases MAC requirements",
+          "Myocardial contractility reduced - careful with cardiodepressant drugs",
+          "Delayed gastric emptying increases aspiration risk",
+          "Hypothermia risk increased"
+        ]
+      }
+    ],
+    "clinical_challenges": [
+      "Obesity with hypothyroidism",
+      "Asthma management",
+      "Multiple comorbidity interactions",
+      "Increased anesthetic sensitivity",
+      "Airway concerns"
+    ],
+    "monitoring_needs": [
+      "Standard ASA monitors",
+      "Temperature monitoring important",
+      "Consider arterial line",
+      "Bronchodilators available"
+    ],
+    "anesthetic_considerations": [
+      "Continue levothyroxine morning of surgery",
+      "Reduce anesthetic doses appropriately",
+      "Avoid histamine-releasing drugs",
+      "Standard bariatric airway management",
+      "Active warming measures",
+      "Bronchodilator pretreatment",
+      "Allow adequate time for emergence",
+      "Monitor for myxedema (rare but serious)"
+    ],
+    "risk_factors": {
+      "cardiac": "moderate",
+      "pulmonary": "high",
+      "airway": "high",
+      "endocrine": "moderate",
+      "hypothermia": "moderate"
+    }
+  },
+  {
+    "patient_name": "Gregory Davis",
+    "patient_index": 59,
+    "asa_class": "III",
+    "surgical_type": "Bariatric - Gastric Sleeve",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Chronic opioid use", "Opioid tolerance in bariatric surgery"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Chronic opioid use creates tolerance requiring higher perioperative doses",
+          "Bariatric surgery + opioid dependence = very difficult pain management",
+          "Multimodal analgesia critical to avoid excessive opioid dosing",
+          "OSA + chronic opioids = extreme respiratory depression risk",
+          "Preoperative pain management consultation recommended"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Multimodal analgesia", "Regional anesthesia in chronic pain"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "TAP block provides excellent analgesia for bariatric surgery",
+          "Ketamine infusion (0.1-0.2 mg/kg/hr) reduces opioid requirements",
+          "Continue baseline opioids perioperatively to prevent withdrawal",
+          "Gabapentin 600-1200mg preoperatively reduces opioid needs 30-40%",
+          "IV acetaminophen and ketorolac as baseline non-opioid analgesia",
+          "Regional anesthesia may reduce central sensitization"
+        ]
+      },
+      {
+        "section": "Section 2",
+        "topics": ["Opioid pharmacology", "Tolerance mechanisms"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Opioid tolerance due to receptor downregulation and desensitization",
+          "Cross-tolerance exists between opioid classes",
+          "Remifentanil useful intraoperatively - no accumulation despite tolerance",
+          "Avoid abrupt discontinuation - risk of hyperalgesia and withdrawal",
+          "Chronic opioids alter pain perception creating hyperalgesia"
+        ]
+      }
+    ],
+    "clinical_challenges": [
+      "Morbid obesity with chronic opioid use",
+      "Diabetes management",
+      "Opioid tolerance and hyperalgesia",
+      "Very high respiratory depression risk",
+      "Pain management complexity",
+      "Potential for inadequate analgesia"
+    ],
+    "monitoring_needs": [
+      "Standard ASA monitors",
+      "Arterial line consideration",
+      "Continuous capnography postoperatively",
+      "Pain scores with validated tools",
+      "Withdrawal symptom monitoring"
+    ],
+    "anesthetic_considerations": [
+      "Continue baseline opioids perioperatively",
+      "Multimodal analgesia protocol mandatory",
+      "TAP block with liposomal bupivacaine",
+      "Ketamine infusion during surgery",
+      "Gabapentin premedication",
+      "IV acetaminophen and ketorolac",
+      "Minimize additional intraoperative opioids beyond baseline",
+      "Postoperative ICU or monitored setting",
+      "Acute pain service consultation",
+      "No PCA - increased risk in OSA with opioid tolerance"
+    ],
+    "risk_factors": {
+      "cardiac": "moderate",
+      "pulmonary": "very high",
+      "airway": "high",
+      "pain": "very high",
+      "respiratory_depression": "very high",
+      "addiction": "high"
+    }
+  },
+  {
+    "patient_name": "Thomas Harper",
+    "patient_index": 60,
+    "asa_class": "III",
+    "surgical_type": "Neurosurgical - Craniotomy for Tumor Resection",
+    "learning_scenarios": [
+      {
+        "section": "Section 3",
+        "topics": ["Cerebral physiology", "ICP and CPP management"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "CPP = MAP - ICP, maintain CPP >60-70 mmHg for adequate cerebral perfusion",
+          "Brain tumor causes mass effect increasing ICP",
+          "Cerebral autoregulation maintains constant blood flow between MAP 50-150 mmHg",
+          "Increased ICP shifts autoregulation curve rightward",
+          "Monroe-Kellie doctrine: skull is fixed volume - blood, brain, CSF compensate"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Neuromonitoring", "Brain relaxation techniques"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "MEPs and SSEPs monitor spinal cord and motor pathway integrity",
+          "Avoid neuromuscular blockade during MEP monitoring - interferes with readings",
+          "Brain relaxation: hyperventilation to PaCO2 30-35 mmHg, mannitol 0.25-1 g/kg, head-up 15-30 degrees",
+          "Propofol and volatile agents at <1 MAC compatible with neuromonitoring",
+          "Total IV anesthesia (TIVA) preferred for reliable MEP/SSEP monitoring"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Seizure management", "Antiepileptic drugs"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Continue antiepileptic drugs perioperatively to prevent seizures",
+          "Phenytoin, carbamazepine, phenobarbital induce hepatic enzymes affecting drug metabolism",
+          "Many AEDs cause thrombocytopenia - check platelet count",
+          "Seizure precautions: bite block, padding, suction ready",
+          "Brain tumor patients at high seizure risk perioperatively"
+        ]
+      }
+    ],
+    "clinical_challenges": [
+      "Brain tumor with mass effect",
+      "Seizure disorder management",
+      "ICP control",
+      "Neuromonitoring requirements",
+      "Smooth emergence critical",
+      "Postoperative neurologic assessment"
+    ],
+    "monitoring_needs": [
+      "Standard ASA monitors",
+      "Arterial line mandatory",
+      "Central venous access for mannitol/hypertonic saline",
+      "MEPs and SSEPs",
+      "Temperature (hypothermia affects monitoring)",
+      "Precordial Doppler if sitting position",
+      "Urinary catheter (mannitol causes diuresis)"
+    ],
+    "anesthetic_considerations": [
+      "TIVA with propofol and remifentanil preferred",
+      "Avoid nitrous oxide (expands air if pneumocephalus)",
+      "Maintain normotension to mild hypertension (CPP)",
+      "Hyperventilation for brain relaxation (avoid excessive <30 mmHg)",
+      "Mannitol 0.5-1 g/kg for brain relaxation",
+      "Dexamethasone 10mg for edema reduction",
+      "Smooth emergence - avoid coughing/straining (increases ICP)",
+      "Rapid awakening for neuro exam",
+      "Elevate head of bed 30 degrees postoperatively"
+    ],
+    "risk_factors": {
+      "neurologic": "high",
+      "seizure": "high",
+      "ICP": "high",
+      "cardiac": "low",
+      "pulmonary": "low"
+    }
+  },
+  {
+    "patient_name": "Rachel Goldman",
+    "patient_index": 61,
+    "asa_class": "IV",
+    "surgical_type": "Neurosurgical - Cerebral Aneurysm Clipping",
+    "learning_scenarios": [
+      {
+        "section": "Section 3",
+        "topics": ["Aneurysm pathophysiology", "Blood pressure management"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Cerebral aneurysm rupture risk increases with BP, transmural pressure, and aneurysm size",
+          "Subarachnoid hemorrhage (SAH) causes cerebral vasospasm 4-14 days post-rupture",
+          "BP control critical: too high = rupture risk, too low = ischemia",
+          "Goal SBP 100-140 mmHg before clipping (prevents rupture)",
+          "After clipping can allow higher BP (SBP 140-160) to prevent vasospasm",
+          "Hypertension chronic changes make brain vulnerable to hypotension"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Neuroprotection", "Induced hypotension"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Temporary clipping during dissection requires neuroprotection strategies",
+          "Burst suppression with propofol or barbiturates reduces CMRO2",
+          "Mild hypothermia (33-35°C) neuroprotective but increases complications",
+          "Induced hypotension (MAP 50-60) during clipping reduces aneurysm tension",
+          "Avoid hypotension if patient has SAH (vasospasm risk)",
+          "Nimodipine 60mg Q4H prevents vasospasm after SAH"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Hypertension optimization", "Aneurysm rupture risk"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Uncontrolled hypertension = ASA IV for aneurysm surgery",
+          "Smooth induction critical - avoid hypertensive response to laryngoscopy",
+          "Remifentanil infusion blunts sympathetic surge",
+          "Have esmolol and nicardipine ready for BP control",
+          "Intubation under deep anesthesia prevents hypertension and rupture"
+        ]
+      }
+    ],
+    "clinical_challenges": [
+      "Unruptured cerebral aneurysm",
+      "Severe hypertension",
+      "Rupture risk during induction",
+      "BP lability",
+      "Potential for massive hemorrhage",
+      "Vasospasm if ruptured"
+    ],
+    "monitoring_needs": [
+      "Standard ASA monitors",
+      "Arterial line pre-induction",
+      "Central venous access",
+      "Large bore IV access x2",
+      "Blood products available",
+      "EEG for burst suppression if needed",
+      "Temperature monitoring"
+    ],
+    "anesthetic_considerations": [
+      "Arterial line awake or with gentle sedation",
+      "Smooth induction with remifentanil",
+      "Avoid hypertension during laryngoscopy (esmolol, lidocaine)",
+      "TIVA or volatile <1 MAC",
+      "Maintain tight BP control (SBP 100-140 pre-clip)",
+      "Induced hypotension during clipping if requested",
+      "Neuroprotection strategies (propofol burst suppression)",
+      "Rapid emergence for neuro exam",
+      "Vasospasm monitoring if SAH",
+      "ICU admission mandatory"
+    ],
+    "risk_factors": {
+      "neurologic": "very high",
+      "hemorrhage": "very high",
+      "cardiac": "moderate",
+      "vasospasm": "high",
+      "mortality": "moderate"
+    }
+  },
+  {
+    "patient_name": "Mark Johnson",
+    "patient_index": 62,
+    "asa_class": "III",
+    "surgical_type": "Neurosurgical - Laminectomy",
+    "learning_scenarios": [
+      {
+        "section": "Section 6",
+        "topics": ["Prone positioning", "Spinal surgery anesthesia"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Prone positioning increases intraocular pressure - risk of vision loss",
+          "Eyes must be checked frequently and free from pressure",
+          "Chest rolls allow abdominal expansion - reduces IVC compression",
+          "Reduce bleeding by minimizing venous pressure (avoid abdominal compression)",
+          "Jackson table or Wilson frame commonly used for spine surgery",
+          "Position arms <90 degrees abduction to prevent brachial plexus injury"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Diabetic neuropathy", "Positioning injuries"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Diabetes causes peripheral neuropathy - increased nerve injury risk",
+          "Document preoperative neurologic deficits",
+          "Meticulous padding of pressure points critical",
+          "Spinal stenosis may cause baseline neurologic symptoms",
+          "Postoperative neurologic exam essential"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Blood loss management", "Spine surgery considerations"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Laminectomy typically low blood loss (<500 mL)",
+          "Multi-level procedures increase blood loss significantly",
+          "Minimize venous pressure to reduce epidural bleeding",
+          "Cell saver available for extensive procedures",
+          "Tranexamic acid may reduce blood loss"
+        ]
+      }
+    ],
+    "clinical_challenges": [
+      "Prone positioning complexity",
+      "Diabetic neuropathy",
+      "Spinal stenosis with neurologic symptoms",
+      "Vision loss risk",
+      "Positioning injury risk",
+      "Postoperative pain management"
+    ],
+    "monitoring_needs": [
+      "Standard ASA monitors",
+      "Arterial line for longer multi-level cases",
+      "Eye protection and checks",
+      "Nerve stimulator if MEPs not used",
+      "Blood glucose monitoring"
+    ],
+    "anesthetic_considerations": [
+      "Careful prone positioning with eye protection",
+      "Chest rolls to allow abdominal expansion",
+      "Arms positioned carefully <90 degrees",
+      "Padding all pressure points meticulously",
+      "Avoid excessive fluids (increases venous pressure)",
+      "Consider controlled hypotension (MAP 65-75) to reduce bleeding",
+      "Multimodal analgesia (IV acetaminophen, ketorolac if appropriate)",
+      "Avoid NSAIDs if fusion planned (controversial)",
+      "Document preoperative neuro exam",
+      "Immediate postop neuro check"
+    ],
+    "risk_factors": {
+      "neurologic": "moderate",
+      "vision": "low",
+      "positioning": "high",
+      "cardiac": "low",
+      "pulmonary": "low"
+    }
+  },
+  {
+    "patient_name": "Lisa Chen",
+    "patient_index": 63,
+    "asa_class": "III",
+    "surgical_type": "Neurosurgical - AVM Resection",
+    "learning_scenarios": [
+      {
+        "section": "Section 3",
+        "topics": ["AVM pathophysiology", "Cerebral blood flow"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "AVM = abnormal connection between arteries and veins without capillary bed",
+          "High-flow AVM causes vascular steal from surrounding brain",
+          "Rupture risk 2-4% per year causing hemorrhage",
+          "Normal perfusion pressure breakthrough theory after AVM resection",
+          "Surrounding brain chronically hypoperfused adapts to low pressure"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Hemorrhage management", "AVM-specific considerations"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Massive hemorrhage possible during AVM resection",
+          "Large bore IV access x2 mandatory",
+          "Cross-matched blood immediately available (4-6 units)",
+          "Controlled hypotension (MAP 60-70) during dissection reduces bleeding",
+          "After resection, maintain normotension to prevent breakthrough bleeding",
+          "Cell saver contraindicated if tumor cells present, ok for AVM"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Young patient considerations", "Migraine management"],
+        "difficulty": "basic",
+        "teaching_points": [
+          "Young healthy patient otherwise = better outcome",
+          "Migraines common with AVM - may worsen postoperatively",
+          "PONV prophylaxis important (young female = high risk)",
+          "Postoperative seizure prophylaxis often given",
+          "Neurologic deficits possible from surgery"
+        ]
+      }
+    ],
+    "clinical_challenges": [
+      "High hemorrhage risk",
+      "AVM rupture during surgery",
+      "Vascular steal syndrome",
+      "Normal perfusion pressure breakthrough",
+      "Young patient - good reserve but high expectations",
+      "Potential for devastating neurologic deficit"
+    ],
+    "monitoring_needs": [
+      "Standard ASA monitors",
+      "Arterial line mandatory",
+      "Central venous access",
+      "Large bore IV access x2",
+      "Rapid infuser available",
+      "Cross-matched blood in OR",
+      "Consider CVP or PA catheter for large AVMs"
+    ],
+    "anesthetic_considerations": [
+      "TIVA preferred",
+      "Controlled hypotension during dissection",
+      "Blood products immediately available",
+      "Cell saver setup",
+      "Prepare for massive transfusion",
+      "After resection, maintain normotension (prevent breakthrough)",
+      "Smooth emergence critical",
+      "ICU admission",
+      "Seizure prophylaxis (levetiracetam or phenytoin)",
+      "Postoperative CT scan to assess for hemorrhage"
+    ],
+    "risk_factors": {
+      "neurologic": "high",
+      "hemorrhage": "very high",
+      "mortality": "moderate",
+      "stroke": "moderate"
+    }
+  },
+  {
+    "patient_name": "Paul Anderson",
+    "patient_index": 64,
+    "asa_class": "III",
+    "surgical_type": "Neurosurgical - Transsphenoidal Pituitary Surgery",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Pituitary adenoma", "Endocrine dysfunction"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Pituitary adenoma causes hormonal imbalances - check cortisol, thyroid, growth hormone",
+          "Diabetes insipidus (DI) common postoperatively from posterior pituitary injury",
+          "DI causes massive diuresis (>200-300 mL/hr) and hypernatremia",
+          "Adrenal insufficiency possible - stress dose steroids if suspected",
+          "Visual field deficits common - optic chiasm compression"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Transsphenoidal approach", "Airway management"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Transsphenoidal approach via nose - shared airway with surgeon",
+          "Throat pack placed to prevent blood aspiration",
+          "Nasal decongestion with cocaine or oxymetazoline reduces bleeding",
+          "Avoid coughing on emergence - can cause bleeding and CSF leak",
+          "Smooth extubation critical - may need remifentanil or lidocaine",
+          "CSF leak risk postoperatively - avoid positive pressure ventilation"
+        ]
+      },
+      {
+        "section": "Section 2",
+        "topics": ["Fluid management", "Diabetes insipidus"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Monitor urine output hourly - DI causes polyuria",
+          "Replace urine output mL for mL if DI develops",
+          "Desmopressin (DDAVP) treats DI - 1-2 mcg IV",
+          "Monitor sodium frequently - hypernatremia from DI",
+          "Triphasic response possible: initial DI, then SIADH, then permanent DI"
+        ]
+      }
+    ],
+    "clinical_challenges": [
+      "Pituitary adenoma with mass effect",
+      "Diabetes insipidus risk",
+      "Endocrine dysfunction",
+      "Shared airway",
+      "CSF leak risk",
+      "Visual impairment",
+      "Fluid management complexity"
+    ],
+    "monitoring_needs": [
+      "Standard ASA monitors",
+      "Arterial line for frequent blood gases and sodium",
+      "Urinary catheter mandatory",
+      "Hourly urine output measurement",
+      "Frequent sodium checks",
+      "Serum and urine osmolality if DI suspected"
+    ],
+    "anesthetic_considerations": [
+      "Preoperative endocrine workup",
+      "Stress dose steroids if adrenal insufficiency suspected (hydrocortisone 100mg)",
+      "Throat pack placed carefully",
+      "TIVA or volatile acceptable",
+      "Avoid nitrous oxide (if air in sella)",
+      "Smooth emergence - avoid coughing",
+      "Remove throat pack before extubation",
+      "Monitor for DI postoperatively",
+      "DDAVP ready if polyuria develops",
+      "Replace urine output appropriately",
+      "ICU or monitored setting"
+    ],
+    "risk_factors": {
+      "neurologic": "moderate",
+      "endocrine": "very high",
+      "fluid_electrolyte": "high",
+      "vision": "moderate",
+      "CSF_leak": "moderate"
+    }
+  },
+  {
+    "patient_name": "Diana Martinez",
+    "patient_index": 65,
+    "asa_class": "III",
+    "surgical_type": "Neurosurgical - Shunt Revision",
+    "learning_scenarios": [
+      {
+        "section": "Section 3",
+        "topics": ["Hydrocephalus", "ICP management"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Hydrocephalus = excessive CSF causing ventricular enlargement and increased ICP",
+          "Shunt malfunction causes acute ICP increase - headache, nausea, altered mental status",
+          "VP shunt drains CSF from ventricles to peritoneum",
+          "Shunt over-drainage can cause subdural hematoma",
+          "Multiple previous surgeries increase scar tissue and difficulty"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["ICP management in shunt patients"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Increased ICP at baseline - avoid further increases",
+          "Smooth induction - avoid coughing, straining, hypercapnia",
+          "Head-up positioning 15-30 degrees",
+          "Hyperventilation if acute ICP crisis (PaCO2 30-35)",
+          "Mannitol available for ICP control"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Multiple previous surgeries", "Infection risk"],
+        "difficulty": "basic",
+        "teaching_points": [
+          "Previous shunt infections common",
+          "Antibiotic prophylaxis critical (cefazolin or vancomycin)",
+          "Shunt revision typically short procedure (1-2 hours)",
+          "Low blood loss expected",
+          "Experienced patient - familiar with process"
+        ]
+      }
+    ],
+    "clinical_challenges": [
+      "Increased ICP from shunt malfunction",
+      "Multiple previous surgeries",
+      "Infection history risk",
+      "Young patient - long-term shunt dependence",
+      "Potential shunt over-drainage"
+    ],
+    "monitoring_needs": [
+      "Standard ASA monitors",
+      "Arterial line usually not needed unless ICP very high",
+      "Capnography for PaCO2 control"
+    ],
+    "anesthetic_considerations": [
+      "Smooth induction to avoid ICP increase",
+      "Propofol or thiopental for induction (decrease ICP)",
+      "Avoid ketamine (increases ICP)",
+      "Maintain normocapnia to mild hypocapnia",
+      "Head-up position",
+      "Antibiotic prophylaxis",
+      "Short procedure - plan for rapid awakening",
+      "Smooth emergence",
+      "PONV prophylaxis"
+    ],
+    "risk_factors": {
+      "neurologic": "moderate",
+      "ICP": "high",
+      "infection": "moderate",
+      "cardiac": "low",
+      "pulmonary": "low"
+    }
+  },
+  {
+    "patient_name": "Kenneth Brown",
+    "patient_index": 66,
+    "asa_class": "III",
+    "surgical_type": "Neurosurgical - Cervical Spine Fusion",
+    "learning_scenarios": [
+      {
+        "section": "Section 6",
+        "topics": ["Cervical myelopathy", "Neuromonitoring in spine surgery"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Cervical myelopathy = spinal cord compression causing motor and sensory deficits",
+          "MEPs monitor motor pathways, SSEPs monitor sensory pathways",
+          "Avoid neuromuscular blockade during MEP monitoring",
+          "50% decrease in MEP amplitude or 10% increase in latency = warning",
+          "TIVA preferred (propofol/remifentanil) for stable monitoring",
+          "Volatile agents >0.5 MAC suppress MEPs significantly"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Hypertension in elderly", "Spinal cord perfusion"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Maintain MAP >80-90 mmHg to ensure spinal cord perfusion",
+          "Hypotension during instrumentation can cause spinal cord ischemia",
+          "Hypertension chronic changes shift autoregulation rightward",
+          "Wake-up test alternative if neuromonitoring unavailable or lost",
+          "Document preoperative neurologic deficits carefully"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Positioning for cervical spine surgery"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "May be prone or supine depending on approach",
+          "Mayfield pins for head fixation - local anesthetic infiltration",
+          "Pin insertion can cause hypertension - treat with beta-blocker",
+          "Neck positioning critical - avoid hyperextension worsening myelopathy",
+          "Eyes protected and checked frequently in prone position"
+        ]
+      }
+    ],
+    "clinical_challenges": [
+      "Cervical myelopathy with cord compression",
+      "Neuromonitoring requirements",
+      "Hypertension management",
+      "Spinal cord perfusion maintenance",
+      "Prone positioning risks",
+      "Potential for quadriplegia"
+    ],
+    "monitoring_needs": [
+      "Standard ASA monitors",
+      "Arterial line mandatory",
+      "MEPs and SSEPs",
+      "Temperature monitoring",
+      "Neuromuscular monitoring (train-of-four)",
+      "Urinary catheter"
+    ],
+    "anesthetic_considerations": [
+      "TIVA with propofol and remifentanil",
+      "Maintain MAP >80-90 mmHg",
+      "No paralysis after intubation (allow MEP monitoring)",
+      "Local anesthetic for pin sites",
+      "Beta-blocker ready for pinning",
+      "Careful positioning to avoid worsening cord compression",
+      "Communicate with neuromonitoring team",
+      "If MEP changes: increase MAP, check positioning, reduce anesthetics",
+      "Smooth emergence for immediate neuro exam",
+      "Document motor and sensory function immediately"
+    ],
+    "risk_factors": {
+      "neurologic": "very high",
+      "quadriplegia": "moderate",
+      "cardiac": "moderate",
+      "pulmonary": "low",
+      "positioning": "high"
+    }
+  },
+  {
+    "patient_name": "Susan Park",
+    "patient_index": 67,
+    "asa_class": "II",
+    "surgical_type": "Neurosurgical - Posterior Fossa Decompression (Chiari)",
+    "learning_scenarios": [
+      {
+        "section": "Section 6",
+        "topics": ["Chiari malformation", "Posterior fossa surgery"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Chiari malformation = cerebellar tonsils herniate through foramen magnum",
+          "CSF flow obstruction causes hydrocephalus and syringomyelia",
+          "Decompression involves craniectomy and duraplasty to enlarge space",
+          "Prone or sitting position used for posterior fossa access",
+          "Sitting position has venous air embolism (VAE) risk 25-50%"
+        ]
+      },
+      {
+        "section": "Section 3",
+        "topics": ["Venous air embolism", "Sitting position physiology"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "VAE occurs when venous pressure at surgical site < atmospheric pressure",
+          "Sitting position creates negative venous pressure in head",
+          "VAE detected by: sudden decrease in ETCO2, hypotension, mill-wheel murmur",
+          "Precordial Doppler most sensitive monitor for VAE",
+          "Treatment: flood field with saline, lower head, Durant position, aspirate air from CVP"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Young healthy patient", "Chronic headache assessment"],
+        "difficulty": "basic",
+        "teaching_points": [
+          "Young healthy patient otherwise = ASA II",
+          "Chronic headaches common symptom of Chiari",
+          "Extensive research by patient common - anxiety about surgery",
+          "Good outcomes expected with decompression",
+          "Headaches may worsen initially postoperatively before improving"
+        ]
+      }
+    ],
+    "clinical_challenges": [
+      "Chiari malformation anatomy",
+      "Posterior fossa surgery complexity",
+      "Sitting position if used",
+      "Venous air embolism risk",
+      "CSF leak risk",
+      "Young patient expectations"
+    ],
+    "monitoring_needs": [
+      "Standard ASA monitors",
+      "Arterial line",
+      "Central venous catheter (for air aspiration if VAE)",
+      "Precordial Doppler for VAE detection",
+      "ETCO2 monitoring critical",
+      "Urinary catheter",
+      "Temperature"
+    ],
+    "anesthetic_considerations": [
+      "Central line placed for air aspiration capability",
+      "If sitting: gradual positioning to avoid hypotension",
+      "Volume loading before sitting",
+      "Avoid nitrous oxide (expands air if VAE)",
+      "TIVA or volatile acceptable",
+      "Watch for VAE signs (sudden ETCO2 drop, hypotension)",
+      "If VAE: flood field, lower head, aspirate CVP, support hemodynamics",
+      "Smooth emergence",
+      "Postoperative nausea/vomiting prophylaxis",
+      "Pain management (headache common postop)"
+    ],
+    "risk_factors": {
+      "neurologic": "moderate",
+      "VAE": "high if sitting position",
+      "CSF_leak": "moderate",
+      "cardiac": "low",
+      "pulmonary": "low"
+    }
+  },
+  {
+    "patient_name": "Brian Wilson",
+    "patient_index": 68,
+    "asa_class": "III",
+    "surgical_type": "Neurosurgical - Intramedullary Spinal Cord Tumor Resection",
+    "learning_scenarios": [
+      {
+        "section": "Section 6",
+        "topics": ["Spinal cord tumor surgery", "Advanced neuromonitoring"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Intramedullary tumor inside spinal cord - highest complexity spine surgery",
+          "MEPs and SSEPs critical - any change may indicate permanent deficit",
+          "No neuromuscular blockade allowed after intubation",
+          "TIVA mandatory for stable monitoring (propofol/remifentanil)",
+          "Prone positioning for thoracic/lumbar cord access",
+          "Surgery may last 6-8 hours"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Chronic pain and opioid tolerance"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Chronic opioid use creates tolerance - higher intraoperative requirements",
+          "Baseline opioid dose must be continued perioperatively",
+          "Multimodal analgesia critical despite opioid use",
+          "Acute pain service consultation recommended",
+          "Risk of hyperalgesia from chronic opioids"
+        ]
+      },
+      {
+        "section": "Section 2",
+        "topics": ["Prolonged anesthesia management"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Hypothermia prevention critical in long cases",
+          "DVT prophylaxis with sequential compression devices",
+          "Pressure injury prevention - extra padding",
+          "Glucose monitoring if prolonged >4 hours",
+          "Staff breaks and relief planning for long case"
+        ]
+      }
+    ],
+    "clinical_challenges": [
+      "Intramedullary spinal cord tumor",
+      "Chronic opioid tolerance",
+      "Very long surgery duration",
+      "High risk of paraplegia/quadriplegia",
+      "Neuromonitoring complexity",
+      "Pain management difficulty",
+      "Anxiety about paralysis"
+    ],
+    "monitoring_needs": [
+      "Standard ASA monitors",
+      "Arterial line mandatory",
+      "MEPs and SSEPs continuously",
+      "Temperature monitoring",
+      "Urinary catheter",
+      "Blood glucose monitoring",
+      "Neuromuscular monitoring (ensure no blockade)"
+    ],
+    "anesthetic_considerations": [
+      "TIVA with propofol and remifentanil only",
+      "Baseline opioid requirement calculated and continued",
+      "No neuromuscular blockade after intubation",
+      "Maintain MAP >80-90 mmHg for spinal cord perfusion",
+      "Aggressive temperature management (forced air warmer, fluid warmer)",
+      "DVT prophylaxis",
+      "Meticulous positioning with extra padding",
+      "Communication protocol with neuromonitoring team",
+      "If MEP/SSEP changes: increase MAP, check position, decrease anesthetics, consider steroids",
+      "Plan for prolonged case - adequate supplies",
+      "Multimodal analgesia despite opioid tolerance",
+      "Immediate postop motor/sensory exam",
+      "ICU admission likely"
+    ],
+    "risk_factors": {
+      "neurologic": "very high",
+      "paraplegia": "high",
+      "pain": "very high",
+      "cardiac": "low",
+      "pulmonary": "moderate",
+      "positioning": "high"
+    }
+  },
+  {
+    "patient_name": "Nancy Rodriguez",
+    "patient_index": 69,
+    "asa_class": "III",
+    "surgical_type": "Neurosurgical - Craniotomy for Meningioma",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Seizure disorder management", "Multiple antiepileptics"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Brain tumor patients at high seizure risk perioperatively",
+          "Multiple AEDs suggest refractory seizures - high risk",
+          "Continue all AEDs perioperatively to prevent status epilepticus",
+          "Enzyme-inducing AEDs (phenytoin, carbamazepine) increase drug metabolism",
+          "Check drug levels preoperatively if patient on AEDs chronically",
+          "Seizure precautions: bite block ready, padding, suction"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Meningioma resection", "Venous bleeding management"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Meningiomas are vascular tumors - significant bleeding risk",
+          "Often involve venous sinuses - major bleeding if injured",
+          "Preoperative embolization may reduce vascularity",
+          "Type and cross 2-4 units blood",
+          "Cell saver typically used",
+          "May require controlled hypotension to reduce bleeding"
+        ]
+      },
+      {
+        "section": "Section 2",
+        "topics": ["Antiepileptic drug interactions"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Phenytoin increases metabolism of NMB (require higher doses)",
+          "Phenytoin, carbamazepine induce CYP450 enzymes",
+          "AEDs may cause thrombocytopenia - check CBC",
+          "Some AEDs cause hyponatremia (carbamazepine, oxcarbazepine)",
+          "Valproic acid inhibits platelet function"
+        ]
+      }
+    ],
+    "clinical_challenges": [
+      "Meningioma with seizure disorder",
+      "Multiple antiepileptic medications",
+      "Refractory seizures risk",
+      "Vascular tumor bleeding",
+      "Drug interactions",
+      "Perioperative seizure risk"
+    ],
+    "monitoring_needs": [
+      "Standard ASA monitors",
+      "Arterial line",
+      "Large bore IV access x2",
+      "Blood products available",
+      "AED levels if indicated",
+      "Platelet count and coagulation studies"
+    ],
+    "anesthetic_considerations": [
+      "Continue all AEDs perioperatively (IV formulations if NPO)",
+      "Seizure precautions in place",
+      "May need higher NMB doses due to enzyme induction",
+      "TIVA or volatile acceptable",
+      "Prepare for significant bleeding",
+      "Type and cross blood",
+      "Cell saver setup",
+      "Controlled hypotension if requested by surgeon",
+      "Smooth emergence to avoid seizure trigger",
+      "Postoperative seizure prophylaxis continued",
+      "ICU admission for neuro checks"
+    ],
+    "risk_factors": {
+      "neurologic": "high",
+      "seizure": "very high",
+      "hemorrhage": "moderate",
+      "cardiac": "low",
+      "pulmonary": "low"
+    }
+  }
+]

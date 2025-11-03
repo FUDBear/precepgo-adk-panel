@@ -1,0 +1,1217 @@
+[
+  {
+    "patient_name": "Betty Garcia",
+    "patient_index": 79,
+    "asa_class": "III",
+    "surgical_type": "Thoracic segmentectomy",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Bronchiectasis evaluation", "Chronic infection management", "Pulmonary function assessment"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Bronchiectasis causes chronic airway inflammation and secretion production",
+          "Assess baseline oxygen requirement and exercise tolerance",
+          "Optimize preoperative bronchial hygiene with chest physiotherapy",
+          "Risk of postoperative respiratory failure with limited pulmonary reserve",
+          "Consider preoperative antibiotics for active infection"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Thoracic anesthesia", "Secretion management", "Lung isolation techniques"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Thick secretions may obstruct endotracheal tube or bronchial blocker",
+          "Avoid dehydration which worsens secretion viscosity",
+          "Aggressive suctioning and bronchoscopy may be needed",
+          "Early extubation preferred to avoid ventilator-associated complications",
+          "Postoperative incentive spirometry and chest physiotherapy essential"
+        ]
+      },
+      {
+        "section": "Section 2",
+        "topics": ["Mucociliary clearance", "Chronic inflammation effects"],
+        "difficulty": "basic",
+        "teaching_points": [
+          "Bronchiectasis results from irreversible airway dilation",
+          "Chronic cough and sputum production are hallmarks",
+          "Recurrent infections damage bronchial walls over time"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Thick secretions", "Chronic infection", "Difficult secretion management", "Postoperative atelectasis risk"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial blood gas capability", "Capnography essential", "Temperature monitoring"],
+    "anesthetic_considerations": [
+      "Preoperative chest physiotherapy and bronchodilators",
+      "Adequate hydration to thin secretions",
+      "Bronchoscopy equipment available",
+      "Regional analgesia (thoracic epidural) for pain control and pulmonary toilet",
+      "Lung protective ventilation strategies"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "high",
+      "airway": "moderate",
+      "infection": "high"
+    }
+  },
+  {
+    "patient_name": "Sophie Dubois",
+    "patient_index": 80,
+    "asa_class": "III",
+    "surgical_type": "Cardiac catheterization",
+    "learning_scenarios": [
+      {
+        "section": "Section 3",
+        "topics": ["Congenital heart disease physiology", "Pediatric cardiac lesions", "Cyanotic vs acyanotic defects"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Congenital heart defects classified as cyanotic (right-to-left shunt) or acyanotic (left-to-right shunt)",
+          "Failure to thrive indicates significant cardiac compromise affecting growth",
+          "Shunt direction determines oxygen saturation and clinical presentation",
+          "Eisenmenger syndrome can develop from chronic left-to-right shunting",
+          "Pulmonary vascular resistance changes affect shunt dynamics"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Pediatric anesthesia", "NPO guidelines", "Family-centered care"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Pediatric NPO: clear liquids 2 hours, breast milk 4 hours, formula 6 hours, solids 8 hours",
+          "Small children decompensate rapidly with NPO-induced hypovolemia",
+          "Inhalation induction with sevoflurane preferred in young children",
+          "Parent presence at induction reduces separation anxiety",
+          "Careful IV access in small veins, consider ultrasound guidance"
+        ]
+      },
+      {
+        "section": "Section 2",
+        "topics": ["Pediatric pharmacology", "Age-related dosing", "Thermoregulation"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Higher oxygen consumption (6-8 mL/kg/min) vs adults (3-4 mL/kg/min)",
+          "Larger body surface area to weight ratio increases heat loss",
+          "Immature hepatic enzyme systems affect drug metabolism",
+          "Infants have higher percentage of total body water"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Congenital heart disease", "Failure to thrive", "Small veins", "NPO intolerance", "Temperature regulation"],
+    "monitoring_needs": ["Standard ASA monitors", "ECG with 5-lead for ischemia detection", "Pulse oximetry (pre and post-ductal if needed)", "Temperature monitoring", "Blood pressure cuff appropriate size"],
+    "anesthetic_considerations": [
+      "Minimize NPO time, consider dextrose-containing IV fluids",
+      "Avoid air bubbles in IV lines (risk of paradoxical embolism)",
+      "Maintain preload and avoid sudden SVR changes",
+      "Warm operating room, forced air warmer, warm IV fluids",
+      "Cardiology present or immediately available",
+      "Parent separation anxiety management"
+    ],
+    "risk_factors": {
+      "cardiac": "very high",
+      "pulmonary": "moderate",
+      "airway": "low",
+      "metabolic": "moderate"
+    }
+  },
+  {
+    "patient_name": "Mason Taylor",
+    "patient_index": 81,
+    "asa_class": "II",
+    "surgical_type": "Inguinal hernia repair",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Prematurity complications", "Reactive airway disease", "Apnea risk assessment"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Former preterm infants (<37 weeks gestation) at risk for postoperative apnea",
+          "Risk highest in infants <60 weeks postconceptual age",
+          "Bronchopulmonary dysplasia common in extreme prematurity (<28 weeks)",
+          "Reactive airways increase bronchospasm risk with airway manipulation",
+          "Consider regional anesthesia to avoid general anesthesia and intubation"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Pediatric regional anesthesia", "Caudal block", "Apnea monitoring"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Caudal block excellent for inguinal hernia repair in infants",
+          "Reduces general anesthetic requirement and postoperative apnea risk",
+          "Sevoflurane inhalation induction, then caudal placement",
+          "LMA or ETT acceptable for airway management during brief procedure",
+          "Postoperative apnea monitoring for minimum 12 hours if <60 weeks PCA"
+        ]
+      },
+      {
+        "section": "Section 2",
+        "topics": ["Bronchopulmonary dysplasia", "Prematurity physiology"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Premature lungs have decreased alveolar development and surfactant",
+          "Oxygen toxicity and mechanical ventilation contribute to BPD",
+          "Reactive airways result from chronic inflammation",
+          "Avoid high FiO2 unless necessary (target SpO2 92-95% in former preemies)"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Premature birth history", "Bronchospasm risk", "Postoperative apnea risk", "Active uncooperative toddler"],
+    "monitoring_needs": ["Standard ASA monitors", "Capnography essential", "Apnea monitor postoperatively", "Temperature monitoring"],
+    "anesthetic_considerations": [
+      "Regional anesthesia (caudal block) strongly preferred",
+      "Light general anesthetic with LMA if caudal successful",
+      "Avoid desflurane (airway irritant)",
+      "Bronchodilators available",
+      "Admit for overnight apnea monitoring if <60 weeks postconceptual age",
+      "Parent presence at induction"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "moderate",
+      "airway": "moderate",
+      "apnea": "high"
+    }
+  },
+  {
+    "patient_name": "Aaliyah Johnson",
+    "patient_index": 82,
+    "asa_class": "III",
+    "surgical_type": "Tonsillectomy and adenoidectomy",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Sickle cell disease", "Perioperative sickling prevention", "Transfusion management"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Sickle cell disease: abnormal hemoglobin S polymerizes when deoxygenated",
+          "Vaso-occlusive crisis triggered by hypoxia, dehydration, acidosis, hypothermia",
+          "Target hemoglobin >10 g/dL for moderate-risk surgery",
+          "Preoperative transfusion may be needed to reduce HbS percentage",
+          "Maintain oxygen saturation >95%, avoid tourniquet if possible"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Tonsillectomy anesthesia", "Pediatric airway management", "Shared airway"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Tonsillectomy is shared airway procedure requiring coordination with surgeon",
+          "RAE (Ring-Adair-Elwyn) oral ETT prevents kinking during mouth gag",
+          "Smooth emergence critical to prevent bleeding from agitation",
+          "Dexamethasone and ondansetron for PONV prophylaxis",
+          "Careful suctioning under direct visualization before extubation"
+        ]
+      },
+      {
+        "section": "Section 2",
+        "topics": ["Sickle cell pathophysiology", "Oxygen delivery"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Sickling occurs when HbS concentration high and oxygen tension low",
+          "Sickled cells cause microvascular occlusion and hemolysis",
+          "Chronic anemia with baseline hemoglobin 6-9 g/dL compensated by increased cardiac output",
+          "Acute chest syndrome can occur postoperatively"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Sickle cell disease", "Chronic anemia", "Vaso-occlusive crisis risk", "Shared airway", "Bleeding risk"],
+    "monitoring_needs": ["Standard ASA monitors", "Maintain SpO2 >95%", "Temperature monitoring critical", "Hemoglobin/hematocrit available"],
+    "anesthetic_considerations": [
+      "Aggressive hydration (1.5x maintenance fluids)",
+      "Maintain normothermia with forced air warmer and warm fluids",
+      "Avoid hypothermia, hypoxia, dehydration, acidosis, stasis",
+      "Consider preoperative transfusion if Hgb <10 g/dL",
+      "Minimize tourniquet time if used",
+      "Pain management to prevent crisis (multimodal approach)",
+      "Smooth emergence to prevent agitation and bleeding"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "moderate",
+      "airway": "moderate",
+      "hematologic": "very high",
+      "pain_crisis": "high"
+    }
+  },
+  {
+    "patient_name": "Ethan Kim",
+    "patient_index": 83,
+    "asa_class": "III",
+    "surgical_type": "Dental surgery under general anesthesia",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Autism spectrum disorder", "Developmental considerations", "Preoperative preparation"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Autism spectrum disorder affects communication, social interaction, and behavior",
+          "Non-verbal patients cannot report pain or discomfort",
+          "Sensory overstimulation triggers agitation and meltdowns",
+          "Preoperative tour and picture books reduce anxiety",
+          "Continue antiepileptic medications perioperatively to prevent seizures"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Behavioral management", "Induction techniques", "Seizure precautions"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Non-verbal patient requires alternative induction approach",
+          "IV induction may be impossible due to lack of cooperation",
+          "Inhalation induction with sevoflurane often necessary despite age",
+          "Midazolam premedication may paradoxically increase agitation",
+          "Avoid seizure-inducing drugs (enflurane, high-dose opioids)",
+          "Have antiepileptic medications available"
+        ]
+      },
+      {
+        "section": "Section 2",
+        "topics": ["Antiepileptic drug interactions", "Drug metabolism"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Many antiepileptic drugs induce hepatic enzymes (phenytoin, carbamazepine)",
+          "Increased drug clearance may require higher anesthetic doses",
+          "Check antiepileptic drug levels preoperatively",
+          "Valproic acid can cause thrombocytopenia and bleeding"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Non-verbal communication", "Autism behavioral issues", "Sensory overstimulation", "Seizure disorder", "Difficult cooperation"],
+    "monitoring_needs": ["Standard ASA monitors", "BIS monitoring may be helpful", "Temperature monitoring", "Seizure precautions"],
+    "anesthetic_considerations": [
+      "Quiet, calm preoperative environment",
+      "Limit strangers and sudden stimuli",
+      "Parent present throughout induction if helpful",
+      "Inhalation induction likely necessary",
+      "Continue antiepileptic medications (oral or IV equivalent)",
+      "Smooth emergence in quiet recovery area",
+      "Pain assessment challenging - use behavioral scales"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "low",
+      "airway": "low",
+      "neurologic": "high",
+      "behavioral": "high"
+    }
+  },
+  {
+    "patient_name": "Isabella Martinez",
+    "patient_index": 84,
+    "asa_class": "III",
+    "surgical_type": "Laparoscopic appendectomy",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Type 1 diabetes management", "Perioperative glucose control", "DKA prevention"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Type 1 diabetes: absolute insulin deficiency requires continuous insulin",
+          "Brittle diabetes = wide glucose fluctuations, difficult to control",
+          "Target perioperative glucose 100-180 mg/dL in children",
+          "Never stop basal insulin completely (risk of DKA)",
+          "Celiac disease may affect absorption and nutritional status"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Insulin management protocols", "Emergency surgery considerations"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Emergency appendectomy requires rapid glucose assessment and control",
+          "Continue insulin pump or IV insulin infusion",
+          "Check glucose every 1-2 hours intraoperatively",
+          "Dextrose-containing IV fluids (D5LR or D5NS) with insulin",
+          "Avoid prolonged NPO status preoperatively"
+        ]
+      },
+      {
+        "section": "Section 2",
+        "topics": ["Insulin pharmacology", "Glucose homeostasis", "Stress response"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Surgical stress increases glucose via cortisol and epinephrine release",
+          "Insulin promotes glucose uptake and prevents lipolysis/ketogenesis",
+          "Basal insulin required even when NPO to prevent DKA",
+          "Short-acting insulin for correction of hyperglycemia"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Brittle type 1 diabetes", "Celiac disease", "Glucose fluctuations", "Emergency surgery", "Mature but still pediatric"],
+    "monitoring_needs": ["Standard ASA monitors", "Continuous glucose monitoring or frequent checks", "Ketone monitoring if hyperglycemic", "Electrolytes"],
+    "anesthetic_considerations": [
+      "Minimize NPO time or start IV early with dextrose",
+      "Insulin infusion protocol (0.05-0.1 units/kg/hr with dextrose)",
+      "Glucose checks: baseline, hourly, and postop",
+      "Avoid beta-blockers (mask hypoglycemia symptoms)",
+      "Stress-dose steroids NOT needed for primary adrenal insufficiency",
+      "Early feeding postoperatively"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "low",
+      "airway": "low",
+      "metabolic": "very high",
+      "infection": "moderate"
+    }
+  },
+  {
+    "patient_name": "Noah Brown",
+    "patient_index": 85,
+    "asa_class": "IV",
+    "surgical_type": "Hip surgery (spastic cerebral palsy)",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Cerebral palsy complications", "Aspiration risk", "Chronic lung disease"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Cerebral palsy: non-progressive brain injury causing motor dysfunction",
+          "Gastrostomy tube indicates severe dysphagia and aspiration risk",
+          "Chronic aspiration causes recurrent pneumonia and reactive airways",
+          "Cannot communicate pain - relies on behavioral cues and vital signs",
+          "Gastroesophageal reflux disease common in CP patients"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Aspiration prevention", "Difficult positioning", "Communication challenges"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Rapid sequence induction indicated for aspiration risk",
+          "Empty G-tube and consider metoclopramide/H2-blocker preoperatively",
+          "Muscle contractures make positioning extremely difficult",
+          "Pressure ulcer risk very high - meticulous padding essential",
+          "Cannot report postoperative pain - use pain assessment scales (FLACC)"
+        ]
+      },
+      {
+        "section": "Section 2",
+        "topics": ["Neuromuscular considerations", "Chronic aspiration effects"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Avoid succinylcholine if patient has muscle atrophy or contractures",
+          "May have abnormal response to muscle relaxants",
+          "Chronic lung disease reduces pulmonary reserve",
+          "Temperature regulation impaired in some CP patients"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Cerebral palsy", "Aspiration risk", "Chronic lung disease", "Unable to communicate", "Severe contractures", "G-tube dependent"],
+    "monitoring_needs": ["Standard ASA monitors", "Temperature monitoring critical", "Consider arterial line for ABGs", "Pain assessment tools (FLACC score)"],
+    "anesthetic_considerations": [
+      "Full stomach precautions - RSI with cricoid pressure",
+      "Empty and clamp G-tube preoperatively",
+      "Aspiration prophylaxis (metoclopramide, ranitidine, sodium citrate)",
+      "Extreme care with positioning - photograph patient position preop",
+      "Regional anesthesia beneficial if feasible",
+      "Postoperative respiratory support may be needed",
+      "Pain assessment via behavioral scales"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "high",
+      "airway": "high",
+      "aspiration": "very high",
+      "positioning": "high"
+    }
+  },
+  {
+    "patient_name": "Mia Patel",
+    "patient_index": 86,
+    "asa_class": "II",
+    "surgical_type": "Bilateral myringotomy with tube placement",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Pediatric asthma", "Allergy assessment", "Latex allergy precautions"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Asthma most common chronic pediatric disease affecting 8-10% of children",
+          "Food allergies may predict latex allergy or anaphylaxis risk",
+          "Document specific allergens and reactions preoperatively",
+          "Reactive airway increases bronchospasm risk with airway manipulation",
+          "Separation anxiety common in age 7 children"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Brief pediatric anesthesia", "Inhalation induction", "Emergence delirium"],
+        "difficulty": "basic",
+        "teaching_points": [
+          "Myringotomy is brief procedure (10-15 minutes) ideal for LMA",
+          "Inhalation induction with sevoflurane in child with IV fear",
+          "N2O contraindicated (expands middle ear gas, displaces tubes)",
+          "Emergence delirium common in young children after sevoflurane",
+          "Parent presence at induction reduces separation anxiety"
+        ]
+      },
+      {
+        "section": "Section 2",
+        "topics": ["Allergic reactions", "Anaphylaxis pathophysiology"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Anaphylaxis: IgE-mediated mast cell degranulation",
+          "Cross-reactivity between food allergies and latex (banana, avocado, kiwi)",
+          "Have epinephrine immediately available for allergic reactions",
+          "Bronchospasm and laryngeal edema are life-threatening manifestations"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Reactive airway", "Multiple food allergies", "Separation anxiety", "Parent-child attachment"],
+    "monitoring_needs": ["Standard ASA monitors", "Pulse oximetry and capnography essential", "Latex-free environment"],
+    "anesthetic_considerations": [
+      "Latex-free environment and equipment",
+      "Parent present for induction if beneficial",
+      "Inhalation induction with sevoflurane",
+      "Albuterol pretreatment if recent asthma symptoms",
+      "LMA preferred over ETT (less airway stimulation)",
+      "Avoid N2O (middle ear pressure)",
+      "Have bronchodilators and epinephrine available",
+      "Smooth emergence - minimize stimulation"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "moderate",
+      "airway": "moderate",
+      "allergy": "moderate"
+    }
+  },
+  {
+    "patient_name": "Oliver Schmidt",
+    "patient_index": 87,
+    "asa_class": "III",
+    "surgical_type": "Joint surgery (juvenile rheumatoid arthritis)",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Juvenile rheumatoid arthritis", "Chronic steroid use", "Adrenal suppression"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Juvenile idiopathic arthritis affects joints and may involve cervical spine",
+          "Chronic steroid use (>3 weeks of >5mg prednisone daily) suppresses HPA axis",
+          "Atlanto-axial instability risk with cervical involvement",
+          "Immunosuppressed from disease and medications (infection risk)",
+          "Adrenal crisis can occur if stress-dose steroids not given"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Airway management with cervical arthritis", "Stress-dose steroids", "Positioning"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Cervical spine films if neck involvement (atlanto-axial instability)",
+          "Manual in-line stabilization during intubation if C-spine disease",
+          "Stress-dose steroids: hydrocortisone 100mg IV at induction",
+          "Fragile skin from steroids - gentle tape application",
+          "Limited joint mobility affects positioning"
+        ]
+      },
+      {
+        "section": "Section 2",
+        "topics": ["Corticosteroid physiology", "HPA axis suppression", "Stress response"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Chronic steroids suppress adrenal cortisol production",
+          "Surgical stress normally increases cortisol 2-10 fold",
+          "Adrenal insufficiency causes hypotension refractory to vasopressors",
+          "Stress-dose steroids provide 'physiologic' cortisol during stress"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Juvenile arthritis", "Chronic steroid use", "Immunosuppression", "Adrenal suppression risk", "Cervical spine involvement"],
+    "monitoring_needs": ["Standard ASA monitors", "Blood glucose monitoring", "Careful blood pressure monitoring for adrenal insufficiency"],
+    "anesthetic_considerations": [
+      "Cervical spine precautions if neck involved",
+      "Stress-dose steroids (hydrocortisone 100mg IV) at induction",
+      "Continue taper postoperatively",
+      "Glucose monitoring (steroids cause hyperglycemia)",
+      "Fragile skin - minimize tape, gentle positioning",
+      "Antibiotic prophylaxis due to immunosuppression",
+      "Careful padding of all joints"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "low",
+      "airway": "moderate",
+      "endocrine": "high",
+      "infection": "moderate",
+      "positioning": "moderate"
+    }
+  },
+  {
+    "patient_name": "Chloe Anderson",
+    "patient_index": 88,
+    "asa_class": "III",
+    "surgical_type": "PICC line placement",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Cystic fibrosis", "Chronic lung disease", "Nutritional assessment"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Cystic fibrosis: genetic disorder causing thick secretions in lungs and pancreas",
+          "Chronic pulmonary infections (Pseudomonas, Staph aureus) damage airways",
+          "Malnutrition from pancreatic insufficiency despite enzyme replacement",
+          "Baseline oxygen saturation and pulmonary function tests guide management",
+          "PICC line for IV antibiotics during pulmonary exacerbations"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["CF anesthesia considerations", "Secretion management", "Bronchoscopy"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Optimize pulmonary status preoperatively (antibiotics, chest PT)",
+          "Thick secretions obstruct airways - aggressive suctioning needed",
+          "Maintain hydration to prevent secretion inspissation",
+          "Avoid high FiO2 unless necessary (absorptive atelectasis)",
+          "Postoperative chest physiotherapy essential"
+        ]
+      },
+      {
+        "section": "Section 2",
+        "topics": ["CF pathophysiology", "CFTR protein dysfunction"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "CFTR gene mutation causes defective chloride channel",
+          "Thick mucus in lungs leads to obstruction and infection",
+          "Pancreatic enzyme deficiency causes malabsorption",
+          "Median survival now >40 years with modern therapy"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Cystic fibrosis", "Chronic lung disease", "Thick secretions", "Malnutrition", "Experienced patient (multiple procedures)"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial blood gas capability", "Aggressive pulmonary toilet equipment"],
+    "anesthetic_considerations": [
+      "Continue chest physiotherapy and bronchodilators preoperatively",
+      "Avoid prolonged NPO - early IV fluids",
+      "MAC or sedation may be sufficient for PICC placement",
+      "If general anesthesia needed: LMA acceptable for brief procedure",
+      "Aggressive airway suctioning",
+      "Postoperative chest physiotherapy",
+      "Pain control to allow deep breathing and coughing"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "very high",
+      "airway": "moderate",
+      "nutritional": "moderate",
+      "infection": "high"
+    }
+  },
+  {
+    "patient_name": "Lucas Silva",
+    "patient_index": 89,
+    "asa_class": "III",
+    "surgical_type": "Adenoidectomy",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Down syndrome", "Congenital heart defects", "Atlanto-axial instability"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Down syndrome (Trisomy 21) associated with multiple comorbidities",
+          "50% have congenital heart defects (ASD, VSD, AVSD, tetralogy of Fallot)",
+          "Atlanto-axial instability in 10-20% due to ligamentous laxity",
+          "Macroglossia and midface hypoplasia cause difficult airway",
+          "Obstructive sleep apnea common from adenotonsillar hypertrophy"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Difficult airway management", "Cervical spine precautions", "Cardiac considerations"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Cervical spine films to rule out atlanto-axial instability before surgery",
+          "Manual in-line stabilization during intubation if C-spine instability",
+          "Large tongue and small mouth make laryngoscopy difficult",
+          "Cardiac lesion determines anesthetic management (avoid SVR changes)",
+          "Postoperative airway obstruction risk from tongue edema"
+        ]
+      },
+      {
+        "section": "Section 2",
+        "topics": ["Congenital heart defect pathophysiology", "Shunt physiology"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "ASD/VSD create left-to-right shunt (increased pulmonary blood flow)",
+          "Avoid increases in PVR (hypoxia, hypercarbia, acidosis)",
+          "Air bubbles in IV can cause paradoxical embolism",
+          "Endocarditis prophylaxis if unrepaired or recently repaired defect"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Down syndrome", "Congenital heart defect", "Atlanto-axial instability risk", "Difficult airway", "Obstructive sleep apnea"],
+    "monitoring_needs": ["Standard ASA monitors", "ECG monitoring for arrhythmias", "Pulse oximetry essential", "Blood pressure monitoring"],
+    "anesthetic_considerations": [
+      "Cervical spine X-rays before surgery if not done",
+      "In-line stabilization during intubation",
+      "Video laryngoscope or fiberoptic bronchoscope available",
+      "Avoid air bubbles in all IV lines",
+      "Antibiotic prophylaxis for endocarditis if indicated",
+      "Maintain cardiac output and avoid sudden SVR changes",
+      "Careful extubation - high risk of obstruction from large tongue",
+      "Extended monitoring postoperatively for apnea"
+    ],
+    "risk_factors": {
+      "cardiac": "high",
+      "pulmonary": "moderate",
+      "airway": "high",
+      "cervical_spine": "moderate"
+    }
+  },
+  {
+    "patient_name": "Arthur Reynolds",
+    "patient_index": 90,
+    "asa_class": "IV",
+    "surgical_type": "Abdominal aortic aneurysm repair",
+    "learning_scenarios": [
+      {
+        "section": "Section 3",
+        "topics": ["Aortic aneurysm pathophysiology", "Hemodynamic management", "Risk of rupture"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "AAA defined as aortic diameter >3 cm (normal 2 cm)",
+          "Rupture risk increases exponentially when >5.5 cm",
+          "Cross-clamping aorta causes sudden increase in afterload and myocardial oxygen demand",
+          "Unclamping causes hypotension from reperfusion and washout of metabolites",
+          "Renal ischemia during cross-clamp time"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["High-risk vascular surgery", "Cardiac risk assessment", "Invasive monitoring"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "AAA repair is highest risk vascular surgery (30-day mortality 3-5%)",
+          "High RCRI score: age >70, vascular surgery, hypertension",
+          "Coronary artery disease screening essential preoperatively",
+          "Arterial line and central venous pressure monitoring mandatory",
+          "Large bore IV access for potential massive hemorrhage"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Vascular anesthesia", "Aortic cross-clamp management", "Massive transfusion"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Goal-directed hemodynamic management reduces complications",
+          "Gradual cross-clamp application allows compensation",
+          "Communicate with surgeon before unclamping (volume load, vasopressors ready)",
+          "Cell saver for blood conservation",
+          "Epidural analgesia improves outcomes but coagulation must be normal"
+        ]
+      }
+    ],
+    "clinical_challenges": ["AAA rupture risk", "Aortic cross-clamp hemodynamics", "Massive hemorrhage potential", "Renal ischemia", "Advanced age"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial line (radial)", "Central venous pressure", "Foley catheter with hourly urine output", "Temperature monitoring", "TEE consideration"],
+    "anesthetic_considerations": [
+      "Type and cross 4-6 units PRBCs",
+      "Large bore IV access (2x 16-18g) and rapid infuser",
+      "Maintain normothermia aggressively",
+      "Beta-blockade for heart rate control",
+      "Communication with surgeon for cross-clamp and unclamp",
+      "Volume and vasopressor ready for unclamp hypotension",
+      "Renal protection (adequate perfusion, avoid nephrotoxins)",
+      "ICU bed postoperatively"
+    ],
+    "risk_factors": {
+      "cardiac": "very high",
+      "pulmonary": "moderate",
+      "airway": "low",
+      "renal": "high",
+      "hemorrhage": "very high"
+    }
+  },
+  {
+    "patient_name": "Evelyn Brooks",
+    "patient_index": 91,
+    "asa_class": "III",
+    "surgical_type": "Femoral-popliteal bypass",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Peripheral arterial disease", "Diabetes complications", "Limb salvage surgery"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "PAD results from atherosclerosis affecting lower extremity arteries",
+          "Diabetes accelerates atherosclerosis and increases amputation risk",
+          "Gangrene indicates critical limb ischemia requiring urgent revascularization",
+          "PAD is marker of systemic atherosclerosis (coronary, carotid, renal)",
+          "High cardiac risk - need careful preoperative assessment"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Regional anesthesia for vascular surgery", "Neuraxial vs general"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Regional anesthesia (spinal/epidural) may reduce cardiac complications",
+          "Peripheral nerve blocks (femoral, sciatic) provide excellent analgesia",
+          "Long surgery duration (3-5 hours) may exceed neuraxial duration",
+          "Combined epidural-general technique optimal",
+          "Maintain perfusion pressure to ischemic limb"
+        ]
+      },
+      {
+        "section": "Section 2",
+        "topics": ["Atherosclerosis pathophysiology", "Diabetic complications"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Diabetes causes microvascular and macrovascular complications",
+          "Autonomic neuropathy increases perioperative cardiac risk",
+          "Poor circulation delays wound healing postoperatively",
+          "Infection risk higher in diabetics with ischemic tissue"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Severe PAD with gangrene", "Diabetes", "High cardiac risk", "Amputation anxiety", "Poor circulation"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial line", "Consider central line for long case", "Glucose monitoring", "Urine output"],
+    "anesthetic_considerations": [
+      "Combined epidural-general anesthesia ideal",
+      "Beta-blockade for cardiac protection",
+      "Maintain adequate perfusion pressure (avoid hypotension)",
+      "Glucose control (100-180 mg/dL target)",
+      "Antibiotic prophylaxis",
+      "Normothermia for optimal wound healing",
+      "Multimodal pain control (epidural, peripheral nerve block)",
+      "Careful padding of opposite leg"
+    ],
+    "risk_factors": {
+      "cardiac": "high",
+      "pulmonary": "low",
+      "airway": "low",
+      "vascular": "very high",
+      "metabolic": "high",
+      "infection": "moderate"
+    }
+  },
+  {
+    "patient_name": "Walter Schmidt",
+    "patient_index": 92,
+    "asa_class": "IV",
+    "surgical_type": "Carotid endarterectomy",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Carotid stenosis", "Stroke risk assessment", "Neurologic monitoring"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Carotid stenosis >70% significantly increases stroke risk",
+          "Previous stroke indicates vulnerable brain with poor collateral flow",
+          "Carotid surgery prevents future stroke but has perioperative stroke risk 2-3%",
+          "Need to balance cerebral perfusion during carotid cross-clamping",
+          "Hemodynamic instability common from carotid sinus manipulation"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Cerebral monitoring", "Blood pressure management", "Regional vs general"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Regional anesthesia (cervical plexus block) allows neurologic monitoring",
+          "General anesthesia requires EEG or cerebral oximetry monitoring",
+          "Maintain MAP 20% above baseline to ensure cerebral perfusion",
+          "Shunt placement if EEG changes during cross-clamp",
+          "Baroreceptor dysfunction causes postop BP lability"
+        ]
+      },
+      {
+        "section": "Section 3",
+        "topics": ["Cerebral blood flow regulation", "Autoregulation"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Cerebral autoregulation maintains constant CBF between MAP 50-150 mmHg",
+          "Chronic hypertension shifts autoregulation curve rightward",
+          "Carotid stenosis reduces flow reserve - brain relies on contralateral flow",
+          "Hypotension during cross-clamp can cause stroke"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Severe carotid stenosis", "Previous stroke", "Stroke risk", "Hemodynamic instability", "Advanced age"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial line (pre-induction)", "Cerebral oximetry or EEG", "Neurologic exam if regional", "Foley catheter"],
+    "anesthetic_considerations": [
+      "Regional (cervical plexus block) vs general anesthesia decision",
+      "Maintain MAP 20% above baseline (typically MAP 80-100 mmHg)",
+      "Phenylephrine or norepinephrine for MAP support",
+      "Avoid hypotension and hypertension extremes",
+      "Smooth emergence to prevent hypertension (neck hematoma risk)",
+      "Neurologic exam immediately postoperatively",
+      "ICU monitoring for 24 hours"
+    ],
+    "risk_factors": {
+      "cardiac": "high",
+      "pulmonary": "low",
+      "airway": "low",
+      "neurologic": "very high",
+      "stroke": "high"
+    }
+  },
+  {
+    "patient_name": "Helen Kowalski",
+    "patient_index": 93,
+    "asa_class": "II",
+    "surgical_type": "Vein stripping and ligation",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Venous insufficiency", "Geriatric assessment", "Outpatient surgery"],
+        "difficulty": "basic",
+        "teaching_points": [
+          "Varicose veins result from venous valve incompetence",
+          "Chronic venous insufficiency causes skin changes and ulcers",
+          "Generally low-risk outpatient procedure",
+          "Geriatric patients require careful assessment despite ASA II status",
+          "Relief-seeking patient usually cooperative and motivated"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Regional anesthesia", "Spinal vs general for vein surgery"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Spinal anesthesia excellent choice for lower extremity vein surgery",
+          "Avoid prolonged spinal in elderly (urinary retention, hypotension)",
+          "General anesthesia with LMA alternative for brief cases",
+          "Tumescent anesthesia (local) reduces systemic anesthetic needs",
+          "Early mobilization reduces DVT risk postoperatively"
+        ]
+      },
+      {
+        "section": "Section 2",
+        "topics": ["Local anesthetic pharmacology", "Tumescent technique"],
+        "difficulty": "basic",
+        "teaching_points": [
+          "Tumescent technique uses dilute local anesthetic (lidocaine) in large volumes",
+          "Slow absorption reduces peak levels and toxicity",
+          "Vasoconstriction from epinephrine reduces bleeding"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Geriatric patient", "Venous disease", "Hypertension control", "Minimal challenges overall"],
+    "monitoring_needs": ["Standard ASA monitors", "Blood pressure monitoring"],
+    "anesthetic_considerations": [
+      "Spinal anesthesia preferred (shorter duration)",
+      "Careful positioning of opposite leg",
+      "Compression stockings on opposite leg for DVT prophylaxis",
+      "Multimodal analgesia (local, NSAIDs, acetaminophen)",
+      "Early mobilization postoperatively",
+      "Same-day discharge likely"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "low",
+      "airway": "low",
+      "thrombotic": "low"
+    }
+  },
+  {
+    "patient_name": "Albert Johnson",
+    "patient_index": 94,
+    "asa_class": "IV",
+    "surgical_type": "AV fistula creation for dialysis",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["End-stage renal disease", "Dialysis considerations", "Electrolyte abnormalities"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "ESRD requires renal replacement therapy (hemodialysis or peritoneal dialysis)",
+          "Hyperkalemia is life-threatening complication in ESRD",
+          "Fluid overload common - assess volume status preoperatively",
+          "AV fistula preferred over catheter for long-term dialysis access",
+          "Time dialysis appropriately (ideally within 24 hours before surgery)"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Regional anesthesia in ESRD", "Drug dosing in renal failure"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Regional anesthesia (brachial plexus block) ideal for AV fistula creation",
+          "Preserves arm veins for future access",
+          "Avoid renally-cleared drugs (morphine, pancuronium)",
+          "Minimize nephrotoxic drugs (NSAIDs, aminoglycosides)",
+          "Careful fluid management (may be anuric)"
+        ]
+      },
+      {
+        "section": "Section 2",
+        "topics": ["Renal pharmacology", "Drug clearance in renal failure"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Avoid morphine (metabolite accumulation causes prolonged sedation)",
+          "Use cisatracurium (Hoffman elimination, not renal)",
+          "Remifentanil ideal opioid (ester hydrolysis)",
+          "Many drugs require dose reduction in ESRD"
+        ]
+      }
+    ],
+    "clinical_challenges": ["End-stage renal disease", "Hyperkalemia risk", "Fluid overload", "Hypertension", "Dialysis dependence"],
+    "monitoring_needs": ["Standard ASA monitors", "ECG for hyperkalemia (tall T waves, wide QRS)", "Electrolytes available", "Avoid blood pressure cuff on fistula arm"],
+    "anesthetic_considerations": [
+      "Check electrolytes preoperatively (especially potassium)",
+      "Dialysis within 24 hours of surgery to optimize status",
+      "Regional anesthesia (supraclavicular or axillary block) preferred",
+      "Avoid blood pressure cuff and IV on fistula arm",
+      "Maintain fistula blood flow (avoid hypotension)",
+      "Use renally-safe drugs (cisatracurium, remifentanil)",
+      "Minimal fluid administration (risk of overload)",
+      "Listen to fistula thrill postoperatively to confirm patency"
+    ],
+    "risk_factors": {
+      "cardiac": "high",
+      "pulmonary": "moderate",
+      "airway": "low",
+      "renal": "very high",
+      "metabolic": "high"
+    }
+  },
+  {
+    "patient_name": "Florence Martinez",
+    "patient_index": 95,
+    "asa_class": "III",
+    "surgical_type": "First rib resection for thoracic outlet syndrome",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Thoracic outlet syndrome", "Chronic pain assessment", "Neurologic complications"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "TOS caused by compression of neurovascular bundle at thoracic outlet",
+          "Chronic pain indicates longstanding nerve compression",
+          "First rib resection decompresses brachial plexus and subclavian vessels",
+          "Brachial plexus injury risk during surgery",
+          "Frustrated patients often have tried multiple conservative therapies"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Positioning for thoracic surgery", "Brachial plexus monitoring", "Postoperative pain"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Lateral or supine position with arm abducted",
+          "Careful positioning to avoid worsening nerve compression",
+          "Interscalene or paravertebral block for postoperative pain",
+          "Pneumothorax risk from surgical approach near pleura",
+          "Chest X-ray postoperatively to rule out pneumothorax"
+        ]
+      },
+      {
+        "section": "Section 2",
+        "topics": ["Chronic pain physiology", "Multimodal analgesia"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Chronic pain causes central sensitization",
+          "Multimodal analgesia (regional, NSAIDs, gabapentinoids) reduces opioid needs",
+          "Nerve compression causes neuropathic pain components"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Thoracic outlet syndrome", "Chronic pain", "Frustration with condition", "Brachial plexus at risk", "Pneumothorax risk"],
+    "monitoring_needs": ["Standard ASA monitors", "Nerve monitoring if available", "Postoperative chest X-ray"],
+    "anesthetic_considerations": [
+      "Interscalene or paravertebral block for analgesia",
+      "General anesthesia with ETT",
+      "Careful positioning with padding",
+      "Document preoperative neurologic deficits",
+      "Multimodal analgesia plan",
+      "Monitor for pneumothorax postoperatively",
+      "Pain management expectations - may take time for nerve recovery"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "moderate",
+      "airway": "low",
+      "neurologic": "moderate",
+      "pneumothorax": "moderate"
+    }
+  },
+  {
+    "patient_name": "Howard Chen",
+    "patient_index": 96,
+    "asa_class": "III",
+    "surgical_type": "Popliteal aneurysm repair",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Popliteal aneurysm", "Thromboembolism risk", "Limb salvage"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Popliteal aneurysm: arterial dilation behind knee (>2x normal diameter)",
+          "High risk of thrombosis or embolization causing acute limb ischemia",
+          "Smoking major risk factor for all aneurysms",
+          "May be bilateral - check contralateral leg",
+          "Limb loss risk if thromboses before surgery"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Lower extremity vascular surgery", "Regional anesthesia"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Spinal or epidural anesthesia effective for popliteal surgery",
+          "Combined sciatic-femoral nerve block alternative",
+          "Maintain adequate perfusion pressure to limb",
+          "Heparinization during surgery - check coagulation before neuraxial",
+          "Distal pulse checks postoperatively essential"
+        ]
+      },
+      {
+        "section": "Section 2",
+        "topics": ["Smoking effects", "Wound healing"],
+        "difficulty": "basic",
+        "teaching_points": [
+          "Smoking cessation >8 weeks preop improves wound healing",
+          "Recent cessation still beneficial for pulmonary function",
+          "Nicotine causes vasoconstriction affecting graft perfusion"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Popliteal aneurysm", "Thrombosis risk", "Smoking history", "Limb ischemia risk", "Geriatric"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial line consideration", "Distal pulse monitoring (Doppler)", "Temperature"],
+    "anesthetic_considerations": [
+      "Regional anesthesia (spinal/epidural or peripheral nerve blocks)",
+      "Check coagulation before neuraxial (will receive heparin)",
+      "Maintain perfusion pressure to affected limb",
+      "Keep limb warm to promote perfusion",
+      "Anticoagulation management during surgery",
+      "Confirm distal pulses postoperatively",
+      "Smoking cessation counseling"
+    ],
+    "risk_factors": {
+      "cardiac": "moderate",
+      "pulmonary": "moderate",
+      "airway": "low",
+      "vascular": "high",
+      "thrombotic": "high"
+    }
+  },
+  {
+    "patient_name": "Mildred Washington",
+    "patient_index": 97,
+    "asa_class": "III",
+    "surgical_type": "IVC filter placement",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Deep vein thrombosis", "Anticoagulation contraindications", "Obesity complications"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "DVT high risk for pulmonary embolism (potentially fatal)",
+          "IVC filter prevents PE when anticoagulation contraindicated",
+          "Recurrent DVT despite anticoagulation is indication for filter",
+          "Obesity is major risk factor for VTE",
+          "Procedure usually done under moderate sedation"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Monitored anesthesia care", "Sedation in obesity"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "IVC filter placement typically performed with moderate sedation",
+          "Obesity increases risk of airway obstruction during sedation",
+          "Supine position may worsen breathing in obese patients",
+          "Have airway equipment immediately available",
+          "Brief procedure (30-60 minutes) in interventional radiology"
+        ]
+      },
+      {
+        "section": "Section 2",
+        "topics": ["Thrombosis pathophysiology", "Virchow's triad"],
+        "difficulty": "basic",
+        "teaching_points": [
+          "Virchow's triad: stasis, hypercoagulability, endothelial injury",
+          "Obesity causes stasis and chronic inflammation (hypercoagulable)",
+          "DVT most commonly originates in deep veins of legs"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Recurrent DVT", "Obesity", "PE anxiety", "Anticoagulation contraindicated"],
+    "monitoring_needs": ["Standard ASA monitors", "Continuous capnography during sedation", "Oxygen saturation"],
+    "anesthetic_considerations": [
+      "Moderate sedation with propofol infusion or intermittent doses",
+      "Supplemental oxygen",
+      "Ramped positioning for better breathing",
+      "Airway equipment readily available",
+      "Local anesthesia at access site",
+      "Reassurance for anxious patient",
+      "Brief procedure - recovery and discharge same day"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "moderate",
+      "airway": "moderate",
+      "thrombotic": "very high"
+    }
+  },
+  {
+    "patient_name": "Ernest Taylor",
+    "patient_index": 98,
+    "asa_class": "IV-E",
+    "surgical_type": "Emergency TEVAR (thoracic endovascular aortic repair)",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Aortic dissection", "Emergency vascular surgery", "End-organ ischemia"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Type B aortic dissection involves descending thoracic aorta",
+          "Dissection creates false lumen that can rupture (fatal)",
+          "Severe pain is hallmark symptom",
+          "Blood pressure control critical to prevent propagation and rupture",
+          "Emergency indicates complications (rupture, malperfusion, refractory pain)"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Emergency anesthesia", "Blood pressure management", "Rapid preparation"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Target MAP 60-80 mmHg and heart rate <60 bpm (reduce shear stress)",
+          "Beta-blockade FIRST, then vasodilators (avoid reflex tachycardia)",
+          "Large bore IV access and arterial line pre-induction",
+          "Type and cross 6+ units blood",
+          "TEVAR less invasive than open repair but still high risk"
+        ]
+      },
+      {
+        "section": "Section 3",
+        "topics": ["Aortic dissection pathophysiology", "Hemodynamic management"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Intimal tear allows blood to separate aortic layers",
+          "Shear stress (dP/dt) propagates dissection more than absolute pressure",
+          "Beta-blockade reduces contractility and shear stress",
+          "Hypertension and hypotension both dangerous",
+          "Spinal cord ischemia risk from covering spinal arteries"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Type B aortic dissection", "Severe pain", "Hemodynamic instability", "Emergency surgery", "Rupture risk"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial line (right radial - bilateral BP)", "Central line", "Foley catheter", "Temperature", "Consider neuromonitoring (SSEPs)"],
+    "anesthetic_considerations": [
+      "EMERGENCY - rapid preparation",
+      "Arterial line pre-induction (awake or rapid sequence)",
+      "Beta-blockade (esmolol infusion) to HR <60",
+      "Maintain MAP 60-80 mmHg (avoid hypertension and hypotension)",
+      "Large bore IV access x2 and rapid infuser",
+      "Blood products immediately available",
+      "Smooth controlled induction (avoid hypertensive response)",
+      "Spinal drain consideration for cord protection",
+      "ICU postoperatively with arterial monitoring continued"
+    ],
+    "risk_factors": {
+      "cardiac": "very high",
+      "pulmonary": "moderate",
+      "airway": "low",
+      "neurologic": "high",
+      "rupture": "very high",
+      "mortality": "very high"
+    }
+  }
+]

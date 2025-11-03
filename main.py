@@ -24,6 +24,51 @@ load_dotenv()  # This loads .env file if it exists
 warnings.filterwarnings("ignore")
 logging.basicConfig(level=logging.ERROR)
 
+# Vector Search imports - For Vertex AI Vector Search RAG
+try:
+    from vector_search_tool import search_barash_content, VectorSearchTool
+    VECTOR_SEARCH_AVAILABLE = True
+except ImportError as e:
+    print(f"⚠️ Vector Search imports failed: {e}")
+    print("⚠️ Will fall back to MCP server if available")
+    VECTOR_SEARCH_AVAILABLE = False
+
+# Firestore imports - For saving scenarios
+try:
+    from firestore_service import get_firestore_service, FirestoreScenarioService
+    FIRESTORE_AVAILABLE = True
+except ImportError as e:
+    print(f"⚠️ Firestore imports failed: {e}")
+    print("⚠️ Scenarios will not be saved to Firestore")
+    FIRESTORE_AVAILABLE = False
+
+# Scenario Agent import
+try:
+    from agents.scenario_agent import ClinicalScenarioAgent
+    CLINICAL_SCENARIO_AGENT_AVAILABLE = True
+except ImportError as e:
+    print(f"⚠️ Scenario Agent imports failed: {e}")
+    print("⚠️ Clinical scenario generation will not be available")
+    CLINICAL_SCENARIO_AGENT_AVAILABLE = False
+
+# Evaluations Agent import
+try:
+    from agents.evaluations_agent import EvaluationsAgent
+    EVALUATIONS_AGENT_AVAILABLE = True
+except ImportError as e:
+    print(f"⚠️ Evaluations Agent imports failed: {e}")
+    print("⚠️ Demo evaluation generation will not be available")
+    EVALUATIONS_AGENT_AVAILABLE = False
+
+# Notification Agent import
+try:
+    from agents.notification_agent import NotificationAgent, create_notification_agent
+    NOTIFICATION_AGENT_AVAILABLE = True
+except ImportError as e:
+    print(f"⚠️ Notification Agent imports failed: {e}")
+    print("⚠️ Notification monitoring will not be available")
+    NOTIFICATION_AGENT_AVAILABLE = False
+
 # ADK imports exactly as shown in the tutorial
 try:
     from google.adk.agents import Agent
@@ -152,13 +197,31 @@ research_state = {
 async def lifespan(app: FastAPI):
     # Startup: No automatic background task - research is manual-only
     print("🚀 PrecepGo ADK Panel started - Research is manual trigger only")
+    
+    # Start Notification Agent monitoring
+    if notification_agent:
+        try:
+            notification_agent.start()
+            print("✅ Notification Agent monitoring started")
+        except Exception as e:
+            print(f"⚠️ Failed to start Notification Agent: {e}")
+    
     yield
+    
     # Shutdown
+    if notification_agent:
+        try:
+            notification_agent.stop()
+            print("🛑 Notification Agent stopped")
+        except Exception as e:
+            print(f"⚠️ Error stopping Notification Agent: {e}")
+    
     print("🛑 PrecepGo ADK Panel shutting down...")
 
 app = FastAPI(title="PrecepGo ADK Panel", lifespan=lifespan)
 
-MCP_URL = os.getenv("MCP_URL")  # set to your precepgo-data-mcp Cloud Run URL
+MCP_URL = os.getenv("MCP_URL")  # Legacy MCP server (deprecated in favor of Vector Search)
+USE_VECTOR_SEARCH = os.getenv("USE_VECTOR_SEARCH", "true").lower() == "true"  # Use Vector Search by default
 
 # Load medical concepts from JSON file
 def load_medical_concepts() -> Dict[str, Any]:
@@ -186,9 +249,69 @@ def load_patient_templates() -> list:
         print(f"Error parsing data/patient_templates.json: {e}")
         return []
 
+# Load cases from JSON file
+def load_cases() -> list:
+    """Load cases from JSON file"""
+    try:
+        with open("data/cases.json", "r") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        print("data/cases.json not found, using fallback")
+        return []
+    except json.JSONDecodeError as e:
+        print(f"Error parsing data/cases.json: {e}")
+        return []
+
 # Load data at startup
 MEDICAL_CONCEPTS = load_medical_concepts()
 PATIENT_TEMPLATES = load_patient_templates()
+CASES = load_cases()
+
+# Initialize Clinical Scenario Agent
+clinical_scenario_agent = None
+if CLINICAL_SCENARIO_AGENT_AVAILABLE:
+    try:
+        clinical_scenario_agent = ClinicalScenarioAgent(
+            cases=CASES,
+            patient_templates=PATIENT_TEMPLATES
+        )
+        print("✅ Clinical Scenario Agent initialized")
+    except Exception as e:
+        print(f"⚠️ Failed to initialize Clinical Scenario Agent: {e}")
+        clinical_scenario_agent = None
+
+# Initialize Evaluations Agent
+evaluations_agent = None
+if EVALUATIONS_AGENT_AVAILABLE:
+    try:
+        evaluations_agent = EvaluationsAgent()
+        print("✅ Evaluations Agent initialized")
+    except Exception as e:
+        print(f"⚠️ Failed to initialize Evaluations Agent: {e}")
+        evaluations_agent = None
+
+# Initialize Notification Agent
+notification_agent = None
+if NOTIFICATION_AGENT_AVAILABLE and FIRESTORE_AVAILABLE:
+    try:
+        # Get Firestore client for notification agent
+        from google.cloud import firestore
+        project_id = os.getenv("FIREBASE_PROJECT_ID") or os.getenv("GOOGLE_CLOUD_PROJECT")
+        if project_id:
+            notification_db = firestore.Client(project=project_id)
+        else:
+            notification_db = firestore.Client()
+        
+        notification_agent = NotificationAgent(
+            admin_email="wasoje4172@fandoe.com",
+            firestore_db=notification_db
+        )
+        print("✅ Notification Agent initialized")
+    except Exception as e:
+        print(f"⚠️ Failed to initialize Notification Agent: {e}")
+        notification_agent = None
+elif NOTIFICATION_AGENT_AVAILABLE:
+    print("⚠️ Notification Agent not initialized: Firestore not available")
 
 # MCP Client Helper
 def _call_mcp(path: str, method: str = "GET", json_body: Optional[Dict[str, Any]] = None, params: Optional[Dict[str,str]] = None):
@@ -247,9 +370,70 @@ def process_mcp_response(res: dict, concept: str) -> dict:
     return result
 
 def fetch_concept_text(concept: str) -> dict:
-    """Fetch concept text and metadata ONLY from Barash Section 2 in MCP service"""
+    """Fetch concept text and metadata from Barash using Vertex AI Vector Search"""
+    # Use Vector Search if available, otherwise fall back to MCP
+    if USE_VECTOR_SEARCH and VECTOR_SEARCH_AVAILABLE:
+        try:
+            print(f"🔍 Searching Barash using Vector Search for: '{concept}'")
+            
+            # Use vector search tool
+            tool = VectorSearchTool()
+            results = tool.search(query=concept, num_results=5)
+            
+            if results.get('success') and results.get('num_results', 0) > 0:
+                # Combine all results into content
+                documents = results['results']['documents']
+                metadatas = results['results']['metadatas']
+                
+                # Extract metadata from first result
+                first_meta = metadatas[0] if metadatas else {}
+                section = first_meta.get('section', 'Unknown Section')
+                topic = first_meta.get('topic', 'General')
+                
+                # Combine all document contexts
+                combined_content = "\n\n".join(documents)
+                
+                # Extract section number from section name if available
+                section_num = ""
+                if section:
+                    import re
+                    match = re.search(r'Section\s+(\d+)', section, re.IGNORECASE)
+                    if match:
+                        section_num = match.group(1)
+                
+                print(f"✅ Found Barash content using Vector Search: {len(documents)} results from {section}")
+                
+                return {
+                    "content": combined_content,
+                    "book_title": "Barash, Cullen, and Stoelting's Clinical Anesthesia",
+                    "chapter_title": topic or section,
+                    "section_title": section,
+                    "section_num": section_num,
+                    "num_results": len(documents)
+                }
+            else:
+                error_msg = results.get('error', 'No results found')
+                print(f"⚠️ Vector Search found no results: {error_msg}")
+                raise ValueError(f"Could not find Barash content for: '{concept}'. Error: {error_msg}")
+                
+        except Exception as e:
+            print(f"⚠️ Vector Search error for '{concept}': {e}")
+            if MCP_URL:
+                print("⚠️ Falling back to MCP server...")
+                return fetch_concept_text_mcp(concept)
+            else:
+                raise ValueError(f"Vector Search failed and MCP_URL not configured: {str(e)}")
+    
+    # Fall back to MCP if Vector Search not available
+    elif MCP_URL:
+        return fetch_concept_text_mcp(concept)
+    else:
+        raise ValueError("Neither Vector Search nor MCP_URL configured. Please set up Vector Search or configure MCP_URL")
+
+def fetch_concept_text_mcp(concept: str) -> dict:
+    """Legacy MCP server fetch (fallback only)"""
     if not MCP_URL:
-        raise ValueError("MCP_URL not configured - cannot retriev   e Barash content")
+        raise ValueError("MCP_URL not configured - cannot retrieve Barash content")
     
     # Extract key search terms from concept
     # Remove common words and focus on medical terms
@@ -291,7 +475,7 @@ def fetch_concept_text(concept: str) -> dict:
             continue
     
     # If we get here, we couldn't find Barash content
-    raise ValueError(f"Could not find Barash Section 2 content for: '{concept}'. Try simpler search terms like: {keywords[0] if keywords else concept.split()[0]}")
+    raise ValueError(f"Could not find Barash content for: '{concept}'. Try simpler search terms like: {keywords[0] if keywords else concept.split()[0]}")
 
 def select_appropriate_patient(concept: str, scenario: str) -> dict:
     """Select a patient template that matches the medical concept"""
@@ -703,35 +887,60 @@ async def fetch_all_barash_sections() -> list:
             "word_count": 0
         }
         
-        # Search for each term in this section
+        # Search for each term in this section using Vector Search
         for term in section["search_terms"]:
             try:
-                res = _call_mcp("/mcp/search", method="POST", json_body={
-                    "query": term,
-                    "limit": 50
-                })
-                
-                if res.get("results"):
-                    chapter_content = ""
-                    chapter_title = term
+                if USE_VECTOR_SEARCH and VECTOR_SEARCH_AVAILABLE:
+                    # Use Vector Search with section filtering
+                    tool = VectorSearchTool()
+                    section_filter = f"Section {section['section_num']}"
                     
-                    # Combine all matches for this search term
-                    for result in res["results"][:15]:
-                        if result.get("matches"):
-                            for match in result["matches"]:
-                                context = match.get("context", "")
-                                if context:
-                                    chapter_content += context + "\n\n"
+                    results = tool.search(
+                        query=term,
+                        num_results=10,  # Get more results per term
+                        section_filter=section_filter
+                    )
                     
-                    if chapter_content:
-                        # Check if this is from Barash book
-                        if any("barash" in str(result.get("book_title", "")).lower() for result in res["results"][:5]):
+                    if results.get('success') and results.get('num_results', 0) > 0:
+                        documents = results['results']['documents']
+                        chapter_content = "\n\n".join(documents)
+                        
+                        if chapter_content:
                             section_content["chapters"].append({
-                                "title": chapter_title,
+                                "title": term,
                                 "content": chapter_content,
                                 "word_count": len(chapter_content.split())
                             })
-                            section_content["total_content"] += f"\n\n=== {chapter_title} ===\n\n{chapter_content}"
+                            section_content["total_content"] += f"\n\n=== {term} ===\n\n{chapter_content}"
+                    
+                elif MCP_URL:
+                    # Fallback to MCP
+                    res = _call_mcp("/mcp/search", method="POST", json_body={
+                        "query": term,
+                        "limit": 50
+                    })
+                    
+                    if res.get("results"):
+                        chapter_content = ""
+                        chapter_title = term
+                        
+                        # Combine all matches for this search term
+                        for result in res["results"][:15]:
+                            if result.get("matches"):
+                                for match in result["matches"]:
+                                    context = match.get("context", "")
+                                    if context:
+                                        chapter_content += context + "\n\n"
+                        
+                        if chapter_content:
+                            # Check if this is from Barash book
+                            if any("barash" in str(result.get("book_title", "")).lower() for result in res["results"][:5]):
+                                section_content["chapters"].append({
+                                    "title": chapter_title,
+                                    "content": chapter_content,
+                                    "word_count": len(chapter_content.split())
+                                })
+                                section_content["total_content"] += f"\n\n=== {chapter_title} ===\n\n{chapter_content}"
             
             except Exception as e:
                 print(f"⚠️ Error fetching {term}: {e}")
@@ -881,7 +1090,7 @@ async def generate_chapter_questions() -> dict:
         raise ValueError("Gemini API question generation failed. Check API key and logs for details.")
         
     # Step 3: Save to Questions.md file
-    output_filename = "Questions.md"
+    output_filename = "Context/Questions.md"
     
     with open(output_filename, "w") as f:
         f.write(f"# Comprehensive Multiple Choice Questions: All Barash Sections\n")
@@ -1354,15 +1563,123 @@ class MakeQuestionRequest(BaseModel):
     level: str = "default"
     format: Optional[str] = "mcq_vignette"
 
+# Note: match_patient_to_case and get_medical_content_for_scenario have been moved to ClinicalScenarioAgent
+# These functions are now encapsulated within the agent and can be accessed via:
+# clinical_scenario_agent.match_patient_to_case(case)
+# clinical_scenario_agent.get_medical_content_for_scenario(case, patient)
+
 # API Endpoints
-@app.post("/mentor/create-question")
-async def mentor_create_question(req: MakeQuestionRequest):
-    """Generate a medical question using ADK agent"""
+@app.post("/mentor/make-scenario")
+async def make_scenario():
+    """
+    Generate a clinical scenario with 2 decision options.
+    Uses the Clinical Scenario Agent to handle the complete workflow.
+    """
+    if not clinical_scenario_agent:
+        raise HTTPException(
+            status_code=503,
+            detail="Scenario Agent not available. Please ensure agents/scenario_agent.py is properly configured."
+        )
+    
     try:
-        question = await adk_agent.generate_question(req.concept, req.level)
-        return {"ok": True, "question": question}
+        # Use the agent to generate the scenario
+        scenario_data = clinical_scenario_agent.generate_scenario(
+            save_to_file=True,
+            save_to_firestore=True
+        )
+        
+        # Return the scenario data
+        return {
+            "ok": True,
+            "scenario": {
+                "case": scenario_data.get("case", {}),
+                "patient": scenario_data.get("patient", {}),
+                "scenario": scenario_data.get("scenario", ""),
+                "option_a": scenario_data.get("option_a", {}),
+                "option_b": scenario_data.get("option_b", {}),
+                "best_answer": scenario_data.get("best_answer", {}),
+                "learning_points": scenario_data.get("learning_points", []),
+                "references": scenario_data.get("references", "")
+            },
+            "firestore_id": scenario_data.get("firestore_id"),
+            "saved_to_firestore": scenario_data.get("saved_to_firestore", False)
+        }
+        
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error generating question: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Error generating scenario: {str(e)}")
+
+@app.post("/mentor/create-demo-evaluation")
+async def create_demo_evaluation():
+    """
+    Create a demo evaluation document in Firestore.
+    Uses the Evaluations Agent to generate fake evaluation data.
+    """
+    if not evaluations_agent:
+        raise HTTPException(
+            status_code=503,
+            detail="Evaluations Agent not available. Please ensure agents/evaluations_agent.py is properly configured."
+        )
+    
+    try:
+        # Use the agent to create and save demo evaluation
+        evaluation_data = evaluations_agent.create_and_save_demo_evaluation()
+        
+        # Clean the evaluation data for JSON serialization
+        # Remove Firestore-specific objects that can't be serialized
+        try:
+            from google.cloud.firestore_v1 import SERVER_TIMESTAMP as _SERVER_TIMESTAMP
+        except ImportError:
+            _SERVER_TIMESTAMP = None
+        
+        cleaned_evaluation = {}
+        for key, value in evaluation_data.items():
+            # Skip SERVER_TIMESTAMP sentinels
+            if _SERVER_TIMESTAMP and (value is _SERVER_TIMESTAMP or (hasattr(value, '__class__') and 'Sentinel' in str(type(value)))):
+                continue
+            # Skip internal Firestore fields that shouldn't be exposed
+            elif key in ['created_at', 'modified_at', 'created_by']:
+                continue
+            # Convert GeoPoint to dict if present
+            elif hasattr(value, 'latitude') and hasattr(value, 'longitude'):
+                cleaned_evaluation[key] = {
+                    "latitude": value.latitude,
+                    "longitude": value.longitude
+                }
+            # Convert datetime objects to ISO strings
+            elif isinstance(value, datetime):
+                cleaned_evaluation[key] = value.isoformat()
+            # Convert Firestore Timestamp objects
+            elif hasattr(value, 'seconds') and hasattr(value, 'nanoseconds'):
+                cleaned_evaluation[key] = {
+                    "seconds": value.seconds,
+                    "nanoseconds": getattr(value, 'nanoseconds', 0)
+                }
+            # Keep other values as-is
+            else:
+                try:
+                    # Try to serialize to check if it's JSON-serializable
+                    import json
+                    json.dumps(value)
+                    cleaned_evaluation[key] = value
+                except (TypeError, ValueError):
+                    # Convert non-serializable values to string
+                    cleaned_evaluation[key] = str(value)
+        
+        # Return the cleaned evaluation data
+        return {
+            "ok": True,
+            "evaluation": cleaned_evaluation,  # Return cleaned evaluation data
+            "firestore_doc_id": evaluation_data.get("firestore_doc_id"),
+            "firestore_parent_doc_id": evaluation_data.get("firestore_parent_doc_id"),
+            "saved_to_firestore": evaluation_data.get("saved_to_firestore", False)
+        }
+        
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Error creating demo evaluation: {str(e)}")
 
 @app.get("/")
 def root():
@@ -1381,7 +1698,11 @@ def adk_status():
 
 @app.get("/health")
 def health_check():
-    return {"status": "healthy", "mcp_url_configured": bool(MCP_URL)}
+    return {
+        "status": "healthy", 
+        "mcp_url_configured": bool(MCP_URL),
+        "firestore_available": FIRESTORE_AVAILABLE
+    }
 
 @app.get("/mentor/concepts")
 def get_available_concepts():
@@ -1402,6 +1723,126 @@ def get_patient_templates():
         "total_count": len(PATIENT_TEMPLATES),
         "categories": list(set([cat for patient in PATIENT_TEMPLATES for cat in patient.get("categories", [])]))
     }
+
+@app.get("/mentor/scenarios")
+def list_scenarios(limit: int = 50):
+    """
+    List scenarios from Firestore.
+    
+    Args:
+        limit: Maximum number of scenarios to return (default: 50)
+        
+    Returns:
+        List of scenarios
+    """
+    if not FIRESTORE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Firestore not available")
+    
+    try:
+        firestore_service = get_firestore_service()
+        if not firestore_service:
+            raise HTTPException(status_code=503, detail="Firestore service not initialized")
+        
+        scenarios = firestore_service.list_scenarios(limit=limit)
+        
+        return {
+            "ok": True,
+            "scenarios": scenarios,
+            "total_count": len(scenarios)
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error listing scenarios: {str(e)}")
+
+@app.get("/mentor/scenarios/{doc_id}")
+def get_scenario(doc_id: str):
+    """
+    Get a specific scenario by Firestore document ID.
+    
+    Args:
+        doc_id: Firestore document ID
+        
+    Returns:
+        Scenario data
+    """
+    if not FIRESTORE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Firestore not available")
+    
+    try:
+        firestore_service = get_firestore_service()
+        if not firestore_service:
+            raise HTTPException(status_code=503, detail="Firestore service not initialized")
+        
+        scenario = firestore_service.get_scenario(doc_id)
+        
+        if not scenario:
+            raise HTTPException(status_code=404, detail=f"Scenario not found: {doc_id}")
+        
+        return {
+            "ok": True,
+            "scenario": scenario
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error getting scenario: {str(e)}")
+
+@app.get("/mentor/scenarios/by-case/{case_code}")
+def get_scenarios_by_case(case_code: str):
+    """
+    Get scenarios filtered by case code.
+    
+    Args:
+        case_code: Case code to filter by
+        
+    Returns:
+        List of matching scenarios
+    """
+    if not FIRESTORE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Firestore not available")
+    
+    try:
+        firestore_service = get_firestore_service()
+        if not firestore_service:
+            raise HTTPException(status_code=503, detail="Firestore service not initialized")
+        
+        scenarios = firestore_service.get_scenarios_by_case(case_code)
+        
+        return {
+            "ok": True,
+            "scenarios": scenarios,
+            "total_count": len(scenarios),
+            "case_code": case_code
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error querying scenarios: {str(e)}")
+
+@app.delete("/mentor/scenarios/{doc_id}")
+def delete_scenario(doc_id: str):
+    """
+    Delete a scenario from Firestore.
+    
+    Args:
+        doc_id: Firestore document ID
+        
+    Returns:
+        Success status
+    """
+    if not FIRESTORE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Firestore not available")
+    
+    try:
+        firestore_service = get_firestore_service()
+        if not firestore_service:
+            raise HTTPException(status_code=503, detail="Firestore service not initialized")
+        
+        success = firestore_service.delete_scenario(doc_id)
+        
+        return {
+            "ok": success,
+            "deleted_id": doc_id
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error deleting scenario: {str(e)}")
 
 @app.get("/research/status")
 def get_research_status():
@@ -1437,19 +1878,19 @@ async def trigger_research_now():
 def get_generated_questions():
     """Get the content of the generated Questions.md file"""
     try:
-        with open("Questions.md", "r") as f:
+        with open("Context/Questions.md", "r") as f:
             content = f.read()
         return {
             "ok": True,
             "content": content,
-            "file": "Questions.md",
+            "file": "Context/Questions.md",
             "exists": True
         }
     except FileNotFoundError:
         return {
             "ok": False,
             "content": "No questions generated yet. Click 'Trigger Research Now' to generate questions.",
-            "file": "Questions.md",
+            "file": "Context/Questions.md",
             "exists": False
         }
     except Exception as e:
@@ -1509,6 +1950,26 @@ def dashboard():
             <div style="background-color: #e8f5e9; padding: 15px; border-radius: 5px; margin-bottom: 20px; border-left: 4px solid #27ae60;">
                 <strong>📖 Content Source:</strong> All questions are generated from ALL 9 Barash sections via MCP server
                 <br><small style="color: #555;"><strong>Sections covered:</strong> Section 1 (Introduction & Overview), Section 2 (Basic Science & Fundamentals), Section 3 (Cardiac Anatomy & Physiology), Section 4 (Anesthetic Drugs & Adjuvants), Section 5 (Preoperative Assessment & Monitoring), Section 6 (Basic Anesthetic Management), Section 7 (Anesthesia Subspecialty Care), Section 8 (Anesthesia for Selected Surgical Services), Section 9 (Postanesthetic Management, Critical Care, and Pain Management)</small>
+            </div>
+            
+            <div style="background-color: #e8f5e9; padding: 15px; border-radius: 5px; margin-bottom: 20px; border-left: 4px solid #4caf50;">
+                <strong>📊 Create Demo Evaluation:</strong> 
+                <br><small style="color: #555;">Generate a fake demo evaluation document and save it to Firestore subcollection 'agent_evaluations'. Creates realistic evaluation data with preceptee/preceptor info, scores, and metadata.</small>
+                <br>
+                <button onclick="createDemoEvaluation()" style="margin-top: 10px; padding: 12px 24px; background: #4caf50; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: bold;">
+                    📊 Create Demo Evaluation
+                </button>
+                <div id="evaluationResult" style="margin-top: 15px; display: none;"></div>
+            </div>
+            
+            <div style="background-color: #fff3cd; padding: 15px; border-radius: 5px; margin-bottom: 20px; border-left: 4px solid #ffc107;">
+                <strong>🎯 Make Scenario:</strong> 
+                <br><small style="color: #555;">Generate a clinical scenario with 2 decision options. The system will pick a random case, match it with an appropriate patient, search Vector DB for medical content, and create a challenging scenario for CRNA students.</small>
+                <br>
+                <button onclick="makeScenario()" style="margin-top: 10px; padding: 12px 24px; background: #ffc107; color: #333; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: bold;">
+                    🎯 Make Scenario
+                </button>
+                <div id="scenarioResult" style="margin-top: 15px; display: none;"></div>
             </div>
             
             <form id="questionForm">
@@ -1641,7 +2102,7 @@ def dashboard():
             <!-- Generated Questions Display -->
             <div style="margin-top: 40px; padding: 20px; background: #f8f9fa; border-radius: 8px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                    <h2 style="margin: 0; color: #2c3e50;">📚 Generated Questions (Questions.md)</h2>
+                    <h2 style="margin: 0; color: #2c3e50;">📚 Generated Questions (Context/Questions.md)</h2>
                     <button onclick="loadQuestions()" style="padding: 8px 16px; background: #3498db; color: white; border: none; border-radius: 4px; cursor: pointer;">
                         🔄 Refresh Questions
                     </button>
@@ -1705,7 +2166,7 @@ def dashboard():
                 }
             }
             
-            // Load generated questions from Questions.md
+            // Load generated questions from Context/Questions.md
             async function loadQuestions() {
                 const questionsEl = document.getElementById('questionsDisplay');
                 questionsEl.innerHTML = '<p style="color: #f39c12; text-align: center;">⏳ Loading questions...</p>';
@@ -1735,6 +2196,245 @@ def dashboard():
             
             // Refresh questions every 30 seconds
             setInterval(loadQuestions, 30000);
+            
+            // Create Demo Evaluation function
+            async function createDemoEvaluation() {
+                const resultDiv = document.getElementById('evaluationResult');
+                resultDiv.style.display = 'block';
+                resultDiv.innerHTML = '<p style="color: #4caf50; text-align: center;">⏳ Creating demo evaluation... This may take a moment.</p>';
+                
+                try {
+                    const response = await fetch('/mentor/create-demo-evaluation', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        }
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.ok && data.evaluation) {
+                        const eval = data.evaluation;
+                        
+                        // Helper function to format AC scores
+                        function formatACScores(eval) {
+                            const acScores = [];
+                            for (let i = 0; i <= 12; i++) {
+                                const key = `ac_${i}`;
+                                if (eval[key] !== undefined) {
+                                    acScores.push({ key, score: eval[key] });
+                                }
+                            }
+                            return acScores;
+                        }
+                        
+                        // Helper function to format PC scores
+                        function formatPCScores(eval) {
+                            const pcScores = [];
+                            for (let i = 0; i <= 10; i++) {
+                                const key = `pc_${i}`;
+                                if (eval[key] !== undefined) {
+                                    pcScores.push({ key, score: eval[key] });
+                                }
+                            }
+                            return pcScores;
+                        }
+                        
+                        const acScores = formatACScores(eval);
+                        const pcScores = formatPCScores(eval);
+                        
+                        let html = `
+                            <div style="background: white; padding: 20px; border-radius: 8px; border: 2px solid #4caf50; margin-top: 15px;">
+                                <h3 style="color: #2c3e50; margin-top: 0;">✅ Demo Evaluation Created</h3>
+                                
+                                <!-- Basic Info -->
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                                    <h4 style="margin-top: 0; color: #495057;">Basic Information</h4>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                                        <div><strong>Preceptee:</strong> ${eval.preceptee_user_name || 'Unknown'}</div>
+                                        <div><strong>Preceptor:</strong> ${eval.preceptor_name || 'Unknown'}</div>
+                                        <div><strong>Case Type:</strong> ${eval.case_type || 'Unknown'}</div>
+                                        <div><strong>Class Standing:</strong> ${eval.class_standing || 'N/A'}</div>
+                                        <div><strong>Completed:</strong> ${eval.completed ? 'Yes' : 'No'}</div>
+                                        <div><strong>Doc ID:</strong> ${eval.docId || 'N/A'}</div>
+                                        <div><strong>Request ID:</strong> ${eval.request_id || 'N/A'}</div>
+                                        ${eval.timestamp ? `<div><strong>Timestamp:</strong> ${eval.timestamp.seconds ? new Date(eval.timestamp.seconds * 1000).toLocaleString() : eval.timestamp}</div>` : ''}
+                                        ${eval.completion_date ? `<div><strong>Completion Date:</strong> ${eval.completion_date.seconds ? new Date(eval.completion_date.seconds * 1000).toLocaleString() : eval.completion_date}</div>` : ''}
+                                        ${eval.request_date ? `<div><strong>Request Date:</strong> ${eval.request_date.seconds ? new Date(eval.request_date.seconds * 1000).toLocaleString() : eval.request_date}</div>` : ''}
+                                    </div>
+                                </div>
+                                
+                                <!-- Preceptor Comment -->
+                                ${eval.comments ? `
+                                    <div style="background: #e3f2fd; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                                        <h4 style="margin-top: 0; color: #1976d2;">📝 Preceptor Comment</h4>
+                                        <p style="white-space: pre-wrap; line-height: 1.6; margin: 0;">${eval.comments}</p>
+                                    </div>
+                                ` : ''}
+                                
+                                <!-- Focus Areas -->
+                                ${eval.focus_areas ? `
+                                    <div style="background: #fff3cd; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                                        <h4 style="margin-top: 0; color: #856404;">🎯 Focus Areas</h4>
+                                        <p style="white-space: pre-wrap; line-height: 1.6; margin: 0;">${eval.focus_areas}</p>
+                                    </div>
+                                ` : ''}
+                                
+                                <!-- AC Scores -->
+                                ${acScores.length > 0 ? `
+                                    <div style="background: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                                        <h4 style="margin-top: 0; color: #495057;">📊 AC Scores (Anesthesia Competency)</h4>
+                                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px;">
+                                            ${acScores.map(ac => `
+                                                <div style="background: white; padding: 8px; border-radius: 4px; border-left: 3px solid #4caf50;">
+                                                    <strong style="font-size: 0.85em;">${ac.key}:</strong><br>
+                                                    <span style="font-size: 1.2em; font-weight: bold; color: #4caf50;">${ac.score}%</span>
+                                                </div>
+                                            `).join('')}
+                                        </div>
+                                    </div>
+                                ` : ''}
+                                
+                                <!-- PC Scores -->
+                                ${pcScores.length > 0 ? `
+                                    <div style="background: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                                        <h4 style="margin-top: 0; color: #495057;">⭐ PC Scores (Performance Categories)</h4>
+                                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px;">
+                                            ${pcScores.map(pc => {
+                                                let scoreDisplay = '';
+                                                let scoreColor = '#495057';
+                                                if (pc.score === -1) {
+                                                    scoreDisplay = '⚠️ Dangerous';
+                                                    scoreColor = '#dc3545';
+                                                } else if (pc.score === 0) {
+                                                    scoreDisplay = 'N/A';
+                                                    scoreColor = '#6c757d';
+                                                } else {
+                                                    scoreDisplay = '★'.repeat(pc.score) + '☆'.repeat(4 - pc.score);
+                                                    scoreColor = pc.score >= 3 ? '#4caf50' : pc.score >= 2 ? '#ffc107' : '#dc3545';
+                                                }
+                                                return `
+                                                    <div style="background: white; padding: 8px; border-radius: 4px; border-left: 3px solid ${scoreColor};">
+                                                        <strong style="font-size: 0.85em;">${pc.key}:</strong><br>
+                                                        <span style="font-size: 1.1em; font-weight: bold; color: ${scoreColor};">${scoreDisplay}</span>
+                                                    </div>
+                                                `;
+                                            }).join('')}
+                                        </div>
+                                    </div>
+                                ` : ''}
+                        `;
+                        
+                        if (data.saved_to_firestore && data.firestore_doc_id) {
+                            html += `
+                                <div style="background: #d1f2eb; padding: 10px; border-radius: 5px; margin-top: 15px; border-left: 4px solid #27ae60;">
+                                    <small style="color: #155724;">✅ Saved to Firestore</small><br>
+                                    <small style="color: #155724;"><strong>Parent Doc:</strong> ${data.firestore_parent_doc_id || 'N/A'}</small><br>
+                                    <small style="color: #155724;"><strong>Subcollection:</strong> agent_evaluations</small><br>
+                                    <small style="color: #155724;"><strong>Document ID:</strong> <code>${data.firestore_doc_id}</code></small>
+                                </div>
+                            `;
+                        } else {
+                            html += `
+                                <div style="background: #fff3cd; padding: 10px; border-radius: 5px; margin-top: 15px; border-left: 4px solid #ffc107;">
+                                    <small style="color: #856404;">⚠️ Not saved to Firestore (Firestore may not be configured)</small>
+                                </div>
+                            `;
+                        }
+                        
+                        html += `</div>`;
+                        resultDiv.innerHTML = html;
+                    } else {
+                        resultDiv.innerHTML = `<p style="color: #e74c3c; text-align: center;">❌ Failed to create evaluation: ${data.error || 'Unknown error'}</p>`;
+                    }
+                } catch (error) {
+                    resultDiv.innerHTML = `<p style="color: #e74c3c; text-align: center;">❌ Error: ${error.message}</p>`;
+                }
+            }
+            
+            // Make Scenario function
+            async function makeScenario() {
+                const resultDiv = document.getElementById('scenarioResult');
+                resultDiv.style.display = 'block';
+                resultDiv.innerHTML = '<p style="color: #f39c12; text-align: center;">⏳ Generating scenario... This may take a moment.</p>';
+                
+                try {
+                    const response = await fetch('/mentor/make-scenario', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        }
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.ok && data.scenario) {
+                        const scenario = data.scenario;
+                        let html = `
+                            <div style="background: white; padding: 20px; border-radius: 8px; border: 2px solid #ffc107; margin-top: 15px;">
+                                <h3 style="color: #2c3e50; margin-top: 0;">🎯 Clinical Scenario</h3>
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                                    <strong>Case:</strong> ${scenario.case?.name || 'Unknown'}<br>
+                                    <strong>Patient:</strong> ${scenario.patient?.name || 'Unknown'} (Age: ${scenario.patient?.age || 'Unknown'})<br>
+                                    <strong>Categories:</strong> ${scenario.patient?.categories?.join(', ') || 'N/A'}
+                                </div>
+                                
+                                <div style="background: #e3f2fd; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                                    <h4 style="margin-top: 0; color: #1976d2;">📋 Scenario</h4>
+                                    <p style="white-space: pre-wrap; line-height: 1.6;">${scenario.scenario || 'No scenario provided'}</p>
+                                </div>
+                                
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                                    <div style="background: #fff3cd; padding: 15px; border-radius: 5px; border-left: 4px solid #ffc107;">
+                                        <h4 style="margin-top: 0; color: #856404;">Option A: ${scenario.option_a?.title || 'Option A'}</h4>
+                                        <p style="white-space: pre-wrap; line-height: 1.6;">${scenario.option_a?.description || 'No description'}</p>
+                                        ${scenario.option_a?.considerations ? '<ul style="margin: 10px 0;"><li>' + scenario.option_a.considerations.join('</li><li>') + '</li></ul>' : ''}
+                                    </div>
+                                    
+                                    <div style="background: #d1ecf1; padding: 15px; border-radius: 5px; border-left: 4px solid #17a2b8;">
+                                        <h4 style="margin-top: 0; color: #0c5460;">Option B: ${scenario.option_b?.title || 'Option B'}</h4>
+                                        <p style="white-space: pre-wrap; line-height: 1.6;">${scenario.option_b?.description || 'No description'}</p>
+                                        ${scenario.option_b?.considerations ? '<ul style="margin: 10px 0;"><li>' + scenario.option_b.considerations.join('</li><li>') + '</li></ul>' : ''}
+                                    </div>
+                                </div>
+                                
+                                ${scenario.best_answer ? `
+                                    <div style="background: #d1f2eb; padding: 15px; border-radius: 5px; margin-bottom: 15px; border-left: 4px solid #27ae60;">
+                                        <h4 style="margin-top: 0; color: #155724;">✅ Best Answer: Option ${scenario.best_answer?.option || 'N/A'}</h4>
+                                        <p style="white-space: pre-wrap; line-height: 1.6; font-weight: 500;">${scenario.best_answer?.rationale || 'No rationale provided'}</p>
+                                    </div>
+                                ` : ''}
+                                
+                                ${scenario.learning_points ? `
+                                    <div style="background: #d4edda; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                                        <h4 style="margin-top: 0; color: #155724;">📚 Learning Points</h4>
+                                        <ul style="margin: 0;">
+                                            ${scenario.learning_points.map(point => `<li style="margin-bottom: 8px;">${point}</li>`).join('')}
+                                        </ul>
+                                    </div>
+                                ` : ''}
+                                
+                                ${scenario.references ? `
+                                    <div style="background: #e2e3e5; padding: 15px; border-radius: 5px;">
+                                        <strong>📖 References:</strong> ${scenario.references}
+                                    </div>
+                                ` : ''}
+                                
+                                ${data.firestore_id ? `
+                                    <div style="background: #d1f2eb; padding: 10px; border-radius: 5px; margin-top: 15px; border-left: 4px solid #27ae60;">
+                                        <small style="color: #155724;">✅ Saved to Firestore: <code>${data.firestore_id}</code></small>
+                                    </div>
+                                ` : ''}
+                            </div>
+                        `;
+                        resultDiv.innerHTML = html;
+                    } else {
+                        resultDiv.innerHTML = `<p style="color: #e74c3c; text-align: center;">❌ Failed to generate scenario: ${data.error || 'Unknown error'}</p>`;
+                    }
+                } catch (error) {
+                    resultDiv.innerHTML = `<p style="color: #e74c3c; text-align: center;">❌ Error: ${error.message}</p>`;
+                }
+            }
             
             document.getElementById('questionForm').addEventListener('submit', async function(e) {
                 e.preventDefault();

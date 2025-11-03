@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Environment files
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+server.log
+
+# Data files - exclude large files but allow JSON configs
+data/*.txt
+data/*/Barash*
+data/metadata_*.json
+# vectordb/ - needed for vector search tools (but exclude cache and docs)
+vectordb/__pycache__/
+vectordb/*.md
+*.md
+*.txt
+!requirements.txt
+
+# Test files
+test_*.py
+*_test.py
+
+# Scenario files (generated)
+Scenario*.md
+Questions.md
+
+# Temporary files
+*.tmp
+/tmp/
+*.bak
+

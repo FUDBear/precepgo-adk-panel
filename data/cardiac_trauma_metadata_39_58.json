@@ -1,0 +1,1331 @@
+[
+  {
+    "patient_name": "William Patterson",
+    "patient_index": 30,
+    "asa_class": "IV",
+    "surgical_type": "Cardiac - CABG",
+    "learning_scenarios": [
+      {
+        "section": "Section 3",
+        "topics": ["Coronary artery disease pathophysiology", "Ejection fraction significance", "Cardiac output determinants"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "EF 40% indicates moderate LV systolic dysfunction (HFrEF - heart failure with reduced ejection fraction)",
+          "Preload, afterload, and contractility determine cardiac output and stroke volume",
+          "Patients with HFrEF are exquisitely sensitive to acute increases in afterload",
+          "Previous MI reduces contractile reserve and increases perioperative MACE risk",
+          "Myocardial oxygen supply-demand balance critical in CAD patients",
+          "Frank-Starling mechanism: increased preload improves stroke volume until plateau"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Cardiac risk assessment", "RCRI score", "Preoperative optimization"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "High RCRI score: CAD + high-risk surgery = elevated perioperative cardiac event risk",
+          "Previous MI is RCRI risk factor for major adverse cardiac events (MACE)",
+          "Multiple cardiac medications indicate significant cardiac disease burden",
+          "Beta-blockers and statins should be continued perioperatively",
+          "Functional capacity assessment critical (METs < 4 indicates poor reserve)"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Cardiac anesthesia management", "Hemodynamic goals", "Invasive monitoring"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Maintain coronary perfusion pressure (CPP = DBP - LVEDP)",
+          "Avoid tachycardia (decreases diastolic filling time and coronary perfusion)",
+          "Goal heart rate 60-80 to optimize myocardial oxygen balance",
+          "Arterial line essential for beat-to-beat BP monitoring",
+          "Consider PA catheter or TEE for severe LV dysfunction",
+          "CPB considerations: anticoagulation, hypothermia, hemodilution"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Reduced ejection fraction (40%)", "Previous MI", "Limited cardiac reserve", "Multiple medications"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial line mandatory", "Central venous access", "PA catheter or TEE consideration", "Urinary catheter", "Core temperature"],
+    "anesthetic_considerations": [
+      "Etomidate or midazolam/fentanyl induction to preserve hemodynamics",
+      "High-dose opioid technique (fentanyl 10-20 mcg/kg or sufentanil 2-5 mcg/kg)",
+      "Maintain preload (euvolemia critical)",
+      "Minimize afterload increases (treat hypertension promptly)",
+      "Support contractility if needed (inotropes available)",
+      "Full anticoagulation for CPB (heparin 300-400 units/kg, target ACT >480 sec)",
+      "Cardioplegia for myocardial protection during cross-clamp",
+      "ICU admission postoperative with mechanical ventilation initially"
+    ],
+    "risk_factors": {
+      "cardiac": "very high",
+      "pulmonary": "moderate",
+      "airway": "low",
+      "bleeding": "moderate"
+    }
+  },
+  {
+    "patient_name": "Patricia Davis",
+    "patient_index": 31,
+    "asa_class": "IV",
+    "surgical_type": "Cardiac - Mitral valve replacement",
+    "learning_scenarios": [
+      {
+        "section": "Section 3",
+        "topics": ["Mitral valve anatomy", "Atrial fibrillation pathophysiology", "Valvular heart disease"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Mitral valve apparatus includes annulus, leaflets, chordae tendineae, and papillary muscles",
+          "Atrial fibrillation commonly associated with mitral valve disease and LA enlargement",
+          "Loss of atrial kick reduces cardiac output by 15-20% (especially critical in diastolic dysfunction)",
+          "Chronic mitral regurgitation causes LA dilation and volume overload",
+          "CHF history indicates chronic hemodynamic compromise and reduced cardiac reserve",
+          "Warfarin anticoagulation for AFib increases bleeding risk - requires reversal before surgery"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Valvular disease assessment", "Anticoagulation management", "TEE evaluation"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "TEE essential for valve assessment: severity of regurgitation, valve morphology, LA size",
+          "INR must be normalized before cardiac surgery (typically <1.5)",
+          "Vitamin K, FFP, or PCC for warfarin reversal",
+          "AFib increases stroke risk - bridge anticoagulation considerations",
+          "Assess pulmonary hypertension secondary to chronic mitral disease"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Valve surgery anesthesia", "Hemodynamic management in mitral regurgitation"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Mitral regurgitation: maintain higher heart rate (80-100) and reduce afterload",
+          "Avoid bradycardia and increases in SVR (worsens regurgitant fraction)",
+          "After valve replacement: heart tolerates higher afterload, avoid tachycardia",
+          "TEE confirms adequate valve function post-repair/replacement",
+          "CPB for valve replacement - longer cross-clamp time than CABG alone",
+          "Risk of heart block post-MVR (proximity to AV node)"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Atrial fibrillation with rate control", "CHF with reduced cardiac reserve", "Anticoagulation management", "Pulmonary hypertension risk"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial line mandatory", "Central venous access", "TEE mandatory", "PA catheter consideration", "Large bore IV access", "Urinary catheter"],
+    "anesthetic_considerations": [
+      "Reverse warfarin preoperatively (INR <1.5)",
+      "Hemodynamically stable induction (etomidate or midazolam/fentanyl)",
+      "High-dose opioid technique",
+      "Preoperatively: reduce afterload (SVR), maintain forward flow",
+      "Postoperatively: new hemodynamic goals after valve replacement",
+      "Treat AFib with rate control (beta-blockers, digoxin)",
+      "Full anticoagulation for CPB",
+      "Pacemaker availability (risk of AV node injury during MVR)",
+      "ICU postoperative with mechanical ventilation"
+    ],
+    "risk_factors": {
+      "cardiac": "very high",
+      "pulmonary": "high",
+      "airway": "low",
+      "bleeding": "high",
+      "stroke": "moderate"
+    }
+  },
+  {
+    "patient_name": "James Mitchell",
+    "patient_index": 32,
+    "asa_class": "IV",
+    "surgical_type": "Cardiac - Aortic valve replacement",
+    "learning_scenarios": [
+      {
+        "section": "Section 3",
+        "topics": ["Aortic valve physiology", "Pressure-overload hypertrophy", "LV dysfunction"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Aortic stenosis causes pressure-overload hypertrophy and concentric LV hypertrophy",
+          "Low EF in AS indicates severe disease with poor prognosis (decompensated state)",
+          "Hypertrophied LV has increased oxygen demand and diastolic dysfunction",
+          "Loss of atrial kick is poorly tolerated in AS (diastolic filling critical)",
+          "Fixed stroke volume in severe AS - cardiac output depends on heart rate",
+          "Sudden afterload reduction can cause cardiovascular collapse in severe AS"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Aortic stenosis assessment", "Risk stratification", "Heart failure management"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Heart failure with diabetes = very high risk (ASA IV)",
+          "Diuretic dependence indicates volume overload and decompensated CHF",
+          "Optimize volume status preoperatively (may need diuresis)",
+          "Severe AS triad: angina, syncope, heart failure (worst prognosis with HF)",
+          "Valve area <0.8 cm² or mean gradient >40 mmHg = severe AS"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Aortic stenosis anesthetic management", "Hemodynamic goals"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Hemodynamic goals: full preload, slow heart rate (60-70), maintain afterload, sinus rhythm",
+          "Avoid hypotension at all costs (coronary perfusion depends on DBP)",
+          "Treat hypotension with phenylephrine (pure alpha agonist maintains SVR)",
+          "Avoid tachycardia (reduces diastolic filling time in stiff LV)",
+          "Have phenylephrine infusion prepared before induction",
+          "Consider arterial line before induction for severe AS",
+          "Post-valve replacement: different hemodynamics, LV hypertrophy regresses over time"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Severe AS with low EF", "Heart failure", "Diabetes complicating recovery", "Diastolic dysfunction"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial line before induction", "Central venous access", "TEE mandatory", "PA catheter strongly considered", "Urinary catheter", "Core temperature", "Defibrillator pads"],
+    "anesthetic_considerations": [
+      "Arterial line placement awake or with sedation before induction",
+      "Phenylephrine infusion ready before induction",
+      "Slow, controlled induction (etomidate preferred for hemodynamic stability)",
+      "High-dose opioid technique",
+      "Avoid sudden decreases in SVR (careful with volatile agents)",
+      "Maintain sinus rhythm (treat arrhythmias aggressively)",
+      "Cardioversion/defibrillation equipment immediately available",
+      "Full CPB anticoagulation",
+      "ICU postoperative with prolonged mechanical ventilation expected"
+    ],
+    "risk_factors": {
+      "cardiac": "very high",
+      "pulmonary": "moderate",
+      "airway": "low",
+      "bleeding": "moderate",
+      "mortality": "high"
+    }
+  },
+  {
+    "patient_name": "Rosa Fernandez",
+    "patient_index": 33,
+    "asa_class": "IV",
+    "surgical_type": "Cardiac - Maze procedure for atrial fibrillation",
+    "learning_scenarios": [
+      {
+        "section": "Section 3",
+        "topics": ["Atrial fibrillation pathophysiology", "Cardiac output in AFib", "Pulmonary circulation"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "AFib eliminates atrial kick, reducing cardiac output by 15-20%",
+          "Irregular ventricular response in AFib reduces cardiac efficiency",
+          "COPD causes pulmonary hypertension and RV strain",
+          "Limited cardiac reserve from both AFib and pulmonary disease",
+          "Maze procedure creates controlled scar tissue to interrupt reentrant circuits",
+          "Advanced age (76) reduces physiologic reserve and increases perioperative risk"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Combined cardiac-pulmonary disease assessment", "Respiratory risk stratification"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "COPD increases postoperative pulmonary complications after cardiac surgery",
+          "Pulmonary hypertension from COPD affects RV function and CPB management",
+          "Optimize bronchodilator therapy preoperatively",
+          "Assess hypoxemia and hypercarbia baseline status",
+          "May require prolonged postoperative mechanical ventilation"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Cardiac surgery in pulmonary disease", "Maze procedure considerations"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Minimize opioid doses to allow early extubation (difficult with COPD)",
+          "Optimize pulmonary mechanics on CPB (lung protection strategies)",
+          "May convert to sinus rhythm intraoperatively - monitor for rate changes",
+          "COPD patients benefit from early extubation but may need prolonged ventilation",
+          "Aggressive pulmonary toilet postoperatively"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Atrial fibrillation", "COPD with respiratory compromise", "Advanced age", "Limited cardiac and pulmonary reserve"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial line mandatory", "Central venous access", "TEE for cardiac assessment", "Arterial blood gases", "Core temperature"],
+    "anesthetic_considerations": [
+      "High-dose opioid technique balanced with need for early extubation",
+      "Bronchodilators available and administered preoperatively",
+      "Avoid histamine-releasing drugs",
+      "Monitor for conversion to sinus rhythm during procedure",
+      "Careful fluid management (avoid volume overload with limited cardiac/pulmonary reserve)",
+      "CPB management: minimize inflammatory response",
+      "Plan for possible prolonged mechanical ventilation postoperatively",
+      "ICU admission mandatory"
+    ],
+    "risk_factors": {
+      "cardiac": "high",
+      "pulmonary": "very high",
+      "airway": "moderate",
+      "bleeding": "moderate"
+    }
+  },
+  {
+    "patient_name": "Richard Thompson",
+    "patient_index": 34,
+    "asa_class": "III",
+    "surgical_type": "Cardiac - CABG x4",
+    "learning_scenarios": [
+      {
+        "section": "Section 3",
+        "topics": ["Coronary artery disease", "Myocardial oxygen supply-demand", "Normal cardiac function"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Four-vessel CABG indicates extensive coronary disease",
+          "Strong heart (good EF) indicates preserved LV systolic function despite CAD",
+          "Type A personality associated with CAD and hypertension",
+          "Myocardial oxygen demand = HR × SBP (rate-pressure product)",
+          "Coronary blood flow occurs primarily in diastole",
+          "Well-controlled hypertension reduces perioperative risk"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Cardiac risk assessment with preserved function", "Medical optimization"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "CAD + high-risk surgery = elevated RCRI score",
+          "Good functional status improves prognosis despite extensive CAD",
+          "Continue beta-blockers and statins perioperatively",
+          "Well-controlled hypertension reduces risk of perioperative BP lability",
+          "Younger age (59) and good function are favorable prognostic factors"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["CABG anesthesia with preserved function", "Standard cardiac technique"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "High-dose opioid technique standard for CABG",
+          "Maintain hemodynamic stability (avoid tachycardia and hypotension)",
+          "Internal mammary artery graft increases operative time but improves long-term patency",
+          "CPB duration typically 90-120 minutes for 4-vessel CABG",
+          "Early extubation protocols feasible with good cardiac function",
+          "Fast-track cardiac anesthesia appropriate for low-risk patients"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Extensive coronary disease (4-vessel)", "Type A personality", "Hypertension management", "Anxiety control"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial line", "Central venous access", "Consider TEE", "Urinary catheter", "Core temperature"],
+    "anesthetic_considerations": [
+      "Standard cardiac anesthetic induction (etomidate or propofol)",
+      "High-dose opioid technique (fentanyl 10-15 mcg/kg)",
+      "Maintain heart rate 60-80 bpm",
+      "Aggressive BP control perioperatively",
+      "Full CPB anticoagulation",
+      "Cardioplegia for myocardial protection",
+      "Fast-track extubation protocol (extubate in OR or within 6 hours)",
+      "ICU admission with plan for early extubation"
+    ],
+    "risk_factors": {
+      "cardiac": "high",
+      "pulmonary": "low",
+      "airway": "low",
+      "bleeding": "moderate"
+    }
+  },
+  {
+    "patient_name": "Linda Washington",
+    "patient_index": 35,
+    "asa_class": "IV",
+    "surgical_type": "Cardiac - CABG + valve replacement",
+    "learning_scenarios": [
+      {
+        "section": "Section 3",
+        "topics": ["Combined coronary and valvular disease", "Renal-cardiac interactions", "Volume overload"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "CKD stage 3 affects drug clearance and perioperative morbidity",
+          "Volume overload from CHF and renal insufficiency complicates management",
+          "Combined CABG + valve increases operative time, CPB duration, and risk",
+          "Diabetes with renal disease indicates microvascular complications",
+          "Obesity increases cardiac workload and complicates surgical access"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Complex cardiac surgery risk assessment", "Renal protection strategies"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Multiple RCRI risk factors: CAD, CHF, diabetes, renal insufficiency",
+          "CKD stage 3 (GFR 30-59) increases AKI risk postoperatively",
+          "Volume assessment challenging (volume overload but may be intravascularly depleted)",
+          "Avoid nephrotoxic drugs perioperatively",
+          "Risk of dialysis requirement postoperatively"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Complex cardiac surgery management", "Renal protection during CPB"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Longer CPB time increases inflammatory response and complications",
+          "Maintain adequate renal perfusion pressure during CPB (MAP >60-70)",
+          "Use cisatracurium (Hoffman elimination, not renally cleared)",
+          "Avoid NSAIDs postoperatively",
+          "Monitor for contrast-induced nephropathy if cardiac cath performed",
+          "Fluid management critical: avoid both hypovolemia and volume overload"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Combined cardiac procedures", "CKD stage 3", "Obesity", "Diabetes", "Volume overload"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial line mandatory", "Central venous access mandatory", "TEE essential", "PA catheter strongly considered", "Urinary catheter with hourly outputs", "Core temperature", "Electrolytes frequently"],
+    "anesthetic_considerations": [
+      "Optimize volume status preoperatively (may need dialysis)",
+      "Etomidate or midazolam/fentanyl induction for hemodynamic stability",
+      "High-dose opioid technique",
+      "Use cisatracurium for neuromuscular blockade",
+      "Avoid renally-cleared drugs (morphine, meperidine)",
+      "Maintain adequate perfusion pressure during CPB",
+      "Expect longer CPB time (3+ hours possible)",
+      "Plan for prolonged mechanical ventilation",
+      "ICU admission with possible dialysis needs postoperatively"
+    ],
+    "risk_factors": {
+      "cardiac": "very high",
+      "pulmonary": "moderate",
+      "airway": "moderate",
+      "renal": "very high",
+      "bleeding": "high",
+      "mortality": "high"
+    }
+  },
+  {
+    "patient_name": "George Papadopoulos",
+    "patient_index": 36,
+    "asa_class": "IV",
+    "surgical_type": "Cardiac/Vascular - Aortic aneurysm repair",
+    "learning_scenarios": [
+      {
+        "section": "Section 3",
+        "topics": ["Aortic pathophysiology", "Cerebral perfusion", "Stroke risk factors"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Aortic aneurysm repair requires cross-clamping with major hemodynamic changes",
+          "Cross-clamp increases afterload dramatically (LV must pump against closed aorta)",
+          "Release of cross-clamp causes sudden decrease in afterload and third-spacing",
+          "Previous stroke indicates cerebrovascular disease and increased perioperative stroke risk",
+          "Carotid stenosis reduces cerebral blood flow reserve",
+          "Maintain cerebral perfusion pressure (CPP = MAP - ICP)"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Aortic aneurysm assessment", "Neurologic risk stratification", "Carotid disease evaluation"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Assess aneurysm size, location (thoracic vs abdominal), extent",
+          "Carotid stenosis >70% may require staged or combined CEA",
+          "Previous stroke increases perioperative stroke risk significantly",
+          "Hypertension must be controlled preoperatively",
+          "High risk of rupture if aneurysm >5.5 cm or symptomatic"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Aortic cross-clamp management", "Hemodynamic control", "Neuroprotection"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Before cross-clamp: optimize preload, consider vasodilators ready",
+          "During cross-clamp: control hypertension (nitroglycerin, nicardipine), monitor for myocardial ischemia",
+          "After cross-clamp release: volume loading, vasopressors ready, expect hypotension",
+          "Spinal cord ischemia risk with thoracoabdominal aneurysms (monitor SSEPs/MEPs)",
+          "Maintain adequate perfusion pressure for cerebral and spinal cord protection",
+          "Consider lumbar drain for thoracoabdominal repairs"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Aortic aneurysm with rupture risk", "Previous stroke", "Carotid stenosis", "Cross-clamp hemodynamic swings", "Advanced age"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial line mandatory (bilateral for thoracic)", "Central venous access", "PA catheter or TEE", "Urinary catheter", "Core temperature", "Consider neuromonitoring (SSEP/MEP)", "Large bore IV access x2"],
+    "anesthetic_considerations": [
+      "Large bore IV access for rapid transfusion capability",
+      "Arterial line before induction (bilateral for thoracic aneurysm)",
+      "Controlled hypotension before cross-clamp if not ruptured",
+      "Vasodilators ready (nitroglycerin, nicardipine, esmolol)",
+      "Volume loading before cross-clamp release",
+      "Vasopressors ready for post-release hypotension",
+      "Blood products available (anticipate significant blood loss)",
+      "Maintain normothermia (coagulopathy risk)",
+      "Spinal cord protection strategies for thoracoabdominal",
+      "ICU admission with mechanical ventilation"
+    ],
+    "risk_factors": {
+      "cardiac": "very high",
+      "pulmonary": "moderate",
+      "airway": "low",
+      "neurologic": "very high",
+      "bleeding": "very high",
+      "renal": "high",
+      "mortality": "high"
+    }
+  },
+  {
+    "patient_name": "Mary O'Connor",
+    "patient_index": 37,
+    "asa_class": "III",
+    "surgical_type": "Cardiac - Cardiac catheterization",
+    "learning_scenarios": [
+      {
+        "section": "Section 3",
+        "topics": ["Atrial fibrillation", "Anticoagulation physiology", "Aging cardiovascular changes"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Atrial fibrillation increases stroke risk 5-fold, requiring anticoagulation",
+          "Cardiac catheterization used for diagnostic coronary angiography and interventions",
+          "Osteoporosis increases risk of positioning injury and vascular complications",
+          "Advanced age (78) reduces cardiovascular reserve and baroreceptor function",
+          "Anticoagulation must be managed carefully for catheterization access site"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Anticoagulation management for procedures", "Sedation in elderly", "Cardiac catheterization risks"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Hold warfarin before procedure (INR <1.8 acceptable for cath)",
+          "Bridge anticoagulation may be needed for high-risk AFib",
+          "Contrast-induced nephropathy risk (hydration important)",
+          "Vascular access complications: bleeding, hematoma, pseudoaneurysm",
+          "Conscious sedation vs monitored anesthesia care"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Sedation for cardiac procedures", "Hemodynamic monitoring", "Complication management"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Conscious sedation with midazolam and fentanyl typical",
+          "Maintain spontaneous ventilation and airway reflexes",
+          "Monitor for chest pain (myocardial ischemia during procedure)",
+          "Vasovagal reactions common during femoral access",
+          "Have vasopressors available (atropine, phenylephrine)",
+          "Post-procedure: bedrest for hemostasis, monitor access site"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Atrial fibrillation on anticoagulation", "Advanced age", "Osteoporosis fragility", "Contrast exposure"],
+    "monitoring_needs": ["Standard ASA monitors", "Continuous ECG", "Blood pressure every 5 minutes", "Oxygen saturation", "ETCO2 if moderate-deep sedation"],
+    "anesthetic_considerations": [
+      "Light to moderate sedation (maintain verbal contact)",
+      "Midazolam 1-2 mg and fentanyl 25-50 mcg titrated carefully",
+      "Reduced doses in elderly (increased sensitivity)",
+      "Local anesthesia at access site (lidocaine)",
+      "Treat vasovagal reactions (atropine 0.5-1 mg IV)",
+      "Hydration for renal protection (contrast nephropathy prevention)",
+      "Gentle positioning (osteoporosis)",
+      "Post-procedure monitoring in recovery area"
+    ],
+    "risk_factors": {
+      "cardiac": "moderate",
+      "pulmonary": "low",
+      "airway": "low",
+      "bleeding": "moderate",
+      "renal": "moderate"
+    }
+  },
+  {
+    "patient_name": "Harold Bennett",
+    "patient_index": 38,
+    "asa_class": "IV",
+    "surgical_type": "Cardiac - Redo CABG",
+    "learning_scenarios": [
+      {
+        "section": "Section 3",
+        "topics": ["Coronary artery disease progression", "Previous cardiac surgery physiology", "COPD-cardiac interactions"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Redo cardiac surgery has significantly higher risk than primary surgery",
+          "Scarred pericardium and adhesions increase risk of cardiac injury during sternotomy",
+          "Previous CABG grafts may be patent, occluded, or diseased (target for redo)",
+          "COPD increases pulmonary complications and prolonged ventilation risk",
+          "Advanced age (73) with multiple comorbidities = very high risk"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Redo cardiac surgery risk assessment", "Previous operative notes review"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Review previous operative report: prior grafts, difficulties, complications",
+          "CT scan of chest assesses proximity of heart/vessels to sternum",
+          "Higher risk of catastrophic bleeding during redo sternotomy",
+          "Pulmonary function testing important with COPD history",
+          "Mortality risk 2-3x higher than primary CABG"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Redo sternotomy precautions", "Emergency CPB preparation"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Femoral cannulation access prepared before sternotomy (emergency CPB)",
+          "Defibrillator pads placed before induction",
+          "Cell saver mandatory (blood conservation)",
+          "Surgeon may dissect femoral vessels first for emergency access",
+          "Longer operative time due to adhesiolysis",
+          "Increased bleeding risk from scarred tissue",
+          "May require prolonged mechanical ventilation postoperatively"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Redo sternotomy with adhesions", "COPD", "Previous CABG", "Advanced age", "Complex anatomy"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial line before induction", "Large bore IV access x2", "Central venous access", "TEE mandatory", "PA catheter consideration", "Urinary catheter", "Core temperature", "Cell saver"],
+    "anesthetic_considerations": [
+      "Large bore IV access before induction (rapid transfusion capability)",
+      "Blood products in room before sternotomy (cross-matched 6+ units)",
+      "Defibrillator pads placed before draping",
+      "Femoral vessels may be exposed for emergency cannulation",
+      "High-dose opioid technique",
+      "Anticipate longer CPB time",
+      "Aggressive blood conservation strategies",
+      "Plan for prolonged mechanical ventilation",
+      "ICU admission with high monitoring level"
+    ],
+    "risk_factors": {
+      "cardiac": "very high",
+      "pulmonary": "high",
+      "airway": "moderate",
+      "bleeding": "very high",
+      "mortality": "very high"
+    }
+  },
+  {
+    "patient_name": "Sandra Lee",
+    "patient_index": 39,
+    "asa_class": "III",
+    "surgical_type": "Cardiac - Coronary stenting (PCI)",
+    "learning_scenarios": [
+      {
+        "section": "Section 3",
+        "topics": ["Coronary artery disease", "Small vessel disease", "Ethnic variations in CAD"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Percutaneous coronary intervention (PCI) with stenting is less invasive than CABG",
+          "Small coronary vessels in Asian populations may affect stent sizing and technique",
+          "Diabetes accelerates coronary atherosclerosis and microvascular disease",
+          "Dual antiplatelet therapy (DAPT) required after stent placement",
+          "Drug-eluting stents require longer DAPT duration than bare metal stents"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Antiplatelet management", "Sedation for cardiac catheterization", "Stent considerations for future surgery"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Continue aspirin perioperatively for PCI",
+          "Clopidogrel or ticagrelor typically continued (or held 24 hours if loading dose given)",
+          "Elective surgery should be delayed after stenting: BMS 30 days minimum, DES 6-12 months",
+          "Premature discontinuation of DAPT increases stent thrombosis risk",
+          "Conscious sedation adequate for most PCI procedures"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Interventional cardiology sedation", "Complications of PCI"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Light sedation allows patient to report chest pain (ischemia indicator)",
+          "Contrast dye used for angiography (renal protection important)",
+          "Complications: coronary dissection, perforation, no-reflow phenomenon, acute stent thrombosis",
+          "Emergency CABG backup required (rare but critical complication)",
+          "Radial artery access increasingly common (lower bleeding risk than femoral)"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Small vessel disease", "Diabetes with microvascular complications", "Hypertension control", "Asian descent considerations"],
+    "monitoring_needs": ["Standard ASA monitors", "Continuous ECG with ST-segment analysis", "Arterial line from access site", "Blood pressure monitoring"],
+    "anesthetic_considerations": [
+      "Light conscious sedation (midazolam 1-2 mg, fentanyl 25-50 mcg)",
+      "Patient able to report symptoms during procedure",
+      "Antiplatelet therapy continued (aspirin, possibly P2Y12 inhibitor)",
+      "Hydration for contrast nephropathy prevention",
+      "Heparin anticoagulation during procedure (ACT 200-250 seconds)",
+      "Nitroglycerin available for coronary vasospasm",
+      "Monitor for chest pain, ST changes (ischemia indicators)",
+      "Post-procedure: bedrest, access site monitoring, DAPT education"
+    ],
+    "risk_factors": {
+      "cardiac": "high",
+      "pulmonary": "low",
+      "airway": "low",
+      "bleeding": "low",
+      "renal": "moderate"
+    }
+  },
+  {
+    "patient_name": "Jake Morrison",
+    "patient_index": 40,
+    "asa_class": "IV-E",
+    "surgical_type": "Trauma - Emergency craniotomy for TBI",
+    "learning_scenarios": [
+      {
+        "section": "Section 6",
+        "topics": ["Traumatic brain injury management", "Rapid sequence induction", "ICP management"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "GCS 8 indicates severe TBI (GCS ≤8 = coma, requires intubation)",
+          "Maintain cerebral perfusion pressure: CPP = MAP - ICP (goal CPP >60 mmHg)",
+          "Avoid hypotension (SBP <90 mmHg doubles mortality in TBI)",
+          "Avoid hypoxia and hypercarbia (increase ICP and worsen secondary brain injury)",
+          "Intracranial hypertension reduces cerebral blood flow and causes herniation",
+          "RSI technique mandatory (full stomach risk in trauma)"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Trauma assessment", "Neurologic injury evaluation", "Associated injuries"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Primary survey: Airway, Breathing, Circulation, Disability, Exposure (ABCDE)",
+          "Rib fractures may indicate pulmonary contusion or pneumothorax",
+          "Hemodynamic instability suggests ongoing hemorrhage (search for source)",
+          "CT brain essential for TBI: location, size, midline shift, herniation",
+          "Associated cervical spine injury in 5-10% of severe TBI (inline stabilization)"
+        ]
+      },
+      {
+        "section": "Section 3",
+        "topics": ["Cerebral physiology", "Intracranial pressure", "Cerebral autoregulation"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Normal ICP is 5-15 mmHg; treatment threshold typically >20-22 mmHg",
+          "Cerebral autoregulation may be impaired in TBI (CBF becomes pressure-dependent)",
+          "Hyperventilation reduces ICP but causes cerebral vasoconstriction (temporary measure only)",
+          "Avoid hypocapnia <30 mmHg (may cause cerebral ischemia)",
+          "Hypertonic saline or mannitol for ICP reduction",
+          "Maintain normothermia (fever increases metabolic demand and ICP)"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Severe TBI with low GCS", "Increased ICP risk", "Full stomach", "Hemodynamic instability", "Rib fractures with pulmonary injury"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial line mandatory", "ETCO2 continuous", "Core temperature", "Foley catheter", "ICP monitor postoperatively", "Large bore IV x2"],
+    "anesthetic_considerations": [
+      "RSI with cricoid pressure: etomidate 0.3 mg/kg or ketamine 1-2 mg/kg, rocuronium 1-1.2 mg/kg",
+      "Avoid hypotension during induction (maintain SBP >100 mmHg, MAP >80)",
+      "Avoid succinylcholine if >24 hours post-injury (hyperkalemia risk)",
+      "Maintain PaCO2 35-40 mmHg (mild hyperventilation only if acute herniation)",
+      "Head of bed elevated 30 degrees (after cervical spine cleared)",
+      "Osmotherapy available: mannitol 0.25-1 g/kg or hypertonic saline 3% bolus",
+      "Avoid hypotonic fluids (use isotonic crystalloids: NS or LR)",
+      "Maintain normothermia (forced air warmer)",
+      "Total IV anesthesia vs balanced technique (avoid nitrous oxide)",
+      "Plan for postoperative mechanical ventilation and ICP monitoring in ICU"
+    ],
+    "risk_factors": {
+      "cardiac": "moderate",
+      "pulmonary": "high",
+      "airway": "high",
+      "neurologic": "very high",
+      "aspiration": "high",
+      "mortality": "very high"
+    }
+  },
+  {
+    "patient_name": "Tyrone Jackson",
+    "patient_index": 41,
+    "asa_class": "IV-E",
+    "surgical_type": "Trauma - Emergency exploratory laparotomy for GSW",
+    "learning_scenarios": [
+      {
+        "section": "Section 6",
+        "topics": ["Hemorrhagic shock management", "Massive transfusion protocol", "Damage control surgery"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Hemorrhagic shock classification: Class III (30-40% blood loss) or Class IV (>40%)",
+          "Penetrating abdominal trauma has high risk of vascular, solid organ, and hollow viscus injury",
+          "Massive transfusion protocol: balanced resuscitation with blood products",
+          "Damage control surgery: control hemorrhage, limit contamination, abbreviated operation",
+          "Avoid crystalloid-only resuscitation (dilutional coagulopathy, hypothermia, acidosis)",
+          "Lethal triad: hypothermia, acidosis, coagulopathy"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Trauma resuscitation", "Shock assessment", "Blood product management"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "ATLS protocols: permissive hypotension until hemorrhage control (SBP 80-90 mmHg)",
+          "Massive transfusion = replacement of entire blood volume in 24 hours",
+          "Balanced transfusion ratio: RBC:FFP:platelets = 1:1:1",
+          "FAST exam identifies free intraperitoneal fluid (blood)",
+          "Type O negative blood for life-threatening hemorrhage (universal donor)",
+          "Activate massive transfusion protocol early"
+        ]
+      },
+      {
+        "section": "Section 3",
+        "topics": ["Hemodynamics in shock", "Coagulation", "Transfusion medicine"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Compensatory mechanisms in shock: tachycardia, vasoconstriction, increased contractility",
+          "Decompensated shock: hypotension, obtundation, organ dysfunction",
+          "Acidosis impairs coagulation cascade and platelet function",
+          "Hypothermia <35°C worsens coagulopathy",
+          "Hypocalcemia from citrate in blood products (supplement calcium)",
+          "Tranexamic acid within 3 hours may reduce mortality in trauma hemorrhage"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Hemorrhagic shock", "Penetrating abdominal trauma", "Massive transfusion need", "Full stomach", "Agitation and pain"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial line before or immediately after induction", "Large bore IV x2 (14-16 gauge)", "Rapid infuser", "Core temperature", "Blood gases and labs frequently", "Cell saver", "Thromboelastography if available"],
+    "anesthetic_considerations": [
+      "Massive transfusion protocol activated before OR",
+      "Large bore IV access (14-16 gauge x2) or central venous introducer",
+      "Rapid infuser and blood warmer setup",
+      "Modified RSI: ketamine 1-2 mg/kg or etomidate 0.2-0.3 mg/kg (reduced doses in shock)",
+      "Avoid propofol in hemodynamically unstable patients (vasodilation)",
+      "Succinylcholine 1.5 mg/kg or rocuronium 1.2 mg/kg for RSI",
+      "Permissive hypotension until hemorrhage control (MAP 60-65 mmHg)",
+      "Balanced transfusion: 1:1:1 ratio RBC:FFP:platelets",
+      "Tranexamic acid 1g load then 1g over 8 hours (if <3 hours from injury)",
+      "Calcium chloride 1g for every 4-5 units blood products",
+      "Aggressive warming: forced air warmer, fluid warmer, increase OR temperature",
+      "Damage control resuscitation: abbreviate surgery if unstable, return to ICU",
+      "Plan for ICU with possible return to OR for definitive repair"
+    ],
+    "risk_factors": {
+      "cardiac": "high",
+      "pulmonary": "moderate",
+      "airway": "moderate",
+      "bleeding": "very high",
+      "coagulopathy": "very high",
+      "mortality": "very high"
+    }
+  },
+  {
+    "patient_name": "Michelle Carter",
+    "patient_index": 42,
+    "asa_class": "III-E",
+    "surgical_type": "Trauma - Femur fracture fixation",
+    "learning_scenarios": [
+      {
+        "section": "Section 6",
+        "topics": ["Trauma orthopedic surgery", "Fat embolism syndrome", "Pain management"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Bilateral femur fractures cause significant blood loss (500-1500 mL per fracture)",
+          "Fall from height suggests high-energy trauma (assess for other injuries)",
+          "Pneumothorax managed with chest tube before anesthesia",
+          "Fat embolism syndrome risk with long bone fractures (24-72 hours post-injury)",
+          "Young patients tolerate blood loss better but still require volume resuscitation"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Trauma evaluation", "Chest injury assessment", "Adolescent considerations"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Chest tube management: ensure functional and no air leak before anesthesia",
+          "Pneumothorax risk of tension if positive pressure ventilation",
+          "Pain control important but avoid oversedation in trauma",
+          "Long bone fractures stabilized early reduce pulmonary complications",
+          "Type and cross for potential transfusion"
+        ]
+      },
+      {
+        "section": "Section 3",
+        "topics": ["Blood loss estimation", "Hemodynamic management", "Fat embolism"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Femur fractures can cause 1-2 liter blood loss into thigh (closed fracture)",
+          "Fat embolism: fat droplets enter circulation, can cause ARDS and neurologic changes",
+          "Early fracture stabilization reduces fat embolism risk",
+          "Adolescents have good cardiovascular reserve but require careful monitoring",
+          "Maintain adequate perfusion and oxygenation"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Bilateral femur fractures", "Pneumothorax with chest tube", "Fall from height trauma", "Adolescent patient", "Parental anxiety"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial line consideration", "Large bore IV access x2", "Blood products available", "Core temperature", "Foley catheter"],
+    "anesthetic_considerations": [
+      "Assess chest tube function before induction (no air leak, lung expanded)",
+      "RSI if recent food intake or altered mental status",
+      "Standard induction if >8 hours NPO and alert",
+      "Adequate IV access for volume resuscitation (16-18 gauge x2)",
+      "Blood products available (type and cross 2-4 units)",
+      "Regional anesthesia consideration: femoral nerve blocks for postoperative analgesia",
+      "General anesthesia standard for bilateral long bone fractures",
+      "Multimodal analgesia: regional blocks, acetaminophen, NSAIDs (if no contraindication), opioids",
+      "Monitor for fat embolism signs: hypoxia, tachycardia, mental status changes, petechiae",
+      "Maintain normothermia (long procedure)",
+      "Plan for postoperative pain management and early mobilization"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "moderate",
+      "airway": "low",
+      "bleeding": "moderate",
+      "fat embolism": "moderate"
+    }
+  },
+  {
+    "patient_name": "Carlos Delgado",
+    "patient_index": 43,
+    "asa_class": "IV-E",
+    "surgical_type": "Trauma - Cervical spine stabilization",
+    "learning_scenarios": [
+      {
+        "section": "Section 6",
+        "topics": ["Spinal cord injury management", "Neurogenic shock", "Airway management in C-spine injury"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Neurogenic shock: loss of sympathetic tone causes hypotension and bradycardia",
+          "Spinal cord injury level determines neurologic deficits and autonomic dysfunction",
+          "C-spine injury requires inline stabilization during intubation",
+          "Differentiate neurogenic shock from hemorrhagic shock (warm extremities, bradycardia vs tachycardia)",
+          "High cervical injuries (C1-C4) may require mechanical ventilation (phrenic nerve C3-C5)",
+          "Vasopressor support needed for neurogenic shock (loss of SVR)"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Spinal cord injury assessment", "Neurologic level determination", "Associated injuries"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "ASIA (American Spinal Injury Association) scale: motor and sensory level assessment",
+          "Complete vs incomplete spinal cord injury (presence of sacral sparing)",
+          "C-spine fracture requires inline stabilization at all times",
+          "Rule out other injuries: head trauma, thoracic injuries, intra-abdominal bleeding",
+          "Baseline neurologic exam critical for postoperative comparison"
+        ]
+      },
+      {
+        "section": "Section 3",
+        "topics": ["Autonomic nervous system", "Neurogenic shock physiology", "Cardiovascular effects of SCI"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Sympathetic outflow T1-L2; injury above T6 causes profound autonomic dysfunction",
+          "Loss of sympathetic tone: vasodilation (hypotension), unopposed vagal tone (bradycardia)",
+          "Spinal shock: temporary loss of all reflexes below injury level (hours to weeks)",
+          "Autonomic dysreflexia risk in chronic SCI above T6 (not acute phase)",
+          "Require vasopressors (phenylephrine or norepinephrine) and fluid resuscitation"
+        ]
+      }
+    ],
+    "clinical_challenges": ["C-spine fracture", "Neurogenic shock", "Paralysis", "Airway management with C-spine precautions", "Vasopressor dependence"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial line mandatory", "Central venous access for vasopressors", "Foley catheter", "Core temperature", "Neuromonitoring if available (SSEP/MEP)"],
+    "anesthetic_considerations": [
+      "Inline stabilization for all airway maneuvers (manual inline stabilization, not hard collar)",
+      "Consider awake fiberoptic intubation if unstable C-spine or difficult airway predicted",
+      "RSI with inline stabilization if patient stable and airway straightforward",
+      "Avoid succinylcholine after 24-48 hours post-injury (hyperkalemia risk from denervation)",
+      "Vasopressor infusion before induction (norepinephrine or phenylephrine)",
+      "Treat bradycardia with atropine or glycopyrrolate",
+      "Maintain MAP 85-90 mmHg for spinal cord perfusion (first 7 days post-injury)",
+      "Methylprednisolone controversial (not routinely recommended per current guidelines)",
+      "Avoid hypotension (worsens spinal cord ischemia)",
+      "Plan for postoperative mechanical ventilation if high cervical injury",
+      "ICU admission with close hemodynamic monitoring"
+    ],
+    "risk_factors": {
+      "cardiac": "high",
+      "pulmonary": "high",
+      "airway": "high",
+      "neurologic": "very high",
+      "autonomic": "very high"
+    }
+  },
+  {
+    "patient_name": "Sarah Mitchell",
+    "patient_index": 44,
+    "asa_class": "IV-E",
+    "surgical_type": "Trauma - Pelvic fracture stabilization",
+    "learning_scenarios": [
+      {
+        "section": "Section 6",
+        "topics": ["Pelvic trauma management", "Hemorrhage control", "Trauma resuscitation"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Unstable pelvic fractures cause massive retroperitoneal hemorrhage (can lose liters of blood)",
+          "Motorcycle accidents = high-energy trauma (assess for multisystem injuries)",
+          "Pelvic binder applied early reduces pelvic volume and tamponades bleeding",
+          "Angiographic embolization may be needed for arterial bleeding",
+          "Ongoing blood loss indicates need for aggressive resuscitation and possible angiography"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Pelvic fracture classification", "Massive transfusion triggers", "Damage control"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Pelvic fracture stability: lateral compression, AP compression, vertical shear",
+          "Unstable fractures (AP compression, vertical shear) have higher bleeding risk",
+          "FAST exam may miss retroperitoneal blood (CT more sensitive)",
+          "Activate massive transfusion protocol for hemodynamically unstable pelvic fractures",
+          "External fixation provides temporary stability, reduces pain, aids hemostasis"
+        ]
+      },
+      {
+        "section": "Section 3",
+        "topics": ["Retroperitoneal hemorrhage", "Shock physiology", "Resuscitation strategies"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Retroperitoneal space can hold several liters of blood before tamponade",
+          "Venous bleeding more common than arterial (managed with pelvic binder and fixation)",
+          "Arterial bleeding requires angiographic embolization",
+          "Permissive hypotension controversial in pelvic fractures (may worsen bleeding if arterial)",
+          "Balanced resuscitation with blood products maintains oxygen delivery and coagulation"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Unstable pelvic fracture", "Ongoing hemorrhage", "Retroperitoneal bleeding", "Hemodynamic instability", "Multisystem trauma"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial line mandatory", "Large bore IV x2 or central introducer", "Rapid infuser", "Core temperature", "Blood gases and coagulation studies frequently", "Foley catheter (contraindicated if urethral injury suspected)"],
+    "anesthetic_considerations": [
+      "Massive transfusion protocol activated",
+      "Large bore IV access (14-16 gauge x2) or 8.5 Fr introducer",
+      "Blood products immediately available (O negative if unstable)",
+      "Modified RSI with reduced induction doses (ketamine 0.5-1 mg/kg or etomidate 0.1-0.2 mg/kg)",
+      "Vasopressor support (norepinephrine or phenylephrine infusion)",
+      "Permissive hypotension until binder applied and fracture stabilized (MAP 60-65)",
+      "Balanced transfusion 1:1:1 ratio RBC:FFP:platelets",
+      "Tranexamic acid 1g load then infusion",
+      "Calcium supplementation (1g per 4-5 units blood)",
+      "Aggressive temperature management (warmer, fluid warmer, room temperature up)",
+      "May need angiographic embolization before or after OR stabilization",
+      "Damage control approach: stabilize, control bleeding, ICU for resuscitation",
+      "Plan for ICU with continued resuscitation"
+    ],
+    "risk_factors": {
+      "cardiac": "high",
+      "pulmonary": "moderate",
+      "airway": "moderate",
+      "bleeding": "very high",
+      "coagulopathy": "high",
+      "mortality": "high"
+    }
+  },
+  {
+    "patient_name": "Omar Hassan",
+    "patient_index": 45,
+    "asa_class": "III-E",
+    "surgical_type": "Trauma - Thoracotomy for stab wound",
+    "learning_scenarios": [
+      {
+        "section": "Section 6",
+        "topics": ["Penetrating chest trauma", "Hemothorax management", "Emergency thoracotomy"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Penetrating chest trauma can injure heart, great vessels, lungs, esophagus, diaphragm",
+          "Hemothorax = blood in pleural space (impairs ventilation and causes hemorrhagic shock)",
+          "Chest tube output >1500 mL immediately or >200 mL/hr indicates thoracotomy",
+          "Stab wounds have better prognosis than gunshot wounds (less tissue destruction)",
+          "Cardiac tamponade possible with wounds near heart (Beck's triad: hypotension, JVD, muffled heart sounds)"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Thoracic trauma assessment", "Chest tube management", "Emergency surgery preparation"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "FAST exam or pericardial window if cardiac injury suspected",
+          "Chest X-ray shows hemothorax, pneumothorax, mediastinal widening",
+          "Chest tube placement therapeutic and diagnostic (measures ongoing blood loss)",
+          "Emergency thoracotomy indicated for: massive hemothorax, persistent bleeding, cardiac arrest",
+          "Type and cross multiple units (potential for massive hemorrhage)"
+        ]
+      },
+      {
+        "section": "Section 3",
+        "topics": ["Thoracic anatomy", "Cardiopulmonary physiology", "One-lung ventilation"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Positive pressure ventilation can worsen pneumothorax (tension pneumothorax)",
+          "Ensure chest tube functional before induction",
+          "One-lung ventilation may be needed for surgical exposure",
+          "Hypoxic pulmonary vasoconstriction maintains V/Q matching during OLV",
+          "Blood in chest reduces lung compliance and functional residual capacity"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Penetrating chest trauma", "Hemothorax", "Potential cardiac injury", "Emergency surgery", "Anxiety"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial line", "Large bore IV x2", "Blood products available", "Core temperature", "Foley catheter", "ETCO2"],
+    "anesthetic_considerations": [
+      "Assess chest tube output and function before induction",
+      "Large bore IV access x2 (potential for rapid hemorrhage)",
+      "Blood products in room (cross-matched 4-6 units minimum)",
+      "RSI standard (penetrating trauma = full stomach)",
+      "Ketamine 1-2 mg/kg or etomidate 0.3 mg/kg for induction",
+      "Avoid nitrous oxide (expands pneumothorax)",
+      "Left-sided double-lumen tube or bronchial blocker for one-lung ventilation if needed",
+      "Prepare for possible cardiac injury: have pericardial instruments available",
+      "Cell saver for blood conservation",
+      "Maintain adequate preload and cardiac output",
+      "Plan for postoperative mechanical ventilation if significant lung injury",
+      "ICU admission postoperative"
+    ],
+    "risk_factors": {
+      "cardiac": "high",
+      "pulmonary": "high",
+      "airway": "moderate",
+      "bleeding": "high",
+      "cardiac tamponade": "moderate"
+    }
+  },
+  {
+    "patient_name": "Jennifer Park",
+    "patient_index": 46,
+    "asa_class": "II-E",
+    "surgical_type": "Trauma - Maxillofacial surgery",
+    "learning_scenarios": [
+      {
+        "section": "Section 6",
+        "topics": ["Difficult airway management", "Maxillofacial trauma", "Shared airway"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Facial trauma creates difficult airway: distorted anatomy, bleeding, edema, fractures",
+          "Jaw fractures may prevent mouth opening (trismus, mechanical obstruction)",
+          "Blood in airway increases aspiration risk and obscures visualization",
+          "Nasal intubation contraindicated with midface fractures (risk of intracranial placement)",
+          "Assault victims may have cervical spine injury (10% with maxillofacial trauma)"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Airway assessment in facial trauma", "Cervical spine clearance", "Aspiration risk"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Assess airway: mouth opening, tongue mobility, bleeding, missing teeth",
+          "Clear C-spine before manipulation if possible (CT, clinical clearance)",
+          "Facial fractures classified: mandible, maxilla (Le Fort I, II, III), zygoma, nasal",
+          "Le Fort fractures indicate high-impact trauma (intracranial injury possible)",
+          "Full stomach assumed in all trauma patients"
+        ]
+      },
+      {
+        "section": "Section 3",
+        "topics": ["Airway anatomy", "Aspiration pathophysiology", "Difficult intubation"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Maxillofacial fractures distort normal airway landmarks",
+          "Bleeding and secretions pool in pharynx (suction essential)",
+          "Edema worsens over time (secure airway early)",
+          "Aspiration of blood causes chemical pneumonitis and hypoxemia",
+          "Shared airway with surgeon requires coordination and secured ETT"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Difficult airway from facial trauma", "Jaw fractures limiting mouth opening", "Bleeding in airway", "Pain management", "Communication difficulty"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial line consideration", "Difficult airway equipment available", "Suction continuously", "Core temperature"],
+    "anesthetic_considerations": [
+      "Difficult airway cart in room before induction",
+      "Awake fiberoptic intubation strongly considered (safest option)",
+      "Alternative: video laryngoscopy with inline C-spine stabilization",
+      "RSI risky with difficult airway (can't intubate, can't ventilate scenario)",
+      "Oral intubation preferred (nasal contraindicated with midface fractures)",
+      "Suction immediately available (clear blood and secretions)",
+      "Consider tracheostomy if severe facial injuries or prolonged surgery",
+      "ETT secured with wires or sutures (tape ineffective with facial surgery)",
+      "Throat pack placement (prevent blood aspiration)",
+      "Careful extubation: assess airway patency, edema, ensure patient fully awake",
+      "ICU observation if airway edema concerns"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "low",
+      "airway": "very high",
+      "aspiration": "high",
+      "C-spine injury": "moderate"
+    }
+  },
+  {
+    "patient_name": "Derek Williams",
+    "patient_index": 47,
+    "asa_class": "IV-E",
+    "surgical_type": "Trauma - Burn surgery and escharotomy",
+    "learning_scenarios": [
+      {
+        "section": "Section 6",
+        "topics": ["Burn injury management", "Smoke inhalation", "Airway edema"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "35% TBSA burns = major burn injury requiring ICU care and massive fluid resuscitation",
+          "Smoke inhalation causes airway edema, bronchospasm, carbon monoxide poisoning",
+          "Airway edema worsens over first 24-48 hours (early intubation critical)",
+          "Burn shock: massive fluid shifts from intravascular to interstitial space",
+          "Parkland formula: 4 mL/kg × %TBSA burn × body weight (half in first 8 hours)",
+          "Escharotomy relieves compartment syndrome from circumferential burns"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Burn assessment", "Fluid resuscitation", "Smoke inhalation evaluation"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Burn severity: depth (1st, 2nd, 3rd degree) and extent (%TBSA)",
+          "Rule of nines: head/neck 9%, each arm 9%, each leg 18%, torso front/back 18% each",
+          "Smoke inhalation indicators: facial burns, singed nasal hairs, carbonaceous sputum, hoarseness",
+          "Carbon monoxide poisoning: COHb levels, treat with 100% oxygen",
+          "Cyanide toxicity possible with enclosed space fires"
+        ]
+      },
+      {
+        "section": "Section 3",
+        "topics": ["Burn pathophysiology", "Fluid shifts", "Hypermetabolic state"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Burn injury causes release of inflammatory mediators (histamine, bradykinin, prostaglandins)",
+          "Increased capillary permeability causes massive fluid loss and hypovolemia",
+          "Hypermetabolic state begins 48-72 hours post-burn (increased oxygen consumption)",
+          "Airway edema from direct thermal injury and fluid resuscitation",
+          "High risk of infection (loss of skin barrier, immunosuppression)"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Major burn injury (35% TBSA)", "Smoke inhalation with airway edema", "Severe pain and agitation", "Massive fluid requirements", "Compartment syndrome risk"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial line mandatory", "Central venous access for resuscitation", "Foley catheter with hourly urine output goal 0.5-1 mL/kg/hr", "Core temperature", "Carboxyhemoglobin level", "Lactate and base deficit"],
+    "anesthetic_considerations": [
+      "Early intubation before airway edema worsens (secure airway immediately)",
+      "Large ETT (7.5-8.0 mm) to facilitate bronchoscopy and pulmonary toilet",
+      "RSI with ketamine 1-2 mg/kg (maintains hemodynamics, analgesia, bronchodilation)",
+      "Avoid succinylcholine if >24-48 hours post-burn (hyperkalemia from upregulated receptors)",
+      "100% oxygen for CO poisoning (reduces COHb half-life)",
+      "Aggressive fluid resuscitation: Parkland formula as starting point, titrate to urine output",
+      "Large bore IV access x2 (may need central access if peripheral burned)",
+      "Warming measures critical (massive heat loss from burns): warm fluids, forced air warmer, increase room temperature",
+      "Multimodal analgesia: opioid infusion, ketamine infusion, regional blocks if feasible",
+      "Escharotomy before general anesthesia if compromising ventilation or circulation",
+      "Plan for prolonged mechanical ventilation",
+      "ICU admission to burn unit"
+    ],
+    "risk_factors": {
+      "cardiac": "high",
+      "pulmonary": "very high",
+      "airway": "very high",
+      "fluid/electrolyte": "very high",
+      "infection": "high",
+      "mortality": "high"
+    }
+  },
+  {
+    "patient_name": "Angela Russo",
+    "patient_index": 48,
+    "asa_class": "III-E",
+    "surgical_type": "Trauma - Observation vs laparotomy for liver laceration",
+    "learning_scenarios": [
+      {
+        "section": "Section 6",
+        "topics": ["Blunt abdominal trauma", "Solid organ injury", "Non-operative management"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Blunt abdominal trauma causes solid organ injury: liver, spleen, kidneys",
+          "Grade 3 liver laceration: 3-10 cm depth, moderate severity",
+          "Non-operative management (NOM) preferred for hemodynamically stable patients",
+          "Rib fractures associated with liver and spleen injuries (lower ribs)",
+          "Serial exams, CT scans, and hemoglobin monitoring guide NOM vs surgery decision"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Liver injury grading", "Hemodynamic stability assessment", "Indications for surgery"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Liver injury grading (I-VI): based on depth, length, and vascular involvement",
+          "NOM success rate high for grades I-III if hemodynamically stable",
+          "Surgery indicated for: hemodynamic instability, peritonitis, grade IV-V injuries, failed NOM",
+          "Type and cross blood (liver highly vascular, can bleed significantly)",
+          "Serial hemoglobin and CT monitoring for occult bleeding"
+        ]
+      },
+      {
+        "section": "Section 3",
+        "topics": ["Liver anatomy and function", "Hemostasis in liver injury", "Blood loss assessment"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Liver receives 25% of cardiac output (highly vascular organ)",
+          "Liver has dual blood supply: hepatic artery (25%) and portal vein (75%)",
+          "Most liver lacerations stop bleeding spontaneously with hemostasis",
+          "Monitor for delayed hemorrhage (can occur days after injury)",
+          "Emotional state (scared, crying) may indicate pain, fear, or physiologic stress"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Grade 3 liver laceration", "Rib fractures causing pain", "Fear and anxiety", "Potential for delayed hemorrhage", "Decision between NOM vs surgery"],
+    "monitoring_needs": ["Standard ASA monitors", "Serial vital signs", "Hemoglobin every 4-6 hours initially", "Abdominal exam frequently", "Arterial line if going to OR", "Type and cross blood"],
+    "anesthetic_considerations": [
+      "If NOM: pain management with multimodal approach (avoid excessive sedation to allow serial exams)",
+      "If surgery needed: RSI (blunt trauma = full stomach)",
+      "Large bore IV x2 (potential for significant hemorrhage)",
+      "Blood products available (cross-matched 4-6 units)",
+      "Standard induction if stable (propofol or etomidate)",
+      "Cell saver for blood conservation",
+      "Damage control surgery if unstable: pack liver, temporary closure, ICU resuscitation",
+      "Definitive repair if stable: hemostasis, debridement, drainage",
+      "Postoperatively: ICU if surgery, floor with telemetry if NOM",
+      "Continue serial exams and hemoglobin monitoring"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "low",
+      "airway": "low",
+      "bleeding": "moderate",
+      "delayed hemorrhage": "moderate"
+    }
+  },
+  {
+    "patient_name": "Kevin O'Brien",
+    "patient_index": 49,
+    "asa_class": "III-E",
+    "surgical_type": "Trauma - Craniotomy for subdural hematoma",
+    "learning_scenarios": [
+      {
+        "section": "Section 6",
+        "topics": ["Head trauma with intoxication", "Subdural hematoma management", "Aspiration risk"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Alcohol intoxication complicates neurologic assessment (GCS unreliable)",
+          "Subdural hematoma: bleeding between dura and arachnoid, often from bridging veins",
+          "Acute SDH requires urgent evacuation if symptomatic or >10 mm thickness",
+          "Fall + head trauma + alcohol = high aspiration risk (depressed airway reflexes)",
+          "Combative patients at risk for self-injury and difficult airway management"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Intoxicated trauma patient assessment", "Subdural hematoma evaluation", "Aspiration risk factors"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Alcohol level may mask or mimic head injury symptoms",
+          "CT brain essential: SDH location, size, midline shift, mass effect",
+          "Assess for other injuries (fall patients often have rib, spine, extremity fractures)",
+          "Full stomach assumed (alcohol delays gastric emptying)",
+          "Coagulopathy possible if chronic alcohol use (liver dysfunction, low platelets)"
+        ]
+      },
+      {
+        "section": "Section 3",
+        "topics": ["Subdural hematoma pathophysiology", "ICP management", "Alcohol effects on anesthesia"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "SDH accumulates slowly, causes gradual ICP increase and brain compression",
+          "Evacuation can cause rapid decompression and rebleeding (controlled drainage)",
+          "Acute alcohol intoxication decreases anesthetic requirements (potentiates GABA)",
+          "Chronic alcohol use increases anesthetic requirements (enzyme induction, tolerance)",
+          "Alcohol withdrawal risk postoperatively (seizures, DTs)"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Alcohol intoxication complicating assessment", "Combative behavior", "Subdural hematoma", "High aspiration risk", "Potential withdrawal"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial line", "Core temperature", "Foley catheter", "ETCO2 continuous", "Alcohol level", "Coagulation studies", "ICP monitor postoperatively"],
+    "anesthetic_considerations": [
+      "RSI mandatory (full stomach + combative + head injury)",
+      "Adequate sedation before induction (avoid hypertension and combativeness during induction)",
+      "Ketamine OK for sedation (maintains hemodynamics, less respiratory depression)",
+      "Etomidate 0.3 mg/kg or propofol 1-2 mg/kg for induction (reduced doses if intoxicated)",
+      "Rocuronium 1-1.2 mg/kg for paralysis",
+      "Maintain CPP >60 mmHg (MAP - ICP)",
+      "Avoid hypertension during evacuation (risk of rebleeding)",
+      "Check coagulation and correct if abnormal (FFP, platelets if needed)",
+      "Maintain normocapnia (PaCO2 35-40 mmHg)",
+      "Benzodiazepine protocol for alcohol withdrawal prevention",
+      "Plan for postoperative mechanical ventilation and ICP monitoring",
+      "ICU admission with close neurologic monitoring"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "moderate",
+      "airway": "high",
+      "neurologic": "high",
+      "aspiration": "very high",
+      "withdrawal": "moderate"
+    }
+  }
+]

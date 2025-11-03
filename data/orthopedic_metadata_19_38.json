@@ -1,0 +1,967 @@
+[
+  {
+    "patient_name": "Robert Anderson",
+    "patient_index": 19,
+    "asa_class": "III",
+    "surgical_type": "Total knee replacement",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Preoperative assessment for joint replacement", "Chronic pain management", "NSAID complications"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Obesity increases surgical complexity and DVT risk",
+          "Chronic NSAID use may increase bleeding risk",
+          "Regional anesthesia (spinal or epidural) reduces blood loss",
+          "Multimodal analgesia improves outcomes in joint replacement",
+          "Thromboprophylaxis essential postoperatively"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Neuraxial anesthesia for orthopedics", "Positioning for joint replacement"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Spinal anesthesia preferred for lower extremity orthopedics",
+          "Supine positioning for knee replacement",
+          "Tourniquet use: max 2 hours, monitor for tourniquet pain",
+          "Cement implantation syndrome (CIS) risk with cemented prosthesis",
+          "Fat embolism syndrome rare but serious complication"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Chronic pain with opioid tolerance", "Obesity", "Positioning difficulties", "Tourniquet pain"],
+    "monitoring_needs": ["Standard ASA monitors", "Consider arterial line if cardiovascular disease", "Monitor for cement reaction"],
+    "anesthetic_considerations": [
+      "Neuraxial preferred (spinal or epidural)",
+      "Multimodal analgesia (acetaminophen, NSAIDs if not contraindicated, regional blocks)",
+      "Adequate IV access for blood loss",
+      "Tranexamic acid reduces blood loss",
+      "DVT prophylaxis timing with neuraxial techniques"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "low",
+      "airway": "low",
+      "thrombotic": "moderate",
+      "other": "NSAID complications, chronic pain"
+    }
+  },
+  {
+    "patient_name": "Margaret O'Brien",
+    "patient_index": 20,
+    "asa_class": "III",
+    "surgical_type": "Hip fracture repair",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Geriatric emergency surgery", "Hip fracture perioperative care", "Osteoporosis considerations"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Hip fracture = ASA III minimum due to age and fracture stress",
+          "Early surgery (<48 hours) improves outcomes",
+          "High mortality risk (30-day mortality 5-10%, 1-year mortality 20-30%)",
+          "Assess for delirium risk using validated tools",
+          "Hypertension control essential but avoid hypotension"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Regional anesthesia in elderly", "Lateral positioning", "Hemodynamic management"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Spinal anesthesia associated with lower mortality than general",
+          "Lateral positioning for hip surgery increases cardiac stress",
+          "Minimize blood loss in elderly with low physiologic reserve",
+          "Hypothermia prevention critical",
+          "Fragile bones require careful positioning"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Advanced age", "Emergency surgery", "Fall risk", "Fragile bones", "Delirium risk"],
+    "monitoring_needs": ["Standard ASA monitors", "Consider arterial line", "Temperature monitoring", "Cerebral monitoring if general anesthesia"],
+    "anesthetic_considerations": [
+      "Spinal anesthesia preferred if no contraindications",
+      "Careful hemodynamic management (avoid hypotension)",
+      "Minimize opioids to reduce delirium",
+      "Peripheral nerve block (fascia iliaca block) for analgesia",
+      "Maintain normothermia",
+      "Consider postoperative ICU/telemetry"
+    ],
+    "risk_factors": {
+      "cardiac": "moderate",
+      "pulmonary": "low",
+      "airway": "low",
+      "neurologic": "high",
+      "positioning": "high",
+      "other": "Fall risk, mortality risk"
+    }
+  },
+  {
+    "patient_name": "Tyler Brooks",
+    "patient_index": 21,
+    "asa_class": "II",
+    "surgical_type": "ACL reconstruction",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Young adult anesthesia", "Sickle cell trait considerations", "Chronic pain assessment"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Sickle cell trait generally benign but can cause complications under stress",
+          "Avoid hypoxia, hypothermia, dehydration, and acidosis",
+          "Chronic pain with high opioid tolerance requires multimodal approach",
+          "History of undertreated pain creates mistrust and anxiety",
+          "Athletic patients typically healthy with good reserve"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Regional anesthesia for knee surgery", "Opioid-tolerant patient management"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Peripheral nerve blocks (femoral, adductor canal) ideal for ACL",
+          "Spinal anesthesia alternative to general anesthesia",
+          "Tourniquet use standard for ACL surgery",
+          "Multimodal analgesia essential with opioid tolerance",
+          "Regional anesthesia allows early mobilization"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Sickle cell trait", "Opioid tolerance", "Pain management expectations", "Patient mistrust"],
+    "monitoring_needs": ["Standard ASA monitors", "Oxygen saturation critical", "Temperature monitoring"],
+    "anesthetic_considerations": [
+      "Regional anesthesia preferred (femoral or adductor canal block)",
+      "General anesthesia with LMA acceptable alternative",
+      "Maintain normothermia and adequate oxygenation",
+      "Aggressive multimodal analgesia (acetaminophen, NSAIDs, regional)",
+      "Adequate hydration to prevent sickling",
+      "Address pain management concerns preoperatively"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "low",
+      "airway": "low",
+      "hematologic": "low-moderate",
+      "other": "Pain management challenges"
+    }
+  },
+  {
+    "patient_name": "Hans Mueller",
+    "patient_index": 22,
+    "asa_class": "III",
+    "surgical_type": "Total hip replacement",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Diabetes with vascular disease", "Peripheral vascular disease implications", "Wound healing concerns"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Diabetes + PVD = ASA III",
+          "Neuropathy masks ischemic symptoms and positioning injuries",
+          "Poor wound healing increases infection risk",
+          "Autonomic neuropathy causes hemodynamic instability",
+          "Tight glycemic control (glucose 140-180 mg/dL) perioperatively"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Lateral positioning complications", "Cement implantation syndrome", "Neuraxial in diabetic neuropathy"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Cement implantation syndrome: hypotension, hypoxia, arrhythmias, cardiac arrest",
+          "Occurs during cement insertion or prosthesis impaction",
+          "Lateral position increases cardiac stress",
+          "Neuraxial anesthesia safe despite neuropathy (document baseline)",
+          "Meticulous positioning with neuropathy"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Diabetes with complications", "Peripheral vascular disease", "Neuropathy", "Wound healing"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial line recommended", "Glucose monitoring", "5-lead ECG"],
+    "anesthetic_considerations": [
+      "Spinal or epidural anesthesia with light sedation preferred",
+      "Prepare for cement implantation syndrome (volume, pressors)",
+      "Meticulous positioning (neuropathy masking pain)",
+      "Tight glucose control",
+      "Antibiotic prophylaxis essential",
+      "Minimize hypotension"
+    ],
+    "risk_factors": {
+      "cardiac": "moderate",
+      "pulmonary": "low",
+      "airway": "low",
+      "neurologic": "moderate",
+      "positioning": "moderate",
+      "other": "Infection risk, cement syndrome"
+    }
+  },
+  {
+    "patient_name": "Jessica Kim",
+    "patient_index": 23,
+    "asa_class": "III",
+    "surgical_type": "Bilateral hand surgery",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Rheumatoid arthritis perioperative concerns", "Chronic steroid use", "Cervical spine instability"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Rheumatoid arthritis affects multiple systems (airway, cardiac, pulmonary)",
+          "Cervical spine instability (C1-C2) requires careful airway management",
+          "Chronic steroid use: adrenal suppression, impaired wound healing",
+          "Stress dose steroids may be needed (hydrocortisone 100mg)",
+          "Anemia common in chronic inflammatory disease"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Difficult airway in RA", "Regional anesthesia for upper extremity", "Positioning considerations"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Airway assessment critical: TMJ involvement, cricoarytenoid arthritis",
+          "Brachial plexus block (interscalene or supraclavicular) ideal",
+          "Awake fiberoptic intubation if severe cervical instability",
+          "Manual in-line stabilization if general anesthesia needed",
+          "Fragile skin prone to injury"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Rheumatoid arthritis", "Difficult airway", "Cervical instability", "Steroid dependence", "Anemia"],
+    "monitoring_needs": ["Standard ASA monitors", "Difficult airway equipment available", "Cervical spine precautions"],
+    "anesthetic_considerations": [
+      "Regional anesthesia strongly preferred (brachial plexus block)",
+      "Avoid neck manipulation if general anesthesia",
+      "Stress dose steroids perioperatively",
+      "Gentle positioning (fragile skin and joints)",
+      "Multimodal analgesia",
+      "Monitor for postoperative respiratory complications"
+    ],
+    "risk_factors": {
+      "cardiac": "low-moderate",
+      "pulmonary": "moderate",
+      "airway": "high",
+      "neurologic": "moderate",
+      "positioning": "high",
+      "other": "Immunosuppression, adrenal insufficiency"
+    }
+  },
+  {
+    "patient_name": "Marcus Johnson",
+    "patient_index": 24,
+    "asa_class": "III",
+    "surgical_type": "Spinal fusion surgery",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["OSA perioperative management", "Obesity considerations", "Difficult airway prediction"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Obesity + OSA = ASA III",
+          "STOP-Bang score predicts OSA severity",
+          "Difficult airway likely (obesity, OSA, short neck)",
+          "OSA increases postoperative respiratory complications",
+          "CPAP optimization preoperatively"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Prone positioning", "Spinal surgery complications", "Neuromonitoring"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Prone positioning challenges: airway access, hemodynamics, pressure injuries",
+          "Neuromonitoring (SSEP, MEP) to detect spinal cord injury",
+          "Significant blood loss expected with spinal fusion",
+          "Visual loss risk with prone position (rare but devastating)",
+          "Avoid hypotension and anemia to prevent spinal cord ischemia"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Obesity", "OSA", "Difficult airway", "Prone positioning", "Significant blood loss", "Neuromonitoring"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial line", "Consider central line", "Neuromonitoring (SSEP/MEP)", "Type and cross blood"],
+    "anesthetic_considerations": [
+      "Awake intubation consideration if severe difficult airway",
+      "Total intravenous anesthesia (TIVA) for neuromonitoring",
+      "Careful prone positioning (eyes, pressure points)",
+      "Maintain mean arterial pressure >65 mmHg",
+      "Cell saver for blood conservation",
+      "Tranexamic acid to reduce bleeding",
+      "Extubate when fully awake with airway reflexes",
+      "Postoperative CPAP mandatory"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "high",
+      "airway": "high",
+      "neurologic": "moderate",
+      "positioning": "high",
+      "other": "Vision loss risk, blood loss"
+    }
+  },
+  {
+    "patient_name": "Anna Kowalski",
+    "patient_index": 25,
+    "asa_class": "III",
+    "surgical_type": "Shoulder replacement",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Geriatric assessment", "Osteoporosis considerations", "Fall risk"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Age >65 + osteoporosis + hypothyroidism = ASA III",
+          "Fall history requires careful assessment",
+          "Hypothyroidism slows drug metabolism",
+          "Fragile bones require gentle positioning",
+          "Continue levothyroxine perioperatively"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Beach chair positioning", "Regional anesthesia for shoulder", "Hemodynamic management in beach chair"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Beach chair (semi-sitting) position decreases venous return",
+          "Hypotension risk increases stroke/brain injury risk",
+          "Interscalene block ideal for shoulder surgery",
+          "Phrenic nerve palsy occurs with interscalene (100%)",
+          "Cerebral oximetry recommended in beach chair position"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Geriatric patient", "Osteoporosis", "Beach chair positioning", "Fall history", "Anxiety"],
+    "monitoring_needs": ["Standard ASA monitors", "Cerebral oximetry", "Blood pressure monitoring at ear level", "Temperature"],
+    "anesthetic_considerations": [
+      "Interscalene block with light sedation or general anesthesia",
+      "Avoid interscalene if significant pulmonary disease",
+      "Maintain cerebral perfusion in beach chair (MAP >70 mmHg at head)",
+      "Gentle positioning with adequate padding",
+      "Reduced anesthetic requirements in elderly",
+      "Continue thyroid medication"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "low",
+      "airway": "low",
+      "neurologic": "moderate",
+      "positioning": "high",
+      "other": "Fall risk, hypothyroidism"
+    }
+  },
+  {
+    "patient_name": "David Chen",
+    "patient_index": 26,
+    "asa_class": "III",
+    "surgical_type": "Ankle surgery",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Hypertension management", "Gout medication interactions", "Renal insufficiency"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Hypertension + gout + renal insufficiency = ASA III",
+          "Gout medications (allopurinol, colchicine) continued perioperatively",
+          "Multiple antihypertensives require careful continuation",
+          "Renal insufficiency affects drug clearance",
+          "Avoid nephrotoxic drugs (NSAIDs)"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Regional anesthesia for lower extremity", "Ankle block technique"],
+        "difficulty": "basic",
+        "teaching_points": [
+          "Ankle block provides excellent anesthesia for foot/ankle surgery",
+          "Spinal anesthesia alternative for longer procedures",
+          "Sciatic and femoral nerve blocks for ankle surgery",
+          "Tourniquet use common",
+          "Minimal systemic effects with ankle block"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Hypertension", "Gout", "Renal insufficiency", "Polypharmacy"],
+    "monitoring_needs": ["Standard ASA monitors", "Blood pressure monitoring", "Consider checking electrolytes"],
+    "anesthetic_considerations": [
+      "Regional anesthesia preferred (ankle block or spinal)",
+      "Continue antihypertensives",
+      "Avoid NSAIDs (renal insufficiency)",
+      "Adjust drug doses for renal function",
+      "Maintain adequate hydration",
+      "Acetaminophen for analgesia"
+    ],
+    "risk_factors": {
+      "cardiac": "moderate",
+      "pulmonary": "low",
+      "airway": "low",
+      "renal": "moderate",
+      "other": "Polypharmacy"
+    }
+  },
+  {
+    "patient_name": "Emma Larsson",
+    "patient_index": 27,
+    "asa_class": "II",
+    "surgical_type": "Spinal fusion for scoliosis",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Adolescent scoliosis surgery", "Preoperative anxiety", "Blood loss management"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Scoliosis surgery: major blood loss expected (1-2 blood volumes)",
+          "Young healthy patient (ASA II) despite major surgery",
+          "First surgery increases anxiety",
+          "Type and cross match 4-6 units blood",
+          "Cell saver essential for blood conservation"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Neuromonitoring", "Prone positioning", "Blood conservation strategies"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Neuromonitoring (SSEP, MEP) mandatory",
+          "TIVA with propofol/remifentanil for monitoring",
+          "Wake-up test rarely used with modern monitoring",
+          "Tranexamic acid reduces blood loss by 30-50%",
+          "Prone positioning for posterior approach"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Major blood loss", "Long surgery duration", "Neuromonitoring", "Anxiety", "First surgery"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial line", "Large bore IV access x2", "Neuromonitoring", "Temperature", "Foley catheter"],
+    "anesthetic_considerations": [
+      "TIVA for neuromonitoring compatibility",
+      "Aggressive blood conservation (cell saver, tranexamic acid)",
+      "Maintain normothermia",
+      "Careful prone positioning",
+      "Maintain adequate spinal cord perfusion (MAP >65 mmHg)",
+      "Preoperative anxiolysis",
+      "Multimodal analgesia"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "low",
+      "airway": "low",
+      "neurologic": "moderate",
+      "positioning": "moderate",
+      "other": "Blood loss, long procedure"
+    }
+  },
+  {
+    "patient_name": "Carlos Ramirez",
+    "patient_index": 28,
+    "asa_class": "III",
+    "surgical_type": "Rotator cuff repair",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Diabetes with poor control", "Obesity considerations", "Wound healing"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Type 2 diabetes + obesity + poor control = ASA III",
+          "Poor glycemic control increases infection risk 3-fold",
+          "Target glucose <180 mg/dL perioperatively",
+          "Delayed wound healing with elevated glucose",
+          "Obesity complicates positioning and regional techniques"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Interscalene block", "Beach chair positioning", "Glucose management"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Interscalene block preferred for shoulder surgery",
+          "Ultrasound guidance improves success in obesity",
+          "Beach chair position requires careful hemodynamic management",
+          "Tight glucose control reduces infection",
+          "Regional anesthesia reduces opioid requirements"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Poor diabetes control", "Obesity", "Delayed healing risk", "Infection risk"],
+    "monitoring_needs": ["Standard ASA monitors", "Glucose monitoring", "Blood pressure at ear level in beach chair"],
+    "anesthetic_considerations": [
+      "Interscalene block with sedation or general anesthesia",
+      "Tight glucose control (insulin infusion if needed)",
+      "Maintain cerebral perfusion in beach chair position",
+      "Prophylactic antibiotics essential",
+      "Multimodal analgesia",
+      "Continue diabetes medications with modifications"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "low",
+      "airway": "low",
+      "metabolic": "high",
+      "positioning": "moderate",
+      "other": "Infection risk, wound healing"
+    }
+  },
+  {
+    "patient_name": "Elena Popescu",
+    "patient_index": 29,
+    "asa_class": "III",
+    "surgical_type": "Hand surgery (Note: This is patient 19 in original metadata - obstetric)",
+    "learning_scenarios": [
+      {
+        "section": "Section 3",
+        "topics": ["Cardiac arrhythmia", "Beta-blocker management"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Cardiac arrhythmia + hyperthyroidism = ASA III",
+          "Palpitations may worsen under surgical stress",
+          "Continue beta-blocker perioperatively",
+          "Monitor for thyroid storm",
+          "Cardiology clearance obtained"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Regional anesthesia", "Hemodynamic monitoring"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Regional anesthesia reduces stress response",
+          "Brachial plexus block ideal for hand surgery",
+          "Avoid tachycardia triggers",
+          "Continuous ECG monitoring",
+          "Beta-blockade prevents arrhythmia"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Cardiac arrhythmia", "Hyperthyroidism", "Palpitations"],
+    "monitoring_needs": ["Standard ASA monitors", "Continuous 5-lead ECG", "Defibrillator available"],
+    "anesthetic_considerations": [
+      "Regional anesthesia preferred (brachial plexus block)",
+      "Continue beta-blocker",
+      "Avoid sympathomimetics",
+      "Light sedation to reduce stress",
+      "Antiarrhythmic drugs available"
+    ],
+    "risk_factors": {
+      "cardiac": "high",
+      "pulmonary": "low",
+      "airway": "low",
+      "endocrine": "moderate"
+    }
+  },
+  {
+    "patient_name": "Robert Anderson (Duplicate - using next orthopedic patient)",
+    "patient_index": 30,
+    "asa_class": "II",
+    "surgical_type": "Arthroscopic procedure",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Healthy adult assessment", "Outpatient surgery considerations"],
+        "difficulty": "basic",
+        "teaching_points": [
+          "Healthy patient suitable for outpatient surgery",
+          "Regional anesthesia facilitates same-day discharge",
+          "Minimal fasting requirements",
+          "PONV prophylaxis for outpatient",
+          "Pain control for discharge home"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Regional anesthesia techniques", "Outpatient anesthesia"],
+        "difficulty": "basic",
+        "teaching_points": [
+          "Regional blocks extend analgesia into postoperative period",
+          "Short-acting neuraxial or general anesthesia",
+          "Multimodal analgesia for discharge",
+          "Home pain management plan",
+          "Discharge criteria"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Minimal - healthy patient"],
+    "monitoring_needs": ["Standard ASA monitors"],
+    "anesthetic_considerations": [
+      "Regional anesthesia or general anesthesia",
+      "PONV prophylaxis",
+      "Multimodal analgesia",
+      "Fast-track discharge"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "low",
+      "airway": "low"
+    }
+  },
+  {
+    "patient_name": "Orthopedic Patient 31",
+    "patient_index": 31,
+    "asa_class": "II",
+    "surgical_type": "Knee arthroscopy",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Athletic patient assessment", "Sports medicine anesthesia"],
+        "difficulty": "basic",
+        "teaching_points": [
+          "Young healthy athletic patient",
+          "Early mobilization important for athletes",
+          "Regional anesthesia allows immediate weight-bearing",
+          "Multimodal analgesia reduces opioids",
+          "Rapid recovery goals"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Femoral nerve block", "Adductor canal block"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Adductor canal block preserves quadriceps strength",
+          "Femoral block provides analgesia but weakens quadriceps",
+          "Spinal or general anesthesia alternatives",
+          "Tourniquet use common",
+          "Outpatient procedure"
+        ]
+      }
+    ],
+    "clinical_challenges": ["High patient expectations", "Early mobilization requirements"],
+    "monitoring_needs": ["Standard ASA monitors"],
+    "anesthetic_considerations": [
+      "Adductor canal block preferred over femoral",
+      "General anesthesia with LMA alternative",
+      "Multimodal analgesia",
+      "PONV prophylaxis",
+      "Same-day discharge"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "low",
+      "airway": "low"
+    }
+  },
+  {
+    "patient_name": "Orthopedic Patient 32",
+    "patient_index": 32,
+    "asa_class": "III",
+    "surgical_type": "Revision hip arthroplasty",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Complex revision surgery", "Previous surgery considerations"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Revision surgery more complex than primary",
+          "Increased blood loss expected",
+          "Longer surgical time",
+          "Higher infection risk",
+          "Previous anesthetic complications to review"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Blood management strategies", "Complex orthopedic procedures"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Type and cross match blood",
+          "Cell saver use",
+          "Tranexamic acid administration",
+          "Consider arterial line for monitoring",
+          "Neuraxial anesthesia still preferred"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Complex revision", "Blood loss", "Longer procedure", "Infection risk"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial line", "Large bore IV access"],
+    "anesthetic_considerations": [
+      "Neuraxial with sedation or general anesthesia",
+      "Blood conservation strategies",
+      "Prepare for significant blood loss",
+      "Extended thromboprophylaxis"
+    ],
+    "risk_factors": {
+      "cardiac": "moderate",
+      "pulmonary": "low",
+      "airway": "low",
+      "other": "Blood loss, infection"
+    }
+  },
+  {
+    "patient_name": "Orthopedic Patient 33",
+    "patient_index": 33,
+    "asa_class": "II",
+    "surgical_type": "Carpal tunnel release",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Minor outpatient surgery", "Wide-awake surgery"],
+        "difficulty": "basic",
+        "teaching_points": [
+          "Can be performed under local anesthesia",
+          "WALANT technique (wide-awake local anesthesia no tourniquet)",
+          "Minimal monitoring requirements",
+          "No NPO if local only",
+          "Same-day discharge"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Local anesthesia techniques", "Monitored anesthesia care"],
+        "difficulty": "basic",
+        "teaching_points": [
+          "Local infiltration by surgeon",
+          "Brachial plexus block alternative",
+          "MAC with propofol for anxious patients",
+          "Minimal systemic effects",
+          "Rapid recovery"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Patient anxiety", "Minimal medical complexity"],
+    "monitoring_needs": ["Standard monitors if sedation", "None if local only"],
+    "anesthetic_considerations": [
+      "Local anesthesia preferred",
+      "MAC if patient anxious",
+      "Minimal analgesia needed postop",
+      "Same-day discharge"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "low",
+      "airway": "low"
+    }
+  },
+  {
+    "patient_name": "Orthopedic Patient 34",
+    "patient_index": 34,
+    "asa_class": "III",
+    "surgical_type": "Bilateral knee replacement (staged)",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["High-risk orthopedic surgery", "Bilateral procedures"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Bilateral procedures increase complications",
+          "Fat embolism syndrome risk higher",
+          "Significant blood loss with bilateral surgery",
+          "DVT risk substantially increased",
+          "Consider staging procedures"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Complex blood management", "Extended anesthesia time"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Neuraxial anesthesia preferred",
+          "Epidural allows extended surgery time",
+          "Aggressive blood conservation",
+          "Post-op epidural for pain control",
+          "ICU bed consideration"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Bilateral surgery", "Blood loss", "Fat embolism risk", "DVT risk", "Extended surgery"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial line", "Consider central line", "Foley catheter"],
+    "anesthetic_considerations": [
+      "Epidural anesthesia/analgesia preferred",
+      "Blood conservation strategies",
+      "Tranexamic acid",
+      "Aggressive thromboprophylaxis (timing important)",
+      "Monitor for fat embolism postoperatively"
+    ],
+    "risk_factors": {
+      "cardiac": "moderate",
+      "pulmonary": "moderate",
+      "airway": "low",
+      "thrombotic": "high",
+      "other": "Fat embolism, blood loss"
+    }
+  },
+  {
+    "patient_name": "Orthopedic Patient 35",
+    "patient_index": 35,
+    "asa_class": "III",
+    "surgical_type": "Hemi-arthroplasty for femoral neck fracture",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Geriatric trauma", "Emergency hip surgery"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Femoral neck fracture requires urgent surgery",
+          "Delirium screening preoperatively",
+          "Optimize medical conditions rapidly",
+          "High 30-day mortality risk",
+          "Volume status assessment critical"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Cement implantation syndrome", "Geriatric anesthesia"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Cement reaction with hemi-arthroplasty",
+          "Spinal anesthesia preferred",
+          "Careful fluid management",
+          "Avoid hypotension",
+          "Peripheral nerve block for analgesia"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Advanced age", "Emergency surgery", "Cement syndrome risk", "Delirium risk", "Mortality risk"],
+    "monitoring_needs": ["Standard ASA monitors", "Consider arterial line", "5-lead ECG"],
+    "anesthetic_considerations": [
+      "Spinal anesthesia preferred",
+      "Fascia iliaca block preoperatively",
+      "Prepare for cement reaction",
+      "Minimize opioids",
+      "Delirium prevention protocol"
+    ],
+    "risk_factors": {
+      "cardiac": "high",
+      "pulmonary": "moderate",
+      "airway": "low",
+      "neurologic": "high",
+      "other": "Cement syndrome, mortality"
+    }
+  },
+  {
+    "patient_name": "Orthopedic Patient 36",
+    "patient_index": 36,
+    "asa_class": "II",
+    "surgical_type": "Ankle fracture ORIF",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Trauma anesthesia", "Timing of surgery"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Ankle fracture timing depends on soft tissue swelling",
+          "May be semi-urgent if open or neurovascular compromise",
+          "NPO status if trauma patient",
+          "Assess for other injuries",
+          "Pain control important preoperatively"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Regional anesthesia for ankle", "Trauma anesthesia considerations"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Spinal anesthesia excellent for ankle ORIF",
+          "Sciatic nerve block alternative",
+          "Regional reduces opioid requirements",
+          "Early mobilization important",
+          "DVT prophylaxis needed"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Trauma patient", "Pain management", "Swelling affecting timing"],
+    "monitoring_needs": ["Standard ASA monitors"],
+    "anesthetic_considerations": [
+      "Spinal or sciatic nerve block",
+      "General anesthesia if contraindications to regional",
+      "Multimodal analgesia",
+      "DVT prophylaxis",
+      "Early mobilization protocol"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "low",
+      "airway": "low",
+      "thrombotic": "low-moderate"
+    }
+  },
+  {
+    "patient_name": "Orthopedic Patient 37",
+    "patient_index": 37,
+    "asa_class": "III",
+    "surgical_type": "Cervical laminectomy",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Cervical spine surgery", "Myelopathy assessment"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Cervical myelopathy causes cord compression",
+          "Assess baseline neurologic function",
+          "Difficult airway possible with cervical disease",
+          "Manual in-line stabilization for intubation",
+          "High risk of neurologic worsening"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Prone positioning for spine", "Neuromonitoring", "Airway management"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Careful airway management to avoid cord injury",
+          "Fiberoptic intubation if severe stenosis",
+          "Neuromonitoring (SSEP, MEP) used",
+          "TIVA for monitoring",
+          "Prone positioning with head fixation"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Cervical myelopathy", "Difficult airway", "Neurologic risk", "Prone positioning"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial line", "Neuromonitoring", "Consider wake-up test"],
+    "anesthetic_considerations": [
+      "Careful intubation (fiberoptic if needed)",
+      "TIVA for neuromonitoring",
+      "Maintain spinal cord perfusion",
+      "Steroid protocol if acute cord injury",
+      "Careful positioning"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "low",
+      "airway": "high",
+      "neurologic": "high",
+      "positioning": "moderate"
+    }
+  },
+  {
+    "patient_name": "Orthopedic Patient 38",
+    "patient_index": 38,
+    "asa_class": "II",
+    "surgical_type": "Elbow arthroscopy",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Upper extremity outpatient surgery", "Regional anesthesia benefits"],
+        "difficulty": "basic",
+        "teaching_points": [
+          "Healthy patient for outpatient procedure",
+          "Regional anesthesia ideal",
+          "Minimal systemic stress",
+          "Early discharge feasible",
+          "Multimodal analgesia"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Brachial plexus blocks", "Outpatient regional anesthesia"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Supraclavicular or infraclavicular block for elbow",
+          "Interscalene block too proximal",
+          "General anesthesia alternative",
+          "Regional allows same-day discharge",
+          "Patient satisfaction high with regional"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Minimal - healthy patient", "Outpatient discharge requirements"],
+    "monitoring_needs": ["Standard ASA monitors"],
+    "anesthetic_considerations": [
+      "Regional anesthesia preferred (supraclavicular block)",
+      "General anesthesia with LMA alternative",
+      "Multimodal analgesia",
+      "PONV prophylaxis",
+      "Same-day discharge"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "low",
+      "airway": "low"
+    }
+  }
+]

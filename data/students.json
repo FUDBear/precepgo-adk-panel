@@ -1,0 +1,228 @@
+{
+  "students": [
+    {
+      "id": "a1b2c3d4",
+      "name": "Isabella Rossi",
+      "hospital": "Duke University Hospital, Durham, NC",
+      "ethnicity": "Caucasian",
+      "class_standing": "1st Year",
+      "background": {
+        "education": "BSN from University of North Carolina, Chapel Hill",
+        "nursing_experience": "2 years in Cardiovascular ICU (CVICU)",
+        "specialties": ["Cardiac Critical Care"],
+        "certifications": ["CCRN", "ACLS", "BLS"]
+      },
+      "clinical_history": {
+        "years_practiced": 2,
+        "units_worked": ["CVICU"],
+        "case_experience": "Managed post-operative open-heart surgery patients, including those with LVADs, IABPs, and on ECMO.",
+        "strengths": ["Hemodynamic monitoring", "Pharmacology"],
+        "areas_for_growth": ["Regional anesthesia techniques", "Pediatric anesthesia"]
+      },
+      "family_background": {
+        "hometown": "Raleigh, NC",
+        "family_in_healthcare": "No - first in family to pursue medicine.",
+        "motivation": "Inspired to become a CRNA after her grandfather underwent a complex open-heart surgery.",
+        "support_system": "Supportive parents and a close-knit group of friends from nursing school."
+      },
+      "personal_interests": ["Running half-marathons", "Cooking Italian food", "Volunteering at a local animal shelter"],
+      "career_goals": "Wants to specialize in cardiac anesthesia at a major academic medical center."
+    },
+    {
+      "id": "e5f6g7h8",
+      "name": "Kenji Tanaka",
+      "hospital": "Harborview Medical Center, Seattle, WA",
+      "ethnicity": "Asian American",
+      "class_standing": "1st Year",
+      "background": {
+        "education": "BSN from University of Washington",
+        "nursing_experience": "3 years in Trauma ICU (TICU)",
+        "specialties": ["Trauma and Emergency Care"],
+        "certifications": ["CCRN", "TNCC", "ACLS", "PALS"]
+      },
+      "clinical_history": {
+        "years_practiced": 3,
+        "units_worked": ["TICU", "Emergency Department"],
+        "case_experience": "Extensive experience with high-acuity trauma patients, managing massive transfusions, and complex airway scenarios.",
+        "strengths": ["Airway management", "Crisis management", "Working in fast-paced environments"],
+        "areas_for_growth": ["Obstetric anesthesia", "Chronic pain management"]
+      },
+      "family_background": {
+        "hometown": "Seattle, WA",
+        "family_in_healthcare": "Yes - father is a pharmacist.",
+        "motivation": "A desire to be at the head of the bed, making critical decisions and providing direct patient care during surgery.",
+        "support_system": "Lives with his partner; his family is local and very supportive."
+      },
+      "personal_interests": ["Mountain biking", "Photography", "Playing guitar"],
+      "career_goals": "Interested in becoming a flight nurse/CRNA for a critical care transport team."
+    },
+    {
+      "id": "i9j0k1l2",
+      "name": "Maria Rodriguez",
+      "hospital": "Parkland Memorial Hospital, Dallas, TX",
+      "ethnicity": "Hispanic/Latino",
+      "class_standing": "2nd Year",
+      "background": {
+        "education": "BSN from Texas Tech University",
+        "nursing_experience": "4 years in Surgical ICU (SICU)",
+        "specialties": ["Surgical Critical Care", "Burn Care"],
+        "certifications": ["CCRN", "ACLS", "BLS"]
+      },
+      "clinical_history": {
+        "years_practiced": 4,
+        "units_worked": ["SICU", "Burn ICU"],
+        "case_experience": "Managed complex post-operative surgical patients, including major abdominal, vascular, and burn surgeries.",
+        "strengths": ["Fluid and electrolyte management", "Wound care", "Patient advocacy"],
+        "areas_for_growth": ["Advanced ECG interpretation", "Neuroanesthesia"]
+      },
+      "family_background": {
+        "hometown": "El Paso, TX",
+        "family_in_healthcare": "No",
+        "motivation": "Wants to provide high-quality care to underserved populations and be a role model for her daughter.",
+        "support_system": "Single mother to a young daughter; relies on her extended family for support."
+      },
+      "personal_interests": ["Dancing salsa", "Spending time with her daughter", "Reading"],
+      "career_goals": "Hopes to work in a community hospital serving a diverse patient population."
+    },
+    {
+      "id": "m3n4o5p6",
+      "name": "David Chen",
+      "hospital": "UCSF Medical Center, San Francisco, CA",
+      "ethnicity": "Asian American",
+      "class_standing": "2nd Year",
+      "background": {
+        "education": "BSN from University of California, Los Angeles (UCLA)",
+        "nursing_experience": "3 years in Neuro ICU",
+        "specialties": ["Neurological Critical Care"],
+        "certifications": ["CCRN", "CNRN", "ACLS"]
+      },
+      "clinical_history": {
+        "years_practiced": 3,
+        "units_worked": ["Neuro ICU"],
+        "case_experience": "Cared for patients with traumatic brain injuries, strokes, and post-operative neurosurgical procedures.",
+        "strengths": ["Neurological assessments", "Understanding of cerebral perfusion pressure"],
+        "areas_for_growth": ["Cardiac anesthesia", "Line placement (central lines, arterial lines)"]
+      },
+      "family_background": {
+        "hometown": "Los Angeles, CA",
+        "family_in_healthcare": "Yes - both parents are physicians.",
+        "motivation": "Fascinated by the pharmacology and physiology of anesthesia.",
+        "support_system": "Married, no children. His wife is a software engineer."
+      },
+      "personal_interests": ["Surfing", "Trying new restaurants", "Traveling"],
+      "career_goals": "Considering a career in academia and research, possibly pursuing a PhD after his DNAP."
+    },
+    {
+      "id": "q7r8s9t0",
+      "name": "Aisha Adebayo",
+      "hospital": "Emory University Hospital, Atlanta, GA",
+      "ethnicity": "African American",
+      "class_standing": "2nd Year",
+      "background": {
+        "education": "BSN from Emory University",
+        "nursing_experience": "5 years in Medical ICU (MICU)",
+        "specialties": ["Medical Critical Care", "Pulmonary Disease"],
+        "certifications": ["CCRN", "ACLS", "PALS"]
+      },
+      "clinical_history": {
+        "years_practiced": 5,
+        "units_worked": ["MICU"],
+        "case_experience": "Managed critically ill patients with sepsis, ARDS, and multi-organ failure.",
+        "strengths": ["Ventilator management", "Differential diagnosis", "Communication with families"],
+        "areas_for_growth": ["Regional anesthesia", "Trauma anesthesia"]
+      },
+      "family_background": {
+        "hometown": "Atlanta, GA",
+        "family_in_healthcare": "Yes - her mother is a registered nurse.",
+        "motivation": "Inspired by her mother's career and wants to advance her practice to the highest level of nursing.",
+        "support_system": "Married with two young children; balances a demanding school schedule with family life."
+      },
+      "personal_interests": ["Gardening", "Family movie nights", "Active in her church community"],
+      "career_goals": "Plans to work in a large, urban hospital and eventually become a clinical instructor."
+    },
+    {
+      "id": "u1v2w3x4",
+      "name": "Omar Al-Jamil",
+      "hospital": "Cleveland Clinic, Cleveland, OH",
+      "ethnicity": "Middle Eastern",
+      "class_standing": "3rd Year",
+      "background": {
+        "education": "BSN from The Ohio State University",
+        "nursing_experience": "6 years in CVICU",
+        "specialties": ["Cardiac Critical Care", "Mechanical Circulatory Support"],
+        "certifications": ["CCRN-CMC", "ACLS", "BLS"]
+      },
+      "clinical_history": {
+        "years_practiced": 6,
+        "units_worked": ["CVICU"],
+        "case_experience": "Expert in managing complex cardiac patients, including heart and lung transplants.",
+        "strengths": ["Advanced hemodynamic monitoring", "ECMO and VAD management", "Pharmacology"],
+        "areas_for_growth": ["Pediatric anesthesia", "Office-based anesthesia"]
+      },
+      "family_background": {
+        "hometown": "Columbus, OH",
+        "family_in_healthcare": "No",
+        "motivation": "A passion for the intricate science of cardiac physiology and anesthesia.",
+        "support_system": "Single, and is the primary caregiver for his aging parents."
+      },
+      "personal_interests": ["Playing soccer", "Watching documentaries", "Learning to play the oud"],
+      "career_goals": "Aspires to be a leader in cardiac anesthesia, working on a specialized cardiac team."
+    },
+    {
+      "id": "y5z6a7b8",
+      "name": "Leilani Kalua",
+      "hospital": "Tripler Army Medical Center, Honolulu, HI",
+      "ethnicity": "Pacific Islander",
+      "class_standing": "3rd Year",
+      "background": {
+        "education": "BSN from University of Hawaii",
+        "nursing_experience": "7 years as an active-duty Army nurse in various ICUs",
+        "specialties": ["Trauma", "Aeromedical Evacuation"],
+        "certifications": ["CCRN", "TNCC", "CFRN", "ACLS", "PALS"]
+      },
+      "clinical_history": {
+        "years_practiced": 7,
+        "units_worked": ["TICU", "Flight Nursing"],
+        "case_experience": "Served in Germany and Afghanistan, managing combat casualties and critical care air transports.",
+        "strengths": ["Leadership", "Working in austere environments", "Difficult airway management"],
+        "areas_for_growth": ["Obstetric and neonatal anesthesia", "Chronic pain"]
+      },
+      "family_background": {
+        "hometown": "Kaneohe, HI",
+        "family_in_healthcare": "Yes - several aunts and uncles are nurses.",
+        "motivation": "Wants to serve fellow soldiers and their families by providing the best possible anesthesia care.",
+        "support_system": "Her husband is also an active-duty soldier. They have a strong military community support system."
+      },
+      "personal_interests": ["Surfing", "Hiking", "Volunteering with military families"],
+      "career_goals": "Continue her career in the military as a CRNA, with the goal of becoming a chief CRNA."
+    },
+    {
+      "id": "c9d0e1f2",
+      "name": "Michael Johnson",
+      "hospital": "Johns Hopkins Hospital, Baltimore, MD",
+      "ethnicity": "African American",
+      "class_standing": "3rd Year",
+      "background": {
+        "education": "BSN from Howard University",
+        "nursing_experience": "8 years in SICU and TICU",
+        "specialties": ["Trauma", "Surgical Critical Care"],
+        "certifications": ["CCRN", "ACLS", "BLS", "ATLS (audited)"]
+      },
+      "clinical_history": {
+        "years_practiced": 8,
+        "units_worked": ["SICU", "TICU"],
+        "case_experience": "Vast experience with a wide range of surgical and trauma patients in a high-acuity, Level 1 trauma center.",
+        "strengths": ["Clinical judgment", "Mentoring junior nurses", "Vascular access"],
+        "areas_for_growth": ["Ambulatory anesthesia", "Economics of healthcare"]
+      },
+      "family_background": {
+        "hometown": "Washington, D.C.",
+        "family_in_healthcare": "No",
+        "motivation": "Saw the impact a CRNA had on his mother during her cancer surgery and was inspired to pursue the profession.",
+        "support_system": "Married; his wife is a lawyer. They are a strong professional couple."
+      },
+      "personal_interests": ["Playing basketball", "Jazz music", "Mentoring inner-city youth"],
+      "career_goals": "Wants to work in a large academic center, combining clinical practice with a role in diversity and inclusion initiatives for the hospital."
+    }
+  ]
+}

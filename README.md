@@ -105,10 +105,10 @@ See dashboard dropdown for complete list!
 
 ## 📖 Documentation
 
-- **BARASH_INTEGRATION.md** - Complete integration guide
-- **BARASH_ONLY_VERIFICATION.md** - Verification test results
-- **IMPROVEMENTS_SUMMARY.md** - Detailed changelog
-- **TEST_RESULTS.md** - Comprehensive test examples
+- **Context/BARASH_INTEGRATION.md** - Complete integration guide
+- **Context/BARASH_ONLY_VERIFICATION.md** - Verification test results
+- **Context/IMPROVEMENTS_SUMMARY.md** - Detailed changelog
+- **Context/TEST_RESULTS.md** - Comprehensive test examples
 
 ## 🏗️ Architecture
 

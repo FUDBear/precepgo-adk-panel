@@ -1,0 +1,627 @@
+[
+  {
+    "patient_name": "Gertrude O'Brien",
+    "patient_index": 99,
+    "asa_class": "III",
+    "surgical_type": "Vascular - Renal artery stenting",
+    "learning_scenarios": [
+      {
+        "section": "Section 5",
+        "topics": ["Renal artery stenosis", "Hypertension management", "Contrast-induced nephropathy prevention"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Renal artery stenosis causes renovascular hypertension",
+          "Blood pressure may improve significantly after revascularization",
+          "Perioperative BP control critical to prevent stroke or cardiac events",
+          "Hydration and minimize contrast to prevent kidney injury"
+        ]
+      },
+      {
+        "section": "Section 2",
+        "topics": ["Antihypertensive pharmacology", "Renal drug clearance"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Continue most antihypertensives perioperatively",
+          "Avoid ACE-I/ARBs on day of procedure due to vasoplegic syndrome risk",
+          "Adjust renally-cleared drugs for kidney function",
+          "Monitor for post-procedure hypertension or hypotension"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Difficult to control hypertension", "Renal insufficiency", "Contrast exposure risk"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial line for continuous BP", "Strict I/O monitoring", "Creatinine and GFR baseline"],
+    "anesthetic_considerations": [
+      "MAC or conscious sedation typical",
+      "Aggressive pre-procedure hydration",
+      "Minimize contrast volume",
+      "Consider N-acetylcysteine or sodium bicarbonate for renal protection",
+      "Tight BP control throughout"
+    ],
+    "risk_factors": {
+      "cardiac": "moderate",
+      "pulmonary": "low",
+      "airway": "low",
+      "renal": "high",
+      "vascular": "high"
+    }
+  },
+  {
+    "patient_name": "Victor Adams",
+    "patient_index": 100,
+    "asa_class": "III",
+    "surgical_type": "ENT - Laryngectomy",
+    "learning_scenarios": [
+      {
+        "section": "Section 6",
+        "topics": ["Shared airway management", "Laryngectomy anesthesia", "Difficult airway"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Laryngectomy creates permanent tracheostomy with total airway separation",
+          "Shared airway requires coordination with surgeon throughout case",
+          "Hoarseness preoperatively indicates vocal cord involvement",
+          "Tumor may cause airway obstruction - have difficult airway equipment ready"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Smoking history assessment", "COPD evaluation", "Cancer staging"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Heavy smoking history increases COPD and CAD risk",
+          "Assess pulmonary function - may need postoperative ventilation",
+          "Cancer patients often malnourished affecting wound healing",
+          "Evaluate for airway distortion or stenosis from tumor"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Awake fiberoptic intubation", "Tracheostomy management"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Consider awake fiberoptic intubation if airway compromise suspected",
+          "After laryngectomy, patient breathes through neck stoma permanently",
+          "Cannot bag-mask ventilate post-laryngectomy - ventilate via stoma",
+          "Humidified oxygen important postoperatively"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Difficult airway from tumor", "Shared airway coordination", "COPD from smoking", "Postoperative airway management"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial line", "Consider CVP if extensive surgery", "Nerve monitoring if neck dissection"],
+    "anesthetic_considerations": [
+      "Have difficult airway cart ready",
+      "Consider awake fiberoptic if tumor causes obstruction",
+      "TIVA vs inhalational based on surgeon preference",
+      "Avoid nitrous oxide (can expand air pockets)",
+      "Plan for tracheostomy at end of case",
+      "Postoperative humidified oxygen to stoma"
+    ],
+    "risk_factors": {
+      "cardiac": "moderate",
+      "pulmonary": "high",
+      "airway": "very high",
+      "bleeding": "moderate"
+    }
+  },
+  {
+    "patient_name": "Denise Harper",
+    "patient_index": 101,
+    "asa_class": "II",
+    "surgical_type": "ENT - Total thyroidectomy",
+    "learning_scenarios": [
+      {
+        "section": "Section 6",
+        "topics": ["Thyroid surgery anesthesia", "Recurrent laryngeal nerve monitoring", "Positioning for thyroid surgery"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Recurrent laryngeal nerve (RLN) injury risk in 1-2% of cases",
+          "Bilateral RLN injury causes airway obstruction from vocal cord adduction",
+          "Unilateral RLN injury causes hoarseness and aspiration risk",
+          "Nerve monitoring requires no or minimal neuromuscular blockade"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Thyroid disease assessment", "Hypocalcemia risk", "Hematoma complications"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Hypoparathyroidism occurs in 3-8% post-thyroidectomy",
+          "Hypocalcemia causes paresthesias, tetany, laryngospasm, seizures",
+          "Check calcium levels postoperatively - monitor Chvostek/Trousseau signs",
+          "Neck hematoma can cause airway compromise - emergent reopening needed"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Extubation after thyroid surgery", "Airway assessment post-thyroidectomy"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Assess for recurrent laryngeal nerve function before extubation",
+          "Perform cuff leak test to assess for airway edema",
+          "Have reintubation equipment immediately available",
+          "Watch for hematoma formation in PACU - can rapidly compromise airway"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Recurrent laryngeal nerve injury risk", "Hypocalcemia", "Postoperative hematoma", "Airway edema"],
+    "monitoring_needs": ["Standard ASA monitors", "Nerve monitoring electrodes (EMG tube or surface)", "Calcium levels postop", "Serial neck assessments"],
+    "anesthetic_considerations": [
+      "Minimize or avoid muscle relaxants after intubation for nerve monitoring",
+      "Use EMG endotracheal tube or surface electrodes",
+      "Head extension positioning - shoulder roll",
+      "Smooth emergence to prevent coughing/straining",
+      "Awake extubation with full return of airway reflexes",
+      "Reintubation equipment at bedside postoperatively"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "low",
+      "airway": "moderate",
+      "neurologic": "moderate",
+      "endocrine": "moderate"
+    }
+  },
+  {
+    "patient_name": "Leonard Rossi",
+    "patient_index": 102,
+    "asa_class": "III",
+    "surgical_type": "ENT - Mandibulectomy with free flap reconstruction",
+    "learning_scenarios": [
+      {
+        "section": "Section 6",
+        "topics": ["Head and neck cancer surgery", "Free flap monitoring", "Prolonged surgery management"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Mandibulectomy with reconstruction is lengthy surgery (8-12 hours)",
+          "Free flap requires meticulous blood pressure and perfusion management",
+          "Microvascular anastomoses sensitive to vasospasm - avoid hypothermia",
+          "Alcohol use increases withdrawal, bleeding, and healing complications"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Alcohol use assessment", "Nutritional status", "Airway evaluation"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Chronic alcohol use causes thiamine deficiency, cardiomyopathy, coagulopathy",
+          "Oral cancer patients often malnourished affecting healing",
+          "Tumor may cause difficult airway - limited mouth opening, tissue distortion",
+          "Assess for airway bleeding or secretions"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Tracheostomy planning", "Flap perfusion management"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Tracheostomy typically performed for airway protection postoperatively",
+          "Maintain MAP 65-80 mmHg for flap perfusion",
+          "Avoid vasoconstrictors if possible to preserve flap blood flow",
+          "Temperature control critical - hypothermia causes vasoconstriction"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Difficult airway", "Prolonged surgery", "Free flap perfusion", "Alcohol withdrawal risk", "Malnutrition"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial line", "CVP or advanced cardiac monitoring", "Temperature probe", "Foley catheter", "Blood glucose"],
+    "anesthetic_considerations": [
+      "Awake fiberoptic intubation if difficult airway anticipated",
+      "Tracheostomy performed at end of case",
+      "Aggressive warming measures - forced air warmer, fluid warmer",
+      "Goal MAP 65-80 mmHg for flap perfusion",
+      "Liberal fluid resuscitation for long case",
+      "Plan for postoperative ICU admission with mechanical ventilation"
+    ],
+    "risk_factors": {
+      "cardiac": "moderate",
+      "pulmonary": "moderate",
+      "airway": "high",
+      "bleeding": "moderate",
+      "flap_failure": "moderate"
+    }
+  },
+  {
+    "patient_name": "Ruth Anderson",
+    "patient_index": 103,
+    "asa_class": "II",
+    "surgical_type": "ENT - Functional endoscopic sinus surgery (FESS)",
+    "learning_scenarios": [
+      {
+        "section": "Section 6",
+        "topics": ["Shared airway surgery", "Bleeding management", "FESS anesthesia"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "FESS requires bloodless field for optimal surgical visualization",
+          "Mild hypotension (MAP 60-70) reduces bleeding but must maintain perfusion",
+          "Head-up positioning (reverse Trendelenburg) decreases venous congestion",
+          "Throat pack placement prevents blood in stomach and reduces PONV"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Asthma management", "Chronic sinusitis implications"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Chronic sinusitis often associated with asthma and nasal polyps",
+          "Aspirin sensitivity triad: asthma, nasal polyps, aspirin sensitivity",
+          "Optimize asthma control preoperatively",
+          "Avoid NSAIDs if aspirin-sensitive"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Controlled hypotension", "Extubation planning"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Controlled hypotension techniques: propofol, remifentanil, beta-blockers",
+          "Avoid coughing/bucking on extubation to prevent bleeding",
+          "Smooth deep extubation vs awake extubation decision",
+          "Confirm throat pack removed before extubation"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Asthma and reactive airway", "Bleeding control", "Nasal polyps", "PONV risk"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial line for controlled hypotension", "Depth of anesthesia monitoring"],
+    "anesthetic_considerations": [
+      "Total IV anesthesia (TIVA) with propofol and remifentanil preferred",
+      "Controlled hypotension with MAP 60-70 mmHg",
+      "Reverse Trendelenburg positioning 10-15 degrees",
+      "Throat pack placement and documentation",
+      "Dexamethasone for polyps and PONV prevention",
+      "Smooth emergence - consider deep extubation in well-controlled asthmatic"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "moderate",
+      "airway": "moderate",
+      "bleeding": "moderate"
+    }
+  },
+  {
+    "patient_name": "Eugene Park",
+    "patient_index": 104,
+    "asa_class": "III",
+    "surgical_type": "ENT - Uvulopalatopharyngoplasty (UPPP)",
+    "learning_scenarios": [
+      {
+        "section": "Section 6",
+        "topics": ["OSA surgery", "Difficult airway in OSA", "Postoperative airway edema"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "UPPP creates significant pharyngeal and palatal edema postoperatively",
+          "OSA patients have difficult airway - redundant tissue, large tongue, narrow pharynx",
+          "High risk of postoperative airway obstruction and desaturation",
+          "STOP-Bang score guides severity assessment"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["OSA assessment", "Obesity complications", "Extubation risk stratification"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "OSA increases risk of difficult mask ventilation and intubation",
+          "Obesity compounds OSA effects - reduced FRC, increased oxygen consumption",
+          "Postoperative opioids dangerous in OSA - respiratory depression",
+          "CPAP therapy should be optimized preoperatively and resumed immediately postop"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["High-risk extubation", "Airway edema assessment", "Multimodal analgesia"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Perform cuff leak test before extubation to assess edema",
+          "Extubate fully awake, sitting up, with full airway reflexes",
+          "Multimodal analgesia to minimize opioids - acetaminophen, NSAIDs, dexamethasone",
+          "Reintubation equipment and personnel must be immediately available"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Severe OSA", "Difficult airway", "Obesity", "Postoperative airway edema", "Pain management without excessive opioids"],
+    "monitoring_needs": ["Standard ASA monitors", "Continuous pulse oximetry postop", "Capnography in PACU", "Consider ICU monitoring"],
+    "anesthetic_considerations": [
+      "Ramped positioning for intubation",
+      "Video laryngoscopy available",
+      "Minimize opioids - use multimodal analgesia",
+      "Dexamethasone 8-10 mg IV for airway edema prevention",
+      "Cuff leak test before extubation",
+      "Fully awake extubation in semi-Fowler position",
+      "CPAP immediately postoperatively",
+      "Extended PACU monitoring or ICU admission"
+    ],
+    "risk_factors": {
+      "cardiac": "moderate",
+      "pulmonary": "high",
+      "airway": "very high",
+      "extubation": "very high"
+    }
+  },
+  {
+    "patient_name": "Gladys Mitchell",
+    "patient_index": 105,
+    "asa_class": "II",
+    "surgical_type": "ENT - Parotidectomy",
+    "learning_scenarios": [
+      {
+        "section": "Section 6",
+        "topics": ["Facial nerve monitoring", "Parotid surgery anesthesia", "Nerve preservation techniques"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Facial nerve (CN VII) runs through parotid gland - injury causes facial paralysis",
+          "Nerve monitoring requires no muscle relaxation after intubation",
+          "Monitor facial nerve integrity with EMG - watch for surgeon alerts",
+          "Patient positioning lateral with head turned - protect eyes and pressure points"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Parotid tumor evaluation", "Hypertension management", "Bleeding risk"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Parotid tumors usually benign (80%) but can be malignant",
+          "Hypertension increases bleeding risk - optimize BP control",
+          "Proximity to carotid artery and jugular vein",
+          "Consider facial nerve dysfunction if pre-existing weakness"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Neuromuscular blockade reversal", "PONV prevention"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Complete reversal of neuromuscular blockade essential",
+          "TOF ratio >0.9 required for safe extubation",
+          "PONV prophylaxis important - head/neck surgery high risk",
+          "Smooth emergence to prevent bleeding from hypertension/coughing"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Facial nerve preservation", "Hypertension control", "Bleeding risk", "Positioning"],
+    "monitoring_needs": ["Standard ASA monitors", "Facial nerve EMG monitoring", "Blood pressure control", "TOF monitoring"],
+    "anesthetic_considerations": [
+      "Avoid or minimize muscle relaxants after intubation",
+      "Use short-acting agents if relaxation needed (rocuronium with sugammadex available)",
+      "Maintain adequate anesthetic depth without relaxation",
+      "Multimodal PONV prophylaxis",
+      "Smooth emergence - control blood pressure",
+      "Full reversal confirmed before extubation"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "low",
+      "airway": "low",
+      "neurologic": "moderate",
+      "bleeding": "moderate"
+    }
+  },
+  {
+    "patient_name": "Chester Brown",
+    "patient_index": 106,
+    "asa_class": "III",
+    "surgical_type": "ENT - Glossectomy with reconstruction",
+    "learning_scenarios": [
+      {
+        "section": "Section 6",
+        "topics": ["Tongue cancer surgery", "Airway reconstruction", "Tracheostomy necessity"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Glossectomy causes significant airway changes - tongue essential for patency",
+          "Partial glossectomy may allow extubation; total requires tracheostomy",
+          "Airway obstruction risk from tongue swelling and loss of anatomy",
+          "Aspiration risk very high postoperatively"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Smoking assessment", "Difficult airway prediction", "Malnutrition evaluation"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Smoking history increases oral cancer risk and COPD",
+          "Tongue tumor can cause difficult intubation - distorted anatomy",
+          "Cancer patients often malnourished and cachexic",
+          "Assess for airway bleeding or secretions"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Awake fiberoptic intubation", "Postoperative airway management"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Consider awake fiberoptic intubation if tumor causes obstruction",
+          "Topical anesthesia and careful sedation for awake intubation",
+          "Plan for tracheostomy at end of case for airway protection",
+          "ICU admission with mechanical ventilation expected"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Difficult airway from tumor", "Aspiration risk", "Postoperative airway obstruction", "Bleeding into airway"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial line", "Consider CVP", "Airway equipment immediately available"],
+    "anesthetic_considerations": [
+      "Awake fiberoptic intubation likely needed",
+      "Have emergency airway equipment ready",
+      "Plan for tracheostomy at end of case",
+      "NG tube placement for nutrition postoperatively",
+      "ICU admission with mechanical ventilation",
+      "Consider free flap if reconstruction - maintain perfusion pressure"
+    ],
+    "risk_factors": {
+      "cardiac": "moderate",
+      "pulmonary": "high",
+      "airway": "very high",
+      "aspiration": "very high",
+      "bleeding": "moderate"
+    }
+  },
+  {
+    "patient_name": "Pearl Lee",
+    "patient_index": 107,
+    "asa_class": "III",
+    "surgical_type": "ENT - Nasopharyngeal mass biopsy",
+    "learning_scenarios": [
+      {
+        "section": "Section 6",
+        "topics": ["Radiation changes", "Difficult airway from radiation", "Shared airway"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Prior radiation causes tissue fibrosis, reduced mouth opening, friable tissue",
+          "Difficult mask ventilation and intubation from radiation changes",
+          "Tissue bleeds easily - gentle laryngoscopy essential",
+          "Edema from impaired lymphatic drainage"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Radiation history assessment", "Difficult airway prediction", "Bleeding risk"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Document radiation dose, timing, and field",
+          "Assess mouth opening, neck mobility, tissue quality",
+          "Previous radiation is major difficult airway predictor",
+          "Friable tissue increases bleeding risk during laryngoscopy"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Awake fiberoptic technique", "Gentle airway management"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Awake fiberoptic intubation safest approach",
+          "Topicalize airway thoroughly - antisialagogue helpful",
+          "Gentle technique to avoid tissue trauma and bleeding",
+          "Have difficult airway cart and backup plans ready"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Radiation-altered anatomy", "Difficult airway", "Friable tissue", "Limited mouth opening"],
+    "monitoring_needs": ["Standard ASA monitors", "Difficult airway equipment ready", "Suction immediately available"],
+    "anesthetic_considerations": [
+      "Awake fiberoptic intubation strongly recommended",
+      "Glycopyrrolate for antisialagogue",
+      "Topical anesthesia to airway - careful sedation",
+      "Video laryngoscopy as backup",
+      "Gentle technique throughout",
+      "Plan for possible bleeding - have suction ready"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "low",
+      "airway": "very high",
+      "bleeding": "moderate"
+    }
+  },
+  {
+    "patient_name": "Vernon Garcia",
+    "patient_index": 108,
+    "asa_class": "II",
+    "surgical_type": "ENT - Vocal cord injection/medialization",
+    "learning_scenarios": [
+      {
+        "section": "Section 6",
+        "topics": ["Vocal cord paralysis", "Aspiration prevention", "Airway protection"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Vocal cord paralysis causes hoarseness and aspiration risk",
+          "Unilateral paralysis impairs glottic closure - aspiration of liquids",
+          "GERD worsens aspiration risk - full stomach precautions",
+          "Vocal cord injection medializes cord to improve voice and swallowing"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Aspiration risk assessment", "GERD management", "NPO guidelines"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "GERD increases aspiration risk - consider RSI",
+          "Aspiration history indicates incompetent airway protection",
+          "Extended NPO time may be appropriate",
+          "Aspiration prophylaxis: H2-blocker, proton pump inhibitor, metoclopramide"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Rapid sequence induction", "Shared airway surgery"],
+        "difficulty": "intermediate",
+        "teaching_points": [
+          "Consider RSI for aspiration risk from GERD and vocal cord dysfunction",
+          "Short procedure - may use LMA or ETT based on aspiration risk",
+          "Surgeon needs access to vocal cords via laryngoscopy",
+          "Coordinate with surgeon for airway access"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Aspiration risk", "GERD", "Vocal cord paralysis", "Shared airway coordination"],
+    "monitoring_needs": ["Standard ASA monitors", "Aspiration precautions"],
+    "anesthetic_considerations": [
+      "Aspiration prophylaxis - consider H2-blocker, metoclopramide",
+      "RSI vs standard induction based on aspiration risk assessment",
+      "ETT vs LMA decision based on risk factors",
+      "Coordinate with surgeon for airway sharing",
+      "Awake extubation with full airway reflexes",
+      "Monitor for aspiration postoperatively"
+    ],
+    "risk_factors": {
+      "cardiac": "low",
+      "pulmonary": "low",
+      "airway": "moderate",
+      "aspiration": "high"
+    }
+  },
+  {
+    "patient_name": "Edna Wilson",
+    "patient_index": 109,
+    "asa_class": "III",
+    "surgical_type": "ENT/Neurosurgery - Acoustic neuroma resection",
+    "learning_scenarios": [
+      {
+        "section": "Section 6",
+        "topics": ["Acoustic neuroma surgery", "Cranial nerve monitoring", "Posterior fossa surgery"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Acoustic neuroma (vestibular schwannoma) arises from CN VIII",
+          "Surgery risks damage to CN VII (facial), CN VIII (hearing), CN V (facial sensation)",
+          "Posterior fossa approach - lateral/semi-sitting positioning",
+          "Long surgery (6-12 hours) with significant physiologic stress"
+        ]
+      },
+      {
+        "section": "Section 5",
+        "topics": ["Cranial nerve function assessment", "Neurosurgical risk evaluation"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Assess baseline facial nerve function (CN VII)",
+          "Document hearing loss severity (CN VIII already affected)",
+          "Evaluate for hydrocephalus or brainstem compression",
+          "Elderly patient - assess cardiac and cerebrovascular disease"
+        ]
+      },
+      {
+        "section": "Section 6",
+        "topics": ["Cranial nerve monitoring", "Positioning complications", "Neurosurgical anesthesia"],
+        "difficulty": "advanced",
+        "teaching_points": [
+          "Facial nerve EMG monitoring requires no muscle relaxation",
+          "BAER (brainstem auditory evoked responses) monitors CN VIII and brainstem",
+          "Lateral position risks brachial plexus injury - careful arm positioning",
+          "Venous air embolism risk in semi-sitting position - precordial Doppler monitoring"
+        ]
+      }
+    ],
+    "clinical_challenges": ["Long surgery duration", "Cranial nerve preservation", "Positioning complications", "Elderly patient", "VAE risk if semi-sitting"],
+    "monitoring_needs": ["Standard ASA monitors", "Arterial line", "CVP", "Facial nerve EMG", "BAER monitoring", "Precordial Doppler if semi-sitting", "Foley catheter"],
+    "anesthetic_considerations": [
+      "Avoid muscle relaxants after intubation for nerve monitoring",
+      "TIVA preferred for reliable neuromonitoring",
+      "Careful positioning - lateral or semi-sitting based on surgeon preference",
+      "Venous air embolism precautions if semi-sitting",
+      "Maintain cerebral perfusion pressure",
+      "Plan for postoperative ICU monitoring",
+      "Consider facial nerve paralysis postoperatively"
+    ],
+    "risk_factors": {
+      "cardiac": "moderate",
+      "pulmonary": "low",
+      "airway": "low",
+      "neurologic": "high",
+      "positioning": "moderate",
+      "VAE": "moderate"
+    }
+  }
+]

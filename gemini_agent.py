@@ -4,6 +4,7 @@ Handles all Gemini API interactions for question generation and content analysis
 """
 
 import os
+import json
 import google.generativeai as genai
 from typing import Dict, Any, Optional, List
 from dotenv import load_dotenv
@@ -240,6 +241,145 @@ Provide a 2-3 sentence explanation that:
             return response.text
         except Exception as e:
             raise Exception(f"Explanation generation failed: {str(e)}")
+    
+    def generate_scenario(
+        self,
+        case: Dict[str, Any],
+        patient: Dict[str, Any],
+        medical_content: str,
+        **kwargs
+    ) -> Dict[str, Any]:
+        """
+        Generate a clinical scenario with 2 decision options based on case, patient, and medical content.
+        
+        Args:
+            case: Case information from cases.json
+            patient: Patient information from patient_templates.json
+            medical_content: Relevant medical content from Vector Search
+            **kwargs: Additional generation parameters
+            
+        Returns:
+            Dictionary with scenario, options, and analysis
+        """
+        temperature = kwargs.get("temperature", 0.7)
+        max_tokens = kwargs.get("max_tokens", 8192)
+        
+        # Build patient summary
+        patient_summary = f"""
+Patient: {patient.get('full_name', 'Patient')}
+Age: {patient.get('age', 'Unknown')} years
+Weight: {patient.get('weight', {}).get('kg', 'Unknown')} kg ({patient.get('weight', {}).get('lbs', 'Unknown')} lbs)
+Comorbidities: {', '.join(patient.get('comorbidities', []))}
+Health Traits: {', '.join(patient.get('health_traits', []))}
+Personality: {patient.get('personality', 'Standard')}
+"""
+        
+        # Build case summary
+        case_summary = f"""
+Case: {case.get('name', 'Surgical Procedure')}
+Description: {case.get('description', '')}
+Keywords: {', '.join(case.get('keywords', []))}
+"""
+        
+        # Limit medical content size
+        medical_content_preview = medical_content[:30000]
+        
+        prompt = f"""You are an expert CRNA clinical scenario designer. Create a realistic clinical scenario based on the following information:
+
+**PATIENT INFORMATION:**
+{patient_summary}
+
+**SURGICAL CASE:**
+{case_summary}
+
+**MEDICAL CONTENT FROM BARASH TEXTBOOK:**
+{medical_content_preview}
+
+**YOUR TASK:**
+Create a clinical scenario with TWO decision options for the CRNA. The scenario should:
+1. Present a realistic clinical situation involving this patient and case
+2. Present a decision point where the CRNA must choose between two approaches
+3. Both options should be plausible and defensible
+4. Base all information on the provided medical content from Barash
+5. Make it educational and challenging for CRNA students
+
+**FORMAT:**
+```json
+{{
+    "scenario": "Detailed scenario description presenting the clinical situation and decision point",
+    "option_a": {{
+        "title": "Brief title for option A",
+        "description": "Detailed description of this approach and rationale",
+        "considerations": ["Consideration 1", "Consideration 2", "Consideration 3"]
+    }},
+    "option_b": {{
+        "title": "Brief title for option B",
+        "description": "Detailed description of this approach and rationale",
+        "considerations": ["Consideration 1", "Consideration 2", "Consideration 3"]
+    }},
+    "best_answer": {{
+        "option": "A" or "B",
+        "rationale": "Comprehensive explanation (3-5 sentences) explaining why this is the best answer, considering patient factors, risks, benefits, evidence-based practice, and clinical guidelines from Barash"
+    }},
+    "learning_points": [
+        "Key learning point 1",
+        "Key learning point 2",
+        "Key learning point 3"
+    ],
+    "references": "References to specific Barash sections/chapters used"
+}}
+```
+
+Generate the scenario now in valid JSON format."""
+        
+        # Configure generation settings
+        generation_config = genai.types.GenerationConfig(
+            temperature=temperature,
+            top_p=0.9,
+            top_k=40,
+            max_output_tokens=max_tokens,
+            response_mime_type="application/json"
+        )
+        
+        # Safety settings
+        safety_settings = [
+            {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
+            {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
+            {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
+            {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
+        ]
+        
+        try:
+            print(f"🤖 Generating scenario with Gemini {self.model_name}...")
+            response = self.model.generate_content(
+                prompt,
+                generation_config=generation_config,
+                safety_settings=safety_settings
+            )
+            
+            # Parse JSON response
+            scenario_data = json.loads(response.text)
+            
+            # Add metadata
+            scenario_data['case'] = {
+                'name': case.get('name'),
+                'code': case.get('code'),
+                'description': case.get('description')
+            }
+            scenario_data['patient'] = {
+                'name': patient.get('full_name'),
+                'age': patient.get('age'),
+                'categories': patient.get('categories', [])
+            }
+            
+            return scenario_data
+        except json.JSONDecodeError as e:
+            raise Exception(f"Failed to parse scenario JSON: {e}. Response: {response.text[:500]}")
+        except Exception as e:
+            error_str = str(e)
+            if "429" in error_str or "quota" in error_str.lower():
+                raise Exception(f"API quota exceeded: {error_str}")
+            raise Exception(f"Gemini API error: {error_str}")
 
 
 # Convenience function for easy importing

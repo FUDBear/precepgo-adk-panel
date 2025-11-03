@@ -53,9 +53,14 @@ BARASH_ONLY_VERIFICATION.md
 # (SECURITY.md should use placeholders only)
 # Note: SECURITY.md itself can be committed, but must not contain real keys
 
-# Large data files (optional - you might want to commit the txt file)
-# data/*.txt
+# Large data files - ignore text files in data directory (Barash content)
+data/**/*.txt
+data/*.txt
 
-# Ignore the entire data directory and all subfiles
-data/
+# But allow JSON files needed by agents
+# Note: We don't ignore data/ directory itself, just specific file types
+# This allows JSON files to be tracked while ignoring large text files
+
+# Vector DB setup scripts and generated files
+vectordb/
 
