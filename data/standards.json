@@ -1,0 +1,549 @@
+{
+    "version": "1.0",
+    "generated_date": "2025-11-03",
+    "description": "COA Standard D mapping to clinical evaluation metrics",
+    "total_standards": 31,
+    "standards": [
+      {
+        "id": "coa_standard_001",
+        "standard": "Be vigilant in the delivery of patient care",
+        "evaluation_metrics": [
+          "pc_01",
+          "pc_02",
+          "pc_03",
+          "pc_04",
+          "pc_05",
+          "pc_06",
+          "pc_07",
+          "pc_08",
+          "pc_09",
+          "pc_10",
+          "pc_11",
+          "pc_12",
+          "pc_13",
+          "perf_01",
+          "perf_02",
+          "perf_04",
+          "perf_05",
+          "perf_06",
+          "perf_07",
+          "perf_08",
+          "perf_09",
+          "perf_10",
+          "perf_11"
+        ]
+      },
+      {
+        "id": "coa_standard_002",
+        "standard": "Refrain from engaging in extraneous activities that abandon or minimize vigilance while providing direct patient care (e.g., texting, reading, emailing, etc.).",
+        "evaluation_metrics": [
+          "perf_08",
+          "perf_09"
+        ]
+      },
+      {
+        "id": "coa_standard_003",
+        "standard": "Conduct a comprehensive equipment check.",
+        "evaluation_metrics": [
+          "pc_01"
+        ]
+      },
+      {
+        "id": "coa_standard_004",
+        "standard": "Protect patients from iatrogenic complications.",
+        "evaluation_metrics": [
+          "pc_01",
+          "pc_02",
+          "pc_03",
+          "pc_04",
+          "pc_05",
+          "pc_06",
+          "pc_07",
+          "pc_08",
+          "pc_09",
+          "pc_10",
+          "pc_11",
+          "pc_12",
+          "pc_13",
+          "perf_01",
+          "perf_02",
+          "perf_03",
+          "perf_04",
+          "perf_05",
+          "perf_06",
+          "perf_07",
+          "perf_08",
+          "perf_09",
+          "perf_10",
+          "perf_11"
+        ]
+      },
+      {
+        "id": "coa_standard_005",
+        "standard": "Provide individualized care throughout the perianesthesia continuum.",
+        "evaluation_metrics": [
+          "pc_01",
+          "pc_02",
+          "pc_03",
+          "pc_04",
+          "pc_05",
+          "pc_06",
+          "pc_07",
+          "pc_08",
+          "pc_09",
+          "pc_10",
+          "pc_11",
+          "pc_12",
+          "pc_13",
+          "perf_01",
+          "perf_02",
+          "perf_03",
+          "perf_04",
+          "perf_05",
+          "perf_06",
+          "perf_07",
+          "perf_08",
+          "perf_09",
+          "perf_10",
+          "perf_11"
+        ]
+      },
+      {
+        "id": "coa_standard_006",
+        "standard": "Deliver culturally competent perianesthesia care.",
+        "evaluation_metrics": [
+          "pc_01",
+          "pc_02",
+          "pc_03",
+          "pc_04",
+          "pc_05",
+          "pc_06",
+          "pc_07",
+          "pc_08",
+          "pc_09",
+          "pc_10",
+          "pc_11",
+          "pc_12",
+          "pc_13",
+          "perf_01",
+          "perf_02",
+          "perf_03",
+          "perf_04",
+          "perf_05",
+          "perf_06",
+          "perf_07",
+          "perf_08",
+          "perf_09",
+          "perf_10",
+          "perf_11"
+        ]
+      },
+      {
+        "id": "coa_standard_007",
+        "standard": "Perform a comprehensive history and physical assessment",
+        "evaluation_metrics": [
+          "pc_02"
+        ]
+      },
+      {
+        "id": "coa_standard_008",
+        "standard": "Administer and manage a variety of regional anesthetics.",
+        "evaluation_metrics": [
+          "pc_05",
+          "perf_01",
+          "perf_02",
+          "perf_03",
+          "perf_04",
+          "perf_05",
+          "perf_06",
+          "perf_07",
+          "perf_08",
+          "perf_09",
+          "perf_10",
+          "perf_11"
+        ]
+      },
+      {
+        "id": "coa_standard_009",
+        "standard": "Apply knowledge to practice in decision making and problem solving.",
+        "evaluation_metrics": [
+          "perf_01",
+          "perf_02",
+          "perf_04",
+          "perf_05"
+        ]
+      },
+      {
+        "id": "coa_standard_010",
+        "standard": "Provide nurse anesthesia services based on evidence-based principles.",
+        "evaluation_metrics": [
+          "perf_01",
+          "perf_02",
+          "perf_06",
+          "perf_07",
+          "perf_08",
+          "perf_09"
+        ]
+      },
+      {
+        "id": "coa_standard_011",
+        "standard": "Perform a preanesthetic assessment before providing anesthesia services.",
+        "evaluation_metrics": [
+          "pc_02",
+          "perf_04",
+          "perf_06",
+          "perf_08",
+          "perf_09",
+          "perf_10"
+        ]
+      },
+      {
+        "id": "coa_standard_012",
+        "standard": "Assume responsibility and accountability for diagnosis.",
+        "evaluation_metrics": [
+          "perf_01",
+          "perf_02",
+          "perf_06",
+          "perf_07",
+          "perf_08",
+          "perf_09"
+        ]
+      },
+      {
+        "id": "coa_standard_013",
+        "standard": "Formulate an anesthesia plan of care before providing anesthesia services.",
+        "evaluation_metrics": [
+          "pc_01",
+          "perf_04",
+          "perf_06",
+          "perf_08",
+          "perf_09"
+        ]
+      },
+      {
+        "id": "coa_standard_014",
+        "standard": "Identify and take appropriate action when confronted with anesthetic equipment-related malfunctions.",
+        "evaluation_metrics": [
+          "pc_11",
+          "perf_01",
+          "perf_04",
+          "perf_05",
+          "perf_06",
+          "perf_07",
+          "perf_09"
+        ]
+      },
+      {
+        "id": "coa_standard_015",
+        "standard": "Interpret and utilize data obtained from noninvasive and invasive monitoring modalities.",
+        "evaluation_metrics": [
+          "pc_01",
+          "pc_03",
+          "pc_04",
+          "pc_06",
+          "pc_07",
+          "pc_08",
+          "pc_09",
+          "pc_10",
+          "pc_11",
+          "pc_12",
+          "perf_01",
+          "perf_04",
+          "perf_05",
+          "perf_06",
+          "perf_07",
+          "perf_09",
+          "perf_10"
+        ]
+      },
+      {
+        "id": "coa_standard_016",
+        "standard": "Calculate, initiate, and manage fluid and blood component therapy.",
+        "evaluation_metrics": [
+          "pc_01",
+          "pc_02",
+          "pc_04",
+          "pc_06",
+          "pc_07",
+          "pc_08",
+          "pc_11",
+          "pc_12",
+          "perf_01",
+          "perf_04",
+          "perf_05",
+          "perf_06",
+          "perf_07",
+          "perf_09",
+          "perf_10",
+          "perf_11"
+        ]
+      },
+      {
+        "id": "coa_standard_017",
+        "standard": "Recognize, evaluate, and manage the physiological responses coincident to the provision of anesthesia services.",
+        "evaluation_metrics": [
+          "pc_12",
+          "perf_01",
+          "perf_02",
+          "perf_04",
+          "perf_05",
+          "perf_06",
+          "perf_07",
+          "perf_09"
+        ]
+      },
+      {
+        "id": "coa_standard_018",
+        "standard": "Recognize and appropriately manage complications that occur during the provision of anesthesia services.",
+        "evaluation_metrics": [
+          "pc_12",
+          "perf_01",
+          "perf_02",
+          "perf_04",
+          "perf_05",
+          "perf_06",
+          "perf_07",
+          "perf_09"
+        ]
+      },
+      {
+        "id": "coa_standard_019",
+        "standard": "Utilize interpersonal and communication skills that result in the effective exchange of information and collaboration with patients and their families.",
+        "evaluation_metrics": [
+          "pc_02",
+          "perf_04",
+          "perf_06",
+          "perf_08",
+          "perf_09",
+          "perf_10"
+        ]
+      },
+      {
+        "id": "coa_standard_020",
+        "standard": "Utilize interpersonal and communication skills that result in the effective interprofessional exchange of information and collaboration with other healthcare professionals.",
+        "evaluation_metrics": [
+          "pc_02",
+          "perf_03",
+          "perf_04",
+          "perf_06",
+          "perf_07",
+          "perf_08",
+          "perf_09",
+          "perf_10"
+        ]
+      },
+      {
+        "id": "coa_standard_021",
+        "standard": "Respect the dignity and privacy of patients while maintaining confidentiality in the delivery of interprofessional care.",
+        "evaluation_metrics": [
+          "pc_03",
+          "perf_04",
+          "perf_06",
+          "perf_08",
+          "perf_09",
+          "perf_10"
+        ]
+      },
+      {
+        "id": "coa_standard_022",
+        "standard": "Maintain comprehensive, timely, accurate, and legible healthcare records.",
+        "evaluation_metrics": [
+          "perf_04",
+          "perf_06",
+          "perf_08",
+          "perf_09",
+          "perf_10"
+        ]
+      },
+      {
+        "id": "coa_standard_023",
+        "standard": "Transfer the responsibility for care of the patient to other qualified providers in a manner that assures continuity of care and patient safety.",
+        "evaluation_metrics": [
+          "pc_03",
+          "perf_04",
+          "perf_06",
+          "perf_08",
+          "perf_09",
+          "perf_10"
+        ]
+      },
+      {
+        "id": "coa_standard_024",
+        "standard": "Provide leadership that facilitates intraprofessional and interprofessional collaboration.",
+        "evaluation_metrics": [
+          "perf_04",
+          "perf_06",
+          "perf_08",
+          "perf_10"
+        ]
+      },
+      {
+        "id": "coa_standard_025",
+        "standard": "Adhere to the Code of Ethics for the Certified Registered Nurse Anesthetist.",
+        "evaluation_metrics": [
+          "pc_01",
+          "pc_02",
+          "pc_03",
+          "pc_04",
+          "pc_06",
+          "pc_07",
+          "pc_08",
+          "pc_09",
+          "pc_10",
+          "pc_11",
+          "pc_12",
+          "perf_01",
+          "perf_02",
+          "perf_03",
+          "perf_04",
+          "perf_06",
+          "perf_07",
+          "perf_08",
+          "perf_09",
+          "perf_10",
+          "perf_11"
+        ]
+      },
+      {
+        "id": "coa_standard_026",
+        "standard": "Interact on a professional level with integrity.",
+        "evaluation_metrics": [
+          "pc_03",
+          "perf_04",
+          "perf_06",
+          "perf_08",
+          "perf_09",
+          "perf_10"
+        ]
+      },
+      {
+        "id": "coa_standard_027",
+        "standard": "Apply ethically sound decision-making processes.",
+        "evaluation_metrics": [
+          "pc_01",
+          "pc_02",
+          "pc_03",
+          "pc_04",
+          "pc_05",
+          "pc_06",
+          "pc_07",
+          "pc_08",
+          "pc_09",
+          "pc_10",
+          "pc_11",
+          "pc_12",
+          "pc_13",
+          "perf_01",
+          "perf_02",
+          "perf_03",
+          "perf_04",
+          "perf_05",
+          "perf_06",
+          "perf_07",
+          "perf_08",
+          "perf_09",
+          "perf_10",
+          "perf_11"
+        ]
+      },
+      {
+        "id": "coa_standard_028",
+        "standard": "Accept responsibility and accountability for his or her practice.",
+        "evaluation_metrics": [
+          "pc_01",
+          "pc_02",
+          "pc_03",
+          "pc_04",
+          "pc_05",
+          "pc_06",
+          "pc_07",
+          "pc_08",
+          "pc_09",
+          "pc_10",
+          "pc_11",
+          "pc_12",
+          "pc_13",
+          "perf_01",
+          "perf_02",
+          "perf_03",
+          "perf_04",
+          "perf_05",
+          "perf_06",
+          "perf_07",
+          "perf_08",
+          "perf_09",
+          "perf_10",
+          "perf_11"
+        ]
+      },
+      {
+        "id": "coa_standard_029",
+        "standard": "Provide anesthesia services to patients in a cost-effective manner.",
+        "evaluation_metrics": [
+          "pc_01",
+          "pc_04",
+          "pc_05",
+          "pc_06",
+          "pc_09",
+          "pc_11",
+          "pc_12",
+          "pc_13",
+          "perf_01",
+          "perf_02",
+          "perf_03",
+          "perf_04",
+          "perf_05",
+          "perf_06",
+          "perf_07",
+          "perf_08",
+          "perf_09",
+          "perf_10",
+          "perf_11"
+        ]
+      },
+      {
+        "id": "coa_standard_030",
+        "standard": "Use information systems/technology to support and improve patient care.",
+        "evaluation_metrics": [
+          "perf_04",
+          "perf_07",
+          "perf_10"
+        ]
+      },
+      {
+        "id": "coa_standard_031",
+        "standard": "Use information systems/technology to support and improve healthcare systems.",
+        "evaluation_metrics": [
+          "perf_04",
+          "perf_07",
+          "perf_10"
+        ]
+      }
+    ],
+    "metric_definitions": {
+      "pc_01": "Procedural room readiness",
+      "pc_02": "Pre-op assessment",
+      "pc_03": "Safely transfers care",
+      "pc_04": "Medication administration",
+      "pc_05": "Regional technique",
+      "pc_06": "Anesthesia induction",
+      "pc_07": "Airway management",
+      "pc_08": "Ventilatory management",
+      "pc_09": "Procedure(s) performed",
+      "pc_10": "Patient positioning",
+      "pc_11": "Anesthetic maintenance",
+      "pc_12": "Responds to condition changes",
+      "pc_13": "Emergence technique",
+      "perf_01": "Appropriate intervention",
+      "perf_02": "Appropriate pain control",
+      "perf_03": "Receptive to instruction",
+      "perf_04": "Communicates effectively",
+      "perf_05": "Troubleshoots effectively",
+      "perf_06": "Calm/professional demeanor",
+      "perf_07": "Recognizes limitations",
+      "perf_08": "Professionalism and integrity",
+      "perf_09": "Accountable for care",
+      "perf_10": "Documentation reflects care",
+      "perf_11": "Follows universal precautions"
+    }
+  }

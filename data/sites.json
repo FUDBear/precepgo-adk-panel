@@ -1,0 +1,1121 @@
+{
+    "version": "1.0",
+    "description": "Preceptor profiles for PrecepGo demo - 20 preceptors with distinct backgrounds and evaluation styles",
+    "generated_date": "2025-11-05",
+    "preceptors": [
+      {
+        "id": "prec_001",
+        "firstName": "Sarah",
+        "lastName": "Martinez",
+        "credentials": "CRNA, DNP",
+        "yearsExperience": 15,
+        "specialty": "Cardiac Anesthesia",
+        "evaluationStyle": {
+          "name": "Detail-Oriented Documenter",
+          "description": "Provides extensive written feedback with specific examples. Documents every strength and weakness with clinical context.",
+          "commentStyle": "Writes detailed paragraphs with specific timestamps and patient scenarios. Always includes what went well before areas for improvement.",
+          "focusAreas": ["Technical Skills", "Documentation Quality", "Critical Thinking"],
+          "typicalCommentLength": "150-250 words per evaluation section",
+          "strengths": "Thorough, evidence-based feedback that students can learn from",
+          "style_tags": ["thorough", "clinical_examples", "balanced"]
+        },
+        "assignedSites": [
+          {
+            "hospitalId": "233",
+            "hospitalName": "ARBOR HEALTH MORTON GENERAL HOSPITAL",
+            "city": "MORTON",
+            "state": "WA",
+            "primarySite": true
+          },
+          {
+            "hospitalId": "289",
+            "hospitalName": "PEACEHEALTH PEACE ISLAND MEDICAL CENTER",
+            "city": "FRIDAY HARBOR",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "1559",
+            "hospitalName": "VA MEDICAL CENTER - VANCOUVER CAMPUS",
+            "city": "VANCOUVER",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "2869",
+            "hospitalName": "PROVIDENCE CENTRALIA HOSPITAL",
+            "city": "CENTRALIA",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "2893",
+            "hospitalName": "GRAYS HARBOR COMMUNITY HOSPITAL - EAST",
+            "city": "ABERDEEN",
+            "state": "WA",
+            "primarySite": false
+          }
+        ]
+      },
+      {
+        "id": "prec_002",
+        "firstName": "Michael",
+        "lastName": "Chen",
+        "credentials": "CRNA, MS",
+        "yearsExperience": 8,
+        "specialty": "Pediatric Anesthesia",
+        "evaluationStyle": {
+          "name": "Positive Reinforcement Coach",
+          "description": "Focuses heavily on strengths and frames all feedback positively. Uses encouraging language and celebrates small wins.",
+          "commentStyle": "Short, upbeat comments that highlight progress. Uses phrases like 'Great job!', 'Showed improvement', 'Continue to develop'.",
+          "focusAreas": ["Communication Skills", "Patient Rapport", "Learning Attitude"],
+          "typicalCommentLength": "50-100 words per evaluation section",
+          "strengths": "Builds student confidence and maintains positive learning environment",
+          "style_tags": ["encouraging", "brief", "strengths_focused"]
+        },
+        "assignedSites": [
+          {
+            "hospitalId": "289",
+            "hospitalName": "PEACEHEALTH PEACE ISLAND MEDICAL CENTER",
+            "city": "FRIDAY HARBOR",
+            "state": "WA",
+            "primarySite": true
+          },
+          {
+            "hospitalId": "2777",
+            "hospitalName": "FAIRFAX BEHAVIORAL HEALTH MONROE",
+            "city": "MONROE",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "2869",
+            "hospitalName": "PROVIDENCE CENTRALIA HOSPITAL",
+            "city": "CENTRALIA",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "2909",
+            "hospitalName": "EAST ADAMS RURAL HOSPITAL",
+            "city": "RITZVILLE",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "2953",
+            "hospitalName": "GROUP HEALTH EASTSIDE HOSPITAL",
+            "city": "REDMOND",
+            "state": "WA",
+            "primarySite": false
+          }
+        ]
+      },
+      {
+        "id": "prec_003",
+        "firstName": "Jennifer",
+        "lastName": "O'Brien",
+        "credentials": "CRNA, DNP",
+        "yearsExperience": 22,
+        "specialty": "Trauma Anesthesia",
+        "evaluationStyle": {
+          "name": "Direct Pragmatist",
+          "description": "No-nonsense, gets straight to the point. Identifies problems quickly and expects immediate improvement. Values efficiency.",
+          "commentStyle": "Bullet points with direct observations. Minimal praise, focuses on what needs to change. Uses clinical terminology without explanation.",
+          "focusAreas": ["Clinical Judgment", "Time Management", "Protocol Adherence"],
+          "typicalCommentLength": "30-70 words per evaluation section",
+          "strengths": "Clear expectations, no ambiguity about performance gaps",
+          "style_tags": ["direct", "concise", "critical"]
+        },
+        "assignedSites": [
+          {
+            "hospitalId": "1559",
+            "hospitalName": "VA MEDICAL CENTER - VANCOUVER CAMPUS",
+            "city": "VANCOUVER",
+            "state": "WA",
+            "primarySite": true
+          },
+          {
+            "hospitalId": "233",
+            "hospitalName": "ARBOR HEALTH MORTON GENERAL HOSPITAL",
+            "city": "MORTON",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "3047",
+            "hospitalName": "SNOQUALMIE VALLEY HOSPITAL",
+            "city": "SNOQUALMIE",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "3603",
+            "hospitalName": "PROVIDENCE SACRED HEART MED CTR",
+            "city": "SPOKANE",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "3655",
+            "hospitalName": "PROVIDENCE ST JOSEPH HOSPITAL",
+            "city": "CHEWELAH",
+            "state": "WA",
+            "primarySite": false
+          }
+        ]
+      },
+      {
+        "id": "prec_004",
+        "firstName": "David",
+        "lastName": "Thompson",
+        "credentials": "CRNA, MS",
+        "yearsExperience": 12,
+        "specialty": "Obstetric Anesthesia",
+        "evaluationStyle": {
+          "name": "Socratic Educator",
+          "description": "Asks reflective questions in evaluations. Wants students to think critically about their own performance. Uses teaching moments.",
+          "commentStyle": "Poses questions like 'What would you do differently?' or 'Why did you choose this approach?' Encourages self-assessment.",
+          "focusAreas": ["Clinical Reasoning", "Self-Reflection", "Problem Solving"],
+          "typicalCommentLength": "80-120 words per evaluation section",
+          "strengths": "Develops independent thinking and metacognitive skills",
+          "style_tags": ["questioning", "reflective", "educational"]
+        },
+        "assignedSites": [
+          {
+            "hospitalId": "2777",
+            "hospitalName": "FAIRFAX BEHAVIORAL HEALTH MONROE",
+            "city": "MONROE",
+            "state": "WA",
+            "primarySite": true
+          },
+          {
+            "hospitalId": "2893",
+            "hospitalName": "GRAYS HARBOR COMMUNITY HOSPITAL - EAST",
+            "city": "ABERDEEN",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "2953",
+            "hospitalName": "GROUP HEALTH EASTSIDE HOSPITAL",
+            "city": "REDMOND",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "4643",
+            "hospitalName": "PEACEHEALTH KETCHIKAN MEDICAL CENTER",
+            "city": "KETCHIKAN",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "5897",
+            "hospitalName": "DEACONESS HOSPITAL",
+            "city": "SPOKANE",
+            "state": "WA",
+            "primarySite": false
+          }
+        ]
+      },
+      {
+        "id": "prec_005",
+        "firstName": "Amanda",
+        "lastName": "Rodriguez",
+        "credentials": "CRNA, DNP",
+        "yearsExperience": 18,
+        "specialty": "Regional Anesthesia",
+        "evaluationStyle": {
+          "name": "Competency Checker",
+          "description": "Uses structured competency frameworks. Rates each skill against established criteria. Very objective and standardized.",
+          "commentStyle": "Clinical checklists with numerical ratings. References specific COA standards. Minimal narrative, maximum structure.",
+          "focusAreas": ["Technical Competencies", "Safety Protocols", "Standard Achievement"],
+          "typicalCommentLength": "40-80 words per evaluation section",
+          "strengths": "Objective, defensible evaluations that align with accreditation standards",
+          "style_tags": ["structured", "objective", "standards_based"]
+        },
+        "assignedSites": [
+          {
+            "hospitalId": "2869",
+            "hospitalName": "PROVIDENCE CENTRALIA HOSPITAL",
+            "city": "CENTRALIA",
+            "state": "WA",
+            "primarySite": true
+          },
+          {
+            "hospitalId": "3047",
+            "hospitalName": "SNOQUALMIE VALLEY HOSPITAL",
+            "city": "SNOQUALMIE",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "4643",
+            "hospitalName": "PEACEHEALTH KETCHIKAN MEDICAL CENTER",
+            "city": "KETCHIKAN",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "6027",
+            "hospitalName": "MULTICARE COVINGTON MEDICAL CENTER",
+            "city": "COVINGTON",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "6043",
+            "hospitalName": "MULTICARE INDIGO URGENT CARE - PUYALLUP SOUTH HILL",
+            "city": "PUYALLUP",
+            "state": "WA",
+            "primarySite": false
+          }
+        ]
+      },
+      {
+        "id": "prec_006",
+        "firstName": "Robert",
+        "lastName": "Williams",
+        "credentials": "CRNA, MS",
+        "yearsExperience": 25,
+        "specialty": "General Anesthesia",
+        "evaluationStyle": {
+          "name": "Storytelling Mentor",
+          "description": "Weaves clinical stories and personal experiences into feedback. Makes evaluations memorable through narrative.",
+          "commentStyle": "Shares anecdotes like 'I remember when I was learning this...' or 'Let me tell you about a case where...'",
+          "focusAreas": ["Clinical Experience", "Professional Growth", "Wisdom Transfer"],
+          "typicalCommentLength": "120-180 words per evaluation section",
+          "strengths": "Makes learning personal and memorable, builds rapport",
+          "style_tags": ["narrative", "experiential", "personal"]
+        },
+        "assignedSites": [
+          {
+            "hospitalId": "2893",
+            "hospitalName": "GRAYS HARBOR COMMUNITY HOSPITAL - EAST",
+            "city": "ABERDEEN",
+            "state": "WA",
+            "primarySite": true
+          },
+          {
+            "hospitalId": "2909",
+            "hospitalName": "EAST ADAMS RURAL HOSPITAL",
+            "city": "RITZVILLE",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "3603",
+            "hospitalName": "PROVIDENCE SACRED HEART MED CTR",
+            "city": "SPOKANE",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "5897",
+            "hospitalName": "DEACONESS HOSPITAL",
+            "city": "SPOKANE",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "6027",
+            "hospitalName": "MULTICARE COVINGTON MEDICAL CENTER",
+            "city": "COVINGTON",
+            "state": "WA",
+            "primarySite": false
+          }
+        ]
+      },
+      {
+        "id": "prec_007",
+        "firstName": "Lisa",
+        "lastName": "Patel",
+        "credentials": "CRNA, DNP",
+        "yearsExperience": 10,
+        "specialty": "Pain Management",
+        "evaluationStyle": {
+          "name": "Growth Mindset Developer",
+          "description": "Emphasizes progress over perfection. Compares current performance to previous evaluations. Celebrates incremental improvement.",
+          "commentStyle": "Uses comparative language like 'Shows improvement from last rotation' or 'Progressing toward competency'. Future-focused.",
+          "focusAreas": ["Skill Development", "Progress Tracking", "Goal Achievement"],
+          "typicalCommentLength": "70-110 words per evaluation section",
+          "strengths": "Motivates students by showing them their progress trajectory",
+          "style_tags": ["progressive", "comparative", "motivational"]
+        },
+        "assignedSites": [
+          {
+            "hospitalId": "2909",
+            "hospitalName": "EAST ADAMS RURAL HOSPITAL",
+            "city": "RITZVILLE",
+            "state": "WA",
+            "primarySite": true
+          },
+          {
+            "hospitalId": "233",
+            "hospitalName": "ARBOR HEALTH MORTON GENERAL HOSPITAL",
+            "city": "MORTON",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "3655",
+            "hospitalName": "PROVIDENCE ST JOSEPH HOSPITAL",
+            "city": "CHEWELAH",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "6043",
+            "hospitalName": "MULTICARE INDIGO URGENT CARE - PUYALLUP SOUTH HILL",
+            "city": "PUYALLUP",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "6047",
+            "hospitalName": "MULTICARE ROCKWOOD CLINIC NORTH DIVISION",
+            "city": "SPOKANE",
+            "state": "WA",
+            "primarySite": false
+          }
+        ]
+      },
+      {
+        "id": "prec_008",
+        "firstName": "James",
+        "lastName": "Anderson",
+        "credentials": "CRNA, MS",
+        "yearsExperience": 14,
+        "specialty": "Critical Care Anesthesia",
+        "evaluationStyle": {
+          "name": "Evidence-Based Evaluator",
+          "description": "Cites research and guidelines in evaluations. Backs up every comment with evidence or best practice references.",
+          "commentStyle": "References studies, protocols, and standards. Uses phrases like 'According to ASA guidelines...' or 'Current evidence suggests...'",
+          "focusAreas": ["Evidence-Based Practice", "Current Literature", "Best Practices"],
+          "typicalCommentLength": "100-140 words per evaluation section",
+          "strengths": "Teaches students to think about the 'why' behind clinical decisions",
+          "style_tags": ["evidence_based", "academic", "referenced"]
+        },
+        "assignedSites": [
+          {
+            "hospitalId": "2953",
+            "hospitalName": "GROUP HEALTH EASTSIDE HOSPITAL",
+            "city": "REDMOND",
+            "state": "WA",
+            "primarySite": true
+          },
+          {
+            "hospitalId": "1559",
+            "hospitalName": "VA MEDICAL CENTER - VANCOUVER CAMPUS",
+            "city": "VANCOUVER",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "2777",
+            "hospitalName": "FAIRFAX BEHAVIORAL HEALTH MONROE",
+            "city": "MONROE",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "4643",
+            "hospitalName": "PEACEHEALTH KETCHIKAN MEDICAL CENTER",
+            "city": "KETCHIKAN",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "6047",
+            "hospitalName": "MULTICARE ROCKWOOD CLINIC NORTH DIVISION",
+            "city": "SPOKANE",
+            "state": "WA",
+            "primarySite": false
+          }
+        ]
+      },
+      {
+        "id": "prec_009",
+        "firstName": "Maria",
+        "lastName": "Garcia",
+        "credentials": "CRNA, DNP",
+        "yearsExperience": 16,
+        "specialty": "Orthopedic Anesthesia",
+        "evaluationStyle": {
+          "name": "Diplomatic Balancer",
+          "description": "Always provides equal amounts of positive and constructive feedback. Very careful with wording to avoid discouragement.",
+          "commentStyle": "Sandwich method - starts positive, gives constructive feedback, ends positive. Uses softening language like 'opportunity for growth'.",
+          "focusAreas": ["Balanced Assessment", "Tactful Communication", "Emotional Intelligence"],
+          "typicalCommentLength": "90-130 words per evaluation section",
+          "strengths": "Maintains positive relationships while still addressing performance issues",
+          "style_tags": ["balanced", "diplomatic", "tactful"]
+        },
+        "assignedSites": [
+          {
+            "hospitalId": "3047",
+            "hospitalName": "SNOQUALMIE VALLEY HOSPITAL",
+            "city": "SNOQUALMIE",
+            "state": "WA",
+            "primarySite": true
+          },
+          {
+            "hospitalId": "289",
+            "hospitalName": "PEACEHEALTH PEACE ISLAND MEDICAL CENTER",
+            "city": "FRIDAY HARBOR",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "2869",
+            "hospitalName": "PROVIDENCE CENTRALIA HOSPITAL",
+            "city": "CENTRALIA",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "5897",
+            "hospitalName": "DEACONESS HOSPITAL",
+            "city": "SPOKANE",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "6027",
+            "hospitalName": "MULTICARE COVINGTON MEDICAL CENTER",
+            "city": "COVINGTON",
+            "state": "WA",
+            "primarySite": false
+          }
+        ]
+      },
+      {
+        "id": "prec_010",
+        "firstName": "Kevin",
+        "lastName": "Lee",
+        "credentials": "CRNA, MS",
+        "yearsExperience": 9,
+        "specialty": "Ambulatory Anesthesia",
+        "evaluationStyle": {
+          "name": "Checklist Minimalist",
+          "description": "Uses the bare minimum required fields. Short answers, checks boxes, doesn't elaborate unless absolutely necessary.",
+          "commentStyle": "One-sentence observations. Uses phrases like 'Adequate', 'Needs improvement', 'Satisfactory'. Rarely exceeds minimum.",
+          "focusAreas": ["Efficiency", "Compliance", "Time Management"],
+          "typicalCommentLength": "20-40 words per evaluation section",
+          "strengths": "Fast turnaround on evaluations, no fluff",
+          "style_tags": ["minimal", "efficient", "checkbox"]
+        },
+        "assignedSites": [
+          {
+            "hospitalId": "3603",
+            "hospitalName": "PROVIDENCE SACRED HEART MED CTR",
+            "city": "SPOKANE",
+            "state": "WA",
+            "primarySite": true
+          },
+          {
+            "hospitalId": "2893",
+            "hospitalName": "GRAYS HARBOR COMMUNITY HOSPITAL - EAST",
+            "city": "ABERDEEN",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "3047",
+            "hospitalName": "SNOQUALMIE VALLEY HOSPITAL",
+            "city": "SNOQUALMIE",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "6043",
+            "hospitalName": "MULTICARE INDIGO URGENT CARE - PUYALLUP SOUTH HILL",
+            "city": "PUYALLUP",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "6047",
+            "hospitalName": "MULTICARE ROCKWOOD CLINIC NORTH DIVISION",
+            "city": "SPOKANE",
+            "state": "WA",
+            "primarySite": false
+          }
+        ]
+      },
+      {
+        "id": "prec_011",
+        "firstName": "Patricia",
+        "lastName": "Brown",
+        "credentials": "CRNA, DNP",
+        "yearsExperience": 20,
+        "specialty": "Neuroanesthesia",
+        "evaluationStyle": {
+          "name": "Holistic Assessor",
+          "description": "Evaluates the whole person, not just clinical skills. Comments on professionalism, attitude, teamwork, and work ethic.",
+          "commentStyle": "Discusses soft skills extensively. Comments on how student interacts with team, their preparedness, professionalism.",
+          "focusAreas": ["Professionalism", "Teamwork", "Work Ethic", "Interpersonal Skills"],
+          "typicalCommentLength": "110-150 words per evaluation section",
+          "strengths": "Prepares students for the reality of professional practice beyond technical skills",
+          "style_tags": ["holistic", "professional_focus", "team_oriented"]
+        },
+        "assignedSites": [
+          {
+            "hospitalId": "3655",
+            "hospitalName": "PROVIDENCE ST JOSEPH HOSPITAL",
+            "city": "CHEWELAH",
+            "state": "WA",
+            "primarySite": true
+          },
+          {
+            "hospitalId": "233",
+            "hospitalName": "ARBOR HEALTH MORTON GENERAL HOSPITAL",
+            "city": "MORTON",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "2909",
+            "hospitalName": "EAST ADAMS RURAL HOSPITAL",
+            "city": "RITZVILLE",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "4643",
+            "hospitalName": "PEACEHEALTH KETCHIKAN MEDICAL CENTER",
+            "city": "KETCHIKAN",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "5897",
+            "hospitalName": "DEACONESS HOSPITAL",
+            "city": "SPOKANE",
+            "state": "WA",
+            "primarySite": false
+          }
+        ]
+      },
+      {
+        "id": "prec_012",
+        "firstName": "Daniel",
+        "lastName": "Kim",
+        "credentials": "CRNA, MS",
+        "yearsExperience": 11,
+        "specialty": "Thoracic Anesthesia",
+        "evaluationStyle": {
+          "name": "Technical Perfectionist",
+          "description": "Extremely high standards for technical skills. Points out even minor technique flaws. Expects excellence.",
+          "commentStyle": "Detailed technical critiques. Uses anatomical landmarks and precise terminology. Notices small details others miss.",
+          "focusAreas": ["Technical Precision", "Procedural Skills", "Attention to Detail"],
+          "typicalCommentLength": "80-120 words per evaluation section",
+          "strengths": "Produces technically excellent graduates who have impeccable skills",
+          "style_tags": ["technical", "detailed", "high_standards"]
+        },
+        "assignedSites": [
+          {
+            "hospitalId": "4643",
+            "hospitalName": "PEACEHEALTH KETCHIKAN MEDICAL CENTER",
+            "city": "KETCHIKAN",
+            "state": "WA",
+            "primarySite": true
+          },
+          {
+            "hospitalId": "1559",
+            "hospitalName": "VA MEDICAL CENTER - VANCOUVER CAMPUS",
+            "city": "VANCOUVER",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "2953",
+            "hospitalName": "GROUP HEALTH EASTSIDE HOSPITAL",
+            "city": "REDMOND",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "3603",
+            "hospitalName": "PROVIDENCE SACRED HEART MED CTR",
+            "city": "SPOKANE",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "6027",
+            "hospitalName": "MULTICARE COVINGTON MEDICAL CENTER",
+            "city": "COVINGTON",
+            "state": "WA",
+            "primarySite": false
+          }
+        ]
+      },
+      {
+        "id": "prec_013",
+        "firstName": "Rachel",
+        "lastName": "Johnson",
+        "credentials": "CRNA, DNP",
+        "yearsExperience": 13,
+        "specialty": "Vascular Anesthesia",
+        "evaluationStyle": {
+          "name": "Collaborative Consultant",
+          "description": "Treats evaluations as a two-way discussion. Asks student for self-assessment first, then provides feedback.",
+          "commentStyle": "Writes 'Student identified...' or 'We discussed...' References collaborative nature of the evaluation process.",
+          "focusAreas": ["Self-Assessment", "Mutual Goal Setting", "Shared Decision Making"],
+          "typicalCommentLength": "90-140 words per evaluation section",
+          "strengths": "Empowers students to take ownership of their learning",
+          "style_tags": ["collaborative", "student_centered", "interactive"]
+        },
+        "assignedSites": [
+          {
+            "hospitalId": "5897",
+            "hospitalName": "DEACONESS HOSPITAL",
+            "city": "SPOKANE",
+            "state": "WA",
+            "primarySite": true
+          },
+          {
+            "hospitalId": "289",
+            "hospitalName": "PEACEHEALTH PEACE ISLAND MEDICAL CENTER",
+            "city": "FRIDAY HARBOR",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "2777",
+            "hospitalName": "FAIRFAX BEHAVIORAL HEALTH MONROE",
+            "city": "MONROE",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "3655",
+            "hospitalName": "PROVIDENCE ST JOSEPH HOSPITAL",
+            "city": "CHEWELAH",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "6047",
+            "hospitalName": "MULTICARE ROCKWOOD CLINIC NORTH DIVISION",
+            "city": "SPOKANE",
+            "state": "WA",
+            "primarySite": false
+          }
+        ]
+      },
+      {
+        "id": "prec_014",
+        "firstName": "Thomas",
+        "lastName": "Miller",
+        "credentials": "CRNA, MS",
+        "yearsExperience": 7,
+        "specialty": "ENT Anesthesia",
+        "evaluationStyle": {
+          "name": "Rapid Feedback Provider",
+          "description": "Provides immediate verbal feedback during procedures, then summarizes briefly in evaluation. Real-time coaching style.",
+          "commentStyle": "References verbal feedback already given. Uses phrases like 'As we discussed during the case...' or 'Per our conversation...'",
+          "focusAreas": ["Real-Time Learning", "Immediate Correction", "Applied Feedback"],
+          "typicalCommentLength": "50-90 words per evaluation section",
+          "strengths": "Students get immediate feedback when it matters most",
+          "style_tags": ["real_time", "brief", "coaching"]
+        },
+        "assignedSites": [
+          {
+            "hospitalId": "6027",
+            "hospitalName": "MULTICARE COVINGTON MEDICAL CENTER",
+            "city": "COVINGTON",
+            "state": "WA",
+            "primarySite": true
+          },
+          {
+            "hospitalId": "2869",
+            "hospitalName": "PROVIDENCE CENTRALIA HOSPITAL",
+            "city": "CENTRALIA",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "2893",
+            "hospitalName": "GRAYS HARBOR COMMUNITY HOSPITAL - EAST",
+            "city": "ABERDEEN",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "3047",
+            "hospitalName": "SNOQUALMIE VALLEY HOSPITAL",
+            "city": "SNOQUALMIE",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "4643",
+            "hospitalName": "PEACEHEALTH KETCHIKAN MEDICAL CENTER",
+            "city": "KETCHIKAN",
+            "state": "WA",
+            "primarySite": false
+          }
+        ]
+      },
+      {
+        "id": "prec_015",
+        "firstName": "Nicole",
+        "lastName": "Davis",
+        "credentials": "CRNA, DNP",
+        "yearsExperience": 19,
+        "specialty": "Geriatric Anesthesia",
+        "evaluationStyle": {
+          "name": "Trend Analyst",
+          "description": "Focuses on patterns over time rather than single incidents. Looks at trajectory and consistency of performance.",
+          "commentStyle": "Uses language like 'Consistently demonstrates...' or 'Pattern of...' References multiple observations across rotation.",
+          "focusAreas": ["Performance Consistency", "Pattern Recognition", "Long-term Development"],
+          "typicalCommentLength": "100-150 words per evaluation section",
+          "strengths": "Gives students a fair assessment based on overall performance, not one bad day",
+          "style_tags": ["pattern_focused", "longitudinal", "fair"]
+        },
+        "assignedSites": [
+          {
+            "hospitalId": "6043",
+            "hospitalName": "MULTICARE INDIGO URGENT CARE - PUYALLUP SOUTH HILL",
+            "city": "PUYALLUP",
+            "state": "WA",
+            "primarySite": true
+          },
+          {
+            "hospitalId": "233",
+            "hospitalName": "ARBOR HEALTH MORTON GENERAL HOSPITAL",
+            "city": "MORTON",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "2909",
+            "hospitalName": "EAST ADAMS RURAL HOSPITAL",
+            "city": "RITZVILLE",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "3603",
+            "hospitalName": "PROVIDENCE SACRED HEART MED CTR",
+            "city": "SPOKANE",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "5897",
+            "hospitalName": "DEACONESS HOSPITAL",
+            "city": "SPOKANE",
+            "state": "WA",
+            "primarySite": false
+          }
+        ]
+      },
+      {
+        "id": "prec_016",
+        "firstName": "Christopher",
+        "lastName": "Wilson",
+        "credentials": "CRNA, MS",
+        "yearsExperience": 6,
+        "specialty": "Emergency Anesthesia",
+        "evaluationStyle": {
+          "name": "Crisis Responder",
+          "description": "Focuses heavily on how students handle unexpected situations and emergencies. Less interested in routine cases.",
+          "commentStyle": "Emphasizes critical moments and decision-making under pressure. Uses phrases like 'When faced with...' or 'Response to emergency...'",
+          "focusAreas": ["Crisis Management", "Quick Thinking", "Composure Under Pressure"],
+          "typicalCommentLength": "70-110 words per evaluation section",
+          "strengths": "Ensures students can handle high-stress situations safely",
+          "style_tags": ["crisis_focused", "situational", "pressure_testing"]
+        },
+        "assignedSites": [
+          {
+            "hospitalId": "6047",
+            "hospitalName": "MULTICARE ROCKWOOD CLINIC NORTH DIVISION",
+            "city": "SPOKANE",
+            "state": "WA",
+            "primarySite": true
+          },
+          {
+            "hospitalId": "1559",
+            "hospitalName": "VA MEDICAL CENTER - VANCOUVER CAMPUS",
+            "city": "VANCOUVER",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "2777",
+            "hospitalName": "FAIRFAX BEHAVIORAL HEALTH MONROE",
+            "city": "MONROE",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "2953",
+            "hospitalName": "GROUP HEALTH EASTSIDE HOSPITAL",
+            "city": "REDMOND",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "6027",
+            "hospitalName": "MULTICARE COVINGTON MEDICAL CENTER",
+            "city": "COVINGTON",
+            "state": "WA",
+            "primarySite": false
+          }
+        ]
+      },
+      {
+        "id": "prec_017",
+        "firstName": "Stephanie",
+        "lastName": "Taylor",
+        "credentials": "CRNA, DNP",
+        "yearsExperience": 17,
+        "specialty": "Bariatric Anesthesia",
+        "evaluationStyle": {
+          "name": "Future-Focused Planner",
+          "description": "Always includes specific action items and goals for the next rotation. Very forward-looking in feedback.",
+          "commentStyle": "Ends every section with 'Goals for next rotation:' or 'Action items:' with specific, measurable objectives.",
+          "focusAreas": ["Goal Setting", "Action Planning", "Continuous Improvement"],
+          "typicalCommentLength": "90-130 words per evaluation section",
+          "strengths": "Students always know exactly what to work on next",
+          "style_tags": ["action_oriented", "goal_focused", "prescriptive"]
+        },
+        "assignedSites": [
+          {
+            "hospitalId": "289",
+            "hospitalName": "PEACEHEALTH PEACE ISLAND MEDICAL CENTER",
+            "city": "FRIDAY HARBOR",
+            "state": "WA",
+            "primarySite": true
+          },
+          {
+            "hospitalId": "2869",
+            "hospitalName": "PROVIDENCE CENTRALIA HOSPITAL",
+            "city": "CENTRALIA",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "3655",
+            "hospitalName": "PROVIDENCE ST JOSEPH HOSPITAL",
+            "city": "CHEWELAH",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "6043",
+            "hospitalName": "MULTICARE INDIGO URGENT CARE - PUYALLUP SOUTH HILL",
+            "city": "PUYALLUP",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "6047",
+            "hospitalName": "MULTICARE ROCKWOOD CLINIC NORTH DIVISION",
+            "city": "SPOKANE",
+            "state": "WA",
+            "primarySite": false
+          }
+        ]
+      },
+      {
+        "id": "prec_018",
+        "firstName": "Brian",
+        "lastName": "Martinez",
+        "credentials": "CRNA, MS",
+        "yearsExperience": 15,
+        "specialty": "Plastic Surgery Anesthesia",
+        "evaluationStyle": {
+          "name": "Comparative Benchmarker",
+          "description": "Compares student performance to cohort norms and previous students at similar training levels.",
+          "commentStyle": "Uses phrases like 'Compared to peers...' or 'For a student at this level...' Provides context through comparison.",
+          "focusAreas": ["Relative Performance", "Cohort Comparison", "Level-Appropriate Expectations"],
+          "typicalCommentLength": "80-120 words per evaluation section",
+          "strengths": "Helps students understand where they stand relative to expectations",
+          "style_tags": ["comparative", "benchmarked", "contextual"]
+        },
+        "assignedSites": [
+          {
+            "hospitalId": "2777",
+            "hospitalName": "FAIRFAX BEHAVIORAL HEALTH MONROE",
+            "city": "MONROE",
+            "state": "WA",
+            "primarySite": true
+          },
+          {
+            "hospitalId": "233",
+            "hospitalName": "ARBOR HEALTH MORTON GENERAL HOSPITAL",
+            "city": "MORTON",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "2893",
+            "hospitalName": "GRAYS HARBOR COMMUNITY HOSPITAL - EAST",
+            "city": "ABERDEEN",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "4643",
+            "hospitalName": "PEACEHEALTH KETCHIKAN MEDICAL CENTER",
+            "city": "KETCHIKAN",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "5897",
+            "hospitalName": "DEACONESS HOSPITAL",
+            "city": "SPOKANE",
+            "state": "WA",
+            "primarySite": false
+          }
+        ]
+      },
+      {
+        "id": "prec_019",
+        "firstName": "Angela",
+        "lastName": "White",
+        "credentials": "CRNA, DNP",
+        "yearsExperience": 21,
+        "specialty": "Transplant Anesthesia",
+        "evaluationStyle": {
+          "name": "Resource Connector",
+          "description": "Includes references to articles, videos, simulation opportunities, and other learning resources in evaluations.",
+          "commentStyle": "Recommends specific resources. Uses phrases like 'I suggest reviewing...' or 'You may benefit from...' with specific links or references.",
+          "focusAreas": ["Resource Provision", "Self-Directed Learning", "Continued Education"],
+          "typicalCommentLength": "100-160 words per evaluation section",
+          "strengths": "Gives students concrete ways to improve between rotations",
+          "style_tags": ["resource_rich", "educational", "supportive"]
+        },
+        "assignedSites": [
+          {
+            "hospitalId": "2869",
+            "hospitalName": "PROVIDENCE CENTRALIA HOSPITAL",
+            "city": "CENTRALIA",
+            "state": "WA",
+            "primarySite": true
+          },
+          {
+            "hospitalId": "2909",
+            "hospitalName": "EAST ADAMS RURAL HOSPITAL",
+            "city": "RITZVILLE",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "3047",
+            "hospitalName": "SNOQUALMIE VALLEY HOSPITAL",
+            "city": "SNOQUALMIE",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "3603",
+            "hospitalName": "PROVIDENCE SACRED HEART MED CTR",
+            "city": "SPOKANE",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "6027",
+            "hospitalName": "MULTICARE COVINGTON MEDICAL CENTER",
+            "city": "COVINGTON",
+            "state": "WA",
+            "primarySite": false
+          }
+        ]
+      },
+      {
+        "id": "prec_020",
+        "firstName": "Eric",
+        "lastName": "Harris",
+        "credentials": "CRNA, MS",
+        "yearsExperience": 10,
+        "specialty": "Urology Anesthesia",
+        "evaluationStyle": {
+          "name": "Pragmatic Problem Solver",
+          "description": "Focuses on practical solutions to observed issues. Every weakness identified comes with a suggested fix.",
+          "commentStyle": "Format: 'Observed issue: X. Recommendation: Y.' Very solution-oriented and practical. No dwelling on problems.",
+          "focusAreas": ["Problem Identification", "Solution Generation", "Practical Application"],
+          "typicalCommentLength": "60-100 words per evaluation section",
+          "strengths": "Students know not just what's wrong, but how to fix it",
+          "style_tags": ["solution_focused", "practical", "prescriptive"]
+        },
+        "assignedSites": [
+          {
+            "hospitalId": "3603",
+            "hospitalName": "PROVIDENCE SACRED HEART MED CTR",
+            "city": "SPOKANE",
+            "state": "WA",
+            "primarySite": true
+          },
+          {
+            "hospitalId": "1559",
+            "hospitalName": "VA MEDICAL CENTER - VANCOUVER CAMPUS",
+            "city": "VANCOUVER",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "2953",
+            "hospitalName": "GROUP HEALTH EASTSIDE HOSPITAL",
+            "city": "REDMOND",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "3655",
+            "hospitalName": "PROVIDENCE ST JOSEPH HOSPITAL",
+            "city": "CHEWELAH",
+            "state": "WA",
+            "primarySite": false
+          },
+          {
+            "hospitalId": "6047",
+            "hospitalName": "MULTICARE ROCKWOOD CLINIC NORTH DIVISION",
+            "city": "SPOKANE",
+            "state": "WA",
+            "primarySite": false
+          }
+        ]
+      }
+    ],
+    "sites_summary": {
+      "total_preceptors": 20,
+      "total_unique_sites": 15,
+      "state": "WA",
+      "preceptor_experience_range": "6-25 years",
+      "evaluation_styles": [
+        "Detail-Oriented Documenter",
+        "Positive Reinforcement Coach",
+        "Direct Pragmatist",
+        "Socratic Educator",
+        "Competency Checker",
+        "Storytelling Mentor",
+        "Growth Mindset Developer",
+        "Evidence-Based Evaluator",
+        "Diplomatic Balancer",
+        "Checklist Minimalist",
+        "Holistic Assessor",
+        "Technical Perfectionist",
+        "Collaborative Consultant",
+        "Rapid Feedback Provider",
+        "Trend Analyst",
+        "Crisis Responder",
+        "Future-Focused Planner",
+        "Comparative Benchmarker",
+        "Resource Connector",
+        "Pragmatic Problem Solver"
+      ]
+    },
+    "usage_notes": {
+      "purpose": "This file provides consistent preceptor profiles for demo evaluations in PrecepGo",
+      "diversity": "Each preceptor has a unique evaluation style to demonstrate how AI agents can handle varied feedback patterns",
+      "realism": "Evaluation styles based on actual preceptor behaviors observed in nursing education",
+      "site_assignments": "Each preceptor has 5 WA state hospital assignments (1 primary, 4 secondary) for realistic rotation scheduling"
+    }
+  }

@@ -284,6 +284,9 @@ Keywords: {', '.join(case.get('keywords', []))}
         # Limit medical content size
         medical_content_preview = medical_content[:30000]
         
+        # Get student context if provided
+        student_context = kwargs.get("student_context", "")
+        
         prompt = f"""You are an expert CRNA clinical scenario designer. Create a realistic clinical scenario based on the following information:
 
 **PATIENT INFORMATION:**
@@ -291,6 +294,8 @@ Keywords: {', '.join(case.get('keywords', []))}
 
 **SURGICAL CASE:**
 {case_summary}
+
+{student_context if student_context else ''}
 
 **MEDICAL CONTENT FROM BARASH TEXTBOOK:**
 {medical_content_preview}

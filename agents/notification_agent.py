@@ -1,18 +1,16 @@
 """
 Notification Agent
 Monitors agent_evaluations collection for negative evaluations (-1 ratings)
-and sends email notifications to program administrators.
+and saves notification records to Firestore.
 Runs every 15 minutes.
 """
 
 import os
-import smtplib
 import threading
 import time
+import html
 from datetime import datetime, timezone
 from typing import Dict, Any, List, Optional
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
 
 # Import dependencies
 try:
@@ -37,17 +35,12 @@ except ImportError:
 
 class NotificationAgent:
     """
-    Agent for monitoring evaluations and sending notifications.
-    Checks for dangerous ratings (-1) and sends email alerts.
+    Agent for monitoring evaluations and saving notification records.
+    Checks for dangerous ratings (-1) and saves notification records to Firestore.
     """
     
     def __init__(
         self,
-        admin_email: str = "wasoje4172@fandoe.com",
-        smtp_server: Optional[str] = None,
-        smtp_port: int = 587,
-        smtp_username: Optional[str] = None,
-        smtp_password: Optional[str] = None,
         check_interval_minutes: int = 15,
         firestore_db=None
     ):
@@ -55,22 +48,10 @@ class NotificationAgent:
         Initialize the Notification Agent.
         
         Args:
-            admin_email: Email address to send notifications to
-            smtp_server: SMTP server (defaults to Gmail SMTP)
-            smtp_port: SMTP port (default: 587)
-            smtp_username: SMTP username (optional, uses admin_email if not provided)
-            smtp_password: SMTP password (optional, uses environment variable if not provided)
             check_interval_minutes: How often to check for new evaluations (default: 15)
             firestore_db: Optional Firestore database client
         """
-        self.admin_email = admin_email
         self.check_interval = check_interval_minutes * 60  # Convert to seconds
-        
-        # SMTP Configuration
-        self.smtp_server = smtp_server or os.getenv("SMTP_SERVER", "smtp.gmail.com")
-        self.smtp_port = smtp_port
-        self.smtp_username = smtp_username or os.getenv("SMTP_USERNAME", admin_email)
-        self.smtp_password = smtp_password or os.getenv("SMTP_PASSWORD")
         
         # Initialize Firestore
         if firestore_db:
@@ -101,10 +82,8 @@ class NotificationAgent:
         self.thread = None
         
         print(f"✅ Notification Agent initialized")
-        print(f"   - Admin email: {admin_email}")
         print(f"   - Check interval: {check_interval_minutes} minutes")
         print(f"   - Firestore: {'Available' if self.db else 'Not available'}")
-        print(f"   - SMTP Server: {self.smtp_server}:{self.smtp_port}")
         print(f"   - Notification tracking: agent_notifications collection")
     
     def _has_notification_been_sent(self, evaluation_doc_id: str) -> bool:
@@ -130,6 +109,147 @@ class NotificationAgent:
             print(f"⚠️ Error checking notification history: {e}")
             return False
     
+    def _generate_email_html(self, evaluation_data: Dict[str, Any], evaluation_doc_id: str, negative_fields: List[str]) -> str:
+        """
+        Generate HTML email content for a single negative evaluation.
+        
+        Args:
+            evaluation_data: Evaluation data dictionary
+            evaluation_doc_id: Document ID of the evaluation
+            negative_fields: List of PC metric fields that were negative
+        
+        Returns:
+            HTML string containing the email content
+        """
+        # Escape HTML to prevent XSS attacks
+        preceptee_name = html.escape(str(evaluation_data.get("preceptee_user_name", "Unknown")))
+        preceptor_name = html.escape(str(evaluation_data.get("preceptor_name", "Unknown")))
+        case_type = html.escape(str(evaluation_data.get("case_type", "Unknown")))
+        request_id = html.escape(str(evaluation_data.get("request_id", "N/A")))
+        comments = html.escape(str(evaluation_data.get("comments", "")))
+        
+        # Metric names mapping
+        metric_names = {
+            "pc_0": "Appropriate Intervention",
+            "pc_1": "Appropriate Pain Control",
+            "pc_2": "Receptive to Instruction",
+            "pc_3": "Communicated Effectively",
+            "pc_4": "Troubleshoots Effectively",
+            "pc_5": "Calm/Professional Demeanor",
+            "pc_6": "Recognizes Limitations",
+            "pc_7": "Professionalism and Integrity",
+            "pc_8": "Accountable for Care",
+            "pc_9": "Documentation Reflects Care",
+            "pc_10": "Follows Universal Precautions"
+        }
+        
+        # Build HTML email content
+        html_content = f"""
+        <html>
+        <head>
+            <style>
+                body {{ font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 0; }}
+                .header {{ background-color: #dc3545; color: white; padding: 20px; }}
+                .content {{ padding: 20px; }}
+                .explanation {{ background-color: #fff3cd; padding: 15px; border-radius: 5px; border-left: 4px solid #ffc107; margin-bottom: 20px; }}
+                .evaluation-info {{ background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px; }}
+                .info-row {{ margin: 8px 0; }}
+                .info-label {{ font-weight: bold; color: #495057; }}
+                .negative-metrics {{ background-color: #f8d7da; padding: 15px; border-radius: 5px; border-left: 4px solid #dc3545; margin-bottom: 20px; }}
+                .negative-field {{ color: #dc3545; font-weight: bold; }}
+                .metric-item {{ margin: 8px 0; padding: 8px; background-color: white; border-radius: 3px; }}
+                .preceptor-comment {{ background-color: #e7f3ff; padding: 15px; border-radius: 5px; border-left: 4px solid #007bff; margin-top: 20px; }}
+                .comment-text {{ margin-top: 10px; font-style: italic; }}
+                .footer {{ margin-top: 30px; padding-top: 20px; border-top: 2px solid #dee2e6; color: #6c757d; font-size: 12px; }}
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <h2>⚠️ Negative Evaluation Alert</h2>
+            </div>
+            <div class="content">
+                <div class="explanation">
+                    <h3>🚨 Important Notification</h3>
+                    <p>This is an automated notification from the PrecepGo evaluation system.</p>
+                    <p><strong>A student has received a negative evaluation rating (Dangerous/Safety Concern) from their preceptor.</strong></p>
+                    <p>This requires immediate attention from the program administrator. Please review the details below and take appropriate action.</p>
+                </div>
+                
+                <div class="evaluation-info">
+                    <h3>📋 Evaluation Information</h3>
+                    <div class="info-row">
+                        <span class="info-label">Student Name:</span> {preceptee_name}
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Preceptor Name:</span> {preceptor_name}
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Case Type:</span> {case_type}
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Document ID:</span> {evaluation_doc_id}
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Request ID:</span> {request_id}
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Notification Generated:</span> {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+                    </div>
+                </div>
+                
+                <div class="negative-metrics">
+                    <h3>⚠️ Negative Ratings Received</h3>
+                    <p>The following performance metrics received a rating of <strong class="negative-field">-1 (DANGEROUS)</strong>:</p>
+        """
+        
+        # Add each negative metric
+        for field in negative_fields:
+            metric_name = metric_names.get(field, field)
+            html_content += f"""
+                    <div class="metric-item">
+                        <strong>{metric_name}</strong> <span class="negative-field">({field}) - DANGEROUS</span>
+                    </div>
+            """
+        
+        html_content += """
+                </div>
+        """
+        
+        # Add preceptor comments if available
+        if comments:
+            # Convert newlines to <br> tags for HTML display
+            comments_html = comments.replace('\n', '<br>')
+            html_content += f"""
+                <div class="preceptor-comment">
+                    <h3>💬 Preceptor's Comments</h3>
+                    <div class="comment-text">
+                        {comments_html}
+                    </div>
+                </div>
+            """
+        else:
+            html_content += """
+                <div class="preceptor-comment">
+                    <h3>💬 Preceptor's Comments</h3>
+                    <div class="comment-text">
+                        <em>No additional comments provided by the preceptor.</em>
+                    </div>
+                </div>
+            """
+        
+        html_content += f"""
+                <div class="footer">
+                    <p><strong>Action Required:</strong> Please review this evaluation immediately and contact the preceptor and student as appropriate.</p>
+                    <p>This is an automated notification. For questions or concerns, please contact the PrecepGo system administrator.</p>
+                    <p>Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}</p>
+                </div>
+            </div>
+        </body>
+        </html>
+        """
+        
+        return html_content.strip()
+    
     def _save_notification_record(self, evaluation_doc_id: str, evaluation_data: Dict[str, Any], negative_fields: List[str]) -> bool:
         """
         Save a record of the notification sent to Firestore.
@@ -146,6 +266,9 @@ class NotificationAgent:
             return False
         
         try:
+            # Generate HTML email content
+            email_html = self._generate_email_html(evaluation_data, evaluation_doc_id, negative_fields)
+            
             notifications_ref = self.db.collection('agent_notifications')
             
             notification_record = {
@@ -155,7 +278,7 @@ class NotificationAgent:
                 'case_type': evaluation_data.get('case_type', 'Unknown'),
                 'request_id': evaluation_data.get('request_id', 'N/A'),
                 'negative_fields': negative_fields,
-                'admin_email': self.admin_email,
+                'email': email_html,  # HTML email content
                 'notification_sent_at': SERVER_TIMESTAMP if SERVER_TIMESTAMP else datetime.now(),
                 'evaluation_timestamp': evaluation_data.get('timestamp'),
                 'created_at': SERVER_TIMESTAMP if SERVER_TIMESTAMP else datetime.now()
@@ -221,151 +344,17 @@ class NotificationAgent:
     
     def send_notification_email(self, evaluations: List[Dict[str, Any]]) -> bool:
         """
-        Send email notification about negative evaluations.
+        Placeholder for email notification (disabled - will use different email service).
         
         Args:
             evaluations: List of evaluation dictionaries with negative ratings
         
         Returns:
-            True if email sent successfully, False otherwise
+            True (email sending disabled)
         """
-        if not evaluations:
-            return True
-        
-        # Prepare email content
-        subject = f"⚠️ Alert: {len(evaluations)} Student(s) Received Negative Evaluation(s)"
-        
-        # Build email body
-        body_html = f"""
-        <html>
-        <head>
-            <style>
-                body {{ font-family: Arial, sans-serif; line-height: 1.6; }}
-                .header {{ background-color: #dc3545; color: white; padding: 20px; }}
-                .content {{ padding: 20px; }}
-                .evaluation {{ border: 1px solid #ddd; margin: 15px 0; padding: 15px; border-radius: 5px; }}
-                .student-info {{ background-color: #f8f9fa; padding: 10px; border-radius: 3px; }}
-                .negative-field {{ color: #dc3545; font-weight: bold; }}
-                .footer {{ margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd; color: #666; font-size: 12px; }}
-            </style>
-        </head>
-        <body>
-            <div class="header">
-                <h2>⚠️ Negative Evaluation Alert</h2>
-            </div>
-            <div class="content">
-                <p>This is an automated notification from the PrecepGo evaluation system.</p>
-                <p><strong>{len(evaluations)} student(s)</strong> have received negative evaluation ratings (Dangerous/Safety Concern) from their preceptors.</p>
-                
-                <h3>Evaluation Details:</h3>
-        """
-        
-        for i, eval_info in enumerate(evaluations, 1):
-            eval_data = eval_info["evaluation"]
-            doc_id = eval_info["doc_id"]
-            negative_fields = eval_info["negative_fields"]
-            
-            preceptee_name = eval_data.get("preceptee_user_name", "Unknown")
-            preceptor_name = eval_data.get("preceptor_name", "Unknown")
-            case_type = eval_data.get("case_type", "Unknown")
-            request_id = eval_data.get("request_id", "N/A")
-            
-            body_html += f"""
-                <div class="evaluation">
-                    <div class="student-info">
-                        <h4>Evaluation #{i}</h4>
-                        <p><strong>Student:</strong> {preceptee_name}</p>
-                        <p><strong>Preceptor:</strong> {preceptor_name}</p>
-                        <p><strong>Case Type:</strong> {case_type}</p>
-                        <p><strong>Document ID:</strong> {doc_id}</p>
-                        <p><strong>Request ID:</strong> {request_id}</p>
-                    </div>
-                    <p><strong class="negative-field">⚠️ Negative Ratings Found:</strong></p>
-                    <ul>
-            """
-            
-            for field in negative_fields:
-                # Get metric name
-                metric_names = {
-                    "pc_0": "Appropriate Intervention",
-                    "pc_1": "Appropriate Pain Control",
-                    "pc_2": "Receptive to Instruction",
-                    "pc_3": "Communicated Effectively",
-                    "pc_4": "Troubleshoots Effectively",
-                    "pc_5": "Calm/Professional Demeanor",
-                    "pc_6": "Recognizes Limitations",
-                    "pc_7": "Professionalism and Integrity",
-                    "pc_8": "Accountable for Care",
-                    "pc_9": "Documentation Reflects Care",
-                    "pc_10": "Follows Universal Precautions"
-                }
-                metric_name = metric_names.get(field, field)
-                body_html += f"<li><strong>{metric_name}</strong> ({field}) - <span class='negative-field'>DANGEROUS</span></li>"
-            
-            # Add comment if available
-            if eval_data.get("comments"):
-                body_html += f"""
-                    </ul>
-                    <p><strong>Preceptor Comment:</strong></p>
-                    <p style="background-color: #fff3cd; padding: 10px; border-radius: 3px; border-left: 3px solid #ffc107;">
-                        {eval_data.get("comments")}
-                    </p>
-                """
-            else:
-                body_html += "</ul>"
-            
-            body_html += "</div>"
-        
-        body_html += f"""
-                <div class="footer">
-                    <p>This is an automated notification. Please review these evaluations immediately.</p>
-                    <p>Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}</p>
-                </div>
-            </div>
-        </body>
-        </html>
-        """
-        
-        # Create email message
-        msg = MIMEMultipart('alternative')
-        msg['From'] = self.smtp_username
-        msg['To'] = self.admin_email
-        msg['Subject'] = subject
-        
-        # Add plain text version
-        text_body = f"""
-        Negative Evaluation Alert
-        
-        {len(evaluations)} student(s) have received negative evaluation ratings.
-        
-        Please check the PrecepGo system for details.
-        
-        Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
-        """
-        msg.attach(MIMEText(text_body, 'plain'))
-        msg.attach(MIMEText(body_html, 'html'))
-        
-        # Send email
-        try:
-            if self.smtp_password:
-                # Use SMTP with authentication
-                with smtplib.SMTP(self.smtp_server, self.smtp_port) as server:
-                    server.starttls()
-                    server.login(self.smtp_username, self.smtp_password)
-                    server.send_message(msg)
-                print(f"✅ Sent notification email to {self.admin_email}")
-                return True
-            else:
-                # For testing without SMTP auth (or use mock)
-                print(f"⚠️ No SMTP password configured. Mock email would be sent to {self.admin_email}")
-                print(f"   Subject: {subject}")
-                print(f"   Evaluations: {len(evaluations)}")
-                # In production, you'd want to actually send the email
-                # For now, we'll simulate it
-                return True
-        except Exception as e:
-            print(f"⚠️ Failed to send email: {e}")
-            return False
+        # Email sending disabled - will use different email service
+        # Notifications are still saved to Firestore
+        return True
     
     def process_notifications(self):
         """Check for negative evaluations and send notifications."""
@@ -380,34 +369,23 @@ class NotificationAgent:
             if negative_evaluations:
                 print(f"🔔 Found {len(negative_evaluations)} negative evaluation(s)")
                 
-                # Send notification email
-                email_sent = self.send_notification_email(negative_evaluations)
+                # Save notification records to Firestore
+                for eval_info in negative_evaluations:
+                    eval_id = eval_info["doc_id"]
+                    eval_data = eval_info["evaluation"]
+                    negative_fields = eval_info["negative_fields"]
+                    self._save_notification_record(eval_id, eval_data, negative_fields)
                 
-                if email_sent:
-                    # Save notification records to Firestore
-                    for eval_info in negative_evaluations:
-                        eval_id = eval_info["doc_id"]
-                        eval_data = eval_info["evaluation"]
-                        negative_fields = eval_info["negative_fields"]
-                        self._save_notification_record(eval_id, eval_data, negative_fields)
-                    
-                    # Update state with result
-                    if self.state_agent:
-                        self.state_agent.set_agent_result(
-                            "notification_agent",
-                            {
-                                "notifications_sent": len(negative_evaluations),
-                                "timestamp": datetime.now().isoformat()
-                            },
-                            StateAgent.STATE_COMPLETED
-                        )
-                else:
-                    # Update state to ERROR
-                    if self.state_agent:
-                        self.state_agent.set_agent_error(
-                            "notification_agent",
-                            "Failed to send notification email"
-                        )
+                # Update state with result
+                if self.state_agent:
+                    self.state_agent.set_agent_result(
+                        "notification_agent",
+                        {
+                            "notifications_sent": len(negative_evaluations),
+                            "timestamp": datetime.now().isoformat()
+                        },
+                        StateAgent.STATE_COMPLETED
+                    )
             else:
                 # No negative evaluations found
                 if self.state_agent:
@@ -532,21 +510,18 @@ class NotificationAgent:
 
 # Convenience function for easy importing
 def create_notification_agent(
-    admin_email: str = "wasoje4172@fandoe.com",
     firestore_db=None
 ) -> NotificationAgent:
     """
     Create a Notification Agent instance.
     
     Args:
-        admin_email: Email address to send notifications to
         firestore_db: Optional Firestore database client
     
     Returns:
         NotificationAgent instance
     """
     return NotificationAgent(
-        admin_email=admin_email,
         firestore_db=firestore_db
     )
 

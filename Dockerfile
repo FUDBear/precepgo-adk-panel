@@ -14,14 +14,15 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application code (all Python files)
 COPY *.py ./
 
+# Copy agents directory
+COPY agents/ ./agents/
+
 # Copy vectordb directory (for vector search tools)
 COPY vectordb/ ./vectordb/
 
-# Note: firestore_service.py, gemini_agent.py, and vector_search_tool.py will be copied
-
 # Copy data files needed at runtime (create directory first)
 RUN mkdir -p data
-COPY data/cases.json data/patient_templates.json data/concepts.json data/
+COPY data/cases.json data/patient_templates.json data/concepts.json data/students.json data/comments_example.json data/task-time-benchmarks.json data/sites.json data/standards.json data/
 
 # Set environment variables
 ENV PORT=8080
