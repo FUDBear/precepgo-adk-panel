@@ -1844,6 +1844,10 @@ async def create_demo_evaluation():
             detail="Evaluations Agent not available. Please ensure agents/evaluations_agent.py is properly configured."
         )
     
+    # Set state to ACTIVE immediately for responsive UI feedback
+    if state_agent:
+        state_agent.set_agent_state("evaluation_agent", StateAgent.STATE_ACTIVE)
+    
     try:
         # Use the agent to create and save demo evaluation
         evaluation_data = evaluations_agent.create_and_save_demo_evaluation()
@@ -1899,6 +1903,9 @@ async def create_demo_evaluation():
         }
         
     except Exception as e:
+        # Set state back to IDLE on error
+        if state_agent:
+            state_agent.set_agent_error("evaluation_agent", str(e))
         import traceback
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Error creating demo evaluation: {str(e)}")
@@ -2106,6 +2113,7 @@ async def stop_automated_mode():
 async def get_automated_mode_status():
     """
     Get automated mode status.
+    Optimized to avoid Firestore timeouts - uses in-memory state first.
     """
     if not state_agent:
         return {
@@ -2115,17 +2123,32 @@ async def get_automated_mode_status():
         }
     
     try:
+        # Check in-memory state first (fast, no Firestore call)
         is_active = state_agent.is_automated_mode_active()
-        all_states = state_agent.get_all_states()
+        
+        # Try to get Firestore state, but don't fail if it times out
+        try:
+            all_states = state_agent.get_all_states()
+            automated_mode = all_states.get("automated_mode", "OFF")
+            start_time = all_states.get("automated_mode_start_time")
+            end_time = all_states.get("automated_mode_end_time")
+        except Exception as firestore_error:
+            # If Firestore fails, use in-memory state
+            print(f"⚠️ Firestore query failed in status endpoint: {firestore_error}")
+            automated_mode = "ON" if is_active else "OFF"
+            start_time = None
+            end_time = None
         
         return {
             "ok": True,
             "active": is_active,
-            "automated_mode": all_states.get("automated_mode", "OFF"),
-            "start_time": all_states.get("automated_mode_start_time"),
-            "end_time": all_states.get("automated_mode_end_time")
+            "automated_mode": automated_mode,
+            "start_time": start_time,
+            "end_time": end_time
         }
     except Exception as e:
+        import traceback
+        traceback.print_exc()
         return {
             "ok": False,
             "active": False,
@@ -2243,7 +2266,7 @@ async def start_time_tracking(request: Dict[str, Any]):
         }
     except ValueError as e:
         raise HTTPException(status_code=400, detail=f"Invalid task_type: {str(e)}")
-        except Exception as e:
+    except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error starting task tracking: {str(e)}")
 
 @app.post("/agents/time-savings/task/complete")
@@ -2357,7 +2380,7 @@ async def get_time_savings_analytics(
         if time_savings_agent.state_agent:
             try:
                 from agents.state_agent import StateAgent
-                time_savings_agent.state_agent.set_agent_state("time_agent", StateAgent.STATE_PROCESSING)
+                time_savings_agent.state_agent.set_agent_state("time_agent", StateAgent.STATE_ACTIVE)
             except Exception as e:
                 print(f"⚠️ Failed to update state_agent: {e}")
         
@@ -2403,7 +2426,7 @@ async def get_time_savings_analytics(
                         "total_hours_saved": savings_data.get('total_hours_saved', 0),
                         "total_tasks": savings_data.get('total_tasks', 0)
                     },
-                    StateAgent.STATE_COMPLETED
+                    StateAgent.STATE_IDLE
                 )
             except Exception as e:
                 print(f"⚠️ Failed to update state_agent result: {e}")
@@ -2450,7 +2473,7 @@ async def get_time_savings_report(
             detail="Time Savings Agent not available"
         )
     
-            try:
+    try:
         # Validate format_type
         if format_type not in ["summary", "detailed"]:
             raise HTTPException(

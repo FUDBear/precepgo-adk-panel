@@ -380,7 +380,7 @@ class COAComplianceAgent:
         """
         # Update state to GENERATING
         if self.state_agent:
-            self.state_agent.set_agent_state("coa_agent", StateAgent.STATE_GENERATING)
+            self.state_agent.set_agent_state("coa_agent", StateAgent.STATE_ACTIVE)
         
         try:
             # Filter students if IDs provided
@@ -458,7 +458,7 @@ class COAComplianceAgent:
                         "students_processed": len(students_to_process),
                         "total_standards": len(self.coa_mapping)
                     },
-                    StateAgent.STATE_COMPLETED
+                    StateAgent.STATE_IDLE
                 )
             
             return consolidated_report

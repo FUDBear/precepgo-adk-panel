@@ -360,7 +360,7 @@ class NotificationAgent:
         """Check for negative evaluations and send notifications."""
         # Update state to PROCESSING
         if self.state_agent:
-            self.state_agent.set_agent_state("notification_agent", StateAgent.STATE_PROCESSING)
+            self.state_agent.set_agent_state("notification_agent", StateAgent.STATE_ACTIVE)
         
         try:
             # Check for negative evaluations
@@ -384,7 +384,7 @@ class NotificationAgent:
                             "notifications_sent": len(negative_evaluations),
                             "timestamp": datetime.now().isoformat()
                         },
-                        StateAgent.STATE_COMPLETED
+                        StateAgent.STATE_IDLE
                     )
             else:
                 # No negative evaluations found

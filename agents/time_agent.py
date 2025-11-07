@@ -905,7 +905,7 @@ Do not include any text, explanations, or formatting - just the number."""
         if self.state_agent:
             try:
                 from agents.state_agent import StateAgent
-                self.state_agent.set_agent_state("time_agent", StateAgent.STATE_PROCESSING)
+                self.state_agent.set_agent_state("time_agent", StateAgent.STATE_ACTIVE)
             except Exception as e:
                 print(f"⚠️ Failed to update state_agent: {e}")
         
@@ -962,7 +962,7 @@ Do not include any text, explanations, or formatting - just the number."""
                     self.state_agent.set_agent_result(
                         "time_agent",
                         result_data,
-                        StateAgent.STATE_COMPLETED
+                        StateAgent.STATE_IDLE
                     )
                 except Exception as e:
                     print(f"⚠️ Failed to update state_agent result: {e}")

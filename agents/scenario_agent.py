@@ -651,7 +651,7 @@ class ClinicalScenarioAgent:
         
         # Update state to GENERATING
         if self.state_agent:
-            self.state_agent.set_agent_state("scenario_agent", StateAgent.STATE_GENERATING)
+            self.state_agent.set_agent_state("scenario_agent", StateAgent.STATE_ACTIVE)
         
         selected_student = None
         case_rationale = None
@@ -848,7 +848,7 @@ When generating this scenario, consider:
                         "case_name": case.get('name'),
                         "saved_to_file": save_to_file
                     },
-                    StateAgent.STATE_COMPLETED
+                    StateAgent.STATE_IDLE
                 )
             
             return result

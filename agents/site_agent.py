@@ -357,7 +357,7 @@ Include specific numbers and data points throughout the report."""
         if self.state_agent:
             try:
                 from agents.state_agent import StateAgent as SA
-                self.state_agent.set_agent_state("site_agent", SA.STATE_GENERATING)
+                self.state_agent.set_agent_state("site_agent", SA.STATE_ACTIVE)
             except Exception as e:
                 print(f"⚠️ Failed to update state: {e}")
         
@@ -419,7 +419,7 @@ Include specific numbers and data points throughout the report."""
                             'total_preceptors': analysis_data['total_preceptors'],
                             'total_evaluations': analysis_data['total_evaluations']
                         },
-                        SA.STATE_COMPLETED
+                        SA.STATE_IDLE
                     )
                 except Exception as e:
                     print(f"⚠️ Failed to update state result: {e}")

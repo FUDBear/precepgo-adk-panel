@@ -1868,27 +1868,28 @@ Keep it to 1-3 sentences. Be specific about what you observed - their preparatio
                                     print(f"   ✅ Matched site to student hospital: {site.get('hospitalName', 'N/A')}")
                                     break
                 
-                # If no match found, prefer primary site, otherwise random
+                # If no match found, use primarySite 90% of the time, otherwise random
                 if not selected_site:
                     primary_sites = [s for s in assigned_sites if s.get('primarySite', False)]
-                    if primary_sites:
+                    # 90% chance to use primary site if available, 10% chance to pick randomly
+                    if primary_sites and random.random() < 0.9:
                         selected_site = primary_sites[0]
-                        print(f"   ✅ Using primary site: {selected_site.get('hospitalName', 'N/A')}")
+                        print(f"   ✅ Using primary site (90% priority): {selected_site.get('hospitalName', 'N/A')}")
                     else:
                         selected_site = random.choice(assigned_sites)
-                        print(f"   ✅ Using random site: {selected_site.get('hospitalName', 'N/A')}")
+                        print(f"   ✅ Selected random site from assignedSites: {selected_site.get('hospitalName', 'N/A')} (primarySite: {selected_site.get('primarySite', False)})")
             else:
                 print(f"   ⚠️ Preceptor has no assigned sites")
         else:
             # Fallback to random generation if no preceptors available
             print(f"⚠️ Falling back to random preceptor generation (sites.json not available or empty)")
-        first_names = ["Drew", "Alex", "Jordan", "Taylor", "Casey", "Morgan", "Riley", "Quinn"]
-        last_names = ["Timme", "Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller"]
-        
-        if not preceptor_name:
-            preceptor_name = f"{random.choice(first_names)} {random.choice(last_names)}"
-        
-        preceptor_id = self._generate_random_string(28)
+            first_names = ["Drew", "Alex", "Jordan", "Taylor", "Casey", "Morgan", "Riley", "Quinn"]
+            last_names = ["Timme", "Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller"]
+            
+            if not preceptor_name:
+                preceptor_name = f"{random.choice(first_names)} {random.choice(last_names)}"
+            
+            preceptor_id = self._generate_random_string(28)
             preceptor_credentials = ""
         
         request_id = self._generate_random_string(20)
@@ -2099,7 +2100,7 @@ Keep it to 1-3 sentences. Be specific about what you observed - their preparatio
         """
         # Update state to GENERATING
         if self.state_agent:
-            self.state_agent.set_agent_state("evaluation_agent", StateAgent.STATE_GENERATING)
+            self.state_agent.set_agent_state("evaluation_agent", StateAgent.STATE_ACTIVE)
         
         try:
             # Generate evaluation data
@@ -2138,7 +2139,7 @@ Keep it to 1-3 sentences. Be specific about what you observed - their preparatio
                 self.state_agent.set_agent_result(
                     "evaluation_agent",
                     {"doc_id": firestore_doc_id, "case_type": evaluation_data.get("case_type")},
-                    StateAgent.STATE_COMPLETED
+                    StateAgent.STATE_IDLE
                 )
             
             return result

@@ -122,7 +122,7 @@ class ImageGenerationAgent:
                 except Exception:
                     # Fallback to older model if @006 not available
                     try:
-                self.imagen_model = ImageGenerationModel.from_pretrained("imagen-3.0-generate-001")
+                        self.imagen_model = ImageGenerationModel.from_pretrained("imagen-3.0-generate-001")
                         print("   - Vertex AI Imagen: ✅ (using imagen-3.0-generate-001)")
                     except Exception as model_error:
                         raise model_error
@@ -167,8 +167,8 @@ class ImageGenerationAgent:
                     # For cross-project buckets, reload might fail due to permissions,
                     # but we can still use the bucket for operations if we have object-level permissions
                     try:
-                    self.bucket.reload()
-                    print(f"   - Cloud Storage Bucket: ✅ ({self.storage_bucket_name})")
+                        self.bucket.reload()
+                        print(f"   - Cloud Storage Bucket: ✅ ({self.storage_bucket_name})")
                     except Exception as reload_error:
                         # Reload failed, but we'll still try to use the bucket
                         # The actual test will happen when we try to upload
@@ -180,7 +180,7 @@ class ImageGenerationAgent:
                 except Exception as bucket_error:
                     print(f"   - Cloud Storage Bucket: ⚠️ Cannot create bucket object: {bucket_error}")
                     print(f"   - Bucket project: {storage_project_id}, Bucket name: {self.storage_bucket_name}")
-                        self.bucket = None
+                    self.bucket = None
             except Exception as e:
                 print(f"   - Cloud Storage: ⚠️ Failed to initialize: {e}")
                 import traceback
@@ -273,7 +273,7 @@ class ImageGenerationAgent:
                 if is_pediatric:
                     context_parts.append(f"Medical condition: {patient_context.get('condition', 'N/A')}")
                 else:
-                context_parts.append(f"Patient: {patient_context.get('full_name', 'Patient')}, Age: {patient_context.get('age', 'N/A')}, Condition: {patient_context.get('condition', 'N/A')}")
+                    context_parts.append(f"Patient: {patient_context.get('full_name', 'Patient')}, Age: {patient_context.get('age', 'N/A')}, Condition: {patient_context.get('condition', 'N/A')}")
             
             if learning_objectives:
                 context_parts.append(f"Learning focus: {', '.join(learning_objectives)}")
@@ -300,7 +300,7 @@ Generate a concise, descriptive prompt (2-3 sentences max) for an AI image gener
 
 Return ONLY the prompt text, nothing else."""
             else:
-            enhancement_prompt = f"""Create a detailed, professional prompt for generating an educational medical illustration image.
+                enhancement_prompt = f"""Create a detailed, professional prompt for generating an educational medical illustration image.
 
 Scenario Description:
 {scenario_description}
@@ -394,9 +394,9 @@ Return ONLY the prompt text, nothing else."""
             # Generate image
             print(f"   📞 Calling Imagen API...")
             try:
-            response = self.imagen_model.generate_images(
-                prompt=final_prompt,
-                number_of_images=1,
+                response = self.imagen_model.generate_images(
+                    prompt=final_prompt,
+                    number_of_images=1,
                     aspect_ratio="16:9",  # Match working temp dashboard settings
                     safety_filter_level="block_some",  # Match working temp dashboard settings
                 person_generation="allow_adult"  # Allow adults in medical illustrations
@@ -811,7 +811,7 @@ Return ONLY the prompt text, nothing else."""
         if self.state_agent:
             try:
                 from agents.state_agent import StateAgent
-                self.state_agent.set_agent_state("image_agent", StateAgent.STATE_PROCESSING)
+                self.state_agent.set_agent_state("image_agent", StateAgent.STATE_ACTIVE)
             except Exception as e:
                 print(f"⚠️ Failed to update state_agent: {e}")
         
@@ -930,7 +930,7 @@ Return ONLY the prompt text, nothing else."""
                             "skipped": results["skipped"],
                             "total_scenarios": results["total_scenarios"]
                         },
-                        StateAgent.STATE_COMPLETED
+                        StateAgent.STATE_IDLE
                     )
                 except Exception as e:
                     print(f"⚠️ Failed to update state_agent result: {e}")

@@ -37,12 +37,9 @@ class StateAgent:
     Manages and tracks the state of all agents in the system.
     """
     
-    # Agent state constants
+    # Agent state constants - simplified to only IDLE and ACTIVE
     STATE_IDLE = "IDLE"
-    STATE_GENERATING = "GENERATING"
-    STATE_COMPLETED = "COMPLETED"
-    STATE_ERROR = "ERROR"
-    STATE_PROCESSING = "PROCESSING"
+    STATE_ACTIVE = "ACTIVE"
     
     # Automated mode constants
     AUTOMATED_MODE_OFF = "OFF"
@@ -103,17 +100,29 @@ class StateAgent:
             doc = doc_ref.get()
             
             if not doc.exists:
-                # Create document with default states
+                # Create document with default states - all agents start as IDLE
                 default_states = {
                     "evaluation_agent_state": self.STATE_IDLE,
                     "scenario_agent_state": self.STATE_IDLE,
                     "time_agent_state": self.STATE_IDLE,
+                    "image_agent_state": self.STATE_IDLE,
+                    "notification_agent_state": self.STATE_IDLE,
+                    "coa_agent_state": self.STATE_IDLE,
+                    "site_agent_state": self.STATE_IDLE,
                     "evaluation_agent_last_activity": None,
                     "scenario_agent_last_activity": None,
                     "time_agent_last_activity": None,
+                    "image_agent_last_activity": None,
+                    "notification_agent_last_activity": None,
+                    "coa_agent_last_activity": None,
+                    "site_agent_last_activity": None,
                     "evaluation_agent_last_result": None,
                     "scenario_agent_last_result": None,
                     "time_agent_last_result": None,
+                    "image_agent_last_result": None,
+                    "notification_agent_last_result": None,
+                    "coa_agent_last_result": None,
+                    "site_agent_last_result": None,
                     "automated_mode": self.AUTOMATED_MODE_OFF,
                     "automated_mode_start_time": None,
                     "automated_mode_end_time": None,
@@ -136,7 +145,7 @@ class StateAgent:
         
         Args:
             agent_name: Name of the agent (e.g., "evaluation_agent", "scenario_agent")
-            state: New state (e.g., STATE_IDLE, STATE_GENERATING, etc.)
+            state: New state (e.g., STATE_IDLE, STATE_ACTIVE)
             metadata: Optional metadata to store with the state
         
         Returns:
@@ -208,6 +217,8 @@ class StateAgent:
         
         try:
             doc_ref = self.db.collection(self.collection_name).document(self.document_id)
+            # Add timeout to prevent hanging - use get() with timeout
+            # Note: Firestore Python client doesn't have built-in timeout, but we can catch exceptions
             doc = doc_ref.get()
             
             if doc.exists:
@@ -216,6 +227,7 @@ class StateAgent:
                 return {}
         except Exception as e:
             print(f"⚠️ Failed to get all states: {e}")
+            # Return empty dict instead of raising - allows endpoint to continue
             return {}
     
     def set_agent_result(
@@ -230,7 +242,7 @@ class StateAgent:
         Args:
             agent_name: Name of the agent
             result: Result dictionary to store
-            state: Optional state to set (defaults to STATE_COMPLETED)
+            state: Optional state to set (defaults to STATE_IDLE)
         
         Returns:
             True if successful, False otherwise
@@ -247,11 +259,11 @@ class StateAgent:
                 "updated_at": SERVER_TIMESTAMP if SERVER_TIMESTAMP else datetime.now()
             }
             
-            # Set state if provided
+            # Set state if provided, otherwise default to IDLE (work is done)
             if state:
                 update_data[f"{agent_name}_state"] = state
             else:
-                update_data[f"{agent_name}_state"] = self.STATE_COMPLETED
+                update_data[f"{agent_name}_state"] = self.STATE_IDLE
             
             doc_ref.update(update_data)
             print(f"✅ Stored result for {agent_name}")
@@ -292,14 +304,14 @@ class StateAgent:
                 error_data.update(error_details)
             
             update_data = {
-                f"{agent_name}_state": self.STATE_ERROR,
+                f"{agent_name}_state": self.STATE_IDLE,  # Set to IDLE after error (work is done)
                 f"{agent_name}_last_error": error_data,
                 f"{agent_name}_last_activity": SERVER_TIMESTAMP if SERVER_TIMESTAMP else datetime.now(),
                 "updated_at": SERVER_TIMESTAMP if SERVER_TIMESTAMP else datetime.now()
             }
             
             doc_ref.update(update_data)
-            print(f"⚠️ Set {agent_name} state to ERROR: {error_message}")
+            print(f"⚠️ {agent_name} error recorded, state set to IDLE: {error_message}")
             return True
             
         except Exception as e:
@@ -520,18 +532,15 @@ class StateAgent:
                 
                 if should_run_eval:
                     eval_state = self.get_agent_state("evaluation_agent")
-                    if eval_state == self.STATE_COMPLETED:
-                        self.set_agent_state("evaluation_agent", self.STATE_IDLE)
-                        eval_state = self.STATE_IDLE
-                    
-                    if eval_state == self.STATE_IDLE:
+                    # Only run if IDLE (not ACTIVE)
+                    if eval_state == self.STATE_IDLE or eval_state is None:
                         print(f"\n{'='*60}")
                         print(f"📝 Running Evaluation Agent (Timer: {elapsed_time / 60:.1f} min elapsed)")
                         print(f"{'='*60}")
                         try:
                             eval_agent = self._get_evaluations_agent()
                             if eval_agent:
-                                self.set_agent_state("evaluation_agent", self.STATE_GENERATING)
+                                self.set_agent_state("evaluation_agent", self.STATE_ACTIVE)
                                 result = eval_agent.create_and_save_demo_evaluation()
                                 self.set_agent_result("evaluation_agent", {
                                     "doc_id": result.get('firestore_doc_id'),
@@ -555,18 +564,15 @@ class StateAgent:
                 
                 if should_run_scenario:
                     scenario_state = self.get_agent_state("scenario_agent")
-                    if scenario_state == self.STATE_COMPLETED:
-                        self.set_agent_state("scenario_agent", self.STATE_IDLE)
-                        scenario_state = self.STATE_IDLE
-                    
-                    if scenario_state == self.STATE_IDLE:
+                    # Only run if IDLE (not ACTIVE)
+                    if scenario_state == self.STATE_IDLE or scenario_state is None:
                         print(f"\n{'='*60}")
                         print(f"📋 Running Scenario Agent (Timer: {elapsed_time / 60:.1f} min elapsed)")
                         print(f"{'='*60}")
                         try:
                             scenario_agent = self._get_scenario_agent()
                             if scenario_agent:
-                                self.set_agent_state("scenario_agent", self.STATE_GENERATING)
+                                self.set_agent_state("scenario_agent", self.STATE_ACTIVE)
                                 result = scenario_agent.generate_scenario()
                                 self.set_agent_result("scenario_agent", {
                                     "case": result.get('case', {}).get('name'),
