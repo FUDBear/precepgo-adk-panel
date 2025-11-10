@@ -1,0 +1,5 @@
+# Google ADK and Dependencies
+google-adk
+google-cloud-firestore
+google-generativeai
+google-cloud-storage

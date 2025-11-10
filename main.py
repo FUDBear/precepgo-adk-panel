@@ -43,32 +43,35 @@ except ImportError as e:
     print("⚠️ Scenarios will not be saved to Firestore")
     FIRESTORE_AVAILABLE = False
 
-# Scenario Agent import
+# Scenario Agent import (ADK agent)
 try:
-    from agents.scenario_agent import ClinicalScenarioAgent
+    from agents.scenario_agent import scenario_agent
     CLINICAL_SCENARIO_AGENT_AVAILABLE = True
 except ImportError as e:
     print(f"⚠️ Scenario Agent imports failed: {e}")
     print("⚠️ Clinical scenario generation will not be available")
     CLINICAL_SCENARIO_AGENT_AVAILABLE = False
+    scenario_agent = None
 
 # Evaluations Agent import
 try:
-    from agents.evaluations_agent import EvaluationsAgent
+    from agents.evaluations_agent import evaluation_agent as evaluations_agent
     EVALUATIONS_AGENT_AVAILABLE = True
 except ImportError as e:
     print(f"⚠️ Evaluations Agent imports failed: {e}")
     print("⚠️ Demo evaluation generation will not be available")
     EVALUATIONS_AGENT_AVAILABLE = False
+    evaluations_agent = None
 
-# Notification Agent import
+# Notification Agent import (ADK agent)
 try:
-    from agents.notification_agent import NotificationAgent, create_notification_agent
+    from agents.notification_agent import notification_agent
     NOTIFICATION_AGENT_AVAILABLE = True
 except ImportError as e:
     print(f"⚠️ Notification Agent imports failed: {e}")
     print("⚠️ Notification monitoring will not be available")
     NOTIFICATION_AGENT_AVAILABLE = False
+    notification_agent = None
 
 # State Agent import
 try:
@@ -79,38 +82,38 @@ except ImportError as e:
     print("⚠️ Agent state tracking will not be available")
     STATE_AGENT_AVAILABLE = False
 
-# COA Compliance Agent import
+# COA Compliance Agent import (ADK agent)
 try:
-    from agents.coa_agent import COAComplianceAgent, create_coa_agent
+    from agents.coa_agent import coa_agent
     COA_AGENT_AVAILABLE = True
 except ImportError as e:
     print(f"⚠️ COA Compliance Agent imports failed: {e}")
     print("⚠️ COA compliance tracking will not be available")
     COA_AGENT_AVAILABLE = False
+    coa_agent = None
 
-# Time Savings Agent
+# Time Savings Agent (ADK agent)
 try:
-    from agents.time_agent import TimeSavingsAgent, TaskType, Timeframe, create_time_savings_agent
+    from agents.time_agent import time_agent
     TIME_SAVINGS_AGENT_AVAILABLE = True
 except ImportError as e:
     TIME_SAVINGS_AGENT_AVAILABLE = False
+    time_agent = None
     print(f"⚠️ Time Savings Agent not available: {e}")
 
-# Image Generation Agent
-try:
-    from agents.image_agent import ImageGenerationAgent, create_image_generation_agent
-    IMAGE_GENERATION_AGENT_AVAILABLE = True
-except ImportError as e:
-    IMAGE_GENERATION_AGENT_AVAILABLE = False
-    print(f"⚠️ Image Generation Agent not available: {e}")
+# Image Generation Agent (now ADK-compliant, integrated into scenario_agent)
+# Image generation now happens automatically after scenario creation
+IMAGE_GENERATION_AGENT_AVAILABLE = False  # Legacy class no longer used
+image_generation_agent = None  # Legacy instance no longer needed
 
-# Site Agent import
+# Site Agent import (ADK agent)
 try:
-    from agents.site_agent import SiteAgent, create_site_agent
+    from agents.site_agent import site_agent
     SITE_AGENT_AVAILABLE = True
 except ImportError as e:
     SITE_AGENT_AVAILABLE = False
     print(f"⚠️ Site Agent not available: {e}")
+    site_agent = None
 
 # ADK imports exactly as shown in the tutorial
 try:
@@ -132,6 +135,26 @@ try:
 except ImportError as e:
     print(f"⚠️ Gemini API imports failed: {e}")
     GEMINI_API_AVAILABLE = False
+
+# Define TaskType and Timeframe enums for backward compatibility
+# (These were originally in the old TimeSavingsAgent class)
+from enum import Enum
+
+class TaskType(str, Enum):
+    EVALUATION = "evaluation"
+    SCENARIO = "scenario"
+    NOTIFICATION = "notification"
+    SITE_REPORT = "site_report"
+    COA_REPORT = "coa_report"
+    IMAGE_GENERATION = "image_generation"
+    OTHER = "other"
+
+class Timeframe(str, Enum):
+    DAILY = "daily"
+    WEEKLY = "weekly"
+    MONTHLY = "monthly"
+    SEMESTER = "semester"
+    ALL_TIME = "all_time"
 
 # Vertex AI imports - For image generation
 try:
@@ -169,7 +192,16 @@ if VERTEX_AI_IMPORTS:
         VERTEX_AI_AVAILABLE = False
 
 # Configure ADK to use Vertex AI
-os.environ["GOOGLE_GENAI_USE_VERTEXAI"] = "True"
+# Configure ADK to use Google AI Studio API (not Vertex AI)
+# Set to False to use Google AI Studio API with GOOGLE_API_KEY
+# Set to True to use Vertex AI (requires GOOGLE_CLOUD_PROJECT and GOOGLE_CLOUD_LOCATION)
+if not os.getenv("GOOGLE_GENAI_USE_VERTEXAI"):
+    os.environ["GOOGLE_GENAI_USE_VERTEXAI"] = "False"  # Use Google AI Studio API
+
+# Ensure GOOGLE_API_KEY is set for Google AI Studio API
+if not os.getenv("GOOGLE_API_KEY"):
+    print("⚠️ WARNING: GOOGLE_API_KEY not set. ADK agents will fail without it.")
+    print("   Set it in your .env file or environment: GOOGLE_API_KEY=your_key_here")
 
 # --- Define Model Constants for easier use ---
 # Gemini API model identifiers (using models/ prefix for google-generativeai)
@@ -238,47 +270,50 @@ research_state = {
 # Lifespan context manager for FastAPI
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup: No automatic background task - research is manual-only
-    print("🚀 PrecepGo ADK Panel started - Research is manual trigger only")
-    
-    # Start Notification Agent monitoring
-    if notification_agent:
-        try:
-            notification_agent.start()
-            print("✅ Notification Agent monitoring started")
-        except Exception as e:
-            print(f"⚠️ Failed to start Notification Agent: {e}")
-    
-    # Start scheduled analytics for Time Savings Agent
-    if time_savings_agent:
-        try:
-            time_savings_agent.start_scheduled_analytics()
-            print("✅ Scheduled Time Savings Analytics started")
-        except Exception as e:
-            print(f"⚠️ Failed to start scheduled analytics: {e}")
-    
+    # Startup: All agents are endpoint-triggered only - no automatic execution
+    print("🚀 PrecepGo ADK Panel started - All agents are endpoint-triggered only")
+    print("💡 Agents will ONLY run when their endpoints are triggered")
+
+    # DISABLED: Automatic Notification Agent monitoring (now endpoint-triggered only)
+    # if notification_agent:
+    #     try:
+    #         notification_agent.start()
+    #         print("✅ Notification Agent monitoring started")
+    #     except Exception as e:
+    #         print(f"⚠️ Failed to start Notification Agent: {e}")
+
+    # DISABLED: Automatic scheduled analytics for Time Savings Agent (now endpoint-triggered only)
+    # if time_savings_agent:
+    #     try:
+    #         time_savings_agent.start_scheduled_analytics()
+    #         print("✅ Scheduled Time Savings Analytics started")
+    #     except Exception as e:
+    #         print(f"⚠️ Failed to start scheduled analytics: {e}")
+
     yield
-    
+
     # Shutdown
-    if notification_agent:
-        try:
-            notification_agent.stop()
-            print("🛑 Notification Agent stopped")
-        except Exception as e:
-            print(f"⚠️ Error stopping Notification Agent: {e}")
-    
-    # Stop scheduled analytics
-    if time_savings_agent:
-        try:
-            time_savings_agent.stop_scheduled_analytics()
-        except Exception as e:
-            print(f"⚠️ Error stopping scheduled analytics: {e}")
-    
+    # DISABLED: No need to stop what wasn't started
+    # if notification_agent:
+    #     try:
+    #         notification_agent.stop()
+    #         print("🛑 Notification Agent stopped")
+    #     except Exception as e:
+    #         print(f"⚠️ Error stopping Notification Agent: {e}")
+
+    # DISABLED: No need to stop what wasn't started
+    # if time_savings_agent:
+    #     try:
+    #         time_savings_agent.stop_scheduled_analytics()
+    #     except Exception as e:
+    #         print(f"⚠️ Error stopping scheduled analytics: {e}")
+
     print("🛑 PrecepGo ADK Panel shutting down...")
 
 app = FastAPI(title="PrecepGo ADK Panel", lifespan=lifespan)
 
 # Configure CORS to allow frontend requests
+# Use allow_origin_regex for more flexible matching (handles trailing slashes, etc.)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -287,9 +322,11 @@ app.add_middleware(
         "http://localhost:5173",  # For Vite dev server
         "http://localhost:8080",  # For local backend testing
     ],
+    allow_origin_regex=r"https://.*\.run\.app",  # Allow all Cloud Run frontend services
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allow_headers=["*"],
+    expose_headers=["*"],
 )
 
 MCP_URL = os.getenv("MCP_URL")  # Legacy MCP server (deprecated in favor of Vector Search)
@@ -339,76 +376,29 @@ MEDICAL_CONCEPTS = load_medical_concepts()
 PATIENT_TEMPLATES = load_patient_templates()
 CASES = load_cases()
 
-# Initialize Clinical Scenario Agent
+# Clinical Scenario Agent (ADK agent - already instantiated)
 clinical_scenario_agent = None
 if CLINICAL_SCENARIO_AGENT_AVAILABLE:
-    try:
-        clinical_scenario_agent = ClinicalScenarioAgent(
-            cases=CASES,
-            patient_templates=PATIENT_TEMPLATES
-        )
-        print("✅ Clinical Scenario Agent initialized")
-    except Exception as e:
-        print(f"⚠️ Failed to initialize Clinical Scenario Agent: {e}")
-        clinical_scenario_agent = None
+    # ADK agents are already instantiated, just assign the imported agent
+    clinical_scenario_agent = scenario_agent
+    print("✅ Clinical Scenario Agent (ADK) initialized")
 
 # Initialize Evaluations Agent
-evaluations_agent = None
-if EVALUATIONS_AGENT_AVAILABLE:
-    try:
-        evaluations_agent = EvaluationsAgent()
-        print("✅ Evaluations Agent initialized")
-    except Exception as e:
-        print(f"⚠️ Failed to initialize Evaluations Agent: {e}")
-        evaluations_agent = None
+# Evaluations agent is imported directly as an instance, no need to initialize
+if EVALUATIONS_AGENT_AVAILABLE and evaluations_agent:
+    print("✅ Evaluations Agent imported successfully")
+elif not EVALUATIONS_AGENT_AVAILABLE:
+    evaluations_agent = None
 
-# Initialize Notification Agent
-notification_agent = None
-if NOTIFICATION_AGENT_AVAILABLE and FIRESTORE_AVAILABLE:
-    try:
-        # Get Firestore client for notification agent
-        from google.cloud import firestore
-        project_id = os.getenv("FIREBASE_PROJECT_ID") or os.getenv("GOOGLE_CLOUD_PROJECT")
-        if project_id:
-            notification_db = firestore.Client(project=project_id)
-        else:
-            notification_db = firestore.Client()
-        
-        notification_agent = NotificationAgent(
-            firestore_db=notification_db
-        )
-        print("✅ Notification Agent initialized")
-    except Exception as e:
-        print(f"⚠️ Failed to initialize Notification Agent: {e}")
-        notification_agent = None
-elif NOTIFICATION_AGENT_AVAILABLE:
-    print("⚠️ Notification Agent not initialized: Firestore not available")
+# Notification Agent (ADK agent - already instantiated)
+# ADK agents are already instantiated during import, no initialization needed
+if NOTIFICATION_AGENT_AVAILABLE:
+    print("✅ Notification Agent (ADK) available")
+elif not NOTIFICATION_AGENT_AVAILABLE:
+    notification_agent = None
 
-# Initialize COA Compliance Agent
-coa_agent = None
-if COA_AGENT_AVAILABLE and FIRESTORE_AVAILABLE:
-    try:
-        # Get Firestore client for COA agent
-        from google.cloud import firestore
-        project_id = os.getenv("FIREBASE_PROJECT_ID") or os.getenv("GOOGLE_CLOUD_PROJECT")
-        if project_id:
-            coa_db = firestore.Client(project=project_id)
-        else:
-            coa_db = firestore.Client()
-        
-        # Get mapping file path from environment or use default
-        mapping_file_path = os.getenv("COA_MAPPING_FILE_PATH", "/mnt/user-data/uploads/Standard_D_Mapping_to_Clinical_Evaluations__1_.docx")
-        
-        coa_agent = COAComplianceAgent(
-            firestore_db=coa_db,
-            mapping_file_path=mapping_file_path
-        )
-        print("✅ COA Compliance Agent initialized")
-    except Exception as e:
-        print(f"⚠️ Failed to initialize COA Compliance Agent: {e}")
-        coa_agent = None
-elif COA_AGENT_AVAILABLE:
-    print("⚠️ COA Compliance Agent not initialized: Firestore not available")
+# COA Compliance Agent is now ADK-compliant and doesn't need initialization
+# It's imported directly as coa_agent (ADK SequentialAgent)
 
 # Initialize State Agent
 state_agent = None
@@ -429,128 +419,24 @@ if STATE_AGENT_AVAILABLE and FIRESTORE_AVAILABLE:
 elif STATE_AGENT_AVAILABLE:
     print("⚠️ State Agent not initialized: Firestore not available")
 
-# Initialize Time Savings Agent
+# Time Savings Agent (ADK agent - already instantiated)
 time_savings_agent = None
-if TIME_SAVINGS_AGENT_AVAILABLE and FIRESTORE_AVAILABLE:
-    try:
-        # Reuse Firestore client from state agent if available
-        if state_agent and hasattr(state_agent, 'db'):
-            time_savings_db = state_agent.db
-        else:
-            from google.cloud import firestore
-            project_id = os.getenv("FIREBASE_PROJECT_ID") or os.getenv("GOOGLE_CLOUD_PROJECT")
-            if project_id:
-                time_savings_db = firestore.Client(project=project_id)
-            else:
-                time_savings_db = firestore.Client()
-        
-        time_savings_agent = TimeSavingsAgent(firestore_db=time_savings_db, state_agent=state_agent)
-        print("✅ Time Savings Agent initialized")
-    except Exception as e:
-        print(f"⚠️ Failed to initialize Time Savings Agent: {e}")
-        time_savings_agent = None
-elif TIME_SAVINGS_AGENT_AVAILABLE:
-    print("⚠️ Time Savings Agent not initialized: Firestore not available")
+if TIME_SAVINGS_AGENT_AVAILABLE:
+    # ADK agents are already instantiated, just assign the imported agent
+    time_savings_agent = time_agent
+    print("✅ Time Savings Agent (ADK) available")
+elif not TIME_SAVINGS_AGENT_AVAILABLE:
+    time_savings_agent = None
 
-# Initialize Image Generation Agent
-image_generation_agent = None
-if IMAGE_GENERATION_AGENT_AVAILABLE and FIRESTORE_AVAILABLE:
-    try:
-        # Reuse Firestore client from state agent if available
-        if state_agent and hasattr(state_agent, 'db'):
-            image_gen_db = state_agent.db
-        else:
-            from google.cloud import firestore
-            project_id = os.getenv("FIREBASE_PROJECT_ID") or os.getenv("GOOGLE_CLOUD_PROJECT")
-            if project_id:
-                image_gen_db = firestore.Client(project=project_id)
-            else:
-                image_gen_db = firestore.Client()
-        
-        # Get project ID for Vertex AI initialization
-        project_id = os.getenv("FIREBASE_PROJECT_ID") or os.getenv("GOOGLE_CLOUD_PROJECT")
-        
-        print(f"\n🎨 Initializing Image Generation Agent (main.py)...")
-        print(f"   - Project ID: {project_id}")
-        print(f"   - Firestore DB: {'Available' if image_gen_db else 'Not available'}")
-        
-        # Auto-detect Firebase Storage bucket if not set
-        # Default to auth-demo-90be0.appspot.com which is the working bucket
-        storage_bucket_name = os.getenv("STORAGE_BUCKET_NAME")
-        storage_bucket_url = os.getenv("STORAGE_BUCKET_URL")
-        
-        if storage_bucket_url:
-            # Parse gs://bucket-name/folder format
-            if storage_bucket_url.startswith("gs://"):
-                parts = storage_bucket_url.replace("gs://", "").split("/", 1)
-                storage_bucket_name = parts[0]
-                storage_folder = parts[1] if len(parts) > 1 else "agent_assets"
-            else:
-                storage_bucket_name = storage_bucket_url
-                storage_folder = "agent_assets"
-            print(f"   - Using bucket URL from env: {storage_bucket_url}")
-        elif not storage_bucket_name:
-            # Default to working bucket if not set
-            storage_bucket_name = "auth-demo-90be0.appspot.com"
-            storage_folder = "agent_assets"
-            print(f"   - Using default bucket: {storage_bucket_name}")
-        else:
-            storage_folder = "agent_assets"
-            print(f"   - Using bucket name from env: {storage_bucket_name}")
-        
-        print(f"   - Storage Bucket Name: {storage_bucket_name}")
-        print(f"   - Storage Folder: {storage_folder}")
-        
-        image_generation_agent = ImageGenerationAgent(
-            firestore_db=image_gen_db,
-            project_id=project_id,
-            storage_bucket_name=storage_bucket_name,
-            storage_folder=storage_folder
-        )
-        
-        # Verify initialization
-        if image_generation_agent:
-            has_model = image_generation_agent.imagen_model is not None
-            has_bucket = image_generation_agent.bucket is not None
-            
-            print(f"   - Image Agent created: ✅")
-            print(f"   - Imagen Model: {'✅ Available' if has_model else '❌ Not available'}")
-            print(f"   - Storage Bucket: {'✅ Available' if has_bucket else '❌ Not available'}")
-            
-            if has_model and has_bucket:
-                print("✅ Image Generation Agent initialized successfully")
-            else:
-                print("⚠️ Image Generation Agent initialized but missing model or bucket")
-        else:
-            print("❌ Image Generation Agent failed to create")
-    except Exception as e:
-        print(f"⚠️ Failed to initialize Image Generation Agent: {e}")
-        import traceback
-        traceback.print_exc()
-        image_generation_agent = None
-elif IMAGE_GENERATION_AGENT_AVAILABLE:
-    print("⚠️ Image Generation Agent not initialized: Firestore not available")
+# Image Generation Agent initialization
+# NOTE: Image generation is now ADK-compliant and integrated into scenario_agent
+# Images are automatically generated after each scenario is created via the ADK workflow
+# The legacy ImageGenerationAgent class is no longer used
+print("ℹ️  Image generation is now automatic via ADK scenario_agent workflow")
+image_generation_agent = None  # Legacy instance no longer needed
 
-# Initialize Site Agent
-site_agent = None
-if SITE_AGENT_AVAILABLE and FIRESTORE_AVAILABLE:
-    try:
-        from google.cloud import firestore
-        project_id = os.getenv("FIREBASE_PROJECT_ID") or os.getenv("GOOGLE_CLOUD_PROJECT")
-        if project_id:
-            site_db = firestore.Client(project=project_id)
-        else:
-            site_db = firestore.Client()
-        
-        site_agent = SiteAgent(firestore_db=site_db)
-        print("✅ Site Agent initialized")
-    except Exception as e:
-        print(f"⚠️ Failed to initialize Site Agent: {e}")
-        import traceback
-        traceback.print_exc()
-        site_agent = None
-elif SITE_AGENT_AVAILABLE:
-    print("⚠️ Site Agent not initialized: Firestore not available")
+# Site Agent is now ADK-compliant and doesn't need initialization
+# It's imported directly as site_agent (ADK SequentialAgent)
 
 # MCP Client Helper
 def _call_mcp(path: str, method: str = "GET", json_body: Optional[Dict[str, Any]] = None, params: Optional[Dict[str,str]] = None):
@@ -1785,7 +1671,7 @@ class MakeQuestionRequest(BaseModel):
 async def make_scenario():
     """
     Generate a clinical scenario with 2 decision options.
-    Uses the Clinical Scenario Agent to handle the complete workflow.
+    Uses the ADK scenario_agent to handle the complete workflow.
     """
     if not clinical_scenario_agent:
         raise HTTPException(
@@ -1793,41 +1679,165 @@ async def make_scenario():
             detail="Scenario Agent not available. Please ensure agents/scenario_agent.py is properly configured."
         )
     
+    # Set state to ACTIVE immediately for responsive UI feedback
+    if state_agent:
+        state_agent.set_agent_state("scenario_agent", StateAgent.STATE_ACTIVE)
+        state_agent.append_agent_log("scenario_agent", "Started scenario generation")
+    
     try:
-        # Use the agent to generate the scenario
-        scenario_data = clinical_scenario_agent.generate_scenario(
-            save_to_file=True,
-            save_to_firestore=True
+        # Use ADK Runner to execute the agent
+        if not ADK_IMPORTS:
+            raise HTTPException(
+                status_code=503,
+                detail="ADK Runner not available. Please ensure google-adk is installed."
+            )
+        
+        from google.adk.runners import Runner
+        from google.adk.sessions import InMemorySessionService
+        from google.genai import types
+        
+        # Create session service and runner
+        session_service = InMemorySessionService()
+        user_id = "web-user"
+        app_name = "precepgo-adk-panel-scenario"
+        
+        runner = Runner(
+            app_name=app_name,
+            agent=clinical_scenario_agent,
+            session_service=session_service
         )
         
-        # Return the scenario data (including student info and rationale if available)
-        scenario_response = {
-            "case": scenario_data.get("case", {}),
-            "patient": scenario_data.get("patient", {}),
-            "scenario": scenario_data.get("scenario", ""),
-            "option_a": scenario_data.get("option_a", {}),
-            "option_b": scenario_data.get("option_b", {}),
-            "best_answer": scenario_data.get("best_answer", {}),
-            "learning_points": scenario_data.get("learning_points", []),
-            "references": scenario_data.get("references", "")
-        }
+        # Create session FIRST before running
+        session = await session_service.create_session(
+            app_name=app_name,
+            user_id=user_id,
+            state={}
+        )
         
-        # Add student-specific information if available
-        if scenario_data.get("student"):
-            scenario_response["student"] = scenario_data.get("student")
-        if scenario_data.get("case_rationale"):
-            scenario_response["case_rationale"] = scenario_data.get("case_rationale")
-        if scenario_data.get("student_analysis"):
-            scenario_response["student_analysis"] = scenario_data.get("student_analysis")
+        # Create Content object for new_message
+        new_message = types.Content(
+            role="user",
+            parts=[types.Part(text="Generate a clinical scenario")]
+        )
+        
+        # Run the scenario agent using run_async() which returns an async generator
+        result = None
+        async for event in runner.run_async(
+            user_id=session.user_id,
+            session_id=session.id,
+            new_message=new_message
+        ):
+            result = event  # Collect the last event
+        
+        # Get the updated session to check state
+        session = await session_service.get_session(
+            app_name=app_name,
+            user_id=user_id,
+            session_id=session.id
+        )
+        
+        # Extract scenario data from session state
+        scenario_doc_id = session.state.get("scenario_doc_id")
+        generated_scenario = session.state.get("generated_scenario", {})
+        scenario_case = session.state.get("scenario_case", {})
+        scenario_patient = session.state.get("scenario_patient", {})
+        scenario_student = session.state.get("scenario_student", {})
+        
+        # If we have a doc_id, fetch the full document from Firestore
+        scenario_data = None
+        if scenario_doc_id:
+            try:
+                from google.cloud import firestore
+                project_id = os.getenv("FIREBASE_PROJECT_ID") or os.getenv("GOOGLE_CLOUD_PROJECT")
+                if project_id:
+                    db = firestore.Client(project=project_id)
+                else:
+                    db = firestore.Client()
+                
+                doc = db.collection("agent_scenarios").document(scenario_doc_id).get()
+                if doc.exists:
+                    scenario_data = doc.to_dict()
+                    # Convert Firestore Timestamps to dict format for JSON serialization
+                    for key, value in scenario_data.items():
+                        if hasattr(value, 'seconds') and hasattr(value, 'nanoseconds'):
+                            scenario_data[key] = {
+                                "seconds": value.seconds,
+                                "nanoseconds": getattr(value, 'nanoseconds', 0)
+                            }
+            except Exception as e:
+                print(f"⚠️ Could not fetch scenario document: {e}")
+        
+        # Build response from session state or fetched document
+        if scenario_data:
+            scenario_response = {
+                "case": scenario_data.get("case", {}),
+                "patient": scenario_data.get("patient", {}),
+                "scenario": scenario_data.get("scenario", ""),
+                "option_a": scenario_data.get("option_a", ""),
+                "option_b": scenario_data.get("option_b", ""),
+                "best_answer": scenario_data.get("best_answer", ""),
+                "rationale": scenario_data.get("rationale", ""),
+                "learning_points": scenario_data.get("learning_points", []),
+                "decision_point": scenario_data.get("decision_point", "")
+            }
+            
+            if scenario_data.get("student"):
+                scenario_response["student"] = scenario_data.get("student")
+        else:
+            # Fallback to session state if Firestore fetch failed
+            scenario_response = {
+                "case": {
+                    "name": scenario_case.get("name"),
+                    "code": scenario_case.get("code"),
+                    "description": scenario_case.get("description", "")
+                },
+                "patient": {
+                    "full_name": scenario_patient.get("full_name"),
+                    "age": scenario_patient.get("age"),
+                    "asa_classification": scenario_patient.get("asa_classification"),
+                    "medical_history": scenario_patient.get("medical_history", "")
+                },
+                "scenario": generated_scenario.get("scenario", ""),
+                "option_a": generated_scenario.get("option_a", ""),
+                "option_b": generated_scenario.get("option_b", ""),
+                "best_answer": generated_scenario.get("best_answer", ""),
+                "rationale": generated_scenario.get("rationale", ""),
+                "learning_points": generated_scenario.get("learning_points", []),
+                "decision_point": generated_scenario.get("decision_point", "")
+            }
+            
+            if scenario_student:
+                scenario_response["student"] = {
+                    "name": scenario_student.get("name"),
+                    "id": scenario_student.get("id"),
+                    "class_standing": scenario_student.get("class_standing")
+                }
+        
+        # Update state agent
+        if state_agent:
+            result_data = {
+                "agent_name": "scenario_agent",
+                "session_id": session.id,
+                "completed_at": datetime.now().isoformat(),
+                "status": "success",
+                "doc_id": scenario_doc_id
+            }
+            state_agent.set_agent_result("scenario_agent", result_data)
+            state_agent.append_agent_log("scenario_agent", f"Successfully generated scenario: {scenario_doc_id}")
         
         return {
             "ok": True,
             "scenario": scenario_response,
-            "firestore_id": scenario_data.get("firestore_id"),
-            "saved_to_firestore": scenario_data.get("saved_to_firestore", False)
+            "firestore_id": scenario_doc_id,
+            "firestore_doc_id": scenario_doc_id,  # Alias for frontend compatibility
+            "saved_to_firestore": scenario_doc_id is not None
         }
         
     except Exception as e:
+        # Set state back to IDLE on error
+        if state_agent:
+            state_agent.set_agent_error("scenario_agent", str(e))
+            state_agent.append_agent_log("scenario_agent", f"Error: {str(e)}")
         import traceback
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Error generating scenario: {str(e)}")
@@ -1836,7 +1846,7 @@ async def make_scenario():
 async def create_demo_evaluation():
     """
     Create a demo evaluation document in Firestore.
-    Uses the Evaluations Agent to generate fake evaluation data.
+    Uses the ADK evaluation_agent to generate fake evaluation data.
     """
     if not evaluations_agent:
         raise HTTPException(
@@ -1847,65 +1857,169 @@ async def create_demo_evaluation():
     # Set state to ACTIVE immediately for responsive UI feedback
     if state_agent:
         state_agent.set_agent_state("evaluation_agent", StateAgent.STATE_ACTIVE)
+        state_agent.append_agent_log("evaluation_agent", "Started evaluation creation")
     
     try:
-        # Use the agent to create and save demo evaluation
-        evaluation_data = evaluations_agent.create_and_save_demo_evaluation()
+        # Use ADK Runner to execute the agent
+        if not ADK_IMPORTS:
+            raise HTTPException(
+                status_code=503,
+                detail="ADK Runner not available. Please ensure google-adk is installed."
+            )
         
-        # Clean the evaluation data for JSON serialization
-        # Remove Firestore-specific objects that can't be serialized
-        try:
-            from google.cloud.firestore_v1 import SERVER_TIMESTAMP as _SERVER_TIMESTAMP
-        except ImportError:
-            _SERVER_TIMESTAMP = None
+        from google.adk.runners import Runner
+        from google.adk.sessions import InMemorySessionService
+        from google.genai import types
+        import uuid
         
-        cleaned_evaluation = {}
-        for key, value in evaluation_data.items():
-            # Skip SERVER_TIMESTAMP sentinels
-            if _SERVER_TIMESTAMP and (value is _SERVER_TIMESTAMP or (hasattr(value, '__class__') and 'Sentinel' in str(type(value)))):
-                continue
-            # Skip internal Firestore fields that shouldn't be exposed
-            elif key in ['created_at', 'modified_at', 'created_by']:
-                continue
-            # Convert GeoPoint to dict if present
-            elif hasattr(value, 'latitude') and hasattr(value, 'longitude'):
-                cleaned_evaluation[key] = {
-                    "latitude": value.latitude,
-                    "longitude": value.longitude
-                }
-            # Convert datetime objects to ISO strings
-            elif isinstance(value, datetime):
-                cleaned_evaluation[key] = value.isoformat()
-            # Convert Firestore Timestamp objects
-            elif hasattr(value, 'seconds') and hasattr(value, 'nanoseconds'):
-                cleaned_evaluation[key] = {
-                    "seconds": value.seconds,
-                    "nanoseconds": getattr(value, 'nanoseconds', 0)
-                }
-            # Keep other values as-is
+        # Create session service and runner
+        session_service = InMemorySessionService()
+        user_id = "web-user"
+        app_name = "precepgo-adk-panel-evaluation"
+        
+        runner = Runner(
+            app_name=app_name,
+            agent=evaluations_agent,
+            session_service=session_service
+        )
+        
+        # Create session FIRST before running
+        session = await session_service.create_session(
+            app_name=app_name,
+            user_id=user_id,
+            state={}
+        )
+        
+        # Create Content object for new_message
+        new_message = types.Content(
+            role="user",
+            parts=[types.Part(text="Create an evaluation")]
+        )
+        
+        # Run the evaluation agent using run_async() which returns an async generator
+        result = None
+        async for event in runner.run_async(
+            user_id=session.user_id,
+            session_id=session.id,
+            new_message=new_message
+        ):
+            result = event  # Collect the last event
+        
+        # Get the updated session to check state
+        session = await session_service.get_session(
+            app_name=app_name,
+            user_id=user_id,
+            session_id=session.id
+        )
+        
+        # Check if result indicates success
+        # ADK Runner returns a response object - check for content or success indicators
+        result_content = None
+        result_text = None
+        
+        if hasattr(result, 'content'):
+            result_content = result.content
+            # Extract text from Content object if it's a Content type
+            if hasattr(result_content, 'parts'):
+                # Content object with parts
+                text_parts = []
+                for part in result_content.parts:
+                    if hasattr(part, 'text'):
+                        text_parts.append(part.text)
+                    elif isinstance(part, str):
+                        text_parts.append(part)
+                result_text = ' '.join(text_parts) if text_parts else str(result_content)
+            elif hasattr(result_content, 'text'):
+                result_text = result_content.text
             else:
-                try:
-                    # Try to serialize to check if it's JSON-serializable
-                    import json
-                    json.dumps(value)
-                    cleaned_evaluation[key] = value
-                except (TypeError, ValueError):
-                    # Convert non-serializable values to string
-                    cleaned_evaluation[key] = str(value)
+                result_text = str(result_content)
+        elif hasattr(result, 'text'):
+            result_text = result.text
+        elif isinstance(result, str):
+            result_text = result
+        else:
+            result_text = str(result) if result else None
         
-        # Return the cleaned evaluation data
+        # Check session state for evaluation_doc_id as success indicator
+        success = False
+        doc_id = None
+        evaluation_data = None
+        
+        if session and hasattr(session, 'state') and 'evaluation_doc_id' in session.state:
+            doc_id = session.state['evaluation_doc_id']
+            success = True
+            print(f"✅ Evaluation created successfully! Doc ID: {doc_id}")
+            
+            # Fetch the actual evaluation document from Firestore for the response
+            try:
+                from google.cloud import firestore
+                project_id = os.getenv("FIREBASE_PROJECT_ID") or os.getenv("GOOGLE_CLOUD_PROJECT")
+                if project_id:
+                    db = firestore.Client(project=project_id)
+                else:
+                    db = firestore.Client()
+                
+                eval_doc = db.collection("agent_evaluations").document(doc_id).get()
+                if eval_doc.exists:
+                    evaluation_data = eval_doc.to_dict()
+                    # Convert Firestore Timestamps to dict format for JSON serialization
+                    for key, value in evaluation_data.items():
+                        if hasattr(value, 'seconds') and hasattr(value, 'nanoseconds'):
+                            evaluation_data[key] = {
+                                "seconds": value.seconds,
+                                "nanoseconds": getattr(value, 'nanoseconds', 0)
+                            }
+                    evaluation_data['docId'] = doc_id
+            except Exception as e:
+                print(f"⚠️ Could not fetch evaluation document: {e}")
+                # Continue without evaluation_data - frontend will show basic success
+        elif result_text:
+            # If we got a response but no doc_id, check if it's an error
+            if 'error' in result_text.lower():
+                raise Exception(f"Agent returned error: {result_text}")
+            success = True
+            print(f"✅ Agent completed with response: {result_text[:100]}")
+        else:
+            # Try to get session state to check for errors
+            if session and hasattr(session, 'state'):
+                error_keys = [k for k in session.state.keys() if 'error' in k.lower()]
+                if error_keys:
+                    error_msg = f"Errors found in state: {error_keys}"
+                    raise Exception(error_msg)
+            success = True  # Assume success if no errors found
+        
+        # Update state with result
+        if state_agent:
+            result_data = {
+                "agent_name": "evaluation_agent",
+                "session_id": session.id,
+                "completed_at": datetime.now().isoformat(),
+                "status": "success" if success else "unknown",
+                "doc_id": doc_id,
+                "result_content": result_text[:200] if result_text else None
+            }
+            state_agent.set_agent_result("evaluation_agent", result_data)
+            # Extract student name from evaluation_data if available
+            student_name = evaluation_data.get("preceptee_user_name", "Unknown") if evaluation_data else "Unknown"
+            state_agent.append_agent_log("evaluation_agent", f"Successfully created evaluation: {doc_id} for {student_name}")
+        
         return {
-            "ok": True,
-            "evaluation": cleaned_evaluation,  # Return cleaned evaluation data
-            "firestore_doc_id": evaluation_data.get("firestore_doc_id"),
-            "firestore_parent_doc_id": evaluation_data.get("firestore_parent_doc_id"),
-            "saved_to_firestore": evaluation_data.get("saved_to_firestore", False)
+            "ok": success,
+            "message": "Evaluation created successfully" if success else "Evaluation agent completed",
+            "session_id": session.id,
+            "doc_id": doc_id,
+            "firestore_doc_id": doc_id,  # Alias for frontend compatibility
+            "saved_to_firestore": doc_id is not None,  # Indicate if saved
+            "evaluation": evaluation_data,  # Include full evaluation data for frontend
+            "timestamp": datetime.now().isoformat(),
+            "result_preview": result_text[:200] if result_text else None
         }
         
     except Exception as e:
         # Set state back to IDLE on error
         if state_agent:
             state_agent.set_agent_error("evaluation_agent", str(e))
+            state_agent.append_agent_log("evaluation_agent", f"Error: {str(e)}")
         import traceback
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Error creating demo evaluation: {str(e)}")
@@ -1915,6 +2029,55 @@ async def create_demo_evaluation():
 async def create_demo_evaluation_alias():
     """Alias for /mentor/create-demo-evaluation"""
     return await create_demo_evaluation()
+
+@app.delete("/agents/evaluations/delete-all")
+async def delete_all_evaluations():
+    """
+    Delete all documents from the agent_evaluations collection.
+    WARNING: This is a destructive operation!
+    """
+    try:
+        from google.cloud import firestore
+        
+        project_id = os.getenv("FIREBASE_PROJECT_ID") or os.getenv("GOOGLE_CLOUD_PROJECT")
+        if project_id:
+            db = firestore.Client(project=project_id)
+        else:
+            db = firestore.Client()
+        
+        # Get all documents in the collection
+        evaluations_ref = db.collection("agent_evaluations")
+        docs = evaluations_ref.stream()
+        
+        deleted_count = 0
+        batch = db.batch()
+        batch_count = 0
+        
+        # Firestore batch limit is 500 operations
+        for doc in docs:
+            batch.delete(doc.reference)
+            batch_count += 1
+            deleted_count += 1
+            
+            # Commit batch when it reaches 500 operations
+            if batch_count >= 500:
+                batch.commit()
+                batch = db.batch()
+                batch_count = 0
+        
+        # Commit remaining batch
+        if batch_count > 0:
+            batch.commit()
+        
+        return {
+            "ok": True,
+            "message": f"Successfully deleted {deleted_count} evaluation documents",
+            "deleted_count": deleted_count
+        }
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Error deleting evaluations: {str(e)}")
 
 @app.post("/agents/site/generate-report")
 async def generate_site_report():
@@ -1932,23 +2095,121 @@ async def generate_site_report():
         )
     
     try:
-        result = site_agent.generate_site_report()
+        # Use ADK Runner to execute the agent
+        if not ADK_IMPORTS:
+            raise HTTPException(
+                status_code=503,
+                detail="ADK Runner not available. Please ensure google-adk is installed."
+            )
         
-        if result.get("success"):
+        from google.adk.runners import Runner
+        from google.adk.sessions import InMemorySessionService
+        from google.genai import types
+        
+        # Set state to ACTIVE
+        if state_agent:
+            state_agent.set_agent_state("site_agent", StateAgent.STATE_ACTIVE)
+            state_agent.append_agent_log("site_agent", "Started site report generation")
+        
+        # Create session service and runner
+        session_service = InMemorySessionService()
+        user_id = "web-user"
+        app_name = "precepgo-adk-panel-site"
+        
+        runner = Runner(
+            app_name=app_name,
+            agent=site_agent,
+            session_service=session_service
+        )
+        
+        # Create session FIRST before running
+        session = await session_service.create_session(
+            app_name=app_name,
+            user_id=user_id,
+            state={}
+        )
+        
+        # Create Content object for new_message
+        new_message = types.Content(
+            role="user",
+            parts=[types.Part(text="Generate a site report analyzing all evaluations")]
+        )
+        
+        # Run the site agent using run_async() which returns an async generator
+        result = None
+        async for event in runner.run_async(
+            user_id=session.user_id,
+            session_id=session.id,
+            new_message=new_message
+        ):
+            result = event  # Collect the last event
+        
+        # Get the updated session to check state
+        session = await session_service.get_session(
+            app_name=app_name,
+            user_id=user_id,
+            session_id=session.id
+        )
+        
+        # Extract report data from session state
+        report_doc_id = session.state.get("report_doc_id")
+        analysis_data = session.state.get("analysis_data", {})
+        
+        # If we have a doc_id, fetch the full document from Firestore
+        if report_doc_id:
+            try:
+                from google.cloud import firestore
+                project_id = os.getenv("FIREBASE_PROJECT_ID") or os.getenv("GOOGLE_CLOUD_PROJECT")
+                if project_id:
+                    db = firestore.Client(project=project_id)
+                else:
+                    db = firestore.Client()
+                
+                doc = db.collection("agent_sites").document(report_doc_id).get()
+                if doc.exists:
+                    report_data = doc.to_dict()
+            except Exception as e:
+                print(f"⚠️ Could not fetch report document: {e}")
+        
+        # Update state agent
+        if state_agent:
+            result_data = {
+                "agent_name": "site_agent",
+                "session_id": session.id,
+                "completed_at": datetime.now().isoformat(),
+                "status": "success",
+                "doc_id": report_doc_id,
+                "total_sites": analysis_data.get("total_sites", 0),
+                "total_preceptors": analysis_data.get("total_preceptors", 0),
+                "total_evaluations": analysis_data.get("total_evaluations", 0)
+            }
+            state_agent.set_agent_result("site_agent", result_data)
+            state_agent.append_agent_log("site_agent", f"Successfully generated site report: {report_doc_id}")
+        
+        if report_doc_id:
             return {
                 "ok": True,
-                "report_id": result.get("report_id"),
-                "summary": result.get("analysis_summary"),
-                "message": "Site report generated successfully"
+                "report_id": report_doc_id,
+                "summary": {
+                    "total_sites": analysis_data.get("total_sites", 0),
+                    "total_preceptors": analysis_data.get("total_preceptors", 0),
+                    "total_evaluations": analysis_data.get("total_evaluations", 0)
+                },
+                "message": "Site report generated successfully",
+                "firestore_doc_id": report_doc_id,
+                "saved_to_firestore": True
             }
         else:
             raise HTTPException(
                 status_code=500,
-                detail=result.get("error", "Failed to generate site report")
+                detail="Site report generation completed but no document ID was returned"
             )
     except Exception as e:
         import traceback
         traceback.print_exc()
+        if state_agent:
+            state_agent.set_agent_error("site_agent", str(e))
+            state_agent.append_agent_log("site_agent", f"Error: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Error generating site report: {str(e)}")
 
 @app.post("/agents/coa-compliance/generate-reports")
@@ -1969,26 +2230,120 @@ async def generate_coa_reports(student_ids: Optional[List[str]] = None):
         )
     
     try:
-        # Use provided student IDs or None to process all
-        student_id_list = student_ids
+        # Use ADK Runner to execute the agent
+        if not ADK_IMPORTS:
+            raise HTTPException(
+                status_code=503,
+                detail="ADK Runner not available. Please ensure google-adk is installed."
+            )
         
-        # Generate consolidated report
-        consolidated_report = coa_agent.generate_reports(student_ids=student_id_list)
-    
+        from google.adk.runners import Runner
+        from google.adk.sessions import InMemorySessionService
+        from google.genai import types
+        
+        # Set state to ACTIVE
+        if state_agent:
+            state_agent.set_agent_state("coa_agent", StateAgent.STATE_ACTIVE)
+            state_agent.append_agent_log("coa_agent", "Started COA compliance report generation")
+        
+        # Create session service and runner
+        session_service = InMemorySessionService()
+        user_id = "web-user"
+        app_name = "precepgo-adk-panel-coa"
+        
+        runner = Runner(
+            app_name=app_name,
+            agent=coa_agent,
+            session_service=session_service
+        )
+        
+        # Create session FIRST before running
+        # Add student_ids to state if provided for filtering
+        initial_state = {}
+        if student_ids:
+            initial_state["student_ids_filter"] = student_ids
+        
+        session = await session_service.create_session(
+            app_name=app_name,
+            user_id=user_id,
+            state=initial_state
+        )
+        
+        # Create Content object for new_message
+        prompt_text = "Generate COA compliance reports"
+        if student_ids:
+            prompt_text += f" for students: {', '.join(student_ids)}"
+        else:
+            prompt_text += " for all students"
+        
+        new_message = types.Content(
+            role="user",
+            parts=[types.Part(text=prompt_text)]
+        )
+        
+        # Run the COA agent using run_async() which returns an async generator
+        result = None
+        async for event in runner.run_async(
+            user_id=session.user_id,
+            session_id=session.id,
+            new_message=new_message
+        ):
+            result = event  # Collect the last event
+        
+        # Get the updated session to check state
+        session = await session_service.get_session(
+            app_name=app_name,
+            user_id=user_id,
+            session_id=session.id
+        )
+        
+        # Extract report data from session state
+        report_doc_id = session.state.get("report_doc_id")
+        consolidated_report = session.state.get("consolidated_report", {})
+        
+        # If we have a doc_id, fetch the full document from Firestore
+        if report_doc_id:
+            try:
+                from google.cloud import firestore
+                project_id = os.getenv("FIREBASE_PROJECT_ID") or os.getenv("GOOGLE_CLOUD_PROJECT")
+                if project_id:
+                    db = firestore.Client(project=project_id)
+                else:
+                    db = firestore.Client()
+                
+                doc = db.collection("agent_coa_reports").document(report_doc_id).get()
+                if doc.exists:
+                    consolidated_report = doc.to_dict()
+            except Exception as e:
+                print(f"⚠️ Could not fetch report document: {e}")
+        
+        # Update state agent
+        if state_agent:
+            result_data = {
+                "agent_name": "coa_agent",
+                "session_id": session.id,
+                "completed_at": datetime.now().isoformat(),
+                "status": "success",
+                "doc_id": report_doc_id,
+                "students_processed": consolidated_report.get("students_processed", 0),
+                "total_standards": consolidated_report.get("total_standards", 0)
+            }
+            state_agent.set_agent_result("coa_agent", result_data)
+            state_agent.append_agent_log("coa_agent", f"Successfully generated COA compliance report: {report_doc_id}")
+        
         # Clean report for JSON serialization (handle Firestore-specific objects)
         from google.cloud.firestore_v1 import SERVER_TIMESTAMP as _SERVER_TIMESTAMP
         
         def clean_value(val):
             """Recursively clean a value for JSON serialization"""
             # Skip SERVER_TIMESTAMP sentinels and other Sentinel objects
-            # Check multiple ways to detect Sentinel objects
             is_sentinel = (
                 val is _SERVER_TIMESTAMP or
                 (hasattr(val, '__class__') and 'Sentinel' in str(type(val))) or
                 str(type(val)) == "<class 'google.cloud.firestore_v1._helpers.Sentinel'>"
             )
             if is_sentinel:
-                return None  # Convert sentinels to None (which is JSON-serializable)
+                return None
             # Convert GeoPoint to dict
             elif hasattr(val, 'latitude') and hasattr(val, 'longitude'):
                 return {
@@ -2006,28 +2361,17 @@ async def generate_coa_reports(student_ids: Optional[List[str]] = None):
                 return val.isoformat()
             # Handle lists
             elif isinstance(val, list):
-                cleaned_list = []
-                for item in val:
-                    cleaned_item = clean_value(item)
-                    # Only skip None if it came from a sentinel (handled above)
-                    cleaned_list.append(cleaned_item)
-                return cleaned_list
+                return [clean_value(item) for item in val]
             # Handle dictionaries
             elif isinstance(val, dict):
-                cleaned_dict = {}
-                for k, v in val.items():
-                    cleaned_v = clean_value(v)
-                    # Only skip None if it came from a sentinel (handled above)
-                    cleaned_dict[k] = cleaned_v
-                return cleaned_dict
+                return {k: clean_value(v) for k, v in val.items()}
             # Try to serialize primitive types
             else:
                 try:
                     import json
-                    json.dumps(val)  # Test if serializable
+                    json.dumps(val)
                     return val
                 except (TypeError, ValueError):
-                    # Convert non-serializable values to string
                     return str(val)
         
         cleaned_report = clean_value(consolidated_report)
@@ -2035,125 +2379,162 @@ async def generate_coa_reports(student_ids: Optional[List[str]] = None):
         return {
             "ok": True,
             "reports": cleaned_report,
-            "total_standards": len(coa_agent.coa_mapping) if coa_agent.coa_mapping else 0
+            "report_id": report_doc_id,
+            "firestore_doc_id": report_doc_id,
+            "saved_to_firestore": report_doc_id is not None,
+            "total_standards": consolidated_report.get("total_standards", 0) if consolidated_report else 0
         }
         
     except Exception as e:
+        # Set state back to IDLE on error
+        if state_agent:
+            state_agent.set_agent_error("coa_agent", str(e))
+            state_agent.append_agent_log("coa_agent", f"Error: {str(e)}")
         import traceback
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Error generating COA compliance reports: {str(e)}")
 
-@app.post("/agents/automated-mode/start")
-async def start_automated_mode():
-    """
-    Start automated mode - agents will run automatically for 15 minutes.
-    Each agent runs on its own 5-minute timer.
-    """
-    if not state_agent:
-        raise HTTPException(
-            status_code=503,
-            detail="State Agent not available. Please ensure agents/state_agent.py is properly configured."
-        )
-    
-    try:
-        if state_agent.is_automated_mode_active():
-            return {
-                "ok": False,
-                "detail": "Automated mode is already running"
-            }
-        
-        success = state_agent.start_automated_mode(duration_minutes=15)
-        
-        if success:
-            return {
-                "ok": True,
-                "message": "Automated mode started successfully",
-                "duration_minutes": 15
-            }
-        else:
-            return {
-                "ok": False,
-                "detail": "Failed to start automated mode"
-            }
-    except Exception as e:
-        import traceback
-        traceback.print_exc()
-        raise HTTPException(status_code=500, detail=f"Error starting automated mode: {str(e)}")
+# DISABLED: Automated mode endpoints - agents are now endpoint-triggered only to save costs
+# To re-enable automated mode, uncomment these endpoints
+# @app.post("/agents/automated-mode/start")
+# async def start_automated_mode():
+#     """
+#     Start automated mode - agents will run automatically indefinitely until manually stopped.
+#     Each agent runs on its own schedule (evaluation_agent every 5 minutes, etc.).
+#     """
+#     if not state_agent:
+#         raise HTTPException(
+#             status_code=503,
+#             detail="State Agent not available. Please ensure agents/state_agent.py is properly configured."
+#         )
+#
+#     try:
+#         if state_agent.is_automated_mode_active():
+#             return {
+#                 "ok": False,
+#                 "detail": "Automated mode is already running"
+#             }
+#
+#         success = state_agent.start_automated_mode(duration_minutes=None)  # None = run indefinitely
+#
+#         if success:
+#             return {
+#                 "ok": True,
+#                 "message": "Automated mode started successfully",
+#                 "duration_minutes": 15
+#             }
+#         else:
+#             return {
+#                 "ok": False,
+#                 "detail": "Failed to start automated mode"
+#             }
+#     except Exception as e:
+#         import traceback
+#         traceback.print_exc()
+#         raise HTTPException(status_code=500, detail=f"Error starting automated mode: {str(e)}")
 
-@app.post("/agents/automated-mode/stop")
-async def stop_automated_mode():
-    """
-    Stop automated mode manually.
-    """
-    if not state_agent:
-        raise HTTPException(
-            status_code=503,
-            detail="State Agent not available. Please ensure agents/state_agent.py is properly configured."
-        )
-    
-    try:
-        success = state_agent.stop_automated_mode()
-        
-        if success:
-            return {
-                "ok": True,
-                "message": "Automated mode stopped successfully"
-            }
-        else:
-            return {
-                "ok": False,
-                "detail": "Automated mode is not running"
-            }
-    except Exception as e:
-        import traceback
-        traceback.print_exc()
-        raise HTTPException(status_code=500, detail=f"Error stopping automated mode: {str(e)}")
+# DISABLED: Automated mode toggle endpoint
+# @app.post("/agents/automated-mode/toggle")
+# async def toggle_automated_mode():
+#     """
+#     Toggle automated mode - switches between ON and OFF.
+#     If currently OFF, turns it ON. If currently ON, turns it OFF.
+#
+#     NOTE: This endpoint uses the legacy StateAgent scheduler system for automated execution.
+#     For Google ADK agents, use the conversational interface:
+#     - CLI: `adk run .`
+#     - Web UI: `adk web`
+#     - Programmatic: Use ADK Runner API (see ADK_MIGRATION_SUMMARY.md)
+#     """
+#     if not state_agent:
+#         raise HTTPException(
+#             status_code=503,
+#             detail="State Agent not available. Please ensure agents/state_agent.py is properly configured."
+#         )
+#
+#     try:
+#         is_active = state_agent.is_automated_mode_active()
+#
+#         if is_active:
+#             # Currently ON, turn it OFF
+#             success = state_agent.stop_automated_mode()
+#             if success:
+#                 return {
+#                     "ok": True,
+#                     "message": "Automated mode toggled OFF",
+#                     "new_state": "OFF",
+#                     "was_active": True
+#                 }
+#             else:
+#                 return {
+#                     "ok": False,
+#                     "detail": "Failed to stop automated mode"
+#                 }
+#         else:
+#             # Currently OFF, turn it ON
+#             success = state_agent.start_automated_mode(duration_minutes=None)  # None = run indefinitely
+#             if success:
+#                 return {
+#                     "ok": True,
+#                     "message": "Automated mode toggled ON",
+#                     "new_state": "ON",
+#                     "was_active": False
+#                 }
+#             else:
+#                 return {
+#                     "ok": False,
+#                     "detail": "Failed to start automated mode"
+#                 }
+#     except Exception as e:
+#         import traceback
+#         traceback.print_exc()
+#         raise HTTPException(status_code=500, detail=f"Error toggling automated mode: {str(e)}")
+
+# DISABLED: Automated mode stop endpoint
+# @app.post("/agents/automated-mode/stop")
+# async def stop_automated_mode():
+#     """
+#     Stop automated mode manually.
+#     """
+#     if not state_agent:
+#         raise HTTPException(
+#             status_code=503,
+#             detail="State Agent not available. Please ensure agents/state_agent.py is properly configured."
+#         )
+#
+#     try:
+#         success = state_agent.stop_automated_mode()
+#
+#         if success:
+#             return {
+#                 "ok": True,
+#                 "message": "Automated mode stopped successfully"
+#             }
+#         else:
+#             return {
+#                 "ok": False,
+#                 "detail": "Automated mode is not running"
+#             }
+#     except Exception as e:
+#         import traceback
+#         traceback.print_exc()
+#         raise HTTPException(status_code=500, detail=f"Error stopping automated mode: {str(e)}")
 
 @app.get("/agents/automated-mode/status")
 async def get_automated_mode_status():
     """
     Get automated mode status.
-    Optimized to avoid Firestore timeouts - uses in-memory state first.
+    NOTE: Automated mode is DISABLED to save costs. Agents are endpoint-triggered only.
     """
-    if not state_agent:
-        return {
-            "ok": False,
-            "active": False,
-            "detail": "State Agent not available"
-        }
-    
-    try:
-        # Check in-memory state first (fast, no Firestore call)
-        is_active = state_agent.is_automated_mode_active()
-        
-        # Try to get Firestore state, but don't fail if it times out
-        try:
-            all_states = state_agent.get_all_states()
-            automated_mode = all_states.get("automated_mode", "OFF")
-            start_time = all_states.get("automated_mode_start_time")
-            end_time = all_states.get("automated_mode_end_time")
-        except Exception as firestore_error:
-            # If Firestore fails, use in-memory state
-            print(f"⚠️ Firestore query failed in status endpoint: {firestore_error}")
-            automated_mode = "ON" if is_active else "OFF"
-            start_time = None
-            end_time = None
-        
-        return {
-            "ok": True,
-            "active": is_active,
-            "automated_mode": automated_mode,
-            "start_time": start_time,
-            "end_time": end_time
-        }
-    except Exception as e:
-        import traceback
-        traceback.print_exc()
-        return {
-            "ok": False,
-            "active": False,
-            "detail": f"Error getting status: {str(e)}"
-        }
+    # DISABLED: Automated mode is always OFF to save costs
+    return {
+        "ok": True,
+        "active": False,
+        "automated_mode": "DISABLED",
+        "detail": "Automated mode is disabled. Use individual agent endpoints to trigger agents manually.",
+        "start_time": None,
+        "end_time": None
+    }
 
 @app.get("/agents/{agent_name}/status")
 async def get_agent_status(agent_name: str):
@@ -2201,6 +2582,7 @@ async def test_agents_endpoint():
             "/agents/evaluation/create-demo",
             "/agents/automated-mode/start",
             "/agents/automated-mode/stop",
+            "/agents/automated-mode/toggle",
             "/agents/automated-mode/status",
             "/agents/time-savings/task/start",
             "/agents/time-savings/task/complete",
@@ -2266,6 +2648,13 @@ async def start_time_tracking(request: Dict[str, Any]):
         }
     except ValueError as e:
         raise HTTPException(status_code=400, detail=f"Invalid task_type: {str(e)}")
+    except AttributeError as e:
+        # ADK agent doesn't have log_task_start method
+        return {
+            "ok": False,
+            "message": "Task tracking not yet available in ADK version. Use /agents/time-savings/analytics instead.",
+            "detail": "The ADK time_agent calculates savings based on document counts in Firestore collections."
+        }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error starting task tracking: {str(e)}")
 
@@ -2330,6 +2719,13 @@ async def complete_time_tracking(request: Dict[str, Any]):
                 "ok": True,
                 "message": "Task tracking completed"
             }
+    except AttributeError as e:
+        # ADK agent doesn't have log_task_complete method
+        return {
+            "ok": False,
+            "message": "Task tracking not yet available in ADK version. Use /agents/time-savings/analytics instead.",
+            "detail": "The ADK time_agent calculates savings based on document counts in Firestore collections."
+        }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error completing task tracking: {str(e)}")
 
@@ -2340,24 +2736,22 @@ async def get_time_savings_analytics(
     include_insights: bool = False
 ):
     """
-    Get time savings analytics for a given timeframe.
+    Get time savings analytics.
+    Uses ADK Runner API to execute the time_agent.
     
     Query parameters:
     - timeframe: "daily" | "weekly" | "monthly" | "semester" | "all_time" (default: monthly)
-    - user_id: Optional user ID to filter by
-    - include_insights: Whether to include AI-generated insights (default: false)
+    - user_id: Optional user ID to filter by (not currently used)
+    - include_insights: Whether to include AI-generated insights (not currently supported)
     
     Returns:
     {
         "timeframe": "monthly",
         "total_hours_saved": 47.5,
-        "fte_equivalent": 1.2,
-        "cost_savings": 2018.75,
         "total_tasks": 125,
-        "task_breakdown": {...},
-        "agent_breakdown": {...},
-        "top_agent": "evaluations_agent",
-        "insights": "..." (if include_insights=true)
+        "evaluations": 50,
+        "scenarios": 30,
+        "notifications": 45
     }
     """
     if not time_savings_agent:
@@ -2366,86 +2760,225 @@ async def get_time_savings_analytics(
             detail="Time Savings Agent not available"
         )
     
+    # Set state to ACTIVE
+    if state_agent:
+        state_agent.set_agent_state("time_agent", StateAgent.STATE_ACTIVE)
+        state_agent.append_agent_log("time_agent", "Started time savings calculation")
+    
     try:
-        # Validate timeframe
-        try:
-            timeframe_enum = Timeframe(timeframe.lower())
-        except ValueError:
+        # Use ADK Runner to execute the agent
+        if not ADK_IMPORTS:
             raise HTTPException(
-                status_code=400,
-                detail=f"Invalid timeframe: {timeframe}. Must be one of: daily, weekly, monthly, semester, all_time"
+                status_code=503,
+                detail="ADK Runner not available. Please ensure google-adk is installed."
+            )
+        
+        from google.adk.runners import Runner
+        from google.adk.sessions import InMemorySessionService
+        from google.genai import types
+        
+        # Create session service and runner
+        session_service = InMemorySessionService()
+        user_id_param = user_id or "web-user"
+        app_name = "precepgo-adk-panel-time"
+        
+        runner = Runner(
+            app_name=app_name,
+            agent=time_savings_agent,
+            session_service=session_service
         )
         
-        # Update state_agent if available
-        if time_savings_agent.state_agent:
+        # Create session FIRST before running
+        session = await session_service.create_session(
+            app_name=app_name,
+            user_id=user_id_param,
+            state={}
+        )
+        
+        # Create Content object for new_message
+        new_message = types.Content(
+            role="user",
+            parts=[types.Part(text="Calculate time savings analytics")]
+        )
+        
+        # Run the time agent using run_async() which returns an async generator
+        result = None
+        async for event in runner.run_async(
+            user_id=session.user_id,
+            session_id=session.id,
+            new_message=new_message
+        ):
+            result = event  # Collect the last event
+            print(f"📊 Time agent event: {type(result)}")
+        
+        # Get the updated session to check state
+        session = await session_service.get_session(
+            app_name=app_name,
+            user_id=user_id_param,
+            session_id=session.id
+        )
+        
+        # Extract metrics from session state
+        metrics = session.state.get("time_savings_metrics", {})
+        doc_id = session.state.get("time_savings_doc_id")
+        
+        print(f"🔍 Debug - Metrics from session state: {metrics}")
+        print(f"🔍 Debug - Doc ID: {doc_id}")
+        
+        # If metrics are empty, the agent might not have run properly
+        if not metrics:
+            print("⚠️ WARNING: No metrics found in session state. Agent may not have executed properly.")
+            # Try to read directly from Firestore as fallback
             try:
-                from agents.state_agent import StateAgent
-                time_savings_agent.state_agent.set_agent_state("time_agent", StateAgent.STATE_ACTIVE)
-            except Exception as e:
-                print(f"⚠️ Failed to update state_agent: {e}")
-        
-        savings_data = time_savings_agent.calculate_savings(timeframe_enum, user_id)
-        
-        # Always write analytics data to time_saved document when API is called
-        try:
-            # Calculate all timeframes for complete analytics
-            all_time_savings = time_savings_agent.calculate_savings(Timeframe.ALL_TIME, update_time_saved=False)
-            daily_savings = time_savings_agent.calculate_savings(Timeframe.DAILY, update_time_saved=False)
-            weekly_savings = time_savings_agent.calculate_savings(Timeframe.WEEKLY, update_time_saved=False)
-            monthly_savings = time_savings_agent.calculate_savings(Timeframe.MONTHLY, update_time_saved=False)
-            semester_savings = time_savings_agent.calculate_savings(Timeframe.SEMESTER, update_time_saved=False)
-            
-            # Generate insights for all-time data
-            insights = None
-            if time_savings_agent.gemini_agent:
-                try:
-                    insights = time_savings_agent.generate_insights(all_time_savings)
-                except Exception as e:
-                    print(f"⚠️ Failed to generate insights: {e}")
-            
-            # Write all analytics data to time_saved document
-            time_savings_agent._write_analytics_to_time_saved(
-                all_time_savings=all_time_savings,
-                daily_savings=daily_savings,
-                weekly_savings=weekly_savings,
-                monthly_savings=monthly_savings,
-                semester_savings=semester_savings,
-                insights=insights
-            )
-        except Exception as e:
-            print(f"⚠️ Failed to write analytics to time_saved: {e}")
-        
-        # Update state_agent to completed
-        if time_savings_agent.state_agent:
-            try:
-                from agents.state_agent import StateAgent
-                time_savings_agent.state_agent.set_agent_result(
-                    "time_agent",
-                    {
+                from google.cloud import firestore
+                project_id = os.getenv("FIREBASE_PROJECT_ID") or os.getenv("GOOGLE_CLOUD_PROJECT")
+                if project_id:
+                    db = firestore.Client(project=project_id)
+                else:
+                    db = firestore.Client()
+                
+                # Try to get existing data from agent_time/time_saved
+                time_saved_ref = db.collection("agent_time").document("time_saved")
+                existing_data = time_saved_ref.get()
+                
+                if existing_data.exists:
+                    existing_dict = existing_data.to_dict()
+                    print(f"📋 Found existing data in Firestore: {existing_dict}")
+                    # Use existing data if available
+                    return {
+                        "ok": True,
                         "timeframe": timeframe,
-                        "total_hours_saved": savings_data.get('total_hours_saved', 0),
-                        "total_tasks": savings_data.get('total_tasks', 0)
-                    },
-                    StateAgent.STATE_IDLE
-                )
+                        "total_hours_saved": existing_dict.get("total_hours_saved", 0),
+                        "total_minutes_saved": existing_dict.get("total_minutes_saved", 0),
+                        "fte_equivalent": existing_dict.get("fte_equivalent", 0),
+                        "cost_savings": existing_dict.get("cost_savings", 0),
+                        "total_tasks": existing_dict.get("total_tasks", 0),
+                        "task_breakdown": existing_dict.get("task_breakdown", {}),
+                        "top_agent": existing_dict.get("top_agent", "none"),
+                        "evaluations": existing_dict.get("evaluations_created", 0),
+                        "scenarios": existing_dict.get("scenarios_created", 0),
+                        "notifications": existing_dict.get("notifications_sent", 0),
+                        "total_days_saved": existing_dict.get("total_days_saved", 0),
+                        "from_cache": True
+                    }
             except Exception as e:
-                print(f"⚠️ Failed to update state_agent result: {e}")
+                print(f"⚠️ Failed to read existing data: {e}")
         
-        # Generate insights for the requested timeframe if requested
-        if include_insights and time_savings_agent.gemini_agent:
+        # Calculate additional metrics expected by dashboard
+        total_hours_saved = metrics.get("total_hours_saved", 0)
+        total_tasks = metrics.get("total_tasks", 0)
+        total_minutes_saved = metrics.get("total_minutes_saved", 0)
+        
+        # FTE equivalent (assuming 2080 hours per year = 1 FTE)
+        fte_equivalent = round(total_hours_saved / 2080, 2) if total_hours_saved > 0 else 0
+        
+        # Cost savings (assuming $50/hour average rate)
+        cost_per_hour = 50
+        cost_savings = round(total_hours_saved * cost_per_hour, 2)
+        
+        # Task breakdown based on document counts
+        evaluations_count = metrics.get("evaluations_created", 0)
+        scenarios_count = metrics.get("scenarios_created", 0)
+        notifications_count = metrics.get("notifications_sent", 0)
+        
+        # Determine top agent based on counts
+        agent_counts = {
+            "evaluation_agent": evaluations_count,
+            "scenario_agent": scenarios_count,
+            "notification_agent": notifications_count
+        }
+        top_agent = max(agent_counts.items(), key=lambda x: x[1])[0] if max(agent_counts.values()) > 0 else "none"
+        
+        # Task breakdown structure matching the document format
+        task_breakdown = {
+            "evaluation_completion": evaluations_count,
+            "scenario_generation": scenarios_count,
+            "notification_check": notifications_count,
+            "admin_review": 0,  # Not tracked by current agent
+            "coa_compliance_check": 0,  # Not tracked by current agent
+            "problem_identification": 0  # Not tracked by current agent
+        }
+        
+        # Also save/update the time_saved document that the dashboard reads from
+        if metrics:
             try:
-                insights = time_savings_agent.generate_insights(savings_data)
-                savings_data["insights"] = insights
+                from google.cloud import firestore
+                project_id = os.getenv("FIREBASE_PROJECT_ID") or os.getenv("GOOGLE_CLOUD_PROJECT")
+                if project_id:
+                    db = firestore.Client(project=project_id)
+                else:
+                    db = firestore.Client()
+                
+                # Save to agent_time/time_saved document (dashboard reads from here)
+                time_saved_ref = db.collection("agent_time").document("time_saved")
+                time_saved_data = {
+                    "total_hours_saved": total_hours_saved,
+                    "total_tasks": total_tasks,
+                    "total_minutes_saved": total_minutes_saved,
+                    "fte_equivalent": fte_equivalent,
+                    "cost_savings": cost_savings,
+                    "task_breakdown": task_breakdown,
+                    "top_agent": top_agent,
+                    "evaluations_created": evaluations_count,
+                    "scenarios_created": scenarios_count,
+                    "notifications_sent": notifications_count,
+                    "total_days_saved": metrics.get("total_days_saved", 0),
+                    "last_updated": datetime.now(),
+                    "timeframe": timeframe,
+                    "generated_at": datetime.now()
+                }
+                time_saved_ref.set(time_saved_data, merge=True)
+                print(f"✅ Updated agent_time/time_saved document for dashboard")
+                print(f"   - Total hours saved: {total_hours_saved}")
+                print(f"   - Total tasks: {total_tasks}")
+                print(f"   - FTE equivalent: {fte_equivalent}")
+                print(f"   - Cost savings: ${cost_savings}")
             except Exception as e:
-                savings_data["insights"] = f"Failed to generate insights: {str(e)}"
+                print(f"⚠️ Failed to update agent_time/time_saved: {e}")
+                import traceback
+                traceback.print_exc()
         
+        # Update state agent
+        if state_agent:
+            result_data = {
+                "agent_name": "time_agent",
+                "session_id": session.id,
+                "completed_at": datetime.now().isoformat(),
+                "status": "success",
+                "doc_id": doc_id,
+                "total_hours_saved": total_hours_saved,
+                "total_tasks": total_tasks
+            }
+            state_agent.set_agent_result("time_agent", result_data)
+            state_agent.append_agent_log("time_agent", f"Successfully calculated time savings: {total_hours_saved} hours, {total_tasks} tasks")
+        
+        # Return response in expected format (matching dashboard expectations)
         return {
             "ok": True,
-            **savings_data
+            "timeframe": timeframe,
+            "total_hours_saved": total_hours_saved,
+            "total_minutes_saved": total_minutes_saved,
+            "fte_equivalent": fte_equivalent,
+            "cost_savings": cost_savings,
+            "total_tasks": total_tasks,
+            "task_breakdown": task_breakdown,
+            "top_agent": top_agent,
+            "evaluations": evaluations_count,
+            "scenarios": scenarios_count,
+            "notifications": notifications_count,
+            "total_days_saved": metrics.get("total_days_saved", 0),
+            "firestore_doc_id": doc_id,
+            "saved_to_firestore": doc_id is not None
         }
     except HTTPException:
         raise
     except Exception as e:
+        # Set state back to IDLE on error
+        if state_agent:
+            state_agent.set_agent_error("time_agent", str(e))
+            state_agent.append_agent_log("time_agent", f"Error: {str(e)}")
+        import traceback
+        traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Error calculating analytics: {str(e)}")
 
 @app.get("/agents/time-savings/report")
@@ -2501,6 +3034,13 @@ async def get_time_savings_report(
             "ok": True,
             **report
         }
+    except AttributeError as e:
+        # ADK agent doesn't have generate_report method - use analytics endpoint instead
+        return await get_time_savings_analytics(
+            timeframe=timeframe,
+            user_id=user_id,
+            include_insights=include_insights
+        )
     except HTTPException:
         raise
     except Exception as e:
@@ -2632,6 +3172,7 @@ async def run_safety_check_alias():
 async def run_safety_check():
     """
     Manually trigger the notification agent to check for negative evaluations.
+    Uses ADK Runner API to execute the notification_agent.
     
     Returns:
         Result of the safety check
@@ -2644,23 +3185,89 @@ async def run_safety_check():
     
     try:
         print("🔍 Manual safety check triggered")
-        # Run the notification check synchronously
-        notification_agent.process_notifications()
+        
+        # Use ADK Runner to execute the agent
+        if not ADK_IMPORTS:
+            raise HTTPException(
+                status_code=503,
+                detail="ADK Runner not available. Please ensure google-adk is installed."
+            )
+        
+        from google.adk.runners import Runner
+        from google.adk.sessions import InMemorySessionService
+        from google.genai import types
+        import uuid
+        
+        # Set state to ACTIVE
+        if state_agent:
+            state_agent.set_agent_state("notification_agent", StateAgent.STATE_ACTIVE)
+            state_agent.append_agent_log("notification_agent", "Started safety check / notification generation")
+        
+        # Create session service and runner
+        session_service = InMemorySessionService()
+        user_id = "web-user"
+        app_name = "precepgo-adk-panel-notification"
+        
+        runner = Runner(
+            app_name=app_name,
+            agent=notification_agent,
+            session_service=session_service
+        )
+        
+        # Create session FIRST before running
+        session = await session_service.create_session(
+            app_name=app_name,
+            user_id=user_id,
+            state={}
+        )
+        
+        # Create Content object for new_message
+        new_message = types.Content(
+            role="user",
+            parts=[types.Part(text="Check for dangerous ratings and send notifications")]
+        )
+        
+        # Run the notification agent using run_async() which returns an async generator
+        result = None
+        async for event in runner.run_async(
+            user_id=session.user_id,
+            session_id=session.id,
+            new_message=new_message
+        ):
+            result = event  # Collect the last event
+        
+        # Get the updated session to check state
+        session = await session_service.get_session(
+            app_name=app_name,
+            user_id=user_id,
+            session_id=session.id
+        )
         
         # Get the state to see results
         result_info = {
             "ok": True,
             "message": "Safety check completed successfully",
+            "session_id": session.id,
             "timestamp": datetime.now().isoformat()
         }
         
-        # Try to get state info if available
-        if notification_agent.state_agent:
+        # Update state with result
+        if state_agent:
+            result_data = {
+                "agent_name": "notification_agent",
+                "session_id": session.id,
+                "completed_at": datetime.now().isoformat(),
+                "status": "success"
+            }
+            state_agent.set_agent_result("notification_agent", result_data)
+            state_agent.append_agent_log("notification_agent", "Successfully completed safety check / notification generation")
+            
+            # Try to get additional state info
             try:
-                state = notification_agent.state_agent.get_agent_state("notification_agent")
+                state = state_agent.get_agent_state("notification_agent")
                 result_info["state"] = state
                 
-                all_states = notification_agent.state_agent.get_all_states()
+                all_states = state_agent.get_all_states()
                 last_result = all_states.get('notification_agent_last_result', {})
                 if last_result:
                     result_info["last_result"] = last_result
@@ -2670,6 +3277,10 @@ async def run_safety_check():
         return result_info
         
     except Exception as e:
+        # Set state back to IDLE on error
+        if state_agent:
+            state_agent.set_agent_error("notification_agent", str(e))
+            state_agent.append_agent_log("notification_agent", f"Error: {str(e)}")
         import traceback
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Error running safety check: {str(e)}")
@@ -2924,6 +3535,10 @@ def dashboard():
                     📊 Create Demo Evaluation
                 </button>
                 <div id="evaluationResult" style="margin-top: 15px; display: none;"></div>
+                <button id="deleteAllEvalsBtn" onclick="deleteAllEvaluations()" style="margin-top: 10px; padding: 8px 16px; background: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px;">
+                    🗑️ Delete All Evaluations
+                </button>
+                <div id="deleteEvalsResult" style="margin-top: 10px; display: none;"></div>
             </div>
             
             <div style="background-color: #e1f5fe; padding: 15px; border-radius: 5px; margin-bottom: 20px; border-left: 4px solid #0288d1;">
@@ -3117,16 +3732,24 @@ def dashboard():
                                             ${pcScores.map(pc => {
                                                 let scoreDisplay = '';
                                                 let scoreColor = '#495057';
-                                                if (pc.score === -1) {
+                                                const score = Number(pc.score); // Ensure it's a number
+                                                
+                                                if (score === -1 || score < 0) {
                                                     scoreDisplay = '⚠️ Dangerous';
                                                     scoreColor = '#dc3545';
-                                                } else if (pc.score === 0) {
+                                                } else if (score === 0) {
                                                     scoreDisplay = 'N/A';
                                                     scoreColor = '#6c757d';
-                    } else {
-                                                    scoreDisplay = '★'.repeat(pc.score) + '☆'.repeat(4 - pc.score);
-                                                    scoreColor = pc.score >= 3 ? '#4caf50' : pc.score >= 2 ? '#ffc107' : '#dc3545';
-                    }
+                                                } else if (score > 0 && score <= 4) {
+                                                    // Valid score range: 1-4
+                                                    scoreDisplay = '★'.repeat(Math.floor(score)) + '☆'.repeat(4 - Math.floor(score));
+                                                    scoreColor = score >= 3 ? '#4caf50' : score >= 2 ? '#ffc107' : '#dc3545';
+                                                } else {
+                                                    // Invalid score - show as-is
+                                                    scoreDisplay = String(score);
+                                                    scoreColor = '#6c757d';
+                                                }
+                                                
                                                 return `
                                                     <div style="background: white; padding: 8px; border-radius: 4px; border-left: 3px solid ${scoreColor};">
                                                         <strong style="font-size: 0.85em;">${pc.key}:</strong><br>
@@ -3159,7 +3782,42 @@ def dashboard():
                         html += `</div>`;
                         resultDiv.innerHTML = html;
                     } else {
-                        resultDiv.innerHTML = `<p style="color: #e74c3c; text-align: center;">❌ Failed to create evaluation: ${data.error || 'Unknown error'}</p>`;
+                        resultDiv.innerHTML = `<p style="color: #e74c3c; text-align: center;">❌ Failed to create evaluation: ${data.error || data.detail || data.message || 'Unknown error'}</p>`;
+                    }
+                } catch (error) {
+                    resultDiv.innerHTML = `<p style="color: #e74c3c; text-align: center;">❌ Error: ${error.message}</p>`;
+                }
+            }
+            
+            // Delete All Evaluations function
+            async function deleteAllEvaluations() {
+                if (!confirm('⚠️ WARNING: This will delete ALL evaluation documents from Firestore!\\n\\nThis action cannot be undone. Are you sure?')) {
+                    return;
+                }
+                
+                const resultDiv = document.getElementById('deleteEvalsResult');
+                resultDiv.style.display = 'block';
+                resultDiv.innerHTML = '<p style="color: #dc3545; text-align: center;">⏳ Deleting all evaluations... This may take a moment.</p>';
+                
+                try {
+                    const response = await fetch('/agents/evaluations/delete-all', {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        }
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.ok) {
+                        resultDiv.innerHTML = `
+                            <div style="background: #d4edda; padding: 15px; border-radius: 5px; border-left: 4px solid #28a745; margin-top: 10px;">
+                                <p style="color: #155724; margin: 0; font-weight: bold;">✅ ${data.message}</p>
+                                <p style="color: #155724; margin: 5px 0 0 0; font-size: 0.9em;">Deleted ${data.deleted_count || 0} evaluation document(s)</p>
+                            </div>
+                        `;
+                    } else {
+                        resultDiv.innerHTML = `<p style="color: #e74c3c; text-align: center;">❌ Failed to delete evaluations: ${data.detail || 'Unknown error'}</p>`;
                     }
                 } catch (error) {
                     resultDiv.innerHTML = `<p style="color: #e74c3c; text-align: center;">❌ Error: ${error.message}</p>`;
@@ -3245,8 +3903,10 @@ def dashboard():
                                 
                                 <div style="background: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
                                     <strong>Case:</strong> ${scenario.case?.name || 'Unknown'}<br>
-                                    <strong>Patient:</strong> ${scenario.patient?.name || 'Unknown'} (Age: ${scenario.patient?.age || 'Unknown'})<br>
-                                    <strong>Categories:</strong> ${scenario.patient?.categories?.join(', ') || 'N/A'}
+                                    <strong>Patient:</strong> ${scenario.patient?.full_name || scenario.patient?.name || 'Unknown'} (Age: ${scenario.patient?.age || 'Unknown'})<br>
+                                    ${scenario.patient?.categories && scenario.patient.categories.length > 0 ? `<strong>Categories:</strong> ${scenario.patient.categories.join(', ')}<br>` : ''}
+                                    ${scenario.patient?.asa_classification ? `<strong>ASA Classification:</strong> ${scenario.patient.asa_classification}<br>` : ''}
+                                    ${scenario.patient?.medical_history ? `<strong>Medical History:</strong> ${scenario.patient.medical_history}<br>` : ''}
                                 </div>
                                 
                                 <div style="background: #e3f2fd; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
@@ -3256,22 +3916,22 @@ def dashboard():
                                 
                                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
                                     <div style="background: #fff3cd; padding: 15px; border-radius: 5px; border-left: 4px solid #ffc107;">
-                                        <h4 style="margin-top: 0; color: #856404;">Option A: ${scenario.option_a?.title || 'Option A'}</h4>
-                                        <p style="white-space: pre-wrap; line-height: 1.6;">${scenario.option_a?.description || 'No description'}</p>
+                                        <h4 style="margin-top: 0; color: #856404;">Option A: Option A</h4>
+                                        <p style="white-space: pre-wrap; line-height: 1.6;">${typeof scenario.option_a === 'string' ? scenario.option_a : (scenario.option_a?.description || 'No description')}</p>
                                         ${scenario.option_a?.considerations ? '<ul style="margin: 10px 0;"><li>' + scenario.option_a.considerations.join('</li><li>') + '</li></ul>' : ''}
                                     </div>
                                     
                                     <div style="background: #d1ecf1; padding: 15px; border-radius: 5px; border-left: 4px solid #17a2b8;">
-                                        <h4 style="margin-top: 0; color: #0c5460;">Option B: ${scenario.option_b?.title || 'Option B'}</h4>
-                                        <p style="white-space: pre-wrap; line-height: 1.6;">${scenario.option_b?.description || 'No description'}</p>
+                                        <h4 style="margin-top: 0; color: #0c5460;">Option B: Option B</h4>
+                                        <p style="white-space: pre-wrap; line-height: 1.6;">${typeof scenario.option_b === 'string' ? scenario.option_b : (scenario.option_b?.description || 'No description')}</p>
                                         ${scenario.option_b?.considerations ? '<ul style="margin: 10px 0;"><li>' + scenario.option_b.considerations.join('</li><li>') + '</li></ul>' : ''}
                                     </div>
                                 </div>
                                 
-                                ${scenario.best_answer ? `
+                                ${(scenario.best_answer || scenario.rationale) ? `
                                     <div style="background: #d1f2eb; padding: 15px; border-radius: 5px; margin-bottom: 15px; border-left: 4px solid #27ae60;">
-                                        <h4 style="margin-top: 0; color: #155724;">✅ Best Answer: Option ${scenario.best_answer?.option || 'N/A'}</h4>
-                                        <p style="white-space: pre-wrap; line-height: 1.6; font-weight: 500;">${scenario.best_answer?.rationale || 'No rationale provided'}</p>
+                                        <h4 style="margin-top: 0; color: #155724;">✅ Best Answer: ${typeof scenario.best_answer === 'string' ? scenario.best_answer : ('Option ' + (scenario.best_answer?.option || 'N/A'))}</h4>
+                                        <p style="white-space: pre-wrap; line-height: 1.6; font-weight: 500;">${scenario.rationale || (scenario.best_answer?.rationale || 'No rationale provided')}</p>
                                     </div>
                                 ` : ''}
                                 

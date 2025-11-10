@@ -3,7 +3,25 @@
     "allow": [
       "Read(//Users/joshuaburleson/Documents/**)",
       "Bash(cat:*)",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "Bash(bash:*)",
+      "Bash(curl:*)",
+      "Bash(python test_adk_deployment.py:*)",
+      "Bash(chmod:*)",
+      "Bash(gcloud config get-value:*)",
+      "Bash(gcloud auth list:*)",
+      "Bash(gcloud logging read:*)",
+      "Bash(gcloud run services logs read:*)",
+      "Bash(gcloud run services describe:*)",
+      "Bash(echo:*)",
+      "Bash(gcloud builds submit:*)",
+      "Bash(gcloud run deploy:*)",
+      "Bash(uvx --from google-adk adk deploy cloud_run:*)",
+      "Bash(pip3 install:*)",
+      "Bash(./venv/bin/adk deploy:*)",
+      "Bash(gcloud builds list:*)",
+      "Bash(done)",
+      "Bash(cd:*)"
     ],
     "deny": [],
     "ask": []

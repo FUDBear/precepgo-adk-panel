@@ -1,6 +1,0 @@
-Safety Agent (Run every 15 minutes)
-Scenario Agent (Run once every 3 hours)
-Evalaution Agent ( Run every 3 hours )
-Site Agent (Run every 24 hours)
-COA Agent (Run every 24 hours)
-Time Agent (Run after COA Agent)

@@ -64,3 +64,6 @@ data/*.txt
 # Vector DB setup scripts and generated files
 vectordb/
 
+# ADK Python reference source code (large folder, don't commit)
+context/adk-python-main/
+

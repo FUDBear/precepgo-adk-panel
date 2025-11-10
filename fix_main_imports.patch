@@ -1,0 +1,59 @@
+# Fix main.py imports to use ADK agents instead of legacy class-based agents
+# Replace lines 46-114 with this:
+
+# ============================================
+# AGENT IMPORTS - ADK Compatible
+# ============================================
+
+# ADK Agent Wrapper (lazy-loaded to prevent import errors)
+try:
+    from adk_wrapper import (
+        get_root_agent,
+        get_safety_pipeline,
+        get_evaluation_agent,
+        get_notification_agent,
+        get_scenario_agent,
+        get_time_agent,
+        is_adk_available
+    )
+    ADK_AGENTS_AVAILABLE = True
+    print("✅ ADK agent wrapper loaded")
+except ImportError as e:
+    print(f"⚠️ ADK agents not available: {e}")
+    ADK_AGENTS_AVAILABLE = False
+    # Create stub functions
+    def get_root_agent(): return None
+    def get_safety_pipeline(): return None
+    def get_evaluation_agent(): return None
+    def get_notification_agent(): return None
+    def get_scenario_agent(): return None
+    def get_time_agent(): return None
+    def is_adk_available(): return False
+
+# Legacy agents (keep for backwards compatibility with existing endpoints)
+# These will be removed once all endpoints are migrated to ADK
+CLINICAL_SCENARIO_AGENT_AVAILABLE = False
+EVALUATIONS_AGENT_AVAILABLE = False
+NOTIFICATION_AGENT_AVAILABLE = False
+STATE_AGENT_AVAILABLE = False
+COA_AGENT_AVAILABLE = False
+TIME_SAVINGS_AGENT_AVAILABLE = False
+IMAGE_GENERATION_AGENT_AVAILABLE = False
+SITE_AGENT_AVAILABLE = False
+
+# Mark these as deprecated
+print("⚠️ Legacy class-based agents disabled - use ADK agents via /adk/* endpoints")
+
+# ADK imports exactly as shown in the tutorial
+try:
+    from google.adk.agents import Agent
+    from google.adk.models.lite_llm import LiteLlm  # For multi-model support
+    from google.adk.sessions import InMemorySessionService
+    from google.adk.runners import Runner
+    from google.genai import types  # For creating message Content/Parts
+    ADK_IMPORTS = True
+    print("✅ Google ADK imports successful")
+except ImportError as e:
+    print(f"⚠️ ADK imports failed: {e}")
+    print("⚠️ Will use ADK-compatible fallback implementation")
+    ADK_IMPORTS = False

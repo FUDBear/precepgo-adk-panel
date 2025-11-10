@@ -86,11 +86,12 @@ else
         --platform managed \
         --region ${REGION} \
         --allow-unauthenticated \
-        --update-env-vars "FIREBASE_PROJECT_ID=auth-demo-90be0,USE_VECTOR_SEARCH=true,GOOGLE_CLOUD_PROJECT=precepgo-mentor-ai,GOOGLE_CLOUD_REGION=us-central1" \
+        --update-env-vars "FIREBASE_PROJECT_ID=auth-demo-90be0,USE_VECTOR_SEARCH=true,GOOGLE_CLOUD_PROJECT=precepgo-mentor-ai,GOOGLE_CLOUD_REGION=us-central1,GOOGLE_CLOUD_LOCATION=us-central1,GOOGLE_GENAI_USE_VERTEXAI=False,STORAGE_BUCKET_URL=gs://auth-demo-90be0.appspot.com/agent_assets/images/clinical_scenario" \
+        --set-secrets "GEMINI_API_KEY=gemini-api-key:latest,GOOGLE_API_KEY=gemini-api-key:latest" \
         --memory 2Gi \
         --cpu 2 \
         --timeout 300 \
-        --max-instances 10
+        --max-instances 10 || echo "   ⚠️  Note: Secrets may need to be set manually in Cloud Run console"
 fi
 
 # Step 5: Grant Firestore permissions to Cloud Run service account

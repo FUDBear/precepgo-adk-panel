@@ -1,971 +1,775 @@
 """
-Scenario Agent
-Independent agent for generating clinical scenarios with decision options.
-Handles case selection, patient matching, content retrieval, and scenario generation.
+Scenario Agent - ADK Compliant
+Generates clinical scenarios with patient matching and decision options.
 """
 
 import os
 import json
 import random
 from datetime import datetime
-from typing import Dict, Any, Optional
+from typing import Dict, Any, List
+from google.cloud import firestore
+from google.cloud.firestore_v1 import SERVER_TIMESTAMP
 
-# Import dependencies
+# Google ADK imports
+from google.adk.agents import Agent, SequentialAgent
+from google.adk.tools import ToolContext
+
+# Import Gemini for scenario generation
 try:
-    from gemini_agent import GeminiAgent, MODEL_GEMINI_PRO
+    import google.generativeai as genai
     GEMINI_AVAILABLE = True
 except ImportError:
     GEMINI_AVAILABLE = False
-    MODEL_GEMINI_PRO = "models/gemini-2.5-pro"  # Fallback model name
-    print("⚠️ Gemini Agent not available")
 
-try:
-    from vector_search_tool import VectorSearchTool
-    VECTOR_SEARCH_AVAILABLE = True
-except ImportError:
-    VECTOR_SEARCH_AVAILABLE = False
-    print("⚠️ Vector Search not available")
 
-try:
-    from firestore_service import get_firestore_service
-    FIRESTORE_AVAILABLE = True
-except ImportError:
-    FIRESTORE_AVAILABLE = False
-    print("⚠️ Firestore not available")
+# ===========================================
+# TOOLS (Functions with ToolContext)
+# ===========================================
 
-try:
-    from agents.state_agent import StateAgent
-    STATE_AGENT_AVAILABLE = True
-except ImportError:
-    STATE_AGENT_AVAILABLE = False
-    print("⚠️ State Agent not available")
+def load_scenario_data_to_state(tool_context: ToolContext) -> dict:
+    """Loads cases, patients, and students for scenario generation.
 
-# Image Generation Agent import (optional - for auto-generating images after scenario creation)
+    Returns:
+        dict: Status and counts of loaded data
+    """
+    try:
+        # Get the directory where this file is located
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        project_root = os.path.dirname(current_dir)  # Go up one level from agents/ to project root
+        
+        # Try multiple possible paths
+        data_paths = [
+            os.path.join(project_root, "data"),
+            os.path.join(current_dir, "..", "data"),
+            "data",  # Relative to current working directory
+            os.path.join(os.getcwd(), "data")
+        ]
+        
+        data_dir = None
+        for path in data_paths:
+            abs_path = os.path.abspath(path)
+            if os.path.exists(abs_path) and os.path.isdir(abs_path):
+                data_dir = abs_path
+                break
+        
+        if not data_dir:
+            raise FileNotFoundError(f"Could not find data directory. Tried: {data_paths}")
+        
+        # Load cases
+        cases_path = os.path.join(data_dir, "cases.json")
+        if not os.path.exists(cases_path):
+            raise FileNotFoundError(f"Cases file not found: {cases_path}")
+        with open(cases_path, "r") as f:
+            data = json.load(f)
+            cases = data.get("procedures", []) if isinstance(data, dict) else data
+            tool_context.state["scenario_cases"] = cases
+
+        # Load patient templates
+        patients_path = os.path.join(data_dir, "patient_templates.json")
+        if not os.path.exists(patients_path):
+            raise FileNotFoundError(f"Patient templates file not found: {patients_path}")
+        with open(patients_path, "r") as f:
+            data = json.load(f)
+            patients = data if isinstance(data, list) else data.get("patients", [])
+            tool_context.state["patient_templates"] = patients
+
+        # Load students
+        students_path = os.path.join(data_dir, "students.json")
+        if not os.path.exists(students_path):
+            raise FileNotFoundError(f"Students file not found: {students_path}")
+        with open(students_path, "r") as f:
+            data = json.load(f)
+            students = data.get("students", []) if isinstance(data, dict) else data
+            tool_context.state["scenario_students"] = students
+
+        return {
+            "status": "success",
+            "cases_loaded": len(cases),
+            "patients_loaded": len(patients),
+            "students_loaded": len(students),
+            "data_dir": data_dir
+        }
+    except Exception as e:
+        error_msg = f"Error loading scenario data: {str(e)}"
+        print(f"❌ {error_msg}")
+        import traceback
+        traceback.print_exc()
+        return {
+            "status": "error",
+            "error_message": error_msg
+        }
+
+
+def select_scenario_case(tool_context: ToolContext) -> dict:
+    """Selects a random case for scenario generation.
+
+    Returns:
+        dict: Selected case info
+    """
+    cases = tool_context.state.get("scenario_cases", [])
+    if not cases:
+        return {"status": "error", "error_message": "No cases available"}
+
+    selected_case = random.choice(cases)
+    tool_context.state["scenario_case"] = selected_case
+
+    return {
+        "status": "success",
+        "case_name": selected_case.get("name"),
+        "case_code": selected_case.get("code"),
+        "difficulty": selected_case.get("difficulty", "intermediate")
+    }
+
+
+def match_patient_to_case(tool_context: ToolContext) -> dict:
+    """Matches a patient template to the selected case based on age and ASA.
+
+    Returns:
+        dict: Matched patient info
+    """
+    case = tool_context.state.get("scenario_case", {})
+    patients = tool_context.state.get("patient_templates", [])
+
+    if not patients:
+        return {"status": "error", "error_message": "No patient templates available"}
+
+    # Get case parameters
+    case_min_age = case.get("min_age", 18)
+    case_max_age = case.get("max_age", 100)
+    case_asa = case.get("asa_classification", [1, 2, 3, 4])
+
+    # Filter patients by age and ASA
+    matching_patients = []
+    for patient in patients:
+        age = patient.get("age", 50)
+        asa = patient.get("asa_classification", 2)
+
+        if case_min_age <= age <= case_max_age and asa in case_asa:
+            matching_patients.append(patient)
+
+    # Select from matching or all patients
+    selected_patient = random.choice(matching_patients if matching_patients else patients)
+    tool_context.state["scenario_patient"] = selected_patient
+
+    return {
+        "status": "success",
+        "patient_name": selected_patient.get("full_name"),
+        "patient_age": selected_patient.get("age"),
+        "asa": selected_patient.get("asa_classification"),
+        "matched": len(matching_patients) > 0
+    }
+
+
+def select_target_student(tool_context: ToolContext) -> dict:
+    """Selects a student to receive this scenario.
+
+    Returns:
+        dict: Selected student info
+    """
+    students = tool_context.state.get("scenario_students", [])
+    if not students:
+        return {"status": "error", "error_message": "No students available"}
+
+    selected_student = random.choice(students)
+    tool_context.state["scenario_student"] = selected_student
+
+    return {
+        "status": "success",
+        "student_name": selected_student.get("name"),
+        "student_id": selected_student.get("id"),
+        "class_standing": selected_student.get("class_standing")
+    }
+
+
+def generate_scenario_with_gemini(tool_context: ToolContext) -> dict:
+    """Generates a clinical scenario with decision options using Gemini Pro.
+
+    Returns:
+        dict: Generated scenario content
+    """
+    case = tool_context.state.get("scenario_case", {})
+    patient = tool_context.state.get("scenario_patient", {})
+    student = tool_context.state.get("scenario_student", {})
+
+    if not GEMINI_AVAILABLE:
+        return {
+            "status": "error",
+            "error_message": "Gemini not available"
+        }
+
+    try:
+        genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+        model = genai.GenerativeModel("gemini-2.0-flash")
+
+        # Build comprehensive patient summary (like original)
+        patient_weight = patient.get('weight', {})
+        patient_summary = f"""Patient: {patient.get('full_name', 'Patient')}
+Age: {patient.get('age', 'Unknown')} years
+Weight: {patient_weight.get('kg', 'Unknown') if isinstance(patient_weight, dict) else 'Unknown'} kg ({patient_weight.get('lbs', 'Unknown') if isinstance(patient_weight, dict) else 'Unknown'} lbs)
+ASA Classification: {patient.get('asa_classification', 'Unknown')}
+Comorbidities: {', '.join(patient.get('comorbidities', [])) if patient.get('comorbidities') else 'None'}
+Health Traits: {', '.join(patient.get('health_traits', [])) if patient.get('health_traits') else 'Standard'}
+Medical History: {patient.get('medical_history', 'No significant medical history')}
+Categories: {', '.join(patient.get('categories', [])) if patient.get('categories') else 'General'}"""
+
+        # Build case summary
+        case_summary = f"""Case: {case.get('name', 'Surgical Procedure')}
+Code: {case.get('code', 'N/A')}
+Description: {case.get('description', '')}
+Keywords: {', '.join(case.get('keywords', [])) if case.get('keywords') else 'N/A'}
+Difficulty: {case.get('difficulty', 'intermediate')}"""
+
+        # Build student context
+        student_context = ""
+        if student:
+            student_name = student.get('name', 'Student')
+            class_standing = student.get('class_standing', '1st Year')
+            student_context = f"""
+**STUDENT CONTEXT:**
+Student: {student_name} ({class_standing})
+Student Level: {class_standing}
+
+When generating this scenario, consider:
+- The scenario should be challenging but appropriate for {class_standing}
+- Focus on areas relevant to this student's level of training
+- Provide clear learning points that address their educational needs
+- Make the scenario realistic and clinically relevant"""
+
+        prompt = f"""You are an expert CRNA clinical scenario designer. Create a realistic clinical scenario based on the following information:
+
+**PATIENT INFORMATION:**
+{patient_summary}
+
+**SURGICAL CASE:**
+{case_summary}
+{student_context}
+
+**YOUR TASK:**
+Create a clinical scenario with TWO decision options for the CRNA student. The scenario should:
+1. Present a realistic clinical situation involving this patient and case
+2. Include detailed patient presentation, vital signs, and clinical context (2-3 paragraphs)
+3. Present a critical decision point where the student must choose between two approaches
+4. Both options should be plausible and defensible
+5. Make it educational and challenging, appropriate for {student.get('class_standing', '1st Year') if student else 'CRNA students'}
+6. Base all information on evidence-based anesthesia practice
+
+**REQUIREMENTS:**
+1. **scenario:** Write 2-3 detailed paragraphs describing the patient presentation, vital signs, current clinical situation, and the context leading to the decision point. Be specific and realistic with actual numbers (BP, HR, SpO2, etc.).
+
+2. **decision_point:** State the specific critical decision the student must make (e.g., "Should you proceed with induction?", "How should you manage this airway?", "What monitoring is essential?", "How should you adjust the anesthetic plan?")
+
+3. **option_a:** Provide a complete, detailed description of the first approach/decision (2-3 sentences explaining what the student would do, why they would do it, and the rationale). This must be a full description, NOT just a label.
+
+4. **option_b:** Provide a complete, detailed description of the second approach/decision (2-3 sentences explaining what the student would do, why they would do it, and the rationale). This must be a full description, NOT just a label.
+
+5. **best_answer:** State which option (A or B) is better. Use format "Option A" or "Option B".
+
+6. **rationale:** Provide a comprehensive explanation (3-5 sentences) explaining why the best answer is correct, considering:
+   - Patient-specific factors (age, comorbidities, ASA status)
+   - Risks and benefits of each approach
+   - Evidence-based practice considerations
+   - Clinical guidelines and best practices
+   - Why the other option is less optimal
+
+7. **learning_points:** Provide 3-4 specific, actionable learning points as an array of strings that address key concepts from this scenario
+
+**CRITICAL:** 
+- Each option (option_a and option_b) must be a complete, detailed description - NOT just a label or single sentence
+- Write full sentences explaining the approach, rationale, and what the student would actually do
+- The scenario should be realistic and clinically relevant
+- Include specific vital signs, medications, and clinical details
+
+**OUTPUT FORMAT:** You MUST return ONLY valid JSON. No markdown, no code blocks, no explanations - just the raw JSON object.
+
+Return ONLY this JSON structure (no other text):
+{{
+  "scenario": "detailed scenario text here (2-3 paragraphs with vital signs, patient presentation, clinical context)...",
+  "decision_point": "the specific critical decision question",
+  "option_a": "complete detailed description of option A approach (2-3 sentences explaining what the student would do and why)",
+  "option_b": "complete detailed description of option B approach (2-3 sentences explaining what the student would do and why)",
+  "best_answer": "Option A" or "Option B",
+  "rationale": "comprehensive explanation (3-5 sentences) of why the best answer is correct, considering patient factors, risks, benefits, and evidence-based practice",
+  "learning_points": ["point 1", "point 2", "point 3", "point 4"]
+}}"""
+
+        # Use structured output for better JSON parsing
+        generation_config = genai.types.GenerationConfig(
+            temperature=0.7,
+            top_p=0.9,
+            top_k=40,
+            max_output_tokens=8192,
+            response_mime_type="application/json"
+        )
+
+        # Safety settings
+        safety_settings = [
+            {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
+            {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
+            {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
+            {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
+        ]
+
+        response = model.generate_content(
+            prompt,
+            generation_config=generation_config,
+            safety_settings=safety_settings
+        )
+        scenario_text = response.text.strip()
+        
+        # Debug: Print raw response
+        print(f"🔍 Raw Gemini response (first 500 chars):\n{scenario_text[:500]}\n")
+
+        # Try to parse as JSON (should be clean JSON since we used response_mime_type="application/json")
+        scenario_json = None
+        try:
+            import re
+            # Since we're using structured output, try parsing directly first
+            try:
+                scenario_json = json.loads(scenario_text)
+                print("✅ Parsed JSON directly (structured output)")
+            except json.JSONDecodeError:
+                # Fallback: try to extract JSON from markdown code blocks
+                json_match = re.search(r'```(?:json)?\s*(\{.*?\})\s*```', scenario_text, re.DOTALL)
+                if json_match:
+                    try:
+                        scenario_json = json.loads(json_match.group(1))
+                        print("✅ Parsed JSON from markdown code block")
+                    except json.JSONDecodeError:
+                        print("⚠️ JSON in markdown block failed to parse, trying other methods...")
+                        json_match = None
+                
+                if not scenario_json:
+                    # Try to find the largest JSON object in the text by counting braces
+                    brace_count = 0
+                    start_idx = -1
+                    end_idx = -1
+                    for i, char in enumerate(scenario_text):
+                        if char == '{':
+                            if brace_count == 0:
+                                start_idx = i
+                            brace_count += 1
+                        elif char == '}':
+                            brace_count -= 1
+                            if brace_count == 0 and start_idx != -1:
+                                end_idx = i + 1
+                                break
+                    
+                    if start_idx != -1 and end_idx != -1:
+                        json_str = scenario_text[start_idx:end_idx]
+                        try:
+                            scenario_json = json.loads(json_str)
+                            print("✅ Parsed JSON by counting braces")
+                        except json.JSONDecodeError:
+                            print("⚠️ Brace-counted JSON failed to parse")
+                    
+        except Exception as e:
+            print(f"⚠️ JSON parsing exception: {e}")
+            scenario_json = None
+        
+        if not scenario_json:
+            print(f"⚠️ JSON parsing failed, attempting to extract fields manually from text...")
+            print(f"⚠️ Full response length: {len(scenario_text)}")
+            
+            # Try to extract fields manually using more robust regex patterns
+            scenario_json = {}
+            
+            # Extract scenario text - handle multi-line strings
+            scenario_match = re.search(r'"scenario"\s*:\s*"((?:[^"\\]|\\.)*)"', scenario_text, re.DOTALL)
+            if not scenario_match:
+                # Try without quotes
+                scenario_match = re.search(r'scenario["\']?\s*:\s*([^\n,}]+)', scenario_text, re.IGNORECASE | re.DOTALL)
+            if scenario_match:
+                scenario_json["scenario"] = scenario_match.group(1).strip().strip('"').strip("'")
+            
+            # Extract option_a - handle multi-line strings
+            option_a_match = re.search(r'"option_a"\s*:\s*"((?:[^"\\]|\\.)*)"', scenario_text, re.DOTALL)
+            if not option_a_match:
+                option_a_match = re.search(r'"option_a"\s*:\s*"([^"]*(?:"[^"]*")*[^"]*)"', scenario_text, re.DOTALL)
+            if not option_a_match:
+                option_a_match = re.search(r'option\s*a["\']?\s*:\s*["\']?([^"\']+)', scenario_text, re.IGNORECASE | re.DOTALL)
+            if option_a_match:
+                scenario_json["option_a"] = option_a_match.group(1).strip().strip('"').strip("'")
+            
+            # Extract option_b - handle multi-line strings
+            option_b_match = re.search(r'"option_b"\s*:\s*"((?:[^"\\]|\\.)*)"', scenario_text, re.DOTALL)
+            if not option_b_match:
+                option_b_match = re.search(r'"option_b"\s*:\s*"([^"]*(?:"[^"]*")*[^"]*)"', scenario_text, re.DOTALL)
+            if not option_b_match:
+                option_b_match = re.search(r'option\s*b["\']?\s*:\s*["\']?([^"\']+)', scenario_text, re.IGNORECASE | re.DOTALL)
+            if option_b_match:
+                scenario_json["option_b"] = option_b_match.group(1).strip().strip('"').strip("'")
+            
+            # Extract best_answer
+            best_match = re.search(r'"best_answer"\s*:\s*"([^"]+)"', scenario_text, re.IGNORECASE)
+            if not best_match:
+                best_match = re.search(r'best\s*answer["\']?\s*:\s*["\']?(option\s*[ab])', scenario_text, re.IGNORECASE)
+            if best_match:
+                scenario_json["best_answer"] = best_match.group(1).strip().strip('"').strip("'")
+            
+            # Extract rationale - handle multi-line strings
+            rationale_match = re.search(r'"rationale"\s*:\s*"((?:[^"\\]|\\.)*)"', scenario_text, re.DOTALL)
+            if not rationale_match:
+                rationale_match = re.search(r'"rationale"\s*:\s*"([^"]*(?:"[^"]*")*[^"]*)"', scenario_text, re.DOTALL)
+            if not rationale_match:
+                rationale_match = re.search(r'rationale["\']?\s*:\s*["\']?([^"\']+)', scenario_text, re.IGNORECASE | re.DOTALL)
+            if rationale_match:
+                scenario_json["rationale"] = rationale_match.group(1).strip().strip('"').strip("'")
+            
+            # Extract decision_point
+            decision_match = re.search(r'"decision_point"\s*:\s*"((?:[^"\\]|\\.)*)"', scenario_text, re.DOTALL)
+            if not decision_match:
+                decision_match = re.search(r'decision\s*point["\']?\s*:\s*["\']?([^"\']+)', scenario_text, re.IGNORECASE | re.DOTALL)
+            if decision_match:
+                scenario_json["decision_point"] = decision_match.group(1).strip().strip('"').strip("'")
+            
+            # Extract learning_points (array)
+            learning_match = re.search(r'"learning_points"\s*:\s*\[(.*?)\]', scenario_text, re.DOTALL)
+            if learning_match:
+                points_text = learning_match.group(1)
+                points = re.findall(r'"([^"]+)"', points_text)
+                if points:
+                    scenario_json["learning_points"] = points
+            
+            # If we still don't have the scenario text, use the raw text
+            if not scenario_json.get("scenario"):
+                scenario_json["scenario"] = scenario_text
+                
+            print(f"📋 Extracted fields: {list(scenario_json.keys())}")
+            print(f"📋 Option A length: {len(scenario_json.get('option_a', ''))}")
+            print(f"📋 Option B length: {len(scenario_json.get('option_b', ''))}")
+            print(f"📋 Rationale length: {len(scenario_json.get('rationale', ''))}")
+
+        # Debug: Print what was generated BEFORE validation
+        print(f"\n🔍 BEFORE VALIDATION - Generated scenario fields:")
+        print(f"   - Has scenario: {bool(scenario_json.get('scenario'))}")
+        print(f"   - Has option_a: {bool(scenario_json.get('option_a'))}")
+        print(f"   - Has option_b: {bool(scenario_json.get('option_b'))}")
+        print(f"   - Has rationale: {bool(scenario_json.get('rationale'))}")
+        print(f"   - Has best_answer: {bool(scenario_json.get('best_answer'))}")
+        print(f"   - Option A value: {scenario_json.get('option_a', '')[:100] if scenario_json.get('option_a') else 'MISSING'}")
+        print(f"   - Option B value: {scenario_json.get('option_b', '')[:100] if scenario_json.get('option_b') else 'MISSING'}")
+        print(f"   - Rationale value: {scenario_json.get('rationale', '')[:100] if scenario_json.get('rationale') else 'MISSING'}\n")
+
+        # Validate that we have complete data
+        if not scenario_json.get("scenario") or len(scenario_json.get("scenario", "")) < 50:
+            print("⚠️ Scenario text is too short or missing")
+            scenario_json["scenario"] = scenario_text[:500] if len(scenario_text) > 50 else "Scenario generation incomplete. Please try again."
+        
+        if not scenario_json.get("option_a") or len(scenario_json.get("option_a", "")) < 20:
+            print("⚠️ Option A is missing or too short")
+            scenario_json["option_a"] = "Detailed option A description not generated. Please regenerate the scenario."
+        
+        if not scenario_json.get("option_b") or len(scenario_json.get("option_b", "")) < 20:
+            print("⚠️ Option B is missing or too short")
+            scenario_json["option_b"] = "Detailed option B description not generated. Please regenerate the scenario."
+        
+        if not scenario_json.get("best_answer"):
+            scenario_json["best_answer"] = "Option A"
+        
+        if not scenario_json.get("rationale"):
+            scenario_json["rationale"] = "Clinical reasoning based on patient presentation and evidence-based practice."
+        
+        if not scenario_json.get("decision_point"):
+            scenario_json["decision_point"] = "A critical clinical decision must be made."
+        
+        if not scenario_json.get("learning_points") or not isinstance(scenario_json.get("learning_points"), list):
+            scenario_json["learning_points"] = ["Clinical reasoning", "Patient safety", "Evidence-based practice"]
+        
+        # Debug: Print what was generated AFTER validation
+        print(f"✅ AFTER VALIDATION - Final scenario:")
+        print(f"   - Scenario length: {len(scenario_json.get('scenario', ''))}")
+        print(f"   - Option A length: {len(scenario_json.get('option_a', ''))}")
+        print(f"   - Option B length: {len(scenario_json.get('option_b', ''))}")
+        print(f"   - Rationale length: {len(scenario_json.get('rationale', ''))}")
+        print(f"   - Best answer: {scenario_json.get('best_answer', '')}")
+        print(f"   - Full scenario_json keys: {list(scenario_json.keys())}\n")
+        
+        tool_context.state["generated_scenario"] = scenario_json
+
+        return {
+            "status": "success",
+            "scenario_length": len(scenario_text),
+            "has_options": "option_a" in scenario_json and "option_b" in scenario_json,
+            "option_a_length": len(scenario_json.get("option_a", "")),
+            "option_b_length": len(scenario_json.get("option_b", ""))
+        }
+
+    except Exception as e:
+        error_msg = f"Error generating scenario with Gemini: {str(e)}"
+        print(f"⚠️ {error_msg}")
+        import traceback
+        traceback.print_exc()
+        return {
+            "status": "error",
+            "error_message": error_msg
+        }
+
+
+def save_scenario_to_firestore(tool_context: ToolContext) -> dict:
+    """Saves the generated scenario to Firestore.
+
+    Returns:
+        dict: Save status and document ID
+    """
+    try:
+        # Validate that we have all required data BEFORE saving
+        case = tool_context.state.get("scenario_case", {})
+        patient = tool_context.state.get("scenario_patient", {})
+        student = tool_context.state.get("scenario_student", {})
+        scenario = tool_context.state.get("generated_scenario", {})
+        
+        # Validate scenario data exists and is complete
+        if not scenario:
+            return {
+                "status": "error",
+                "error_message": "No scenario generated. Please run scenario_content_generator first."
+            }
+        
+        if not scenario.get("scenario") or len(scenario.get("scenario", "")) < 50:
+            return {
+                "status": "error",
+                "error_message": "Scenario text is missing or too short. Please regenerate."
+            }
+        
+        if not scenario.get("option_a") or len(scenario.get("option_a", "")) < 20:
+            return {
+                "status": "error",
+                "error_message": "Option A is missing or incomplete. Please regenerate."
+            }
+        
+        if not scenario.get("option_b") or len(scenario.get("option_b", "")) < 20:
+            return {
+                "status": "error",
+                "error_message": "Option B is missing or incomplete. Please regenerate."
+            }
+        
+        # Use FIREBASE_PROJECT_ID if available, otherwise auto-detect
+        project_id = os.getenv("FIREBASE_PROJECT_ID") or os.getenv("GOOGLE_CLOUD_PROJECT")
+        if project_id:
+            db = firestore.Client(project=project_id)
+        else:
+            db = firestore.Client()
+
+        scenario_doc = {
+            "case": {
+                "name": case.get("name"),
+                "code": case.get("code"),
+                "description": case.get("description", "")
+            },
+            "patient": {
+                "full_name": patient.get("full_name"),
+                "age": patient.get("age"),
+                "asa_classification": patient.get("asa_classification"),
+                "medical_history": patient.get("medical_history", "")
+            },
+            "student": {
+                "name": student.get("name"),
+                "id": student.get("id"),
+                "class_standing": student.get("class_standing")
+            },
+            "scenario": scenario.get("scenario", ""),
+            "decision_point": scenario.get("decision_point", ""),
+            "option_a": scenario.get("option_a", ""),
+            "option_b": scenario.get("option_b", ""),
+            "best_answer": scenario.get("best_answer", ""),
+            "rationale": scenario.get("rationale", ""),
+            "learning_points": scenario.get("learning_points", []),
+            "created_at": SERVER_TIMESTAMP,
+            "agent": "scenario_agent",
+            "adk_version": "1.0"
+        }
+        
+        # Debug: Print what we're saving
+        print(f"\n💾 Saving scenario to Firestore:")
+        print(f"   - Scenario length: {len(scenario.get('scenario', ''))}")
+        print(f"   - Option A length: {len(scenario.get('option_a', ''))}")
+        print(f"   - Option B length: {len(scenario.get('option_b', ''))}")
+        print(f"   - Rationale length: {len(scenario.get('rationale', ''))}")
+        print(f"   - Best answer: {scenario.get('best_answer', '')}")
+        print(f"   - Has decision_point: {bool(scenario.get('decision_point'))}")
+        print(f"   - Full scenario keys: {list(scenario.keys())}")
+        print(f"   - Option A value (first 100 chars): {scenario.get('option_a', '')[:100] if scenario.get('option_a') else 'MISSING'}")
+        print(f"   - Option B value (first 100 chars): {scenario.get('option_b', '')[:100] if scenario.get('option_b') else 'MISSING'}\n")
+
+        doc_ref = db.collection("agent_scenarios").add(scenario_doc)
+        doc_id = doc_ref[1].id
+
+        tool_context.state["scenario_doc_id"] = doc_id
+
+        return {
+            "status": "success",
+            "doc_id": doc_id,
+            "case_name": case.get("name"),
+            "student_name": student.get("name")
+        }
+    except Exception as e:
+        error_msg = f"Error saving scenario: {str(e)}"
+        print(f"❌ {error_msg}")
+        import traceback
+        traceback.print_exc()
+        return {
+            "status": "error",
+            "error_message": error_msg
+        }
+
+
+# ===========================================
+# AGENTS (ADK Agent instances)
+# ===========================================
+
+# Scenario Data Loader
+scenario_data_loader = Agent(
+    name="scenario_data_loader",
+    model="gemini-2.0-flash",
+    description="Loads cases, patients, and students for scenarios",
+    instruction="""
+    You load data needed for clinical scenario generation.
+    
+    IMPORTANT: You MUST use your load_scenario_data_to_state tool to load:
+    1. Cases from data/cases.json
+    2. Patient templates from data/patient_templates.json
+    3. Students from data/students.json
+    
+    Load all three data files into the session state. Do not proceed until all data is loaded.
+    """,
+    tools=[load_scenario_data_to_state]
+)
+
+# Case Selector for Scenarios
+scenario_case_selector = Agent(
+    name="scenario_case_selector",
+    model="gemini-2.0-flash",
+    description="Selects a case for scenario generation",
+    instruction="""
+    You select a clinical case for scenario generation.
+    
+    IMPORTANT: You MUST use your select_scenario_case tool to select a case.
+    
+    Available cases: {scenario_cases?}
+    
+    Call your tool to select a random case.
+    """,
+    tools=[select_scenario_case]
+)
+
+# Patient Matcher
+patient_matcher = Agent(
+    name="patient_matcher",
+    model="gemini-2.0-flash",
+    description="Matches patients to cases based on age and ASA",
+    instruction="""
+    You match patient templates to clinical cases.
+    
+    IMPORTANT: You MUST use your match_patient_to_case tool to find a matching patient.
+    
+    Selected case: {scenario_case?}
+    Available patients: {patient_templates?}
+    
+    Match based on age range and ASA classification.
+    Call your tool to find a suitable patient.
+    """,
+    tools=[match_patient_to_case]
+)
+
+# Student Selector
+scenario_student_selector = Agent(
+    name="scenario_student_selector",
+    model="gemini-2.0-flash",
+    description="Selects a student to receive the scenario",
+    instruction="""
+    You select a student to receive this clinical scenario.
+    
+    IMPORTANT: You MUST use your select_target_student tool to select a student.
+    
+    Available students: {scenario_students?}
+    
+    Call your tool to select a student.
+    """,
+    tools=[select_target_student]
+)
+
+# Scenario Content Generator
+scenario_content_generator = Agent(
+    name="scenario_content_generator",
+    model="gemini-2.0-flash",
+    description="Generates scenario content with Gemini",
+    instruction="""
+    You generate detailed clinical scenarios with decision options.
+    
+    IMPORTANT: You MUST use your generate_scenario_with_gemini tool to generate the complete scenario.
+    
+    Case: {scenario_case?}
+    Patient: {scenario_patient?}
+    Student: {scenario_student?}
+    
+    The tool will generate:
+    - A detailed patient presentation scenario (2-3 paragraphs)
+    - A decision point question
+    - Two complete options (A and B) with detailed descriptions
+    - Best answer
+    - Rationale
+    - Learning points
+    
+    Call your tool now to generate the scenario. Do not proceed until the tool has been called.
+    """,
+    tools=[generate_scenario_with_gemini]
+)
+
+# Scenario Saver
+scenario_saver = Agent(
+    name="scenario_saver",
+    model="gemini-2.0-flash",
+    description="Saves scenarios to Firestore",
+    instruction="""
+    You save generated scenarios to Firestore.
+    
+    IMPORTANT: You MUST use your save_scenario_to_firestore tool to save the scenario.
+    
+    Case: {scenario_case?}
+    Patient: {scenario_patient?}
+    Student: {scenario_student?}
+    Scenario: {generated_scenario?}
+    
+    Call your tool to save this scenario to the agent_scenarios collection.
+    """,
+    tools=[save_scenario_to_firestore]
+)
+
+
+# ===========================================
+# WORKFLOW (Sequential execution)
+# ===========================================
+
+# Import image agent for automatic image generation
 try:
-    from agents.image_agent import ImageGenerationAgent
+    from agents.image_agent import image_generator
     IMAGE_AGENT_AVAILABLE = True
 except ImportError:
     IMAGE_AGENT_AVAILABLE = False
-    ImageGenerationAgent = None
-    print("⚠️ Image Generation Agent not available")
+    print("⚠️ Image agent not available - scenarios will be created without images")
+
+# Build sub-agents list
+scenario_sub_agents = [
+    scenario_data_loader,
+    scenario_case_selector,
+    patient_matcher,
+    scenario_student_selector,
+    scenario_content_generator,
+    scenario_saver
+]
+
+# Add image generation as final step if available
+if IMAGE_AGENT_AVAILABLE:
+    scenario_sub_agents.append(image_generator)
+    print("✅ Image generation will run automatically after scenario creation")
+
+scenario_agent = SequentialAgent(
+    name="scenario_agent",
+    description="Generates complete clinical scenarios with case selection, patient matching, content generation, Firestore storage, and automatic image generation",
+    sub_agents=scenario_sub_agents
+)
 
 
-class ClinicalScenarioAgent:
-    """
-    Independent agent for generating clinical scenarios.
-    Handles the complete workflow from case selection to scenario generation and storage.
-    """
-    
-    def __init__(
-        self,
-        cases: Optional[list] = None,
-        patient_templates: Optional[list] = None,
-        model_name: Optional[str] = None
-    ):
-        """
-        Initialize the Clinical Scenario Agent.
-        
-        Args:
-            cases: List of cases (if None, will load from data/cases.json)
-            patient_templates: List of patient templates (if None, will load from data/patient_templates.json)
-            model_name: Gemini model to use for scenario generation (defaults to MODEL_GEMINI_PRO if available)
-        """
-        # Load cases if not provided, or normalize if provided
-        if cases is None:
-            self.cases = self._load_cases()
-        else:
-            # Normalize cases to ensure it's a list
-            self.cases = self._normalize_cases(cases)
-        
-        self.patient_templates = patient_templates or self._load_patient_templates()
-        self.model_name = model_name or (MODEL_GEMINI_PRO if GEMINI_AVAILABLE else "models/gemini-2.5-pro")
-        
-        # Load students for personalized scenario generation
-        self.students = self._load_students()
-        
-        # Initialize Gemini Agent
-        if GEMINI_AVAILABLE:
-            self.gemini_agent = GeminiAgent(model_name=self.model_name)
-        else:
-            self.gemini_agent = None
-            print("⚠️ Clinical Scenario Agent initialized without Gemini support")
-        
-        # Initialize Vector Search Tool
-        if VECTOR_SEARCH_AVAILABLE:
-            self.vector_tool = VectorSearchTool()
-        else:
-            self.vector_tool = None
-        
-        # Initialize Firestore client (for state tracking)
-        self.db = None
-        if FIRESTORE_AVAILABLE:
-            try:
-                from google.cloud import firestore
-                project_id = os.getenv("FIREBASE_PROJECT_ID") or os.getenv("GOOGLE_CLOUD_PROJECT")
-                if project_id:
-                    self.db = firestore.Client(project=project_id)
-                else:
-                    self.db = firestore.Client()
-            except Exception as e:
-                print(f"⚠️ Firestore initialization failed: {e}")
-                self.db = None
-        
-        # Initialize State Agent for state tracking (after Firestore is initialized)
-        self.state_agent = None
-        if STATE_AGENT_AVAILABLE and self.db:
-            try:
-                self.state_agent = StateAgent(firestore_db=self.db)
-            except Exception as e:
-                print(f"⚠️ State Agent failed to initialize: {e}")
-                self.state_agent = None
-        
-        # Initialize Image Generation Agent (optional - for auto-generating images)
-        self.image_agent = None
-        if IMAGE_AGENT_AVAILABLE and self.db:
-            try:
-                # Get project ID for bucket configuration
-                project_id = os.getenv("FIREBASE_PROJECT_ID") or os.getenv("GOOGLE_CLOUD_PROJECT")
-                
-                print(f"\n🎨 Initializing Image Generation Agent...")
-                print(f"   - Project ID: {project_id}")
-                print(f"   - Firestore DB: {'Available' if self.db else 'Not available'}")
-                
-                # Use explicit bucket URL if available, otherwise use the working bucket
-                # Default to auth-demo-90be0.appspot.com which is the working bucket
-                storage_bucket_url = os.getenv("STORAGE_BUCKET_URL")
-                if not storage_bucket_url:
-                    # Use the working bucket as default
-                    storage_bucket_url = "gs://auth-demo-90be0.appspot.com/agent_assets"
-                    print(f"   - Using default bucket URL: {storage_bucket_url}")
-                else:
-                    print(f"   - Using bucket URL from env: {storage_bucket_url}")
-                
-                # Parse bucket name from URL
-                if storage_bucket_url.startswith("gs://"):
-                    parts = storage_bucket_url.replace("gs://", "").split("/", 1)
-                    storage_bucket_name = parts[0]
-                    storage_folder = parts[1] if len(parts) > 1 else "agent_assets"
-                else:
-                    storage_bucket_name = storage_bucket_url
-                    storage_folder = "agent_assets"
-                
-                print(f"   - Storage Bucket Name: {storage_bucket_name}")
-                print(f"   - Storage Folder: {storage_folder}")
-                
-                self.image_agent = ImageGenerationAgent(
-                    firestore_db=self.db,
-                    project_id=project_id,
-                    storage_bucket_name=storage_bucket_name,
-                    storage_folder=storage_folder
-                )
-                
-                print(f"   - Image Agent created: {'✅' if self.image_agent else '❌'}")
-                
-                # Check if image agent is fully ready (has model and bucket)
-                if self.image_agent:
-                    has_model = self.image_agent.imagen_model is not None
-                    has_bucket = self.image_agent.bucket is not None
-                    
-                    print(f"   - Imagen Model: {'✅ Available' if has_model else '❌ Not available'}")
-                    print(f"   - Storage Bucket: {'✅ Available' if has_bucket else '❌ Not available'}")
-                    
-                    if has_model and has_bucket:
-                        print(f"✅ Image Generation Agent: Fully initialized (auto-generate images enabled)")
-                        print(f"   - Storage Bucket: {storage_bucket_name}")
-                        print(f"   - Storage Folder: {storage_folder}")
-                    elif has_model:
-                        print(f"⚠️ Image Generation Agent: Model available but bucket not ready (images will be skipped)")
-                        self.image_agent = None  # Don't enable auto-generation if bucket not available
-                    else:
-                        print(f"⚠️ Image Generation Agent: Not fully initialized (missing model or bucket)")
-                        self.image_agent = None
-                else:
-                    print(f"❌ Image Generation Agent: Failed to create")
-            except Exception as e:
-                print(f"⚠️ Image Generation Agent failed to initialize: {e}")
-                import traceback
-                traceback.print_exc()
-                self.image_agent = None
-        elif IMAGE_AGENT_AVAILABLE:
-            print(f"   - Image Generation Agent: Not available (Firestore required)")
-            print(f"     - IMAGE_AGENT_AVAILABLE: {IMAGE_AGENT_AVAILABLE}")
-            print(f"     - self.db: {self.db is not None}")
-        else:
-            print(f"   - Image Generation Agent: Not available (IMAGE_AGENT_AVAILABLE=False)")
-        
-        print(f"✅ Clinical Scenario Agent initialized")
-        print(f"   - Cases loaded: {len(self.cases)}")
-        print(f"   - Patient templates loaded: {len(self.patient_templates)}")
-        print(f"   - Students loaded: {len(self.students)}")
-        print(f"   - Vector Search: {'Available' if self.vector_tool else 'Not available'}")
-        print(f"   - Gemini Agent: {'Available' if self.gemini_agent else 'Not available'}")
-        print(f"   - State Agent: {'Available' if self.state_agent else 'Not available'}")
-        print(f"   - Image Generation Agent: {'✅ Available (auto-generate enabled)' if self.image_agent else 'Not available'}")
-    
-    def _normalize_cases(self, cases: Any) -> list:
-        """
-        Normalize cases data structure to ensure it's a list.
-        Handles dict, list, or other structures.
-        
-        Args:
-            cases: Cases data (can be dict, list, etc.)
-            
-        Returns:
-            List of case dictionaries
-        """
-        if isinstance(cases, list):
-            return cases
-        elif isinstance(cases, dict):
-            if 'procedures' in cases:
-                return cases['procedures']
-            else:
-                # If dict values are lists, flatten them
-                case_list = list(cases.values())
-                if case_list and isinstance(case_list[0], list):
-                    return [item for sublist in case_list for item in sublist]
-                # If dict values are dicts, return them as list
-                return case_list
-        else:
-            print(f"⚠️ Unexpected cases data type: {type(cases)}")
-            return []
-    
-    def _load_cases(self) -> list:
-        """Load cases from JSON file"""
-        try:
-            with open("data/cases.json", "r") as f:
-                data = json.load(f)
-            
-            # Handle different JSON structures
-            if isinstance(data, dict):
-                if 'procedures' in data:
-                    return data['procedures']
-                else:
-                    case_list = list(data.values())
-                    if case_list and isinstance(case_list[0], list):
-                        return [item for sublist in case_list for item in sublist]
-                    return case_list
-            elif isinstance(data, list):
-                return data
-            else:
-                print("⚠️ Invalid cases.json structure")
-                return []
-        except FileNotFoundError:
-            print("⚠️ data/cases.json not found")
-            return []
-        except json.JSONDecodeError as e:
-            print(f"⚠️ Error parsing data/cases.json: {e}")
-            return []
-    
-    def _load_patient_templates(self) -> list:
-        """Load patient templates from JSON file"""
-        try:
-            with open("data/patient_templates.json", "r") as f:
-                return json.load(f)
-        except FileNotFoundError:
-            print("⚠️ data/patient_templates.json not found")
-            return []
-        except json.JSONDecodeError as e:
-            print(f"⚠️ Error parsing data/patient_templates.json: {e}")
-            return []
-    
-    def _load_students(self) -> list:
-        """Load students from JSON file"""
-        try:
-            with open("data/students.json", "r") as f:
-                data = json.load(f)
-                if isinstance(data, dict) and "students" in data:
-                    return data["students"]
-                elif isinstance(data, list):
-                    return data
-                else:
-                    return []
-        except FileNotFoundError:
-            print("⚠️ data/students.json not found")
-            return []
-        except json.JSONDecodeError as e:
-            print(f"⚠️ Error parsing data/students.json: {e}")
-            return []
-    
-    def _get_student_evaluations(self, student_id: str, student_name: str) -> list:
-        """
-        Get all evaluations for a student from Firestore.
-        
-        Args:
-            student_id: Student ID
-            student_name: Student name
-            
-        Returns:
-            List of evaluation documents
-        """
-        if not self.db:
-            return []
-        
-        try:
-            evaluations = []
-            collection_ref = self.db.collection('agent_evaluations')
-            
-            # Query by student ID
-            query_by_id = collection_ref.where('preceptee_user_id', '==', student_id).stream()
-            for doc in query_by_id:
-                eval_data = doc.to_dict()
-                eval_data['doc_id'] = doc.id
-                if not any(e.get('doc_id') == doc.id for e in evaluations):
-                    evaluations.append(eval_data)
-            
-            # Query by student name (in case ID doesn't match)
-            query_by_name = collection_ref.where('preceptee_user_name', '==', student_name).stream()
-            for doc in query_by_name:
-                eval_data = doc.to_dict()
-                eval_data['doc_id'] = doc.id
-                if not any(e.get('doc_id') == doc.id for e in evaluations):
-                    evaluations.append(eval_data)
-            
-            # Sort by completion_date if available (most recent first)
-            evaluations.sort(
-                key=lambda e: e.get('completion_date', ''),
-                reverse=True
-            )
-            
-            return evaluations
-        except Exception as e:
-            print(f"⚠️ Error fetching student evaluations: {e}")
-            return []
-    
-    def _analyze_student_struggles(self, evaluations: list) -> Dict[str, Any]:
-        """
-        Analyze student evaluations to identify struggling areas.
-        
-        Args:
-            evaluations: List of evaluation documents
-            
-        Returns:
-            Dictionary with struggling areas, recent cases, and analysis
-        """
-        if not evaluations:
-            return {
-                "struggling_areas": [],
-                "recent_cases": [],
-                "weak_ac_scores": [],
-                "weak_pc_scores": [],
-                "focus_areas": [],
-                "comments": []
-            }
-        
-        struggling_areas = []
-        recent_cases = []
-        weak_ac_scores = []
-        weak_pc_scores = []
-        all_focus_areas = []
-        all_comments = []
-        
-        for eval_data in evaluations[:10]:  # Analyze last 10 evaluations
-            case_type = eval_data.get('case_type', '')
-            if case_type:
-                recent_cases.append(case_type)
-            
-            # Collect focus areas
-            focus_areas = eval_data.get('focus_areas', '')
-            if focus_areas:
-                all_focus_areas.append(focus_areas)
-            
-            # Collect comments
-            comments = eval_data.get('comments', '')
-            if comments:
-                all_comments.append(comments)
-            
-            # Find weak AC scores (<70)
-            for i in range(13):
-                ac_key = f"ac_{i}"
-                score = eval_data.get(ac_key)
-                if isinstance(score, (int, float)) and score < 70:
-                    weak_ac_scores.append({
-                        "metric": ac_key,
-                        "score": score,
-                        "case": case_type
-                    })
-            
-            # Find weak PC scores (<3 and >0, meaning not N/A)
-            for i in range(11):
-                pc_key = f"pc_{i}"
-                score = eval_data.get(pc_key)
-                if isinstance(score, (int, float)) and 0 < score < 3:
-                    weak_pc_scores.append({
-                        "metric": pc_key,
-                        "score": score,
-                        "case": case_type
-                    })
-        
-        # Extract struggling areas from focus areas and comments
-        struggling_keywords = []
-        for focus_area in all_focus_areas:
-            if focus_area:
-                # Extract key phrases (simplified)
-                struggling_keywords.extend(focus_area.lower().split(';'))
-        
-        for comment in all_comments:
-            if comment:
-                # Look for negative indicators
-                negative_indicators = ['needs improvement', 'struggled', 'difficulty', 'challenge', 'concern', 'should focus']
-                comment_lower = comment.lower()
-                for indicator in negative_indicators:
-                    if indicator in comment_lower:
-                        struggling_keywords.append(indicator)
-        
-        return {
-            "struggling_areas": list(set(struggling_keywords[:10])),  # Unique keywords
-            "recent_cases": list(set(recent_cases[:10])),  # Unique recent cases
-            "weak_ac_scores": weak_ac_scores[:10],
-            "weak_pc_scores": weak_pc_scores[:10],
-            "focus_areas": all_focus_areas[:5],
-            "comments": all_comments[:5]
-        }
-    
-    def _select_case_for_student(self, student: Dict[str, Any], analysis: Dict[str, Any]) -> tuple:
-        """
-        Select a case that would benefit the student based on their evaluations.
-        
-        Args:
-            student: Student information
-            analysis: Analysis of student's struggles
-            
-        Returns:
-            Tuple of (selected_case, rationale)
-        """
-        recent_cases = analysis.get("recent_cases", [])
-        struggling_areas = analysis.get("struggling_areas", [])
-        weak_ac_scores = analysis.get("weak_ac_scores", [])
-        weak_pc_scores = analysis.get("weak_pc_scores", [])
-        
-        rationale_parts = []
-        
-        # If student has recent cases, prioritize those types for reinforcement
-        if recent_cases:
-            # Try to find a case matching recent case types
-            recent_case_name = recent_cases[0]  # Most recent
-            matching_cases = [
-                case for case in self.cases
-                if recent_case_name.lower() in case.get('name', '').lower() or
-                   any(keyword.lower() in recent_case_name.lower() for keyword in case.get('keywords', []))
-            ]
-            
-            if matching_cases:
-                selected_case = random.choice(matching_cases)
-                rationale_parts.append(f"Student recently completed '{recent_case_name}' cases and could benefit from additional practice")
-                return selected_case, " ".join(rationale_parts)
-        
-        # Otherwise, look for cases that match struggling areas
-        if struggling_areas or weak_ac_scores or weak_pc_scores:
-            # Try to find cases matching struggling keywords
-            struggling_text = " ".join(struggling_areas[:5]).lower()
-            matching_cases = []
-            
-            for case in self.cases:
-                case_text = f"{case.get('name', '')} {case.get('description', '')} {' '.join(case.get('keywords', []))}".lower()
-                # Check if any struggling keyword matches case keywords
-                for keyword in struggling_areas[:5]:
-                    if keyword in case_text:
-                        matching_cases.append(case)
-                        break
-            
-            if matching_cases:
-                selected_case = random.choice(matching_cases)
-                rationale_parts.append(f"Student has areas for improvement that align with '{selected_case.get('name')}' cases")
-                if weak_ac_scores:
-                    rationale_parts.append(f"Specifically struggling with: {', '.join([s['metric'] for s in weak_ac_scores[:3]])}")
-                if weak_pc_scores:
-                    rationale_parts.append(f"Behavioral areas needing attention: {', '.join([s['metric'] for s in weak_pc_scores[:2]])}")
-                return selected_case, " ".join(rationale_parts)
-        
-        # Fallback: Select random case
-        selected_case = random.choice(self.cases)
-        rationale_parts.append(f"Selected '{selected_case.get('name')}' to provide diverse clinical exposure")
-        return selected_case, " ".join(rationale_parts)
-    
-    def match_patient_to_case(self, case: Dict[str, Any]) -> Optional[Dict[str, Any]]:
-        """
-        Match a patient from patient_templates.json that fits the case type.
-        
-        Args:
-            case: Case information from cases.json
-            
-        Returns:
-            Matching patient or None
-        """
-        if not self.patient_templates:
-            return None
-        
-        case_keywords = [k.lower() for k in case.get('keywords', [])]
-        case_name = case.get('name', '').lower()
-        case_description = case.get('description', '').lower()
-        
-        # Create a combined search text
-        search_text = ' '.join([case_name, case_description] + case_keywords)
-        
-        # Score each patient based on category/keyword matches
-        scored_patients = []
-        for patient in self.patient_templates:
-            score = 0
-            patient_categories = [c.lower() for c in patient.get('categories', [])]
-            patient_comorbidities = [c.lower() for c in patient.get('comorbidities', [])]
-            
-            # Check for category matches (e.g., "Pediatric", "Cardiac", "Orthopedic")
-            category_keywords = {
-                'pediatric': ['pediatric', 'ped', 'child', 'infant', 'adolescent'],
-                'cardiac': ['cardiac', 'heart', 'cardiac surgery', 'cabg', 'valve'],
-                'orthopedic': ['orthopedic', 'ortho', 'knee', 'hip', 'shoulder', 'fracture'],
-                'trauma': ['trauma', 'emergency', 'injury'],
-                'bariatric': ['bariatric', 'obesity', 'gastric'],
-                'neurosurgical': ['neurosurgical', 'neuro', 'brain', 'spine', 'craniotomy'],
-                'thoracic': ['thoracic', 'lung', 'pulmonary', 'lobectomy'],
-                'vascular': ['vascular', 'artery', 'vein', 'aneurysm'],
-                'ent': ['ent', 'ear', 'nose', 'throat', 'laryngectomy', 'thyroid'],
-                'obstetric': ['obstetric', 'ob', 'c-section', 'cesarean', 'delivery']
-            }
-            
-            # Match case keywords to patient categories
-            for category, keywords in category_keywords.items():
-                if any(kw in search_text for kw in keywords):
-                    if category in patient_categories:
-                        score += 10
-            
-            # Check for specific keyword matches in comorbidities
-            for keyword in case_keywords:
-                if keyword in ' '.join(patient_comorbidities):
-                    score += 5
-            
-            scored_patients.append((score, patient))
-        
-        # Sort by score and return top match
-        scored_patients.sort(key=lambda x: x[0], reverse=True)
-        
-        if scored_patients and scored_patients[0][0] > 0:
-            return scored_patients[0][1]
-        
-        # Fallback: return random patient
-        return random.choice(self.patient_templates) if self.patient_templates else None
-    
-    def get_medical_content_for_scenario(
-        self,
-        case: Dict[str, Any],
-        patient: Dict[str, Any]
-    ) -> str:
-        """
-        Get relevant medical content from Vector Search for the case and patient.
-        
-        Args:
-            case: Case information
-            patient: Patient information
-            
-        Returns:
-            Combined medical content string
-        """
-        if not self.vector_tool:
-            return "Medical content unavailable - Vector Search not configured"
-        
-        # Build search queries from case and patient
-        search_queries = []
-        
-        # Add case keywords
-        search_queries.extend(case.get('keywords', [])[:3])
-        
-        # Add case name
-        search_queries.append(case.get('name', ''))
-        
-        # Add patient comorbidities
-        search_queries.extend(patient.get('comorbidities', [])[:2])
-        
-        # Add patient categories
-        category_keywords = {
-            'Pediatric': 'pediatric anesthesia',
-            'Cardiac': 'cardiac anesthesia',
-            'Orthopedic': 'orthopedic anesthesia',
-            'Trauma': 'trauma anesthesia',
-            'Bariatric': 'bariatric anesthesia',
-            'Neurosurgical': 'neurosurgical anesthesia',
-            'Thoracic': 'thoracic anesthesia',
-            'Vascular': 'vascular anesthesia',
-            'ENT': 'ENT anesthesia',
-            'Obstetric': 'obstetric anesthesia'
-        }
-        
-        for category in patient.get('categories', []):
-            if category in category_keywords:
-                search_queries.append(category_keywords[category])
-        
-        # Remove duplicates
-        search_queries = list(dict.fromkeys([q for q in search_queries if q]))
-        
-        # Perform Vector Search for each query
-        all_content = []
-        
-        for query in search_queries[:5]:  # Limit to 5 queries
-            try:
-                results = self.vector_tool.search(query=query, num_results=3)
-                if results.get('success') and results.get('num_results', 0) > 0:
-                    documents = results['results']['documents']
-                    all_content.extend(documents)
-            except Exception as e:
-                print(f"⚠️ Vector Search error for '{query}': {e}")
-                continue
-        
-        # Combine and return
-        combined_content = "\n\n".join(all_content[:10])  # Limit to 10 chunks
-        return combined_content if combined_content else "No relevant medical content found"
-    
-    def select_case(self) -> Dict[str, Any]:
-        """
-        Select a random case from available cases.
-        
-        Returns:
-            Selected case dictionary
-        """
-        if not self.cases:
-            raise ValueError("No cases available. Please ensure data/cases.json exists and contains valid cases.")
-        
-        return random.choice(self.cases)
-    
-    def generate_scenario(
-        self,
-        case: Optional[Dict[str, Any]] = None,
-        patient: Optional[Dict[str, Any]] = None,
-        save_to_file: bool = True,
-        save_to_firestore: bool = True,
-        use_student_selection: bool = True
-    ) -> Dict[str, Any]:
-        """
-        Generate a complete clinical scenario.
-        Optionally selects a student and analyzes their evaluations to create a personalized scenario.
-        
-        Args:
-            case: Optional case to use (if None, selects based on student or randomly)
-            patient: Optional patient to use (if None, matches to case)
-            save_to_file: Whether to save scenario to Context/Scenario.md
-            save_to_firestore: Whether to save scenario to Firestore
-            use_student_selection: Whether to select a student and personalize the scenario
-        
-        Returns:
-            Complete scenario data dictionary with student info and rationale
-        """
-        if not self.gemini_agent:
-            raise ValueError("Gemini Agent not available. Cannot generate scenario.")
-        
-        # Update state to GENERATING
-        if self.state_agent:
-            self.state_agent.set_agent_state("scenario_agent", StateAgent.STATE_ACTIVE)
-        
-        selected_student = None
-        case_rationale = None
-        student_analysis = None
-        
-        try:
-            # Step 0: Select student and analyze evaluations if requested
-            if use_student_selection and self.students and self.db:
-                selected_student = random.choice(self.students)
-                student_id = selected_student.get("id")
-                student_name = selected_student.get("name")
-                
-                print(f"👨‍🎓 Selected student: {student_name} ({student_id})")
-                
-                # Get student evaluations
-                evaluations = self._get_student_evaluations(student_id, student_name)
-                print(f"📊 Found {len(evaluations)} evaluation(s) for student")
-                
-                # Analyze struggles
-                student_analysis = self._analyze_student_struggles(evaluations)
-                
-                # Select case based on student's needs
-                if not case:
-                    case, case_rationale = self._select_case_for_student(selected_student, student_analysis)
-                    print(f"📋 Selected case: {case.get('name', 'Unknown')}")
-                    print(f"💡 Rationale: {case_rationale}")
-            
-            # Step 1: Select case if not provided and not already selected
-            if not case:
-                case = self.select_case()
-                print(f"📋 Selected case: {case.get('name', 'Unknown')}")
-            
-            # Step 2: Match patient to case if not provided
-            if not patient:
-                patient = self.match_patient_to_case(case)
-                if not patient:
-                    raise ValueError("No matching patient found for case")
-            print(f"👤 Matched patient: {patient.get('full_name', 'Unknown')}")
-            
-            # Step 3: Get medical content from Vector Search
-            print("🔍 Searching Vector DB for medical content...")
-            medical_content = self.get_medical_content_for_scenario(case, patient)
-            
-            if not medical_content or medical_content == "No relevant medical content found":
-                print("⚠️ Limited medical content found, using basic case description")
-                medical_content = f"{case.get('description', '')}\n\nKeywords: {', '.join(case.get('keywords', []))}"
-            
-            # Step 4: Generate scenario using Gemini Agent
-            print("🤖 Generating scenario with Gemini Agent...")
-            
-            # Build context about student struggles if available
-            student_context = ""
-            if selected_student and student_analysis:
-                student_context = f"""
-**STUDENT CONTEXT:**
-Student: {selected_student.get('name')} ({selected_student.get('class_standing')})
-Recent Cases: {', '.join(student_analysis.get('recent_cases', [])[:3]) if student_analysis.get('recent_cases') else 'None'}
-Areas for Improvement: {', '.join(student_analysis.get('struggling_areas', [])[:3]) if student_analysis.get('struggling_areas') else 'None'}
-Weak Performance Areas: {len(student_analysis.get('weak_ac_scores', []))} AC metrics, {len(student_analysis.get('weak_pc_scores', []))} PC metrics need improvement
-
-When generating this scenario, consider:
-- The student may benefit from practicing this type of case
-- Focus on areas where they've shown weakness in evaluations
-- Provide clear learning points that address their specific needs
-- Make the scenario challenging but appropriate for their class standing
-"""
-            
-            scenario_data = self.gemini_agent.generate_scenario(
-                case=case,
-                patient=patient,
-                medical_content=medical_content,
-                student_context=student_context if student_context else None
-            )
-            
-            # Step 5: Add student selection info to scenario data (before saving to Firestore)
-            if selected_student:
-                scenario_data["student"] = {
-                    "id": selected_student.get("id"),
-                    "name": selected_student.get("name"),
-                    "class_standing": selected_student.get("class_standing"),
-                    "hospital": selected_student.get("hospital")
-                }
-                scenario_data["case_rationale"] = case_rationale
-                if student_analysis:
-                    scenario_data["student_analysis"] = {
-                        "recent_cases": student_analysis.get("recent_cases", [])[:5],
-                        "struggling_areas": student_analysis.get("struggling_areas", [])[:5],
-                        "weak_ac_count": len(student_analysis.get("weak_ac_scores", [])),
-                        "weak_pc_count": len(student_analysis.get("weak_pc_scores", []))
-                    }
-            
-            # Step 6: Save to file if requested
-            firestore_id = None
-            if save_to_file:
-                self._save_scenario_to_file(scenario_data)
-            
-            # Step 7: Save to Firestore if requested (includes student info)
-            if save_to_firestore and FIRESTORE_AVAILABLE:
-                try:
-                    firestore_service = get_firestore_service(force_refresh=True)
-                    if firestore_service:
-                        import copy
-                        firestore_scenario = copy.deepcopy(scenario_data)
-                        firestore_id = firestore_service.save_scenario(firestore_scenario)
-                        print(f"✅ Scenario saved to Firestore: {firestore_id}")
-                        
-                        # Step 7a: Auto-generate image for the scenario (if image agent is available)
-                        print(f"\n{'='*60}")
-                        print(f"🎨 Image Generation Check")
-                        print(f"{'='*60}")
-                        print(f"   - firestore_id: {firestore_id}")
-                        print(f"   - self.image_agent exists: {self.image_agent is not None}")
-                        
-                        if firestore_id:
-                            if self.image_agent:
-                                print(f"   - Image agent available: ✅")
-                                print(f"   - imagen_model available: {self.image_agent.imagen_model is not None}")
-                                print(f"   - bucket available: {self.image_agent.bucket is not None}")
-                                
-                                # Check if image agent is fully ready
-                                if not self.image_agent.imagen_model:
-                                    print(f"   ⚠️ Skipping auto-image generation: Imagen model not available")
-                                elif not self.image_agent.bucket:
-                                    print(f"   ⚠️ Skipping auto-image generation: Storage bucket not available")
-                                else:
-                                    try:
-                                        print(f"\n🎨 Starting auto-image generation for scenario {firestore_id}...")
-                                        image_result = self.image_agent.process_scenario_document(firestore_id)
-                                        
-                                        print(f"\n📊 Image Generation Result:")
-                                        print(f"   - Success: {image_result.get('success')}")
-                                        print(f"   - Skipped: {image_result.get('skipped', False)}")
-                                        print(f"   - Error: {image_result.get('error', 'None')}")
-                                        
-                                        if image_result.get("success"):
-                                            image_url = image_result.get("image_url")
-                                            if image_url:
-                                                print(f"✅ Image generated successfully: {image_url[:80]}...")
-                                                # Add image URL to result
-                                                scenario_data["image"] = image_url
-                                                
-                                                # Also update the Firestore document with the image URL
-                                                try:
-                                                    from google.cloud.firestore_v1 import SERVER_TIMESTAMP
-                                                    scenario_ref = self.db.collection("agent_scenarios").document(firestore_id)
-                                                    scenario_ref.update({
-                                                        "image": image_url,
-                                                        "image_generated_at": SERVER_TIMESTAMP,
-                                                        "updated_at": SERVER_TIMESTAMP
-                                                    })
-                                                    print(f"✅ Updated Firestore document with image URL")
-                                                except Exception as update_error:
-                                                    print(f"⚠️ Failed to update Firestore document: {update_error}")
-                                            else:
-                                                print(f"⚠️ Image generation succeeded but no URL returned")
-                                        else:
-                                            error_msg = image_result.get("error", "Unknown error")
-                                            print(f"⚠️ Image generation failed: {error_msg}")
-                                            # Don't fail the scenario creation if image generation fails
-                                    except Exception as image_error:
-                                        print(f"⚠️ Exception during auto-image generation: {image_error}")
-                                        import traceback
-                                        traceback.print_exc()
-                                        # Don't fail the scenario creation if image generation fails
-                            else:
-                                print(f"   ⚠️ Image agent not available: self.image_agent is None")
-                                print(f"   - IMAGE_AGENT_AVAILABLE: {IMAGE_AGENT_AVAILABLE}")
-                                print(f"   - self.db: {self.db is not None}")
-                        else:
-                            print(f"   ⚠️ No firestore_id available, skipping image generation")
-                        print(f"{'='*60}\n")
-                except Exception as firestore_error:
-                    print(f"⚠️ Failed to save scenario to Firestore: {firestore_error}")
-                    import traceback
-                    traceback.print_exc()
-                    # Update state to ERROR
-                    if self.state_agent:
-                        self.state_agent.set_agent_error("scenario_agent", str(firestore_error))
-            
-            # Return complete scenario data (already includes student info and image URL if generated)
-            result = {
-                **scenario_data,
-                "firestore_id": firestore_id,
-                "saved_to_firestore": firestore_id is not None,
-                "saved_to_file": save_to_file
-            }
-            
-            # Update state to COMPLETED and store result
-            if self.state_agent:
-                self.state_agent.set_agent_result(
-                    "scenario_agent",
-                    {
-                        "firestore_id": firestore_id,
-                        "case_name": case.get('name'),
-                        "saved_to_file": save_to_file
-                    },
-                    StateAgent.STATE_IDLE
-                )
-            
-            return result
-            
-        except Exception as e:
-            # Update state to ERROR
-            if self.state_agent:
-                self.state_agent.set_agent_error("scenario_agent", str(e))
-            raise
-    
-    def _save_scenario_to_file(self, scenario_data: Dict[str, Any]) -> str:
-        """
-        Save scenario to Context/Scenario.md file.
-        
-        Args:
-            scenario_data: Scenario data dictionary
-            
-        Returns:
-            File path where scenario was saved
-        """
-        output_filename = "Context/Scenario.md"
-        
-        # Ensure Context directory exists
-        os.makedirs("Context", exist_ok=True)
-        
-        with open(output_filename, "w") as f:
-            f.write(f"# Clinical Scenario: {scenario_data.get('case', {}).get('name', 'Unknown Case')}\n\n")
-            f.write(f"**Generated:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
-            
-            # Case Information
-            case_info = scenario_data.get('case', {})
-            f.write(f"## Case Information\n\n")
-            f.write(f"**Case:** {case_info.get('name', 'Unknown')}\n")
-            f.write(f"**Code:** {case_info.get('code', 'N/A')}\n")
-            f.write(f"**Description:** {case_info.get('description', 'N/A')}\n\n")
-            
-            # Patient Information
-            patient_info = scenario_data.get('patient', {})
-            f.write(f"## Patient Information\n\n")
-            f.write(f"**Name:** {patient_info.get('name', 'Unknown')}\n")
-            f.write(f"**Age:** {patient_info.get('age', 'Unknown')} years\n")
-            f.write(f"**Categories:** {', '.join(patient_info.get('categories', []))}\n\n")
-            
-            # Scenario
-            f.write(f"## Scenario\n\n")
-            f.write(f"{scenario_data.get('scenario', 'No scenario provided')}\n\n")
-            
-            # Options
-            f.write(f"## Decision Options\n\n")
-            
-            option_a = scenario_data.get('option_a', {})
-            f.write(f"### Option A: {option_a.get('title', 'Option A')}\n\n")
-            f.write(f"{option_a.get('description', 'No description')}\n\n")
-            if option_a.get('considerations'):
-                f.write(f"**Considerations:**\n")
-                for consideration in option_a.get('considerations', []):
-                    f.write(f"- {consideration}\n")
-                f.write(f"\n")
-            
-            option_b = scenario_data.get('option_b', {})
-            f.write(f"### Option B: {option_b.get('title', 'Option B')}\n\n")
-            f.write(f"{option_b.get('description', 'No description')}\n\n")
-            if option_b.get('considerations'):
-                f.write(f"**Considerations:**\n")
-                for consideration in option_b.get('considerations', []):
-                    f.write(f"- {consideration}\n")
-                f.write(f"\n")
-            
-            # Best Answer
-            best_answer = scenario_data.get('best_answer', {})
-            if best_answer:
-                f.write(f"## Best Answer\n\n")
-                f.write(f"**Recommended Option:** Option {best_answer.get('option', 'N/A')}\n\n")
-                f.write(f"**Rationale:**\n\n")
-                f.write(f"{best_answer.get('rationale', 'No rationale provided')}\n\n")
-            
-            # Learning Points
-            if scenario_data.get('learning_points'):
-                f.write(f"## Learning Points\n\n")
-                for point in scenario_data.get('learning_points', []):
-                    f.write(f"- {point}\n")
-                f.write(f"\n")
-            
-            # References
-            if scenario_data.get('references'):
-                f.write(f"## References\n\n")
-                f.write(f"{scenario_data.get('references')}\n\n")
-            
-            f.write(f"---\n\n")
-            f.write(f"**Created:** {datetime.now().strftime('%B %d, %Y')}\n")
-            f.write(f"**File Location:** {os.path.abspath(output_filename)}\n")
-            f.write(f"**Source:** Vector Search - Barash Clinical Anesthesia, 9th Edition\n")
-        
-        print(f"✅ Scenario saved to {output_filename}")
-        return output_filename
-
-
-# Convenience function for easy importing
-def create_scenario_agent(
-    cases: Optional[list] = None,
-    patient_templates: Optional[list] = None,
-    model_name: Optional[str] = None
-) -> ClinicalScenarioAgent:
-    """
-    Create a Clinical Scenario Agent instance.
-    
-    Args:
-        cases: Optional list of cases
-        patient_templates: Optional list of patient templates
-        model_name: Gemini model to use (defaults to MODEL_GEMINI_PRO if available)
-        
-    Returns:
-        ClinicalScenarioAgent instance
-    """
-    return ClinicalScenarioAgent(
-        cases=cases,
-        patient_templates=patient_templates,
-        model_name=model_name
-    )
-
+# Export the main agent
+__all__ = ["scenario_agent"]

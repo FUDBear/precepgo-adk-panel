@@ -31,5 +31,5 @@ ENV PYTHONUNBUFFERED=1
 # Expose port
 EXPOSE 8080
 
-# Run the application
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
+# Run the application (use shell form to support $PORT variable)
+CMD uvicorn main:app --host 0.0.0.0 --port $PORT
