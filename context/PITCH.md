@@ -1,1 +1,0 @@
-PrecepGo automates CRNA education tasks using Google ADK agents: clinical scenarios, evaluations, safety monitoring, and compliance tracking. What takes hours now takes minutes.

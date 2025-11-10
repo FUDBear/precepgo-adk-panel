@@ -2301,7 +2301,8 @@ async def generate_coa_reports(student_ids: Optional[List[str]] = None):
         report_doc_id = session.state.get("report_doc_id")
         consolidated_report = session.state.get("consolidated_report", {})
         
-        # If we have a doc_id, fetch the full document from Firestore
+        # If we have a doc_id, fetch the full document from Firestore for reference
+        # But prefer session state data as it's guaranteed to be fresh
         if report_doc_id:
             try:
                 from google.cloud import firestore
@@ -2313,9 +2314,40 @@ async def generate_coa_reports(student_ids: Optional[List[str]] = None):
                 
                 doc = db.collection("agent_coa_reports").document(report_doc_id).get()
                 if doc.exists:
-                    consolidated_report = doc.to_dict()
+                    firestore_report = doc.to_dict()
+                    # Debug: Check if standard_scores exist and have values
+                    firestore_scores = firestore_report.get("standard_scores", [])
+                    session_scores = consolidated_report.get("standard_scores", [])
+                    
+                    print(f"🔍 Debug - Comparing Firestore vs Session state:")
+                    print(f"   - Firestore standard_scores count: {len(firestore_scores)}")
+                    print(f"   - Session standard_scores count: {len(session_scores)}")
+                    
+                    # Prefer session state if it has valid scores, otherwise use Firestore
+                    if session_scores and len(session_scores) > 0:
+                        scores_with_values = sum(1 for s in session_scores if s.get("score", 0) > 0)
+                        print(f"   - Session has {scores_with_values} scores > 0")
+                        if scores_with_values > 0:
+                            print(f"   - ✅ Using session state data (fresh)")
+                            # Keep consolidated_report from session state
+                        else:
+                            print(f"   - ⚠️ Session scores all zero, checking Firestore...")
+                            if firestore_scores and len(firestore_scores) > 0:
+                                firestore_scores_with_values = sum(1 for s in firestore_scores if s.get("score", 0) > 0)
+                                if firestore_scores_with_values > 0:
+                                    print(f"   - ✅ Using Firestore data ({firestore_scores_with_values} scores > 0)")
+                                    consolidated_report = firestore_report
+                                else:
+                                    print(f"   - ⚠️ Both have zeros, using session state")
+                            else:
+                                print(f"   - ⚠️ Firestore has no scores, using session state")
+                    else:
+                        print(f"   - ⚠️ Session has no scores, using Firestore data")
+                        if firestore_scores and len(firestore_scores) > 0:
+                            consolidated_report = firestore_report
             except Exception as e:
                 print(f"⚠️ Could not fetch report document: {e}")
+                # Continue with session state data
         
         # Update state agent
         if state_agent:

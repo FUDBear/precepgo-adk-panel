@@ -46,6 +46,7 @@ credentials/
 secrets/
 
 # Project docs to exclude from Git history/uploads
+docs/
 BARASH_INTEGRATION.md
 BARASH_ONLY_VERIFICATION.md
 
@@ -66,4 +67,7 @@ vectordb/
 
 # ADK Python reference source code (large folder, don't commit)
 context/adk-python-main/
+
+# Test files and utilities (not needed for production)
+tests/
 

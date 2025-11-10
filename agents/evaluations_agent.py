@@ -62,8 +62,8 @@ def load_data_to_state(tool_context: ToolContext) -> dict:
             raise FileNotFoundError(f"Cases file not found: {cases_path}")
         with open(cases_path, "r") as f:
             data = json.load(f)
-            cases = data.get("procedures", []) if isinstance(data, dict) else data
-            tool_context.state["cases"] = cases
+        cases = data.get("procedures", []) if isinstance(data, dict) else data
+        tool_context.state["cases"] = cases
 
         # Load students
         students_path = os.path.join(data_dir, "students.json")
@@ -71,8 +71,8 @@ def load_data_to_state(tool_context: ToolContext) -> dict:
             raise FileNotFoundError(f"Students file not found: {students_path}")
         with open(students_path, "r") as f:
             data = json.load(f)
-            students = data.get("students", []) if isinstance(data, dict) else data
-            tool_context.state["students"] = students
+        students = data.get("students", []) if isinstance(data, dict) else data
+        tool_context.state["students"] = students
 
         # Load preceptors
         sites_path = os.path.join(data_dir, "sites.json")
@@ -80,8 +80,8 @@ def load_data_to_state(tool_context: ToolContext) -> dict:
             raise FileNotFoundError(f"Sites file not found: {sites_path}")
         with open(sites_path, "r") as f:
             data = json.load(f)
-            preceptors = data.get("preceptors", []) if isinstance(data, dict) else data
-            tool_context.state["preceptors"] = preceptors
+        preceptors = data.get("preceptors", []) if isinstance(data, dict) else data
+        tool_context.state["preceptors"] = preceptors
 
         return {
             "status": "success",
@@ -103,8 +103,8 @@ def load_data_to_state(tool_context: ToolContext) -> dict:
 
 def select_random_case(tool_context: ToolContext) -> dict:
     """Selects a random clinical case.
-
-    Returns:
+        
+        Returns:
         dict: Selected case info
     """
     cases = tool_context.state.get("cases", [])
@@ -123,8 +123,8 @@ def select_random_case(tool_context: ToolContext) -> dict:
 
 def select_random_student(tool_context: ToolContext) -> dict:
     """Selects a random student.
-
-    Returns:
+            
+        Returns:
         dict: Selected student info
     """
     students = tool_context.state.get("students", [])
@@ -144,8 +144,8 @@ def select_random_student(tool_context: ToolContext) -> dict:
 
 def select_matching_preceptor(tool_context: ToolContext) -> dict:
     """Selects a preceptor, preferably matching student's hospital.
-
-    Returns:
+            
+        Returns:
         dict: Selected preceptor info
     """
     preceptors = tool_context.state.get("preceptors", [])
@@ -228,10 +228,10 @@ def generate_evaluation_scores(tool_context: ToolContext) -> dict:
     # Make negative evaluations rare (5% total: 2% dangerous + 3% needs improvement)
     pc_scores = {}
     overall_negative_roll = random.random()
-    
+        
     # Determine if this is a negative evaluation (5% chance)
     is_negative_eval = overall_negative_roll < 0.05
-    
+        
     for i in range(11):
         roll = random.random()
         
@@ -267,15 +267,15 @@ def generate_evaluation_scores(tool_context: ToolContext) -> dict:
 
 def generate_preceptor_comment(tool_context: ToolContext) -> dict:
     """Generates a realistic preceptor comment using Gemini Pro, styled after real preceptor comments.
-
-    Returns:
+            
+        Returns:
         dict: Generated comment
-    """
+        """
     case = tool_context.state.get("selected_case", {})
     student = tool_context.state.get("selected_student", {})
     scores = tool_context.state.get("evaluation_scores", {})
     preceptor = tool_context.state.get("selected_preceptor", {})
-
+        
     # Calculate averages
     ac_values = [scores.get(f"ac_{i}", 70) for i in range(13) if scores.get(f"ac_{i}", -1) > 0]
     pc_values = [scores.get(f"pc_{i}", 3) for i in range(11) if scores.get(f"pc_{i}", 0) > 0]
@@ -349,7 +349,7 @@ Write the comment now (just the comment text, no quotes or formatting):"""
 
             response = model.generate_content(prompt)
             comment = response.text.strip()
-            
+                    
             # Clean up the comment - remove any quotes or extra formatting
             if comment.startswith('"') and comment.endswith('"'):
                 comment = comment[1:-1]
@@ -373,7 +373,6 @@ Be direct and conversational. Mention specific things that happened. Use the stu
                     comment = comment[1:-1]
                 if comment.startswith("'") and comment.endswith("'"):
                     comment = comment[1:-1]
-                
         except Exception as e:
             print(f"⚠️ Error generating comment with Gemini: {e}")
             import traceback
@@ -413,8 +412,8 @@ Be direct and conversational. Mention specific things that happened. Use the stu
 
 def save_evaluation_to_firestore(tool_context: ToolContext) -> dict:
     """Saves the complete evaluation to Firestore.
-
-    Returns:
+            
+        Returns:
         dict: Save status and document ID
     """
     try:
@@ -587,7 +586,7 @@ score_generator = Agent(
     """,
     tools=[generate_evaluation_scores]
 )
-
+    
 # Comment Generator
 comment_generator = Agent(
     name="comment_generator",
@@ -603,7 +602,7 @@ comment_generator = Agent(
     Write a professional, constructive comment about the student's performance.
     """,
     tools=[generate_preceptor_comment]
-)
+        )
 
 # Evaluation Saver
 evaluation_saver = Agent(

@@ -163,8 +163,8 @@ def match_patient_to_case(tool_context: ToolContext) -> dict:
 
 def select_target_student(tool_context: ToolContext) -> dict:
     """Selects a student to receive this scenario.
-
-    Returns:
+            
+        Returns:
         dict: Selected student info
     """
     students = tool_context.state.get("scenario_students", [])
@@ -184,8 +184,8 @@ def select_target_student(tool_context: ToolContext) -> dict:
 
 def generate_scenario_with_gemini(tool_context: ToolContext) -> dict:
     """Generates a clinical scenario with decision options using Gemini Pro.
-
-    Returns:
+            
+        Returns:
         dict: Generated scenario content
     """
     case = tool_context.state.get("scenario_case", {})
@@ -353,8 +353,8 @@ Return ONLY this JSON structure (no other text):
                             brace_count -= 1
                             if brace_count == 0 and start_idx != -1:
                                 end_idx = i + 1
-                                break
-                    
+                        break
+            
                     if start_idx != -1 and end_idx != -1:
                         json_str = scenario_text[start_idx:end_idx]
                         try:
@@ -494,7 +494,6 @@ Return ONLY this JSON structure (no other text):
             "option_a_length": len(scenario_json.get("option_a", "")),
             "option_b_length": len(scenario_json.get("option_b", ""))
         }
-
     except Exception as e:
         error_msg = f"Error generating scenario with Gemini: {str(e)}"
         print(f"⚠️ {error_msg}")
@@ -508,8 +507,8 @@ Return ONLY this JSON structure (no other text):
 
 def save_scenario_to_firestore(tool_context: ToolContext) -> dict:
     """Saves the generated scenario to Firestore.
-
-    Returns:
+        
+        Returns:
         dict: Save status and document ID
     """
     try:

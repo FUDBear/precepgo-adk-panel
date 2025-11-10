@@ -20,7 +20,7 @@ from google.adk.tools import ToolContext
 
 def calculate_time_savings(tool_context: ToolContext) -> dict:
     """Calculates time savings from agent automation.
-
+    
     Returns:
         dict: Time savings metrics
     """
@@ -89,8 +89,8 @@ def calculate_time_savings(tool_context: ToolContext) -> dict:
 
 def save_time_savings_report(tool_context: ToolContext) -> dict:
     """Saves time savings report to Firestore.
-
-    Returns:
+        
+        Returns:
         dict: Save status and document ID
     """
     try:
@@ -161,8 +161,8 @@ time_calculator = Agent(
     Call your tool to calculate time savings metrics.
     """,
     tools=[calculate_time_savings]
-)
-
+            )
+            
 # Report Saver
 time_report_saver = Agent(
     name="time_report_saver",
