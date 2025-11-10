@@ -268,20 +268,6 @@ precepgo-adk-panel/
 
 ---
 
-## 🔧 Configuration
-
-### Environment Variables
-
-```bash
-# Required
-GOOGLE_API_KEY=your_gemini_api_key      # Gemini AI access
-FIREBASE_PROJECT_ID=your_project_id     # Firestore project
-
-# Optional
-STORAGE_BUCKET_NAME=your_bucket_name    # Cloud Storage bucket
-PORT=8080                               # Application port
-```
-
 ### Firestore Collections
 
 The application uses these Firestore collections:
@@ -373,7 +359,7 @@ curl -X POST http://localhost:8080/agents/notification/run-safety-check \
 
 ## 📄 License
 
-Built for the Google ADK Hackathon 2024.
+Built for the Google ADK Hackathon 2025.
 
 ---
 
